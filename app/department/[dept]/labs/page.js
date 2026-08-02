@@ -1,39 +1,70 @@
 "use client";
-import React from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+
+import React, { use } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { getDepartment } from '@/lib/departments';
+
+const FEATURES = [
+  { icon: 'bi-pc-display', label: 'Modern equipment and workstations' },
+  { icon: 'bi-person-workspace', label: 'Individual workbench for every student' },
+  { icon: 'bi-shield-check', label: 'Full safety protocols and supervision' },
+  { icon: 'bi-clock-fill', label: 'Extended access during project work' },
+];
 
 export default function LabsPage({ params }) {
+  const { dept } = use(params);
+  const department = getDepartment(dept);
+
   return (
-    <Card className="border-0 shadow-sm">
-      <Card.Body>
-        <h2 className="text-primary-blue mb-4">Laboratory Facilities</h2>
-        <Row className="g-4">
-          <Col md={6}>
-            <Card className="h-100 border-0 bg-light p-3">
-              <h5 className="text-primary-blue">Advanced Computing Lab</h5>
-              <p className="text-muted small">Equipped with latest i7 systems, high-speed internet, and software development tools.</p>
-            </Card>
-          </Col>
-          <Col md={6}>
-            <Card className="h-100 border-0 bg-light p-3">
-              <h5 className="text-primary-blue">Electronics & Microprocessor Lab</h5>
-              <p className="text-muted small">Contains CROs, Function Generators, microcontrollers and simulation software.</p>
-            </Card>
-          </Col>
-          <Col md={6}>
-            <Card className="h-100 border-0 bg-light p-3">
-              <h5 className="text-primary-blue">Networking Lab</h5>
-              <p className="text-muted small">Features Cisco routers, switches and network simulation environments.</p>
-            </Card>
-          </Col>
-          <Col md={6}>
-            <Card className="h-100 border-0 bg-light p-3">
-              <h5 className="text-primary-blue">Hardware Lab</h5>
-              <p className="text-muted small">For practical hands-on experience in PC assembling, troubleshooting, and hardware design.</p>
-            </Card>
-          </Col>
-        </Row>
-      </Card.Body>
-    </Card>
+    <>
+      <div className="panel">
+        <div className="panel-header">
+          <i className="bi bi-beaker" />
+          Laboratory Facilities — {department.name}
+        </div>
+        <div className="panel-body">
+          <p>
+            Practical work sits at the heart of every diploma programme. Our laboratories are equipped
+            to give each student direct, hands-on experience with the tools and instruments used in
+            industry.
+          </p>
+
+          <Row className="g-4 mt-1">
+            {department.labs.map((lab) => (
+              <Col md={6} key={lab.name}>
+                <div className="premium-card h-100 p-4">
+                  <span className="icon-tile mb-3">
+                    <i className={`bi ${lab.icon}`} />
+                  </span>
+                  <h5 className="fw-bold mb-2">{lab.name}</h5>
+                  <p className="small mb-0">{lab.text}</p>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
+
+      <div className="panel mt-4">
+        <div className="panel-header">
+          <i className="bi bi-stars" />
+          What Makes Our Labs Different
+        </div>
+        <div className="panel-body">
+          <Row className="g-3">
+            {FEATURES.map((feature) => (
+              <Col md={6} key={feature.label}>
+                <div className="feature-row align-items-center h-100">
+                  <span className="icon-tile icon-tile-sm">
+                    <i className={`bi ${feature.icon}`} />
+                  </span>
+                  <h5 className="mb-0">{feature.label}</h5>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
+    </>
   );
 }

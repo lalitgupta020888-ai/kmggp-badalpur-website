@@ -1,29 +1,111 @@
 "use client";
-import React from 'react';
-import { Card } from 'react-bootstrap';
+
+import React, { use } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { getDepartment } from '@/lib/departments';
+
+const HIGHLIGHTS = [
+  { icon: 'bi-people-fill', value: '60', label: 'Seats per Year' },
+  { icon: 'bi-hourglass-split', value: '3 Yrs', label: 'Programme Duration' },
+  { icon: 'bi-beaker', value: '04', label: 'Dedicated Labs' },
+  { icon: 'bi-patch-check-fill', value: 'BTEUP', label: 'Affiliation' },
+];
 
 export default function DepartmentHome({ params }) {
-  const dept = params.dept;
-  
+  const { dept } = use(params);
+  const department = getDepartment(dept);
+
   return (
-    <Card className="border-0 shadow-sm">
-      <Card.Body>
-        <h2 className="text-primary-blue mb-4">Welcome to the Department</h2>
-        <p className="lead">
-          Our department is committed to excellence in technical education and holistic development of students.
-        </p>
-        <p>
-          We offer comprehensive coursework, state-of-the-art laboratory facilities, and experienced faculty to ensure that students acquire both theoretical knowledge and practical skills required in the industry today.
-        </p>
-        <h4 className="mt-4 text-primary-blue">Vision</h4>
-        <p>To be recognized globally for excellence in education, research, and innovation in the field.</p>
-        <h4 className="mt-4 text-primary-blue">Mission</h4>
-        <ul>
-          <li>To provide a rigorous academic environment that fosters innovation and continuous learning.</li>
-          <li>To establish industry collaborations for hands-on exposure and better placements.</li>
-          <li>To empower women through technical prowess and leadership skills.</li>
-        </ul>
-      </Card.Body>
-    </Card>
+    <>
+      <div className="panel">
+        <div className="panel-header">
+          <i className={`bi ${department.icon}`} />
+          Welcome to {department.name}
+        </div>
+        <div className="panel-body">
+          <p className="lead">{department.intro}</p>
+          <p>
+            We offer comprehensive coursework, state-of-the-art laboratory facilities and experienced
+            faculty to ensure that students acquire both the theoretical knowledge and the practical
+            skills the industry expects today.
+          </p>
+
+          <div className="gold-rule-thin my-4" />
+
+          <Row className="g-3">
+            {HIGHLIGHTS.map((item) => (
+              <Col md={3} sm={6} key={item.label}>
+                <div className="feature-row align-items-center h-100">
+                  <span className="icon-tile icon-tile-sm">
+                    <i className={`bi ${item.icon}`} />
+                  </span>
+                  <div>
+                    <h5 className="mb-0">{item.value}</h5>
+                    <p className="small mb-0">{item.label}</p>
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
+
+      <Row className="g-4 mt-1">
+        <Col md={6}>
+          <div className="panel h-100">
+            <div className="panel-header">
+              <i className="bi bi-eye-fill" />
+              Vision
+            </div>
+            <div className="panel-body">
+              <p className="mb-0">
+                To be recognised for excellence in education, innovation and applied research in the
+                field, and to produce technically competent women professionals who lead with
+                confidence and integrity.
+              </p>
+            </div>
+          </div>
+        </Col>
+
+        <Col md={6}>
+          <div className="panel h-100">
+            <div className="panel-header">
+              <i className="bi bi-bullseye" />
+              Mission
+            </div>
+            <div className="panel-body">
+              <ul className="gold-list mb-0">
+                <li>Provide a rigorous academic environment that fosters innovation and continuous learning.</li>
+                <li>Establish industry collaborations for hands-on exposure and stronger placements.</li>
+                <li>Empower women through technical prowess and leadership skills.</li>
+              </ul>
+            </div>
+          </div>
+        </Col>
+      </Row>
+
+      {department.focus.length > 0 && (
+        <div className="panel mt-4">
+          <div className="panel-header">
+            <i className="bi bi-bookmark-star-fill" />
+            Areas of Focus
+          </div>
+          <div className="panel-body">
+            <Row className="g-3">
+              {department.focus.map((area) => (
+                <Col md={6} key={area}>
+                  <div className="feature-row align-items-center h-100">
+                    <span className="icon-tile icon-tile-sm">
+                      <i className="bi bi-check-lg" />
+                    </span>
+                    <h5 className="mb-0">{area}</h5>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

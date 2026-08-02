@@ -1,66 +1,84 @@
 "use client";
+
 import React from 'react';
-import { Card, ListGroup, Badge } from 'react-bootstrap';
 import Link from 'next/link';
 
-export default function NoticeBoard() {
-  const notices = [
-    {
-      id: 1,
-      title: 'Admission 2026-27 Open',
-      date: 'Aug 01, 2026',
-      isNew: true,
-      link: '/admission/process'
-    },
-    {
-      id: 2,
-      title: 'Even Semester Exam Schedule Released',
-      date: 'Jul 15, 2026',
-      isNew: false,
-      link: '/academic/calendar'
-    },
-    {
-      id: 3,
-      title: 'Campus Placement Drive by Tech Mahindra',
-      date: 'Jul 10, 2026',
-      isNew: false,
-      link: '/placements/records'
-    },
-    {
-      id: 4,
-      title: 'National Level Hackathon Announcement',
-      date: 'Jun 25, 2026',
-      isNew: false,
-      link: '/department/cse/achievements'
-    }
-  ];
+const NOTICES = [
+  {
+    id: 1,
+    title: 'Admission 2026-27 is now open — apply through JEECUP counselling',
+    date: 'Aug 01, 2026',
+    icon: 'bi-mortarboard-fill',
+    isNew: true,
+    link: '/admission/process',
+  },
+  {
+    id: 2,
+    title: 'Even Semester examination schedule released',
+    date: 'Jul 15, 2026',
+    icon: 'bi-calendar-check-fill',
+    isNew: true,
+    link: '/academic/calendar',
+  },
+  {
+    id: 3,
+    title: 'Campus placement drive by Tech Mahindra',
+    date: 'Jul 10, 2026',
+    icon: 'bi-briefcase-fill',
+    isNew: false,
+    link: '/placements/records',
+  },
+  {
+    id: 4,
+    title: 'National level hackathon — registrations open',
+    date: 'Jun 25, 2026',
+    icon: 'bi-trophy-fill',
+    isNew: false,
+    link: '/department/cse/achievements',
+  },
+  {
+    id: 5,
+    title: 'Post-matric scholarship forms — last date reminder',
+    date: 'Jun 12, 2026',
+    icon: 'bi-cash-coin',
+    isNew: false,
+    link: '/scholarship',
+  },
+];
 
+export default function NoticeBoard() {
   return (
-    <Card className="shadow-sm border-0 h-100">
-      <Card.Header className="bg-primary-blue text-white fw-bold">
-        📢 Notice Board & Latest Updates
-      </Card.Header>
-      <ListGroup variant="flush">
-        {notices.map((notice) => (
-          <ListGroup.Item key={notice.id} className="d-flex justify-content-between align-items-start py-3">
-            <div className="ms-2 me-auto">
-              <div className="fw-bold">
-                <Link href={notice.link} className="text-decoration-none text-dark">
-                  {notice.title}
-                </Link>
-                {notice.isNew && <Badge bg="danger" className="ms-2">New</Badge>}
+    <section className="notice-card">
+      <div className="notice-head">
+        <i className="bi bi-megaphone-fill" />
+        Notice Board &amp; Updates
+      </div>
+
+      <ul className="notice-list">
+        {NOTICES.map((notice) => (
+          <li className="notice-item" key={notice.id}>
+            <span className="icon-tile icon-tile-sm">
+              <i className={`bi ${notice.icon}`} />
+            </span>
+            <div>
+              <Link href={notice.link}>
+                {notice.title}
+                {notice.isNew && <span className="badge-new">NEW</span>}
+              </Link>
+              <div className="notice-date">
+                <i className="bi bi-clock" />
+                {notice.date}
               </div>
-              <small className="text-muted">{notice.date}</small>
             </div>
-          </ListGroup.Item>
+          </li>
         ))}
-      </ListGroup>
-      <Card.Footer className="bg-white text-center">
-        <Link href="/academic/calendar" className="text-primary-blue fw-bold text-decoration-none">
-          View All Notices &rarr;
+      </ul>
+
+      <div className="notice-foot">
+        <Link href="/academic/calendar">
+          View All Notices <i className="bi bi-arrow-right" />
         </Link>
-      </Card.Footer>
-    </Card>
+      </div>
+    </section>
   );
 }
-

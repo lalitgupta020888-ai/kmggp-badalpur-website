@@ -1,54 +1,53 @@
 "use client";
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import Link from 'next/link';
 
-// Helper to format department name
-function formatDeptName(dept) {
-  const map = {
-    'electronics': 'Electronics Engineering',
-    'cse': 'Computer Science & Engineering',
-    'it': 'Information Technology'
-  };
-  return map[dept] || 'Department';
-}
+import React, { use } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import PageHeader from '@/components/PageHeader';
+import SideNav from '@/components/SideNav';
+import { getDepartment, DEPT_NAV } from '@/lib/departments';
 
 export default function DepartmentLayout({ children, params }) {
-  const dept = params.dept;
-  const deptName = formatDeptName(dept);
+  // In Next.js 16 `params` is a Promise, unwrapped with React's `use` hook.
+  const { dept } = use(params);
+  const department = getDepartment(dept);
+
+  const navItems = DEPT_NAV.map((item) => ({
+    href: `/department/${dept}${item.path}`,
+    label: item.label,
+    icon: item.icon,
+  }));
 
   return (
-    <div className="py-5 bg-white">
-      <Container>
-        <Row>
-          <Col lg={3} className="mb-4">
-            <Card className="shadow-sm border-0">
-              <Card.Header className="bg-primary-blue text-white fw-bold">
-                {deptName}
-              </Card.Header>
-              <Card.Body className="p-0">
-                <div className="list-group list-group-flush">
-                  <Link href={`/department/${dept}`} className="list-group-item list-group-item-action text-primary-blue">
-                    Department Home
-                  </Link>
-                  <Link href={`/department/${dept}/faculty`} className="list-group-item list-group-item-action text-primary-blue">
-                    Faculty
-                  </Link>
-                  <Link href={`/department/${dept}/labs`} className="list-group-item list-group-item-action text-primary-blue">
-                    Labs
-                  </Link>
-                  <Link href={`/department/${dept}/achievements`} className="list-group-item list-group-item-action text-primary-blue">
-                    Achievements
-                  </Link>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col lg={9}>
-            {children}
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <>
+      <PageHeader
+        icon={department.icon}
+        eyebrow="Academic Department"
+        title={department.name}
+        subtitle={department.tagline}
+        crumbs={[{ label: 'Departments' }, { label: department.name }]}
+      />
+
+      <section className="section" style={{ background: 'var(--white)' }}>
+        <Container>
+          <Row className="g-4">
+            <Col lg={3}>
+              <SideNav
+                eyebrow="Department"
+                title={department.name}
+                items={navItems}
+                cta={{
+                  icon: 'bi-headset',
+                  title: 'Have a Question?',
+                  text: 'Reach out to the department office for academic guidance.',
+                  href: '/contact',
+                  label: 'Contact Us',
+                }}
+              />
+            </Col>
+            <Col lg={9}>{children}</Col>
+          </Row>
+        </Container>
+      </section>
+    </>
   );
 }

@@ -1,23 +1,86 @@
 "use client";
+
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+
+const RECRUITERS = [
+  'Tech Mahindra',
+  'Wipro Technologies',
+  'Infosys',
+  'HCL Technologies',
+  'TCS',
+  'L&T Technology Services',
+  'Genpact',
+  'Concentrix',
+  'Samsung India Electronics',
+  'Havells India',
+];
+
+const SECTORS = [
+  { icon: 'bi-code-slash', title: 'IT & Software Services', text: 'Development, testing, technical support and IT operations roles.' },
+  { icon: 'bi-cpu-fill', title: 'Electronics & Manufacturing', text: 'Production, quality assurance and maintenance engineering.' },
+  { icon: 'bi-hdd-network-fill', title: 'Networking & Infrastructure', text: 'Network administration, data centre and field support roles.' },
+  { icon: 'bi-headset', title: 'Business Process Services', text: 'Technical helpdesk, process associate and analyst positions.' },
+];
 
 export default function Recruiters() {
   return (
-    <Card className="border-0 shadow-sm">
-      <Card.Body>
-        <h2 className="text-primary-blue mb-4">Our Recruiters</h2>
-        <p>We are proud to have strong ties with leading multinational companies who consistently recruit our talented students.</p>
-        <ul>
-          <li>Tech Mahindra</li>
-          <li>Wipro Technologies</li>
-          <li>Infosys</li>
-          <li>HCL Technologies</li>
-          <li>TCS</li>
-          <li>L&T Technology Services</li>
-        </ul>
-      </Card.Body>
-    </Card>
+    <>
+      <div className="panel">
+        <div className="panel-header">
+          <i className="bi bi-buildings" />
+          Our Recruiters
+        </div>
+        <div className="panel-body">
+          <p>
+            We are proud to maintain strong ties with leading organisations that consistently recruit
+            our talented students across engineering and technology roles.
+          </p>
+
+          <div className="gold-rule-thin my-4" />
+
+          <div className="chip-grid">
+            {RECRUITERS.map((company) => (
+              <span className="brand-chip" key={company}>
+                <i className="bi bi-building-fill" />
+                {company}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="panel mt-4">
+        <div className="panel-header">
+          <i className="bi bi-diagram-3-fill" />
+          Sectors Our Students Join
+        </div>
+        <div className="panel-body">
+          <Row className="g-4">
+            {SECTORS.map((sector) => (
+              <Col md={6} key={sector.title}>
+                <div className="feature-row h-100">
+                  <span className="icon-tile icon-tile-sm">
+                    <i className={`bi ${sector.icon}`} />
+                  </span>
+                  <div>
+                    <h5>{sector.title}</h5>
+                    <p>{sector.text}</p>
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
+
+      <div className="callout mt-4">
+        <i className="bi bi-building-check" />
+        <p>
+          Organisations wishing to conduct a campus recruitment drive may write to the Training &amp;
+          Placement cell at <strong>tnp@kmggp.ac.in</strong> to schedule a visit.
+        </p>
+      </div>
+    </>
   );
 }
-

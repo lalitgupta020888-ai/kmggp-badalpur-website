@@ -1,68 +1,165 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Container, Card, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 
-export default function LoginPage() {
-  const [isLogin, setIsLogin] = useState(true);
+const NOTICES = [
+  {
+    icon: 'bi-shield-lock-fill',
+    text: 'This portal is restricted to authorised institute staff only.',
+  },
+  {
+    icon: 'bi-eye-slash-fill',
+    text: 'Never share your credentials. The institute will never ask for your password.',
+  },
+  {
+    icon: 'bi-clock-history',
+    text: 'All login attempts and portal activity are recorded for audit purposes.',
+  },
+];
+
+export default function AdminLoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(isLogin ? "Login functionality will be connected to backend." : "Registration functionality will be connected to backend.");
+    alert('Admin authentication will be connected to the backend.');
   };
 
   return (
-    <div className="py-5 bg-light-blue" style={{ minHeight: 'calc(100vh - 300px)', display: 'flex', alignItems: 'center' }}>
+    <div className="auth-wrap">
       <Container>
-        <Card className="border-0 shadow mx-auto" style={{ maxWidth: '450px' }}>
-          <Card.Header className="bg-primary-blue text-white text-center py-3">
-            <h4 className="mb-0">{isLogin ? 'Student Login' : 'Student Registration'}</h4>
-          </Card.Header>
-          <Card.Body className="p-4">
-            <Form onSubmit={handleSubmit}>
-              {!isLogin && (
-                <Form.Group className="mb-3">
-                  <Form.Label>Full Name</Form.Label>
-                  <Form.Control type="text" placeholder="Enter full name" required />
-                </Form.Group>
-              )}
-              
+        <div className="auth-card">
+          <div className="auth-head">
+            <span className="auth-emblem">
+              <i className="bi bi-shield-lock-fill" />
+            </span>
+            <h4>Admin Login</h4>
+            <p>Restricted access — Km. Mayawati Government Girls Polytechnic, Badalpur</p>
+          </div>
+
+          <div className="p-4 p-sm-5">
+            <Alert variant="warning" className="d-flex align-items-start gap-3 border-0 small mb-4">
+              <i className="bi bi-exclamation-triangle-fill fs-5 lh-1 mt-1" />
+              <span>
+                Authorised personnel only. Unauthorised access attempts are logged and may invite
+                disciplinary or legal action.
+              </span>
+            </Alert>
+
+            <Form onSubmit={handleSubmit} className="premium-form">
               <Form.Group className="mb-3">
-                <Form.Label>Email / Enrollment No.</Form.Label>
-                <Form.Control type="text" placeholder="Enter email or enrollment number" required />
+                <Form.Label>Admin ID / Username</Form.Label>
+                <div className="input-icon">
+                  <i className="bi bi-person-badge-fill" />
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your admin ID"
+                    autoComplete="username"
+                    required
+                  />
+                </div>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" required />
+                <div className="input-icon input-icon-action">
+                  <i className="bi bi-key-fill" />
+                  <Form.Control
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Enter your password"
+                    autoComplete="current-password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="input-action"
+                    onClick={() => setShowPassword((v) => !v)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    title={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`} />
+                  </button>
+                </div>
               </Form.Group>
 
-              {isLogin && (
-                <div className="text-end mb-3">
-                  <Link href="#" className="text-decoration-none small text-muted">Forgot Password?</Link>
+              <Form.Group className="mb-4">
+                <Form.Label>Role</Form.Label>
+                <div className="input-icon">
+                  <i className="bi bi-diagram-3-fill" />
+                  <Form.Select required defaultValue="">
+                    <option value="" disabled>
+                      Select your role
+                    </option>
+                    <option value="principal">Principal</option>
+                    <option value="admin">Administrative Officer</option>
+                    <option value="hod">Head of Department</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="accounts">Accounts Section</option>
+                    <option value="tnp">Training &amp; Placement Cell</option>
+                  </Form.Select>
                 </div>
-              )}
+              </Form.Group>
 
-              <Button variant="primary" type="submit" className="btn-primary-custom w-100 py-2">
-                {isLogin ? 'Login' : 'Register'}
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <Form.Check
+                  type="checkbox"
+                  id="admin-remember"
+                  label="Keep me signed in"
+                  className="mb-0"
+                />
+                <Link
+                  href="/contact"
+                  className="text-decoration-none small"
+                  style={{ color: 'var(--gold-700)' }}
+                >
+                  <i className="bi bi-question-circle me-1" />
+                  Forgot Password?
+                </Link>
+              </div>
+
+              <Button type="submit" className="btn-gold w-100 justify-content-center">
+                <i className="bi bi-box-arrow-in-right" />
+                Sign In to Dashboard
               </Button>
             </Form>
 
-            <div className="text-center mt-4 pt-3 border-top">
-              <span className="text-muted small">
-                {isLogin ? "Don't have an account? " : "Already have an account? "}
-              </span>
-              <Button 
-                variant="link" 
-                className="p-0 text-primary-blue text-decoration-none small fw-bold" 
-                onClick={() => setIsLogin(!isLogin)}
-              >
-                {isLogin ? 'Register Here' : 'Login Here'}
-              </Button>
+            <div className="gold-rule-thin my-4" />
+
+            <div className="auth-notes">
+              {NOTICES.map((notice) => (
+                <div className="auth-note" key={notice.text}>
+                  <i className={`bi ${notice.icon}`} />
+                  <span>{notice.text}</span>
+                </div>
+              ))}
             </div>
-          </Card.Body>
-        </Card>
+
+            <div className="text-center mt-4">
+              <Link href="/" className="text-decoration-none small text-muted">
+                <i className="bi bi-arrow-left me-1" />
+                Back to Home
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <p className="text-center small text-muted mt-4 mb-0">
+          Students looking for grievance services should use the{' '}
+          <Link href="/igrs" className="fw-semibold text-decoration-none" style={{ color: 'var(--gold-700)' }}>
+            IGRS Portal
+          </Link>
+          {' '}or the{' '}
+          <Link
+            href="/student/urise-portal"
+            className="fw-semibold text-decoration-none"
+            style={{ color: 'var(--gold-700)' }}
+          >
+            URISE Portal
+          </Link>
+          .
+        </p>
       </Container>
     </div>
   );

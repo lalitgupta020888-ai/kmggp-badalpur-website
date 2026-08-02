@@ -1,132 +1,362 @@
 "use client";
+
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import Link from 'next/link';
 import HeroSlider from '@/components/HeroSlider';
 import NoticeBoard from '@/components/NoticeBoard';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import Link from 'next/link';
+import Leadership from '@/components/Leadership';
+import PrincipalCard from '@/components/PrincipalCard';
+import SectionHead from '@/components/SectionHead';
+
+const STATS = [
+  { icon: 'bi-people-fill', value: '1,200+', label: 'Students Enrolled' },
+  { icon: 'bi-diagram-3-fill', value: '03', label: 'Engineering Branches' },
+  { icon: 'bi-graph-up-arrow', value: '88%', label: 'Placement Rate' },
+  { icon: 'bi-calendar2-check-fill', value: '15+', label: 'Years of Excellence' },
+];
+
+const HIGHLIGHTS = [
+  {
+    icon: 'bi-collection-fill',
+    title: 'Courses Offered',
+    text: 'Three-year AICTE-approved diploma programmes in Electronics, Computer Science and Information Technology.',
+    href: '/admission/courses',
+  },
+  {
+    icon: 'bi-mortarboard-fill',
+    title: 'Admissions 2026-27',
+    text: 'Eligibility, the JEECUP counselling process, fee structure and the official information booklet.',
+    href: '/admission/process',
+  },
+  {
+    icon: 'bi-briefcase-fill',
+    title: 'Training & Placements',
+    text: 'A dedicated T&P cell, leading recruiters and a consistently strong campus placement record.',
+    href: '/placements/records',
+  },
+  {
+    icon: 'bi-stars',
+    title: 'Life @ KMGGP',
+    text: 'Clubs, cultural festivals, technical symposiums, sports and a secure on-campus hostel.',
+    href: '/life',
+  },
+];
+
+const PILLARS = [
+  {
+    icon: 'bi-buildings-fill',
+    title: 'Modern Infrastructure',
+    text: 'Well-equipped laboratories, smart classrooms, a rich library and a green, secure campus.',
+  },
+  {
+    icon: 'bi-person-video3',
+    title: 'Experienced Faculty',
+    text: 'Highly qualified teaching staff committed to mentoring every student individually.',
+  },
+  {
+    icon: 'bi-shield-lock-fill',
+    title: 'Safe Girls Campus',
+    text: 'A protected, women-only environment with hostel facilities and round-the-clock security.',
+  },
+  {
+    icon: 'bi-cash-stack',
+    title: 'Scholarship Support',
+    text: 'State and central government schemes including the AICTE Pragati scheme for girls.',
+  },
+  {
+    icon: 'bi-cpu-fill',
+    title: 'Industry Exposure',
+    text: 'Industrial visits, expert guest lectures and hands-on workshops on emerging technologies.',
+  },
+  {
+    icon: 'bi-trophy-fill',
+    title: 'Proven Results',
+    text: 'Students consistently secure top ranks in BTEUP examinations and state-level competitions.',
+  },
+];
+
+const DEPARTMENTS = [
+  {
+    icon: 'bi-cpu-fill',
+    name: 'Electronics Engineering',
+    text: 'Circuits, microprocessors, communication systems and embedded design.',
+    href: '/department/electronics',
+  },
+  {
+    icon: 'bi-pc-display',
+    name: 'Computer Science & Engineering',
+    text: 'Programming, data structures, databases and modern software development.',
+    href: '/department/cse',
+  },
+  {
+    icon: 'bi-hdd-network-fill',
+    name: 'Information Technology',
+    text: 'Networking, web technologies, cloud fundamentals and IT infrastructure.',
+    href: '/department/it',
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      'The Computer Science department here is phenomenal. The faculty are extremely supportive and the labs are well equipped. I secured a job at a top MNC directly through campus placements.',
+    name: 'Anjali Sharma',
+    meta: 'CSE, Batch of 2025',
+    initial: 'A',
+  },
+  {
+    quote:
+      'Km. Mayawati Government Girls Polytechnic, Badalpur completely transformed my career. The practical approach in Electronics Engineering helped me understand core concepts effortlessly and gave me real confidence.',
+    name: 'Priya Verma',
+    meta: 'Electronics, Batch of 2024',
+    initial: 'P',
+  },
+];
 
 export default function Home() {
   return (
     <>
       <HeroSlider />
-      
-      {/* Introduction Section */}
-      <section className="py-5 bg-white">
+
+      {/* Key figures */}
+      <section className="stat-strip">
         <Container>
-          <Row className="align-items-center">
-            <Col lg={8} className="mb-4 mb-lg-0">
-              <h2 className="text-primary-blue fw-bold mb-4">Welcome to Km. Mayawati Government Girls Polytechnic</h2>
+          <Row className="g-0">
+            {STATS.map((stat) => (
+              <Col key={stat.label} md={3} sm={6}>
+                <div className="stat-item">
+                  <i className={`bi ${stat.icon}`} />
+                  <div className="stat-value">{stat.value}</div>
+                  <div className="stat-label">{stat.label}</div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Welcome + notice board */}
+      <section className="section" style={{ background: 'var(--white)' }}>
+        <Container>
+          <Row className="g-5 align-items-start">
+            <Col lg={7}>
+              <SectionHead
+                align="start"
+                eyebrow="Welcome to the Institute"
+                icon="bi-buildings-fill"
+                title="Km. Mayawati Government Girls Polytechnic, Badalpur"
+              />
               <p className="lead">
-                Established with a vision to empower women through technical education, Km. Mayawati Government Girls Polytechnic, Badalpur is a premier institute offering diploma courses in various engineering disciplines.
+                Established with a vision to empower women through technical education, our institute
+                is a premier government polytechnic offering diploma programmes across leading
+                engineering disciplines.
               </p>
               <p>
-                Our campus is equipped with state-of-the-art infrastructure, modern laboratories, and a highly qualified faculty dedicated to shaping the future of young women. We focus on holistic development, academic excellence, and providing 100% placement assistance.
+                The campus is equipped with state-of-the-art infrastructure, modern laboratories and a
+                highly qualified faculty dedicated to shaping the future of young women. We focus on
+                holistic development, academic excellence and comprehensive placement assistance.
               </p>
-              <Link href="/about" className="btn btn-primary-custom mt-3 px-4 py-2">
-                Read More About Us
-              </Link>
+
+              <Row className="g-3 mt-3">
+                {PILLARS.slice(0, 4).map((pillar) => (
+                  <Col md={6} key={pillar.title}>
+                    <div className="feature-row h-100">
+                      <span className="icon-tile icon-tile-sm">
+                        <i className={`bi ${pillar.icon}`} />
+                      </span>
+                      <div>
+                        <h5>{pillar.title}</h5>
+                        <p>{pillar.text}</p>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+
+              <div className="d-flex flex-wrap gap-3 mt-4">
+                <Link href="/about" className="btn-gold">
+                  <i className="bi bi-book-half" />
+                  Read More About Us
+                </Link>
+                <Link href="/contact" className="btn-outline-navy">
+                  <i className="bi bi-telephone-fill" />
+                  Get in Touch
+                </Link>
+              </div>
             </Col>
-            <Col lg={4}>
+
+            <Col lg={5}>
               <NoticeBoard />
+              <div className="mt-4">
+                <PrincipalCard />
+              </div>
             </Col>
           </Row>
         </Container>
       </section>
 
-      {/* Quick Links Section */}
-      <section className="py-5 bg-light-blue">
+      <Leadership />
+
+      {/* Explore */}
+      <section className="section" style={{ background: 'var(--paper)' }}>
         <Container>
-          <div className="text-center mb-5">
-            <h2 className="text-primary-blue fw-bold">Explore Our Institute</h2>
-            <p className="text-muted">Quick access to important sections</p>
-          </div>
-          <Row className="g-4 text-center">
-            <Col md={3} sm={6}>
-              <Card className="h-100 shadow-sm border-0 py-4 hover-lift">
-                <Card.Body>
-                  <div className="display-4 text-primary-blue mb-3">📚</div>
-                  <Card.Title className="fw-bold">Courses Offered</Card.Title>
-                  <Card.Text className="text-muted small">Explore our Diploma programs in EE, CSE, and IT.</Card.Text>
-                  <Link href="/admission/courses" className="stretched-link text-decoration-none">View Details</Link>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={3} sm={6}>
-              <Card className="h-100 shadow-sm border-0 py-4 hover-lift">
-                <Card.Body>
-                  <div className="display-4 text-primary-blue mb-3">🎓</div>
-                  <Card.Title className="fw-bold">Admissions</Card.Title>
-                  <Card.Text className="text-muted small">Check the admission process, eligibility, and fees.</Card.Text>
-                  <Link href="/admission/process" className="stretched-link text-decoration-none">View Details</Link>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={3} sm={6}>
-              <Card className="h-100 shadow-sm border-0 py-4 hover-lift">
-                <Card.Body>
-                  <div className="display-4 text-primary-blue mb-3">💼</div>
-                  <Card.Title className="fw-bold">Placements</Card.Title>
-                  <Card.Text className="text-muted small">Top recruiters and our excellent placement records.</Card.Text>
-                  <Link href="/placements/records" className="stretched-link text-decoration-none">View Details</Link>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={3} sm={6}>
-              <Card className="h-100 shadow-sm border-0 py-4 hover-lift">
-                <Card.Body>
-                  <div className="display-4 text-primary-blue mb-3">🏆</div>
-                  <Card.Title className="fw-bold">Life@KMGGP</Card.Title>
-                  <Card.Text className="text-muted small">Discover campus life, events, and student activities.</Card.Text>
-                  <Link href="/life" className="stretched-link text-decoration-none">View Details</Link>
-                </Card.Body>
-              </Card>
-            </Col>
+          <SectionHead
+            eyebrow="Explore Our Institute"
+            icon="bi-compass-fill"
+            title="Everything You Need, One Click Away"
+            subtitle="Quick access to the sections most requested by students, parents and recruiters."
+          />
+          <Row className="g-4">
+            {HIGHLIGHTS.map((item) => (
+              <Col lg={3} md={6} key={item.title}>
+                <div className="premium-card h-100 p-4 text-center d-flex flex-column">
+                  <span className="icon-tile mx-auto mb-4">
+                    <i className={`bi ${item.icon}`} />
+                  </span>
+                  <h5 className="fw-bold mb-3">{item.title}</h5>
+                  <p className="small flex-grow-1">{item.text}</p>
+                  <div className="gold-rule-thin my-3" />
+                  <Link href={item.href} className="fw-bold text-decoration-none text-primary-blue">
+                    View Details <i className="bi bi-arrow-right" />
+                  </Link>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Departments */}
+      <section className="section" style={{ background: 'var(--white)' }}>
+        <Container>
+          <SectionHead
+            eyebrow="Academic Departments"
+            icon="bi-diagram-3-fill"
+            title="Three Disciplines, One Standard of Excellence"
+            subtitle="Each department combines a rigorous curriculum with practical, laboratory-led learning."
+          />
+          <Row className="g-4">
+            {DEPARTMENTS.map((dept) => (
+              <Col lg={4} md={6} key={dept.name}>
+                <div className="premium-card is-featured h-100 p-4">
+                  <span className="icon-tile mb-4">
+                    <i className={`bi ${dept.icon}`} />
+                  </span>
+                  <h5 className="fw-bold mb-3">{dept.name}</h5>
+                  <p className="small">{dept.text}</p>
+                  <div className="gold-rule-thin my-3" />
+                  <div className="d-flex flex-wrap gap-3 small">
+                    <Link href={`${dept.href}/faculty`} className="text-decoration-none text-primary-blue fw-semibold">
+                      <i className="bi bi-person-badge me-1" />
+                      Faculty
+                    </Link>
+                    <Link href={`${dept.href}/labs`} className="text-decoration-none text-primary-blue fw-semibold">
+                      <i className="bi bi-beaker me-1" />
+                      Labs
+                    </Link>
+                    <Link href={dept.href} className="text-decoration-none text-primary-blue fw-semibold ms-auto">
+                      Visit <i className="bi bi-arrow-right" />
+                    </Link>
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Why choose us */}
+      <section className="section" style={{ background: 'var(--paper)' }}>
+        <Container>
+          <SectionHead
+            eyebrow="Why Choose Us"
+            icon="bi-patch-check-fill"
+            title="Built on Six Enduring Strengths"
+          />
+          <Row className="g-4">
+            {PILLARS.map((pillar) => (
+              <Col lg={4} md={6} key={pillar.title}>
+                <div className="feature-row h-100">
+                  <span className="icon-tile icon-tile-sm">
+                    <i className={`bi ${pillar.icon}`} />
+                  </span>
+                  <div>
+                    <h5>{pillar.title}</h5>
+                    <p>{pillar.text}</p>
+                  </div>
+                </div>
+              </Col>
+            ))}
           </Row>
         </Container>
       </section>
 
       {/* Testimonials */}
-      <section className="py-5 bg-white">
+      <section className="section" style={{ background: 'var(--white)' }}>
         <Container>
-          <div className="text-center mb-5">
-            <h2 className="text-primary-blue fw-bold">Student Testimonials</h2>
-            <p className="text-muted">What our alumnae have to say</p>
-          </div>
+          <SectionHead
+            eyebrow="Student Voices"
+            icon="bi-chat-quote-fill"
+            title="What Our Alumnae Say"
+            subtitle="Stories from students who began here and went on to build strong technical careers."
+          />
           <Row className="g-4">
-            <Col md={6}>
-              <Card className="shadow-sm border-0 h-100 bg-light p-3">
-                <Card.Body>
-                  <Card.Text className="fst-italic">
-                    "The Computer Science department here is phenomenal. The faculty are extremely supportive and the labs are well-equipped. I secured a job at a top MNC directly through campus placements!"
-                  </Card.Text>
-                  <div className="mt-3 fw-bold text-primary-blue">- Anjali Sharma, CSE Batch 2025</div>
-                </Card.Body>
-              </Card>
+            {TESTIMONIALS.map((item) => (
+              <Col md={6} key={item.name}>
+                <div className="quote-card">
+                  <span className="quote-mark">&rdquo;</span>
+                  <p>{item.quote}</p>
+                  <div className="quote-author">
+                    <span className="quote-avatar">{item.initial}</span>
+                    <div>
+                      <div className="quote-name">{item.name}</div>
+                      <div className="quote-meta">{item.meta}</div>
+                    </div>
+                    <span className="ms-auto text-gold">
+                      <i className="bi bi-star-fill" />
+                      <i className="bi bi-star-fill" />
+                      <i className="bi bi-star-fill" />
+                      <i className="bi bi-star-fill" />
+                      <i className="bi bi-star-fill" />
+                    </span>
+                  </div>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Closing CTA */}
+      <section className="cta-band">
+        <Container>
+          <Row className="align-items-center g-4">
+            <Col lg={8}>
+              <span className="eyebrow eyebrow-light">
+                <i className="bi bi-send-fill" />
+                Admissions Open 2026-27
+              </span>
+              <h3>Begin Your Engineering Journey With Us</h3>
+              <div className="hero-gold-line" />
+              <p>
+                Have a question about eligibility, courses, fees or hostel facilities? Our admission
+                team is here to help you take the next step.
+              </p>
             </Col>
-            <Col md={6}>
-              <Card className="shadow-sm border-0 h-100 bg-light p-3">
-                <Card.Body>
-                  <Card.Text className="fst-italic">
-                    "KMGGP Badalpur completely transformed my career. The practical approach in Electronics Engineering helped me understand core concepts effortlessly."
-                  </Card.Text>
-                  <div className="mt-3 fw-bold text-primary-blue">- Priya Verma, EE Batch 2024</div>
-                </Card.Body>
-              </Card>
+            <Col lg={4} className="d-flex flex-column gap-3 align-items-lg-end">
+              <Link href="/admission/enquiry" className="btn-gold">
+                <i className="bi bi-pencil-square" />
+                Submit an Enquiry
+              </Link>
+              <Link href="/admission/booklet" className="hero-btn-ghost">
+                <i className="bi bi-file-earmark-pdf" />
+                Download Booklet
+              </Link>
             </Col>
           </Row>
         </Container>
       </section>
-      
-      {/* Additional styling for hover effects */}
-      <style>{`
-        .hover-lift {
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .hover-lift:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
-        }
-      `}</style>
     </>
   );
 }
-

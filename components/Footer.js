@@ -4,51 +4,119 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 
+const QUICK_LINKS = [
+  { href: '/about', label: 'About Us' },
+  { href: '/admission/courses', label: 'Courses Offered' },
+  { href: '/academic/calendar', label: 'Academic Calendar' },
+  { href: '/admission/fee', label: 'Fee Structure' },
+  { href: '/contact', label: 'Contact Us' },
+];
+
+const IMPORTANT_LINKS = [
+  { href: '/student/urise-portal', label: 'URISE Portal' },
+  { href: '/igrs', label: 'IGRS Grievance Portal' },
+  { href: '/scholarship', label: 'Scholarships' },
+  { href: '/placements/records', label: 'Placement Records' },
+  { href: '/academic/verification', label: 'Educational Verification' },
+  { href: '/gallery', label: 'Photo Gallery' },
+];
+
 export default function Footer() {
   return (
     <footer className="footer mt-auto">
       <Container>
-        <Row className="gy-4">
+        <Row className="gy-5">
           <Col lg={4} md={6}>
-            <h5 className="text-white mb-3">Km. Mayawati Government Girls Polytechnic</h5>
-            <p className="mb-4">
-              Providing quality technical education to women and empowering them for a better future.
-              Located in Badalpur, Gautam Buddha Nagar.
+            <div className="footer-brand">
+              <span className="brand-crest">
+                <i className="bi bi-mortarboard-fill" />
+              </span>
+              <span className="brand-text">
+                <span className="brand-line-1">Km. Mayawati Government Girls</span>
+                <span className="brand-line-2">Polytechnic, Badalpur</span>
+              </span>
+            </div>
+            <p>
+              Km. Mayawati Government Girls Polytechnic, Badalpur is committed to providing quality
+              technical education to women and empowering them to lead in the engineering profession.
             </p>
+            <div className="footer-social">
+              <a href="#" aria-label="Facebook"><i className="bi bi-facebook" /></a>
+              <a href="#" aria-label="Instagram"><i className="bi bi-instagram" /></a>
+              <a href="#" aria-label="YouTube"><i className="bi bi-youtube" /></a>
+              <a href="#" aria-label="LinkedIn"><i className="bi bi-linkedin" /></a>
+            </div>
           </Col>
+
           <Col lg={2} md={6}>
-            <h5 className="text-white mb-3">Quick Links</h5>
-            <ul className="list-unstyled">
-              <li className="mb-2"><Link href="/about">About Us</Link></li>
-              <li className="mb-2"><Link href="/admission/courses">Courses</Link></li>
-              <li className="mb-2"><Link href="/academic/calendar">Academic Calendar</Link></li>
-              <li className="mb-2"><Link href="/contact">Contact</Link></li>
+            <h5>Quick Links</h5>
+            <ul className="list-unstyled footer-links">
+              {QUICK_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <i className="bi bi-chevron-right" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </Col>
+
           <Col lg={3} md={6}>
-            <h5 className="text-white mb-3">Important Links</h5>
-            <ul className="list-unstyled">
-              <li className="mb-2"><Link href="/igrs">IGRS Login</Link></li>
-              <li className="mb-2"><Link href="/scholarship">Scholarships</Link></li>
-              <li className="mb-2"><Link href="/placements/records">Placements</Link></li>
-              <li className="mb-2"><Link href="/gallery">Gallery</Link></li>
+            <h5>Important Links</h5>
+            <ul className="list-unstyled footer-links">
+              {IMPORTANT_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <i className="bi bi-chevron-right" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </Col>
+
           <Col lg={3} md={6}>
-            <h5 className="text-white mb-3">Contact Us</h5>
-            <address className="text-light-text">
-              Km. Mayawati Government Girls Polytechnic<br />
-              Badalpur, Gautam Buddha Nagar<br />
-              Uttar Pradesh, India<br />
-              <br />
-              <strong>Phone:</strong> +91 XXXXXXXXXX<br />
-              <strong>Email:</strong> info@kmggp.ac.in
-            </address>
+            <h5>Reach Us</h5>
+            <div className="footer-contact-item">
+              <i className="bi bi-geo-alt-fill" />
+              <address className="mb-0">
+                Km. Mayawati Government Girls Polytechnic, Badalpur,
+                <br />
+                Gautam Buddha Nagar,
+                <br />
+                Uttar Pradesh, India
+              </address>
+            </div>
+            <div className="footer-contact-item">
+              <i className="bi bi-telephone-fill" />
+              <a href="tel:+910000000000">+91 XXXXX XXXXX</a>
+            </div>
+            <div className="footer-contact-item">
+              <i className="bi bi-envelope-fill" />
+              <a href="mailto:info@kmggp.ac.in">info@kmggp.ac.in</a>
+            </div>
+            <div className="footer-contact-item">
+              <i className="bi bi-clock-fill" />
+              <span>Monday – Saturday, 9:00 AM – 5:00 PM</span>
+            </div>
           </Col>
         </Row>
-        <div className="footer-bottom">
-          <p className="mb-0">&copy; {new Date().getFullYear()} Km. Mayawati Government Girls Polytechnic, Badalpur. All Rights Reserved.</p>
+
+        <div className="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <p className="mb-0">
+            &copy; {new Date().getFullYear()} Km. Mayawati Government Girls Polytechnic, Badalpur.
+            All Rights Reserved.
+          </p>
+          <p className="mb-0 d-flex align-items-center gap-2">
+            <i className="bi bi-patch-check-fill text-gold" />
+            Affiliated to BTEUP, Government of Uttar Pradesh
+          </p>
         </div>
+
+        <p className="footer-credit mb-0 text-center">
+          Designed By : Lalit Kumar Gupta, Lecturer I.T. KMGGP, Badalapur, G.B. Nagar
+        </p>
       </Container>
     </footer>
   );

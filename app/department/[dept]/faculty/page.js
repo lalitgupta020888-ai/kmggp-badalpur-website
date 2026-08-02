@@ -1,47 +1,118 @@
 "use client";
-import React from 'react';
-import { Card, Table } from 'react-bootstrap';
+
+import React, { use } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { getDepartment } from '@/lib/departments';
+
+const FACULTY = [
+  {
+    name: 'Dr. Example Name',
+    designation: 'Head of Department',
+    qualification: 'Ph.D., M.Tech.',
+    experience: '15 Years',
+    initial: 'D',
+  },
+  {
+    name: 'Mrs. Faculty Two',
+    designation: 'Lecturer',
+    qualification: 'M.Tech.',
+    experience: '8 Years',
+    initial: 'F',
+  },
+  {
+    name: 'Ms. Faculty Three',
+    designation: 'Lecturer',
+    qualification: 'B.Tech.',
+    experience: '3 Years',
+    initial: 'F',
+  },
+];
 
 export default function FacultyPage({ params }) {
+  const { dept } = use(params);
+  const department = getDepartment(dept);
+
   return (
-    <Card className="border-0 shadow-sm">
-      <Card.Body>
-        <h2 className="text-primary-blue mb-4">Faculty Members</h2>
-        <Table striped bordered hover responsive className="mt-3">
-          <thead className="bg-light-blue">
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Designation</th>
-              <th>Qualification</th>
-              <th>Experience</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Dr. Example Name</td>
-              <td>Head of Department</td>
-              <td>Ph.D, M.Tech</td>
-              <td>15 Years</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Mrs. Faculty Two</td>
-              <td>Lecturer</td>
-              <td>M.Tech</td>
-              <td>8 Years</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Ms. Faculty Three</td>
-              <td>Lecturer</td>
-              <td>B.Tech</td>
-              <td>3 Years</td>
-            </tr>
-          </tbody>
-        </Table>
-      </Card.Body>
-    </Card>
+    <>
+      <div className="panel">
+        <div className="panel-header">
+          <i className="bi bi-person-badge" />
+          Faculty — {department.name}
+        </div>
+        <div className="panel-body">
+          <p>
+            Our faculty combine strong academic credentials with industry awareness, mentoring every
+            student individually through the three-year diploma programme.
+          </p>
+
+          <Row className="g-4 mt-1">
+            {FACULTY.map((member) => (
+              <Col lg={4} md={6} key={member.name}>
+                <div className="premium-card h-100 p-4 text-center">
+                  <span className="quote-avatar mx-auto mb-3" style={{ width: 64, height: 64, flex: '0 0 64px', fontSize: '1.5rem' }}>
+                    {member.initial}
+                  </span>
+                  <h5 className="fw-bold mb-1">{member.name}</h5>
+                  <span className="eyebrow">{member.designation}</span>
+                  <div className="gold-rule-thin my-3" />
+                  <p className="small mb-1">
+                    <i className="bi bi-mortarboard-fill text-gold me-2" />
+                    {member.qualification}
+                  </p>
+                  <p className="small mb-0">
+                    <i className="bi bi-clock-history text-gold me-2" />
+                    {member.experience} of experience
+                  </p>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
+
+      <div className="panel mt-4">
+        <div className="panel-header">
+          <i className="bi bi-table" />
+          Faculty Directory
+        </div>
+        <div className="panel-body p-0">
+          <div className="table-wrap">
+            <table className="premium-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Designation</th>
+                  <th>Qualification</th>
+                  <th>Experience</th>
+                </tr>
+              </thead>
+              <tbody>
+                {FACULTY.map((member, index) => (
+                  <tr key={member.name}>
+                    <td>{index + 1}</td>
+                    <td>
+                      <i className="bi bi-person-circle text-gold me-2" />
+                      {member.name}
+                    </td>
+                    <td>{member.designation}</td>
+                    <td>{member.qualification}</td>
+                    <td>{member.experience}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div className="callout mt-4">
+        <i className="bi bi-info-circle-fill" />
+        <p>
+          Faculty details are updated at the start of every academic session. For departmental
+          enquiries, please contact the institute office.
+        </p>
+      </div>
+    </>
   );
 }
