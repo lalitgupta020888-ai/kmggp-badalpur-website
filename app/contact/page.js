@@ -4,17 +4,30 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
 
+const LOCATION = {
+  name: 'Km. Mayawati Govt. Girls Polytechnic',
+  lines: ['HGV9+964, Sadopur, Badalpur', 'Gautam Buddha Nagar', 'Uttar Pradesh 203207, India'],
+  plusCode: 'HGV9+964 Badalpur, Uttar Pradesh',
+  lat: 28.593145,
+  lng: 77.51895,
+};
+
+const MAP_POINT = `${LOCATION.lat},${LOCATION.lng}`;
+const MAP_EMBED = `https://www.google.com/maps?q=${MAP_POINT}&z=17&hl=en&output=embed`;
+const MAP_VIEW = `https://www.google.com/maps/search/?api=1&query=${MAP_POINT}`;
+const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${MAP_POINT}`;
+
 const CONTACT_LINES = [
   {
     icon: 'bi-geo-alt-fill',
     label: 'Campus Address',
     value: (
       <>
-        Km. Mayawati Government Girls Polytechnic,
+        {LOCATION.name},
         <br />
-        Badalpur, Gautam Buddha Nagar,
+        {LOCATION.lines[0]},
         <br />
-        Uttar Pradesh, India
+        {LOCATION.lines[1]}, {LOCATION.lines[2]}
       </>
     ),
   },
@@ -154,17 +167,48 @@ export default function ContactPage() {
               <i className="bi bi-pin-map-fill" />
               Find Us on the Map
             </div>
-            <div style={{ height: '420px' }}>
+            <div className="map-frame">
               <iframe
-                title="Institute location on Google Maps"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d112108.5714088998!2d77.41164917539003!3d28.588820473550383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce59f143715c1%3A0xc39f9fbceba7a4b!2sBadalpur%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1707812903820!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0, display: 'block' }}
+                title="Km. Mayawati Government Girls Polytechnic, Badalpur on Google Maps"
+                src={MAP_EMBED}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
+
+              <div className="map-card">
+                <span className="map-card-eyebrow">Campus Location</span>
+                <h3 className="map-card-title">{LOCATION.name}</h3>
+                <address className="map-card-address">
+                  {LOCATION.lines.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                </address>
+
+                <dl className="map-card-meta">
+                  <div>
+                    <dt>Plus Code</dt>
+                    <dd>{LOCATION.plusCode}</dd>
+                  </div>
+                  <div>
+                    <dt>Coordinates</dt>
+                    <dd>
+                      {LOCATION.lat}° N, {LOCATION.lng}° E
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className="map-card-actions">
+                  <a className="btn-gold" href={MAP_DIRECTIONS} target="_blank" rel="noopener noreferrer">
+                    <i className="bi bi-signpost-split-fill" />
+                    Get Directions
+                  </a>
+                  <a className="btn-outline-navy" href={MAP_VIEW} target="_blank" rel="noopener noreferrer">
+                    <i className="bi bi-box-arrow-up-right" />
+                    Open in Maps
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </Container>
