@@ -40,7 +40,7 @@ const MILESTONES = [
   },
   {
     title: 'Three Engineering Disciplines',
-    text: 'Electronics Engineering, Computer Science & Engineering and Information Technology, with 60 seats each.',
+    text: 'Electronics Engineering, Computer Science & Engineering and Information Technology, with 75 seats each.',
   },
   {
     title: 'A Growing Placement Network',
@@ -208,7 +208,7 @@ export default function AboutPage() {
                     </span>
                     <div>
                       <div className="label">Programmes</div>
-                      <p className="value">3 diploma branches · 3 years each · 60 seats per branch</p>
+                      <p className="value">3 diploma branches · 3 years each · 75 seats per branch</p>
                     </div>
                   </div>
                   <div className="contact-line">

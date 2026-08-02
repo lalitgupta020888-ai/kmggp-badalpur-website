@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import { getDepartment } from '@/lib/departments';
 
 const HIGHLIGHTS = [
-  { icon: 'bi-people-fill', value: '60', label: 'Seats per Year' },
+  { icon: 'bi-people-fill', value: '75', label: 'Seats per Year' },
   { icon: 'bi-hourglass-split', value: '3 Yrs', label: 'Programme Duration' },
   { icon: 'bi-beaker', value: '04', label: 'Dedicated Labs' },
   { icon: 'bi-patch-check-fill', value: 'BTEUP', label: 'Affiliation' },

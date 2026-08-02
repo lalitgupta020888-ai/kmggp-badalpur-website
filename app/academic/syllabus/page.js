@@ -2,21 +2,25 @@
 
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
 
 const BRANCHES = [
   {
+    slug: 'electronics',
     icon: 'bi-cpu-fill',
     name: 'Electronics Engineering',
     text: 'Circuit theory, digital electronics, microprocessors, communication systems and embedded design.',
   },
   {
+    slug: 'cse',
     icon: 'bi-pc-display',
     name: 'Computer Science & Engineering',
     text: 'Programming fundamentals, data structures, databases, operating systems and software engineering.',
   },
   {
+    slug: 'it',
     icon: 'bi-hdd-network-fill',
     name: 'Information Technology',
     text: 'Computer networks, web technologies, cloud fundamentals, cyber security and IT infrastructure.',
@@ -61,11 +65,11 @@ export default function Syllabus() {
                   <h5 className="fw-bold mb-3">{branch.name}</h5>
                   <p className="small flex-grow-1">{branch.text}</p>
                   <div className="gold-rule-thin my-3" />
-                  <a href="#" className="doc-link mb-0">
+                  <Link href={`/academic/syllabus/${branch.slug}`} className="doc-link mb-0">
                     <i className="bi bi-file-earmark-pdf-fill" />
                     Download Syllabus (PDF)
                     <i className="bi bi-arrow-right-short" />
-                  </a>
+                  </Link>
                 </div>
               </Col>
             ))}

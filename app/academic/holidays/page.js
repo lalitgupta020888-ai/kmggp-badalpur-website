@@ -62,6 +62,22 @@ export default function ListOfHolidays() {
             </div>
           </div>
 
+          <div className="download-note mt-4">
+            <p>
+              The complete holiday list for the session 2026-27, as notified by the Government of
+              Uttar Pradesh, is available for download.
+            </p>
+            <a
+              className="btn-gold"
+              href="/documents/holiday-list-2026-27.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="bi bi-file-earmark-pdf-fill" />
+              Click Here
+            </a>
+          </div>
+
           <div className="callout mt-4">
             <i className="bi bi-info-circle-fill" />
             <p>

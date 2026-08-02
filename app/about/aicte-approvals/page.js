@@ -15,9 +15,9 @@ const LETTERS = [
 ];
 
 const PROGRAMMES = [
-  { name: 'Diploma in Electronics Engineering', intake: 60, icon: 'bi-cpu-fill' },
-  { name: 'Diploma in Computer Science & Engineering', intake: 60, icon: 'bi-pc-display' },
-  { name: 'Diploma in Information Technology', intake: 60, icon: 'bi-hdd-network-fill' },
+  { name: 'Diploma in Electronics Engineering', intake: 75, icon: 'bi-cpu-fill' },
+  { name: 'Diploma in Computer Science & Engineering', intake: 75, icon: 'bi-pc-display' },
+  { name: 'Diploma in Information Technology', intake: 75, icon: 'bi-hdd-network-fill' },
 ];
 
 export default function AicteApprovalsPage() {
@@ -113,7 +113,7 @@ export default function AicteApprovalsPage() {
                     </span>
                     <div>
                       <div className="label">Total Sanctioned Intake</div>
-                      <p className="value">180 seats across 3 programmes</p>
+                      <p className="value">246 seats across 3 programmes (with Lateral Entry)</p>
                     </div>
                   </div>
                 </div>
