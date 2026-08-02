@@ -2702,7 +2702,7 @@ a {
 .footer-credit {
   padding-bottom: 22px;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.32);
+  color: var(--gold-400);
 }
 
 /* ---------- Motion ----------------------------------------------------- */

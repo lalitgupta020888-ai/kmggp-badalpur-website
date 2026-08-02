@@ -10,7 +10,7 @@ import PrincipalCard from '@/components/PrincipalCard';
 import SectionHead from '@/components/SectionHead';
 
 const STATS = [
-  { icon: 'bi-people-fill', value: '1,200+', label: 'Students Enrolled' },
+  { icon: 'bi-people-fill', value: '500+', label: 'Students Enrolled' },
   { icon: 'bi-diagram-3-fill', value: '03', label: 'Engineering Branches' },
   { icon: 'bi-graph-up-arrow', value: '88%', label: 'Placement Rate' },
   { icon: 'bi-calendar2-check-fill', value: '15+', label: 'Years of Excellence' },
