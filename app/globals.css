@@ -1455,8 +1455,8 @@ a {
 /* ---------- Leadership / dignitaries grid ----------------------------- */
 
 .leader-tile {
-  background: var(--white);
-  border: 1px solid var(--hairline);
+  background: linear-gradient(180deg, #fffdf5 0%, var(--white) 42%);
+  border: 1px solid rgba(201, 162, 39, 0.3);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   padding: 30px 22px 26px;
@@ -1470,26 +1470,25 @@ a {
     border-color 0.35s var(--ease);
 }
 
-/* Gold edge sweeps in on hover, matching the site's card language */
+/* Gold cap along the top edge — always lit, brighter on hover */
 .leader-tile::before {
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
-  height: 3px;
+  height: 4px;
   background: var(--gold-bar);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.45s var(--ease);
+  opacity: 0.8;
+  transition: opacity 0.35s var(--ease);
 }
 
 .leader-tile:hover {
   transform: translateY(-7px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(201, 162, 39, 0.42);
+  box-shadow: var(--shadow-lg), 0 18px 40px rgba(201, 162, 39, 0.18);
+  border-color: rgba(201, 162, 39, 0.6);
 }
 
 .leader-tile:hover::before {
-  transform: scaleX(1);
+  opacity: 1;
 }
 
 /* Portrait frame — rounded square, navy mat with a gold ring */
@@ -1501,7 +1500,7 @@ a {
   overflow: hidden;
   background: var(--navy-wash);
   border: 3px solid var(--navy-800);
-  box-shadow: 0 6px 18px rgba(10, 37, 64, 0.22),
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.38), 0 6px 18px rgba(10, 37, 64, 0.22),
     inset 0 0 0 2px rgba(201, 162, 39, 0.55);
   display: grid;
   place-items: center;
@@ -1511,7 +1510,7 @@ a {
 
 .leader-tile:hover .leader-frame {
   transform: scale(1.04);
-  box-shadow: 0 12px 28px rgba(10, 37, 64, 0.28),
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.65), 0 12px 28px rgba(10, 37, 64, 0.28),
     inset 0 0 0 2px rgba(201, 162, 39, 0.9);
 }
 
@@ -1545,12 +1544,46 @@ a {
   font-size: 0.6rem;
 }
 
+/* The designation sits on a gold band running the full width of the tile */
 .leader-tile-role {
-  font-size: 0.84rem;
-  font-weight: 700;
-  color: var(--gold-700);
-  margin: 0 0 3px;
+  position: relative;
+  align-self: stretch;
+  margin: 2px -22px 14px;
+  padding: 9px 12px;
+  overflow: hidden;
+  background: var(--gold-bar);
+  color: var(--navy-900);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
   line-height: 1.4;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(138, 109, 20, 0.4), 0 6px 16px rgba(201, 162, 39, 0.24);
+}
+
+.leader-tile-role span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Light sweeps across the band as the card is hovered */
+.leader-tile-role::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-130%);
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.75) 50%,
+    transparent 68%
+  );
+  transition: transform 0.85s var(--ease);
+}
+
+.leader-tile:hover .leader-tile-role::after {
+  transform: translateX(130%);
 }
 
 .leader-tile-org {
@@ -1588,7 +1621,10 @@ a {
   }
 
   .leader-tile-role {
-    font-size: 0.78rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    margin: 2px -14px 12px;
+    padding: 8px 8px;
   }
 
   .leader-tile-org {
@@ -1616,6 +1652,10 @@ a {
   .leader-frame {
     width: 108px;
     height: 108px;
+  }
+
+  .leader-tile-role {
+    margin: 2px -18px 12px;
   }
 }
 
@@ -2392,39 +2432,81 @@ a {
 
 /* ---------- IGRS — Grievance Redressal --------------------------------- */
 
-/* The landing cards are buttons, so reset the native button chrome */
-.igrs-action {
-  border: 1px solid var(--hairline);
-  background: var(--white);
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
+/* Pending → In Progress → Resolved tracker on the status page */
+.status-track {
   display: flex;
-  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  counter-reset: track;
 }
 
-.igrs-action p {
-  flex-grow: 1;
+.status-track-step {
+  flex: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 4px;
 }
 
-.igrs-back {
+.status-track-step::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--hairline);
+  z-index: 0;
+}
+
+.status-track-step:first-child::before {
+  display: none;
+}
+
+.status-track-step.is-done::before {
+  background: var(--gold-bar);
+}
+
+.status-track-dot {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  border: none;
-  background: transparent;
-  color: var(--navy-800);
-  font-weight: 600;
-  font-size: 0.88rem;
-  padding: 0;
-  margin-bottom: 26px;
-  cursor: pointer;
-  transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--hairline);
+  color: var(--ink-faint);
+  font-size: 1.05rem;
+  transition: all 0.3s var(--ease);
 }
 
-.igrs-back:hover {
+.status-track-step.is-done .status-track-dot {
+  border-color: var(--gold-500);
+  background: var(--gold-100);
   color: var(--gold-700);
-  transform: translateX(-4px);
+}
+
+.status-track-step.is-current .status-track-dot {
+  background: var(--navy-wash);
+  border-color: var(--gold-500);
+  color: var(--gold-300);
+  box-shadow: var(--shadow-gold);
+}
+
+.status-track-label {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink-faint);
+}
+
+.status-track-step.is-done .status-track-label {
+  color: var(--navy-800);
 }
 
 .status-pill {
@@ -2951,6 +3033,56 @@ a {
 
 .download-note .btn-gold {
   gap: 0.5rem;
+  padding: 0.62rem 1.5rem;
+  font-size: 0.88rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ---------- Government order note (fee page) --------------------------- */
+
+.go-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin: 22px;
+  padding: 20px 22px;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--gold-500);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+}
+
+.go-note-meta {
+  flex: 1 1 320px;
+}
+
+.go-note-meta h6 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy-800);
+  line-height: 1.5;
+}
+
+.go-note-meta p {
+  margin: 0 0 2px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.go-note-meta p:last-child {
+  margin-bottom: 0;
+}
+
+.go-note-meta p span {
+  font-weight: 600;
+  color: var(--navy-800);
+}
+
+.go-note .btn-gold {
   padding: 0.62rem 1.5rem;
   font-size: 0.88rem;
   text-decoration: none;

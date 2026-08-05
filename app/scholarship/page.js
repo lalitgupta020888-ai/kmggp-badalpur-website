@@ -33,10 +33,20 @@ const SCHEMES = [
   },
 ];
 
+const UP_SCHOLARSHIP_PORTAL = 'https://scholarship.up.gov.in/';
+
 const STEPS = [
   {
     title: 'Register on the Official Portal',
-    text: 'Create your account on scholarship.up.gov.in or the National Scholarship Portal, as applicable to your scheme.',
+    text: (
+      <>
+        Create your account on{' '}
+        <a href={UP_SCHOLARSHIP_PORTAL} target="_blank" rel="noopener noreferrer">
+          scholarship.up.gov.in
+        </a>{' '}
+        or the National Scholarship Portal, as applicable to your scheme.
+      </>
+    ),
   },
   {
     title: 'Complete the Application Form',

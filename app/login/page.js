@@ -62,7 +62,7 @@ export default function AdminLoginPage() {
                 </div>
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-4">
                 <Form.Label>Password</Form.Label>
                 <div className="input-icon input-icon-action">
                   <i className="bi bi-key-fill" />
@@ -81,24 +81,6 @@ export default function AdminLoginPage() {
                   >
                     <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`} />
                   </button>
-                </div>
-              </Form.Group>
-
-              <Form.Group className="mb-4">
-                <Form.Label>Role</Form.Label>
-                <div className="input-icon">
-                  <i className="bi bi-diagram-3-fill" />
-                  <Form.Select required defaultValue="">
-                    <option value="" disabled>
-                      Select your role
-                    </option>
-                    <option value="principal">Principal</option>
-                    <option value="admin">Administrative Officer</option>
-                    <option value="hod">Head of Department</option>
-                    <option value="faculty">Faculty</option>
-                    <option value="accounts">Accounts Section</option>
-                    <option value="tnp">Training &amp; Placement Cell</option>
-                  </Form.Select>
                 </div>
               </Form.Group>
 

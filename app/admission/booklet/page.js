@@ -16,6 +16,8 @@ const CONTENTS = [
   'Training & placement activities and recruiter list',
 ];
 
+const JEECUP_BOOKLET_FILE = '/documents/jeecup-information-booklet.pdf';
+
 const DOWNLOADS = [
   { icon: 'bi-file-earmark-pdf-fill', label: 'Information Booklet 2026-27 (PDF)' },
   { icon: 'bi-file-earmark-text-fill', label: 'Admission Application Form (PDF)' },
@@ -54,6 +56,23 @@ export default function InformationBooklet() {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
+
+                  <div className="download-note mt-4">
+                    <p>
+                      The official JEECUP information booklet, containing the entrance examination
+                      and counselling details for admission to all diploma programmes, is available
+                      for download.
+                    </p>
+                    <a
+                      className="btn-gold"
+                      href={JEECUP_BOOKLET_FILE}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="bi bi-file-earmark-pdf-fill" />
+                      Download JEECUP Booklet
+                    </a>
+                  </div>
                 </div>
               </div>
             </Col>

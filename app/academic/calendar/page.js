@@ -5,11 +5,13 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 
+const ACADEMIC_CALENDAR_FILE = '/documents/academic-calendar-2026-27.pdf';
+
 const ODD_SEMESTER = [
-  { icon: 'bi-play-circle-fill', event: 'Odd Semester Classes Begin', date: 'August 16, 2026' },
+  { icon: 'bi-play-circle-fill', event: 'Odd Semester Classes Begin', date: 'July 2026' },
   { icon: 'bi-pencil-square', event: 'Mid Semester Examinations', date: 'October 2026' },
   { icon: 'bi-journal-check', event: 'Practical Examinations', date: 'November 2026' },
-  { icon: 'bi-mortarboard-fill', event: 'Odd Semester Theory Examinations', date: 'December 2026' },
+  { icon: 'bi-mortarboard-fill', event: 'Odd Semester Theory Examinations', date: 'November 2026' },
 ];
 
 const EVEN_SEMESTER = [
@@ -74,6 +76,22 @@ export default function AcademicCalendar() {
               <SemesterPanel title="Even Semester (II, IV, VI)" icon="bi-calendar-range-fill" rows={EVEN_SEMESTER} />
             </Col>
           </Row>
+
+          <div className="download-note mt-4">
+            <p>
+              The complete academic calendar for the session 2026-27, as notified by the Board of
+              Technical Education, Uttar Pradesh (BTEUP), is available for download.
+            </p>
+            <a
+              className="btn-gold"
+              href={ACADEMIC_CALENDAR_FILE}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="bi bi-file-earmark-pdf-fill" />
+              Download Academic Calendar
+            </a>
+          </div>
 
           <div className="callout mt-4">
             <i className="bi bi-info-circle-fill" />

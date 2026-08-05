@@ -129,17 +129,8 @@ export default function LibraryPage() {
                       <i className="bi bi-calendar-week-fill" />
                     </span>
                     <div>
-                      <div className="label">Monday – Friday</div>
-                      <p className="value">9:00 AM – 5:00 PM</p>
-                    </div>
-                  </div>
-                  <div className="contact-line">
-                    <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-calendar-event" />
-                    </span>
-                    <div>
-                      <div className="label">Saturday</div>
-                      <p className="value">9:00 AM – 1:00 PM</p>
+                      <div className="label">Monday – Saturday</div>
+                      <p className="value">10:00 AM – 5:00 PM</p>
                     </div>
                   </div>
                   <div className="contact-line">
@@ -148,7 +139,7 @@ export default function LibraryPage() {
                     </span>
                     <div>
                       <div className="label">Book Issue &amp; Return</div>
-                      <p className="value">10:00 AM – 4:00 PM on working days</p>
+                      <p className="value">11:00 AM – 4:00 PM on working days</p>
                     </div>
                   </div>
                   <div className="contact-line">

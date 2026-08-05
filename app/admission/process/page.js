@@ -5,10 +5,20 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 
+const JEECUP_PORTAL = 'https://jeecup.admissions.nic.in/';
+
 const STEPS = [
   {
     title: 'Register for JEECUP',
-    text: 'Complete the online application on the official JEECUP portal within the notified window and pay the examination fee.',
+    text: (
+      <>
+        Complete the online application on the official{' '}
+        <a href={JEECUP_PORTAL} target="_blank" rel="noopener noreferrer">
+          JEECUP
+        </a>{' '}
+        portal within the notified window and pay the examination fee.
+      </>
+    ),
   },
   {
     title: 'Appear for the Entrance Examination',

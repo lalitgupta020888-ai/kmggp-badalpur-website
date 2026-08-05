@@ -55,13 +55,6 @@ const LIFE = [
   { href: '/life/library', label: 'Library', icon: 'bi-book-half' },
 ];
 
-const PLACEMENTS = [
-  { href: '/placements/tnp-department', label: 'T&P Department', icon: 'bi-building-gear' },
-  { href: '/placements/recruiters', label: 'Our Recruiters', icon: 'bi-buildings' },
-  { href: '/placements/records', label: 'Placement Records', icon: 'bi-graph-up-arrow' },
-  { href: '/placements/programmes', label: 'T&P Programmes', icon: 'bi-easel' },
-];
-
 function DropdownLinks({ items }) {
   return items.map((item) => (
     <NavDropdown.Item as={Link} href={item.href} key={item.href}>
@@ -151,9 +144,15 @@ export default function Navigation() {
                 <DropdownLinks items={STUDENT} />
               </NavDropdown>
 
-              <NavDropdown title="Placements" id="placements-dropdown" renderMenuOnMount>
-                <DropdownLinks items={PLACEMENTS} />
-              </NavDropdown>
+              {/* No dropdown here — the placements section carries its own
+                  sidebar with every sub-page. */}
+              <Nav.Link
+                as={Link}
+                href="/placements/tnp-department"
+                className={isActive('/placements') ? 'active' : ''}
+              >
+                Placements
+              </Nav.Link>
 
               <NavDropdown title="Life@KMGGP" id="life-dropdown" renderMenuOnMount>
                 <DropdownLinks items={LIFE} />
@@ -180,7 +179,7 @@ export default function Navigation() {
               </Button>
               <Button
                 as={Link}
-                href="/igrs"
+                href="/igrs/student"
                 size="sm"
                 className="nav-ghost nav-icon-only"
                 title="IGRS Grievance Portal"

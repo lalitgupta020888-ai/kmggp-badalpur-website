@@ -12,13 +12,15 @@ const QUICK_LINKS = [
   { href: '/contact', label: 'Contact Us' },
 ];
 
+/* Official portals students and staff need most — all external. */
 const IMPORTANT_LINKS = [
-  { href: '/student/urise-portal', label: 'URISE Portal' },
-  { href: '/igrs', label: 'IGRS Grievance Portal' },
-  { href: '/scholarship', label: 'Scholarships' },
-  { href: '/placements/records', label: 'Placement Records' },
-  { href: '/academic/verification', label: 'Educational Verification' },
-  { href: '/gallery', label: 'Photo Gallery' },
+  { href: 'https://bteup.ac.in/', label: 'UP BTE' },
+  { href: 'http://upted.gov.in/directorate', label: 'UPTED' },
+  { href: 'https://www.irdtup.in/', label: 'IRDTUP' },
+  { href: 'https://www.aicte.gov.in/', label: 'AICTE' },
+  { href: 'https://urise.up.gov.in/', label: 'URISE' },
+  { href: 'https://jeecup.admissions.nic.in/', label: 'JEECUP' },
+  { href: 'https://scholarship.up.gov.in/', label: 'SCHOLARSHIP' },
 ];
 
 export default function Footer() {
@@ -67,10 +69,10 @@ export default function Footer() {
             <ul className="list-unstyled footer-links">
               {IMPORTANT_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
                     <i className="bi bi-chevron-right" />
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -115,7 +117,7 @@ export default function Footer() {
         </div>
 
         <p className="footer-credit mb-0 text-center">
-          Designed By : Lalit Kumar Gupta, Lecturer I.T. KMGGP, Badalapur, G.B. Nagar
+          Designed By : Lalit Kumar Gupta & Team, KMGGP, Badalapur, G.B. Nagar
         </p>
       </Container>
     </footer>

@@ -32,7 +32,7 @@ const LEADERS = [
   },
   {
     name: 'Smt. Selva Kumari J. (IAS)',
-    role: 'Secretary',
+    role: 'Director General',
     org: 'Technical Education, Uttar Pradesh',
     photo: '/images/leadership/selva-kumari.png',
   },
@@ -83,7 +83,9 @@ export default function Leadership() {
                 <div className="gold-flourish leader-tile-rule">
                   <i className="bi bi-diamond-fill" />
                 </div>
-                <p className="leader-tile-role">{leader.role}</p>
+                <p className="leader-tile-role">
+                  <span>{leader.role}</span>
+                </p>
                 <p className="leader-tile-org">{leader.org}</p>
               </article>
             </Col>
