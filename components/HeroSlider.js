@@ -9,19 +9,29 @@ const SLIDES = [
   {
     src: '/images/campus.png',
     alt: 'The main entrance of Km. Mayawati Government Girls Polytechnic, Badalpur',
-    // Deliberately captionless — the photograph carries this slide on its own.
-    whole: true,
-  },
-  {
-    src: '/images/college_1.png',
-    alt: 'The academic block of Km. Mayawati Government Girls Polytechnic, Badalpur',
-    whole: true,
+    // A wide panorama in a 2.2:1 hero: cover trims a good part of the width.
+    // Anchoring left spends the whole trim on the right edge, so the tree line
+    // and the name board survive intact.
+    position: 'left center',
     eyebrow: 'Government of Uttar Pradesh',
     icon: 'bi-award-fill',
     title: 'Empowering Women Through Technical Excellence',
     text: 'Km. Mayawati Government Girls Polytechnic, Badalpur — a premier institute shaping confident, industry-ready engineers.',
     primary: { href: '/admission/process', label: 'Apply for Admission', icon: 'bi-mortarboard-fill' },
     secondary: { href: '/about', label: 'Discover the Institute', icon: 'bi-arrow-right' },
+  },
+  {
+    src: '/images/slider1.jpg',
+    alt: 'The academic block of Km. Mayawati Government Girls Polytechnic, Badalpur',
+    // The name board sits high in this frame, so bias the crop upward — at the
+    // hero's wide ratio a centred crop clips it.
+    position: 'center 35%',
+    eyebrow: 'Our Campus',
+    icon: 'bi-building-fill',
+    title: 'A Campus Built for Learning',
+    text: 'Spacious academic blocks, green surroundings and a safe, well-equipped environment for every student.',
+    primary: { href: '/gallery', label: 'View Campus Gallery', icon: 'bi-images' },
+    secondary: { href: '/life', label: 'Life @ KMGGP', icon: 'bi-stars' },
   },
   {
     src: '/images/slider2.jpg',
@@ -49,66 +59,42 @@ export default function HeroSlider() {
   return (
     <Carousel fade indicators interval={6000} pause="hover" nextLabel="" prevLabel="">
       {SLIDES.map((slide, index) => (
-        <Carousel.Item
-          key={slide.src + index}
-          className={`hero-slide${slide.title ? '' : ' hero-slide--bare'}`}
-        >
-          {/* A `whole` slide shows its photograph uncropped rather than trimmed
-              to the hero's ratio, so the letterbox left over by `contain` is
-              filled with a blurred copy of the same frame. */}
-          {slide.whole && (
-            <Image
-              src={slide.src}
-              alt=""
-              aria-hidden
-              fill
-              sizes="100vw"
-              className="hero-backdrop"
-              style={{ objectFit: 'cover' }}
-              priority={index === 0}
-            />
-          )}
+        <Carousel.Item key={slide.src + index} className="hero-slide">
           <Image
             src={slide.src}
             alt={slide.alt}
             fill
             sizes="100vw"
-            style={{
-              objectFit: slide.whole ? 'contain' : 'cover',
-              objectPosition: slide.position ?? 'center',
-            }}
+            className="hero-photo"
+            style={{ objectFit: 'cover', objectPosition: slide.position ?? 'center' }}
             priority={index === 0}
           />
           <div className="hero-overlay" />
           <div className="hero-vignette" />
 
-          {/* A slide may carry no copy at all, in which case the photograph
-              stands alone — every caption field is then absent. */}
-          {slide.title && (
-            <div className="hero-caption">
-              <Container>
-                <div style={{ maxWidth: '760px' }}>
-                  <span className="eyebrow eyebrow-light anim-up anim-up-1">
-                    <i className={`bi ${slide.icon}`} />
-                    {slide.eyebrow}
-                  </span>
-                  <h2 className="anim-up anim-up-1">{slide.title}</h2>
-                  <div className="hero-gold-line anim-up anim-up-2" />
-                  <p className="anim-up anim-up-2">{slide.text}</p>
-                  <div className="d-flex flex-wrap gap-3 mt-4 anim-up anim-up-3">
-                    <Link href={slide.primary.href} className="hero-btn-primary">
-                      <i className={`bi ${slide.primary.icon}`} />
-                      {slide.primary.label}
-                    </Link>
-                    <Link href={slide.secondary.href} className="hero-btn-ghost">
-                      <i className={`bi ${slide.secondary.icon}`} />
-                      {slide.secondary.label}
-                    </Link>
-                  </div>
+          <div className="hero-caption">
+            <Container>
+              <div style={{ maxWidth: '760px' }}>
+                <span className="eyebrow eyebrow-light anim-up anim-up-1">
+                  <i className={`bi ${slide.icon}`} />
+                  {slide.eyebrow}
+                </span>
+                <h2 className="anim-up anim-up-1">{slide.title}</h2>
+                <div className="hero-gold-line anim-up anim-up-2" />
+                <p className="anim-up anim-up-2">{slide.text}</p>
+                <div className="d-flex flex-wrap gap-3 mt-4 anim-up anim-up-3">
+                  <Link href={slide.primary.href} className="hero-btn-primary">
+                    <i className={`bi ${slide.primary.icon}`} />
+                    {slide.primary.label}
+                  </Link>
+                  <Link href={slide.secondary.href} className="hero-btn-ghost">
+                    <i className={`bi ${slide.secondary.icon}`} />
+                    {slide.secondary.label}
+                  </Link>
                 </div>
-              </Container>
-            </div>
-          )}
+              </div>
+            </Container>
+          </div>
         </Carousel.Item>
       ))}
     </Carousel>

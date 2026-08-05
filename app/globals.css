@@ -713,44 +713,30 @@ a {
   position: relative;
 }
 
+/* Graded on the photograph itself, not the slide, so the scrims layered above
+   are not lifted along with it. */
+.hero-photo {
+  filter: brightness(1.12) contrast(1.06) saturate(1.14);
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
+  /* The caption sits in the left ~760px, so the scrim stays heavy there and
+     thins out to the right — contrast where the text needs it, and a brighter
+     photograph across the half nobody reads over. */
   background: linear-gradient(
       100deg,
-      rgba(4, 16, 31, 0.9) 0%,
-      rgba(7, 28, 51, 0.74) 45%,
-      rgba(10, 37, 64, 0.42) 100%
+      rgba(4, 16, 31, 0.86) 0%,
+      rgba(7, 28, 51, 0.56) 45%,
+      rgba(10, 37, 64, 0.1) 100%
     );
 }
 
 .hero-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, transparent 20%, rgba(4, 16, 31, 0.55) 100%);
-}
-
-/* A captionless slide has no text to keep legible, so the scrims drop to the
-   little that is still needed: a touch of shading under the navbar and a soft
-   edge fade. The photograph itself stays clear. */
-.hero-slide--bare .hero-overlay {
-  background: linear-gradient(
-    180deg,
-    rgba(4, 16, 31, 0.42) 0%,
-    rgba(4, 16, 31, 0.08) 26%,
-    rgba(4, 16, 31, 0) 55%
-  );
-}
-
-/* Blurred stand-in behind a `contain` photograph. Scaled up so the blur radius
-   does not pull transparent edges into the frame. */
-.hero-backdrop {
-  filter: blur(28px) saturate(1.15) brightness(0.72);
-  transform: scale(1.15);
-}
-
-.hero-slide--bare .hero-vignette {
-  background: radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(4, 16, 31, 0.3) 100%);
+  background: radial-gradient(ellipse at 30% 50%, transparent 32%, rgba(4, 16, 31, 0.4) 100%);
 }
 
 .hero-caption {
