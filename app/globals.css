@@ -394,6 +394,21 @@ a {
   border: 2px solid rgba(255, 255, 255, 0.35);
 }
 
+/* Crest variant carrying the institute emblem instead of an icon. The artwork
+   is already a circle on transparency, so the disc behind it stays white —
+   the gold fill would bleed through the ring and muddy it. */
+.brand-crest--logo {
+  overflow: hidden;
+  background: #fff;
+}
+
+.brand-crest--logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .brand-text {
   display: flex;
   flex-direction: column;
@@ -713,6 +728,29 @@ a {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at 30% 50%, transparent 20%, rgba(4, 16, 31, 0.55) 100%);
+}
+
+/* A captionless slide has no text to keep legible, so the scrims drop to the
+   little that is still needed: a touch of shading under the navbar and a soft
+   edge fade. The photograph itself stays clear. */
+.hero-slide--bare .hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(4, 16, 31, 0.42) 0%,
+    rgba(4, 16, 31, 0.08) 26%,
+    rgba(4, 16, 31, 0) 55%
+  );
+}
+
+/* Blurred stand-in behind a `contain` photograph. Scaled up so the blur radius
+   does not pull transparent edges into the frame. */
+.hero-backdrop {
+  filter: blur(28px) saturate(1.15) brightness(0.72);
+  transform: scale(1.15);
+}
+
+.hero-slide--bare .hero-vignette {
+  background: radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(4, 16, 31, 0.3) 100%);
 }
 
 .hero-caption {

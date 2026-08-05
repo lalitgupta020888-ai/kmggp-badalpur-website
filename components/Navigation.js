@@ -3,6 +3,7 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 const DEPARTMENTS = [
@@ -107,8 +108,14 @@ export default function Navigation() {
       <Navbar expand="xl" className="navbar-custom" collapseOnSelect>
         <Container fluid className="nav-shell">
           <Navbar.Brand as={Link} href="/">
-            <span className="brand-crest">
-              <i className="bi bi-mortarboard-fill" />
+            <span className="brand-crest brand-crest--logo">
+              <Image
+                src="/images/logo.png"
+                alt="Km. Mayawati Government Girls Polytechnic, Badalpur crest"
+                width={92}
+                height={92}
+                priority
+              />
             </span>
             <span className="brand-text">
               <span className="brand-line-1">Km. Mayawati Government Girls</span>

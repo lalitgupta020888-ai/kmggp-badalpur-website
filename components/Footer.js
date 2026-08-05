@@ -3,6 +3,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const QUICK_LINKS = [
   { href: '/about', label: 'About Us' },
@@ -30,8 +31,13 @@ export default function Footer() {
         <Row className="gy-5">
           <Col lg={4} md={6}>
             <div className="footer-brand">
-              <span className="brand-crest">
-                <i className="bi bi-mortarboard-fill" />
+              <span className="brand-crest brand-crest--logo">
+                <Image
+                  src="/images/logo.png"
+                  alt="Km. Mayawati Government Girls Polytechnic, Badalpur crest"
+                  width={92}
+                  height={92}
+                />
               </span>
               <span className="brand-text">
                 <span className="brand-line-1">Km. Mayawati Government Girls</span>
@@ -100,7 +106,7 @@ export default function Footer() {
             </div>
             <div className="footer-contact-item">
               <i className="bi bi-clock-fill" />
-              <span>Monday – Saturday, 9:00 AM – 5:00 PM</span>
+              <span>Mon – Sat, 10:00 AM – 5:00 PM</span>
             </div>
           </Col>
         </Row>
