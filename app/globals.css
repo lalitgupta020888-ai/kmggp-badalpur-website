@@ -1729,6 +1729,8 @@ a {
   background: var(--navy-800);
   color: var(--white);
   border: none;
+  /* Same reason as .btn-gold — these pills are usually <Link>s. */
+  text-decoration: none;
   font-weight: 600;
   padding: 0.72rem 1.7rem;
   border-radius: 999px;
@@ -1742,6 +1744,7 @@ a {
 .btn-navy:focus {
   background: var(--navy-700);
   color: var(--gold-300);
+  text-decoration: none;
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
@@ -2175,120 +2178,83 @@ a {
   }
 }
 
-/* ---------- Recruiters band ------------------------------------------- */
+/* ---------- Recruiters ------------------------------------------------ */
 
-.recruiter-band {
-  position: relative;
-  overflow: hidden;
-  padding: 84px 0;
-  background:
-    radial-gradient(ellipse at 18% 0%, rgba(28, 96, 153, 0.5) 0%, transparent 58%),
-    linear-gradient(135deg, var(--navy-950) 0%, var(--navy-800) 60%, var(--navy-700) 100%);
+.recruiter-section {
+  background: var(--off-white);
 }
 
-/* Gold hairlines top and bottom tie the band to the rest of the palette. */
-.recruiter-band::before,
-.recruiter-band::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--gold-bar);
+.recruiter-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
 }
 
-.recruiter-band::before { top: 0; }
-.recruiter-band::after { bottom: 0; }
-
-.recruiter-band .section-head h2 {
-  color: var(--white);
-}
-
-.recruiter-band .section-head p {
-  color: rgba(255, 255, 255, 0.76);
-}
-
-/* Two identical tracks slide left by exactly one track width, so the moment
-   the first leaves the frame the second is pixel-aligned behind it. */
-/* Fades the row into the band at both ends rather than cutting it dead. */
-.recruiter-marquee-viewport {
-  overflow: hidden;
-  margin-top: 12px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
-}
-
-.recruiter-marquee {
+.recruiter-card {
   display: flex;
-  width: max-content;
-  animation: recruiterScroll 38s linear infinite;
-}
-
-.recruiter-marquee:hover {
-  animation-play-state: paused;
-}
-
-.recruiter-track {
-  display: flex;
-  gap: 16px;
-  padding-right: 16px;
-}
-
-@keyframes recruiterScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .recruiter-marquee-viewport {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .recruiter-marquee {
-    animation: none;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .recruiter-track {
-    flex-wrap: wrap;
-    justify-content: center;
-    row-gap: 12px;
-  }
-
-  /* The duplicate exists only to close the scroll loop. */
-  .recruiter-track[aria-hidden='true'] {
-    display: none;
-  }
-}
-
-.recruiter-chip {
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  flex: 0 0 auto;
-  padding: 14px 24px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  white-space: nowrap;
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(4px);
-  transition: all 0.3s var(--ease);
+  padding: 26px 18px 22px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
+    border-color 0.35s var(--ease);
 }
 
-.recruiter-chip i {
-  color: var(--gold-400);
-}
-
-.recruiter-chip:hover {
+.recruiter-card:hover {
+  transform: translateY(-6px);
   border-color: var(--gold-400);
-  background: rgba(236, 210, 130, 0.12);
-  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.recruiter-logo {
+  position: relative;
+  width: 100%;
+  height: 62px;
+  margin-bottom: 18px;
+}
+
+/* Held back to grey so the row reads as one system, then released to the
+   brand's own colours on hover. Saturation alone would leave the darker
+   marks muddy, so brightness/contrast lift them to match the card. */
+.recruiter-logo img {
+  filter: grayscale(1) opacity(0.62) contrast(1.05);
+  transition: filter 0.4s var(--ease);
+}
+
+.recruiter-card:hover .recruiter-logo img {
+  filter: grayscale(0) opacity(1) contrast(1);
+}
+
+/* Stand-in for a company whose logo file has not been supplied yet. */
+.recruiter-wordmark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.32rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink-faint);
+  transition: color 0.4s var(--ease);
+}
+
+.recruiter-card:hover .recruiter-wordmark {
+  color: var(--navy-800);
+}
+
+.recruiter-name {
+  margin: 0;
+  text-align: center;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--navy-800);
 }
 
 .recruiter-actions {
@@ -2299,22 +2265,38 @@ a {
   margin-top: 44px;
 }
 
-.btn-ghost-light {
-  display: inline-flex;
-  align-items: center;
-  padding: 13px 30px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  transition: all 0.3s var(--ease);
+@media (max-width: 1199.98px) {
+  .recruiter-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-.btn-ghost-light:hover {
-  color: var(--gold-300);
-  border-color: var(--gold-400);
-  transform: translateY(-3px);
+@media (max-width: 767.98px) {
+  .recruiter-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .recruiter-logo {
+    height: 48px;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .recruiter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Hover is unavailable on touch, so the logos ship in colour there. */
+@media (hover: none) {
+  .recruiter-logo img {
+    filter: none;
+  }
+
+  .recruiter-wordmark {
+    color: var(--navy-800);
+  }
 }
 
 /* ---------- Testimonials ---------------------------------------------- */

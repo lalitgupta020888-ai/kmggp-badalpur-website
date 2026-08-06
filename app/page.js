@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
 import { GALLERY_PREVIEW } from '@/lib/gallery';
-import { RECRUITER_MARQUEE } from '@/lib/recruiters';
+import { RECRUITERS } from '@/lib/recruiters';
 import HeroSlider from '@/components/HeroSlider';
 import NoticeBoard from '@/components/NoticeBoard';
 import Leadership from '@/components/Leadership';
@@ -306,50 +306,43 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Recruiters — dark band so it reads as a distinct plate under the gallery */}
-      <section className="recruiter-band">
+      {/* Recruiters — light plate, because the logos carry white backgrounds */}
+      <section className="section recruiter-section">
         <Container>
-          <div className="section-head">
-            <span className="eyebrow eyebrow-light">
-              <i className="bi bi-briefcase-fill" />
-              Our Recruiters
-            </span>
-            <h2>Where Our Students Build Careers</h2>
-            <div className="gold-flourish">
-              <i className="bi bi-diamond-fill" />
-            </div>
-            <p>
-              Leading technology, electronics and engineering organisations recruit from this campus
-              through the Training &amp; Placement cell.
-            </p>
-          </div>
+          <SectionHead
+            eyebrow="Our Recruiters"
+            icon="bi-briefcase-fill"
+            title="Where Our Students Build Careers"
+            subtitle="Leading technology, electronics and engineering organisations recruit from this campus through the Training & Placement cell."
+          />
 
-        </Container>
-
-        {/* Outside the container so the row runs the full width of the band. */}
-        <div className="recruiter-marquee-viewport" aria-label="Organisations that recruit from campus">
-          <div className="recruiter-marquee">
-            {/* Rendered twice so the loop meets itself without a visible seam. */}
-            {[0, 1].map((pass) => (
-              <div className="recruiter-track" key={pass} aria-hidden={pass === 1}>
-                {RECRUITER_MARQUEE.map((company) => (
-                  <span className="recruiter-chip" key={`${pass}-${company.name}`}>
-                    <i className="bi bi-building-fill" />
-                    {company.short}
-                  </span>
-                ))}
+          <div className="recruiter-grid">
+            {RECRUITERS.map((company) => (
+              <div className="recruiter-card" key={company.name}>
+                <div className="recruiter-logo">
+                  {company.logo ? (
+                    <Image
+                      src={company.logo}
+                      alt={`${company.name} logo`}
+                      fill
+                      sizes="180px"
+                      style={{ objectFit: 'contain' }}
+                    />
+                  ) : (
+                    <span className="recruiter-wordmark">{company.short}</span>
+                  )}
+                </div>
+                <p className="recruiter-name">{company.name}</p>
               </div>
             ))}
           </div>
-        </div>
 
-        <Container>
           <div className="recruiter-actions">
             <Link href="/placements/recruiters" className="btn-gold">
               <i className="bi bi-buildings me-2" />
               See All Recruiters
             </Link>
-            <Link href="/placements/records" className="btn-ghost-light">
+            <Link href="/placements/records" className="btn-navy">
               <i className="bi bi-graph-up-arrow me-2" />
               Placement Records
             </Link>
