@@ -42,7 +42,7 @@ const SLIDES = [
     secondary: { href: '/life', label: 'Life @ KMGGP', icon: 'bi-stars' },
   },
   {
-    src: null, // e.g. '/images/slider2.png' — a laboratory interior
+    src: '/images/slider2.png',
     alt: 'Modern laboratories at Km. Mayawati Government Girls Polytechnic, Badalpur',
     eyebrow: 'World-class Infrastructure',
     icon: 'bi-cpu-fill',
