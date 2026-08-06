@@ -316,25 +316,30 @@ export default function Home() {
             subtitle="Leading technology, electronics and engineering organisations recruit from this campus through the Training & Placement cell."
           />
 
-          <div className="recruiter-grid">
-            {RECRUITERS.map((company) => (
-              <div className="recruiter-card" key={company.name}>
-                <div className="recruiter-logo">
-                  {company.logo ? (
-                    <Image
-                      src={company.logo}
-                      alt={`${company.name} logo`}
-                      fill
-                      sizes="180px"
-                      style={{ objectFit: 'contain' }}
-                    />
-                  ) : (
-                    <span className="recruiter-wordmark">{company.short}</span>
-                  )}
+          {/* One plate with a hairline grid inside, rather than ten loose
+              boxes — the logos then read as a single roster. */}
+          <div className="recruiter-panel">
+            <div className="recruiter-grid">
+              {RECRUITERS.map((company) => (
+                <div className="recruiter-card" key={company.name}>
+                  <div className="recruiter-logo">
+                    {company.logo ? (
+                      <Image
+                        src={company.logo}
+                        alt={`${company.name} logo`}
+                        fill
+                        sizes="180px"
+                        style={{ objectFit: 'contain' }}
+                      />
+                    ) : (
+                      <span className="recruiter-wordmark">{company.short}</span>
+                    )}
+                  </div>
+                  <span className="recruiter-rule" />
+                  <p className="recruiter-name">{company.name}</p>
                 </div>
-                <p className="recruiter-name">{company.name}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="recruiter-actions">
