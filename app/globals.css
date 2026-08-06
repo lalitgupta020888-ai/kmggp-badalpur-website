@@ -989,7 +989,12 @@ a {
 /* Two passes. The first thickens towards the foot of the card, where the
    photograph is busiest and the Faculty/Labs/Visit links sit; the second
    veils the left column the copy runs down. What is left uncovered is the
-   upper right, which is where the artwork actually reads. */
+   upper right, which is where the artwork actually reads.
+   The two compose to 1-(1-a1)(1-a2), so the artwork reaches roughly 22% at
+   the open top right, 7% behind the body copy and 3% behind the links. At
+   7% a dark photograph lifts white to about #eee, which keeps the lightest
+   text here — --ink-soft body copy — above a 6.5:1 ratio. Loosen these and
+   check that figure again; the copy is the first thing to suffer. */
 .dept-media::after {
   content: '';
   position: absolute;
@@ -998,11 +1003,11 @@ a {
   background:
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.82) 0%,
-      rgba(255, 255, 255, 0.88) 48%,
-      rgba(255, 255, 255, 0.96) 100%
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.85) 48%,
+      rgba(255, 255, 255, 0.94) 100%
     ),
-    linear-gradient(100deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0) 62%);
+    linear-gradient(100deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 62%);
 }
 
 .premium-card:hover .dept-media img {
