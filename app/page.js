@@ -3,6 +3,9 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
+import Image from 'next/image';
+import { GALLERY_PREVIEW } from '@/lib/gallery';
+import { RECRUITER_MARQUEE } from '@/lib/recruiters';
 import HeroSlider from '@/components/HeroSlider';
 import NoticeBoard from '@/components/NoticeBoard';
 import Leadership from '@/components/Leadership';
@@ -43,6 +46,7 @@ const HIGHLIGHTS = [
   },
 ];
 
+/** The welcome section leads with the first four of these. */
 const PILLARS = [
   {
     icon: 'bi-buildings-fill',
@@ -63,16 +67,6 @@ const PILLARS = [
     icon: 'bi-cash-stack',
     title: 'Scholarship Support',
     text: 'State and central government schemes including the AICTE Pragati scheme for girls.',
-  },
-  {
-    icon: 'bi-cpu-fill',
-    title: 'Industry Exposure',
-    text: 'Industrial visits, expert guest lectures and hands-on workshops on emerging technologies.',
-  },
-  {
-    icon: 'bi-trophy-fill',
-    title: 'Proven Results',
-    text: 'Students consistently secure top ranks in BTEUP examinations and state-level competitions.',
   },
 ];
 
@@ -266,29 +260,100 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Why choose us */}
+      {/* Gallery preview — a lead tile beside a stack, then the recruiters band */}
       <section className="section" style={{ background: 'var(--paper)' }}>
         <Container>
           <SectionHead
-            eyebrow="Why Choose Us"
-            icon="bi-patch-check-fill"
-            title="Built on Six Enduring Strengths"
+            eyebrow="Campus Moments"
+            icon="bi-camera-fill"
+            title="A Glimpse of Life on Campus"
+            subtitle="Classrooms, laboratories, the library and the grounds our students learn in every day."
           />
-          <Row className="g-4">
-            {PILLARS.map((pillar) => (
-              <Col lg={4} md={6} key={pillar.title}>
-                <div className="feature-row h-100">
-                  <span className="icon-tile icon-tile-sm">
-                    <i className={`bi ${pillar.icon}`} />
+
+          <div className="gallery-mosaic">
+            {GALLERY_PREVIEW.map((image, index) => (
+              <Link
+                href="/gallery"
+                key={`${image.src}-${index}`}
+                className={`gallery-tile gallery-mosaic-item${index === 0 ? ' is-lead' : ''}`}
+                aria-label={`${image.caption} — open the full gallery`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.caption}
+                  fill
+                  sizes={index === 0 ? '(max-width: 767px) 100vw, 50vw' : '(max-width: 767px) 50vw, 25vw'}
+                  style={{ objectFit: 'cover' }}
+                />
+                <span className="gallery-badge">{image.tag}</span>
+                <span className="gallery-veil">
+                  <span className="gold-rule-thin" />
+                  <span>
+                    <i className="bi bi-camera-fill me-2" />
+                    {image.caption}
                   </span>
-                  <div>
-                    <h5>{pillar.title}</h5>
-                    <p>{pillar.text}</p>
-                  </div>
-                </div>
-              </Col>
+                </span>
+              </Link>
             ))}
-          </Row>
+          </div>
+
+          <div className="text-center mt-5">
+            <Link href="/gallery" className="btn-gold">
+              <i className="bi bi-images me-2" />
+              View Full Gallery
+            </Link>
+          </div>
+        </Container>
+      </section>
+
+      {/* Recruiters — dark band so it reads as a distinct plate under the gallery */}
+      <section className="recruiter-band">
+        <Container>
+          <div className="section-head">
+            <span className="eyebrow eyebrow-light">
+              <i className="bi bi-briefcase-fill" />
+              Our Recruiters
+            </span>
+            <h2>Where Our Students Build Careers</h2>
+            <div className="gold-flourish">
+              <i className="bi bi-diamond-fill" />
+            </div>
+            <p>
+              Leading technology, electronics and engineering organisations recruit from this campus
+              through the Training &amp; Placement cell.
+            </p>
+          </div>
+
+        </Container>
+
+        {/* Outside the container so the row runs the full width of the band. */}
+        <div className="recruiter-marquee-viewport" aria-label="Organisations that recruit from campus">
+          <div className="recruiter-marquee">
+            {/* Rendered twice so the loop meets itself without a visible seam. */}
+            {[0, 1].map((pass) => (
+              <div className="recruiter-track" key={pass} aria-hidden={pass === 1}>
+                {RECRUITER_MARQUEE.map((company) => (
+                  <span className="recruiter-chip" key={`${pass}-${company.name}`}>
+                    <i className="bi bi-building-fill" />
+                    {company.short}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <Container>
+          <div className="recruiter-actions">
+            <Link href="/placements/recruiters" className="btn-gold">
+              <i className="bi bi-buildings me-2" />
+              See All Recruiters
+            </Link>
+            <Link href="/placements/records" className="btn-ghost-light">
+              <i className="bi bi-graph-up-arrow me-2" />
+              Placement Records
+            </Link>
+          </div>
         </Container>
       </section>
 

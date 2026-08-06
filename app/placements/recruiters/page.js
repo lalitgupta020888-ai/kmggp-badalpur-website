@@ -2,19 +2,7 @@
 
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-
-const RECRUITERS = [
-  'Tech Mahindra',
-  'Wipro Technologies',
-  'Infosys',
-  'HCL Technologies',
-  'TCS',
-  'L&T Technology Services',
-  'Genpact',
-  'Concentrix',
-  'Samsung India Electronics',
-  'Havells India',
-];
+import { RECRUITERS } from '@/lib/recruiters';
 
 const SECTORS = [
   { icon: 'bi-code-slash', title: 'IT & Software Services', text: 'Development, testing, technical support and IT operations roles.' },
@@ -41,9 +29,9 @@ export default function Recruiters() {
 
           <div className="chip-grid">
             {RECRUITERS.map((company) => (
-              <span className="brand-chip" key={company}>
+              <span className="brand-chip" key={company.name}>
                 <i className="bi bi-building-fill" />
-                {company}
+                {company.name}
               </span>
             ))}
           </div>

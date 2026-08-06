@@ -1701,6 +1701,8 @@ a {
   background: var(--gold-bar);
   color: var(--navy-900);
   border: none;
+  /* Bootstrap underlines every anchor, and these pills are mostly <Link>s. */
+  text-decoration: none;
   font-weight: 700;
   letter-spacing: 0.02em;
   padding: 0.72rem 1.7rem;
@@ -1718,6 +1720,7 @@ a {
 .btn-gold:focus {
   background: var(--gold-bar);
   color: var(--navy-950);
+  text-decoration: none;
   transform: translateY(-3px);
   box-shadow: 0 16px 38px rgba(201, 162, 39, 0.42);
 }
@@ -2091,6 +2094,227 @@ a {
 
 .gallery-tile:hover .gallery-veil .gold-rule-thin {
   transform: translateY(0);
+}
+
+/* ---------- Home gallery mosaic --------------------------------------- */
+
+/* Four photographs in a 3x2 grid with no gaps: the lead runs down the whole
+   left edge, two square tiles sit top right, and the last one runs wide
+   beneath them. Six cells, four tiles, nothing left over. */
+.gallery-mosaic {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  grid-auto-rows: 190px;
+  gap: 18px;
+}
+
+.gallery-mosaic-item {
+  height: auto;
+  display: block;
+  text-decoration: none;
+}
+
+.gallery-mosaic-item.is-lead {
+  grid-row: span 2;
+}
+
+.gallery-mosaic-item:last-child {
+  grid-column: span 2;
+}
+
+/* The tile is a link, so the caption must not swallow the pointer. */
+.gallery-mosaic-item .gallery-veil {
+  pointer-events: none;
+}
+
+.gallery-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--gold-100);
+  background: rgba(4, 16, 31, 0.72);
+  border: 1px solid rgba(236, 210, 130, 0.35);
+  backdrop-filter: blur(6px);
+  transition: all 0.35s var(--ease);
+}
+
+.gallery-mosaic-item:hover .gallery-badge {
+  color: var(--navy-900);
+  background: var(--gold-bar);
+  border-color: transparent;
+}
+
+@media (max-width: 991.98px) {
+  .gallery-mosaic {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 175px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .gallery-mosaic {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 200px;
+    gap: 14px;
+  }
+
+  /* A single column has no stack to sit beside, so the spans are dropped. */
+  .gallery-mosaic-item.is-lead {
+    grid-row: auto;
+  }
+
+  .gallery-mosaic-item:last-child {
+    grid-column: auto;
+  }
+}
+
+/* ---------- Recruiters band ------------------------------------------- */
+
+.recruiter-band {
+  position: relative;
+  overflow: hidden;
+  padding: 84px 0;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(28, 96, 153, 0.5) 0%, transparent 58%),
+    linear-gradient(135deg, var(--navy-950) 0%, var(--navy-800) 60%, var(--navy-700) 100%);
+}
+
+/* Gold hairlines top and bottom tie the band to the rest of the palette. */
+.recruiter-band::before,
+.recruiter-band::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold-bar);
+}
+
+.recruiter-band::before { top: 0; }
+.recruiter-band::after { bottom: 0; }
+
+.recruiter-band .section-head h2 {
+  color: var(--white);
+}
+
+.recruiter-band .section-head p {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+/* Two identical tracks slide left by exactly one track width, so the moment
+   the first leaves the frame the second is pixel-aligned behind it. */
+/* Fades the row into the band at both ends rather than cutting it dead. */
+.recruiter-marquee-viewport {
+  overflow: hidden;
+  margin-top: 12px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.recruiter-marquee {
+  display: flex;
+  width: max-content;
+  animation: recruiterScroll 38s linear infinite;
+}
+
+.recruiter-marquee:hover {
+  animation-play-state: paused;
+}
+
+.recruiter-track {
+  display: flex;
+  gap: 16px;
+  padding-right: 16px;
+}
+
+@keyframes recruiterScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recruiter-marquee-viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .recruiter-marquee {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .recruiter-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 12px;
+  }
+
+  /* The duplicate exists only to close the scroll loop. */
+  .recruiter-track[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+.recruiter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s var(--ease);
+}
+
+.recruiter-chip i {
+  color: var(--gold-400);
+}
+
+.recruiter-chip:hover {
+  border-color: var(--gold-400);
+  background: rgba(236, 210, 130, 0.12);
+  transform: translateY(-3px);
+}
+
+.recruiter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 44px;
+}
+
+.btn-ghost-light {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 30px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  transition: all 0.3s var(--ease);
+}
+
+.btn-ghost-light:hover {
+  color: var(--gold-300);
+  border-color: var(--gold-400);
+  transform: translateY(-3px);
 }
 
 /* ---------- Testimonials ---------------------------------------------- */

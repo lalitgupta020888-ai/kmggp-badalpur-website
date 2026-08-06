@@ -5,15 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-
-const IMAGES = [
-  { src: '/images/slider1.jpg', caption: 'The Main Campus', tag: 'Campus' },
-  { src: '/images/slider2.jpg', caption: 'Advanced Computing Laboratory', tag: 'Laboratories' },
-  { src: '/images/slider3.jpg', caption: 'The Institute Library', tag: 'Library' },
-  { src: '/images/slider1.jpg', caption: 'Academic Block', tag: 'Campus' },
-  { src: '/images/slider2.jpg', caption: 'Electronics Laboratory', tag: 'Laboratories' },
-  { src: '/images/slider3.jpg', caption: 'Reading & Study Hall', tag: 'Library' },
-];
+import { GALLERY_IMAGES as IMAGES } from '@/lib/gallery';
 
 export default function GalleryPage() {
   return (
