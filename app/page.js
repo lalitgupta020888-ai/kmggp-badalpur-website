@@ -70,20 +70,25 @@ const PILLARS = [
   },
 ];
 
+/**
+ * `image` is optional: where set it fills the card behind the content, under
+ * a white scrim, so the icon, copy and links keep the same colours and
+ * contrast as a card without one. Dark artwork suits it best — the scrim is
+ * tuned to hold a dark photograph back, and a light one all but disappears.
+ */
 const DEPARTMENTS = [
   {
     icon: 'bi-cpu-fill',
     name: 'Electronics Engineering',
     text: 'Circuits, microprocessors, communication systems and embedded design.',
     href: '/department/electronics',
+    image: '/images/departments/electronics.png',
   },
   {
     icon: 'bi-pc-display',
     name: 'Computer Science & Engineering',
     text: 'Programming, data structures, databases and modern software development.',
     href: '/department/cse',
-    // Optional. Sits behind the card under a white scrim, so the icon, copy
-    // and links keep the same colours and contrast as a card without one.
     image: '/images/departments/cse.png',
   },
   {
@@ -91,6 +96,7 @@ const DEPARTMENTS = [
     name: 'Information Technology',
     text: 'Networking, web technologies, cloud fundamentals and IT infrastructure.',
     href: '/department/it',
+    image: '/images/departments/it.jpg',
   },
 ];
 
