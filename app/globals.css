@@ -719,6 +719,17 @@ a {
   filter: brightness(1.12) contrast(1.06) saturate(1.14);
 }
 
+/* Stands in for a slide whose photograph has not been supplied yet. The hero
+   scrims sit on top of this exactly as they do on a photo, so the caption keeps
+   its contrast and the slide reads as designed rather than as a broken image. */
+.hero-photo-pending {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 72% 38%, rgba(28, 96, 153, 0.55) 0%, transparent 62%),
+    linear-gradient(125deg, var(--navy-950) 0%, var(--navy-800) 52%, var(--navy-600) 100%);
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;

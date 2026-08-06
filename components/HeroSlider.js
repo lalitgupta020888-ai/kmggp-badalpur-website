@@ -5,6 +5,12 @@ import { Carousel, Container } from 'react-bootstrap';
 import Image from 'next/image';
 import Link from 'next/link';
 
+/**
+ * `src: null` means the photograph for that slide has not been supplied yet.
+ * The slide still runs in the rotation with its copy intact, over the navy
+ * house gradient instead of a photo — same convention PrincipalCard uses.
+ * Drop the file into `public/images/` and set `src` to its path to restore it.
+ */
 const SLIDES = [
   {
     src: '/images/campus.png',
@@ -23,9 +29,11 @@ const SLIDES = [
   {
     src: '/images/slider1.png',
     alt: 'The academic block of Km. Mayawati Government Girls Polytechnic, Badalpur',
-    // The name board sits high in this frame, so bias the crop upward — at the
-    // hero's wide ratio a centred crop clips it.
-    position: 'center 35%',
+    // This frame is 2.35:1, so it only crops vertically once the viewport is
+    // wide enough to out-stretch it (~1500px up; below that the height fits
+    // exactly and this offset is inert). Biasing past the midpoint lifts the
+    // photo clear of the headline and keeps the building's base in frame.
+    position: 'center 70%',
     eyebrow: 'Our Campus',
     icon: 'bi-building-fill',
     title: 'A Campus Built for Learning',
@@ -34,7 +42,7 @@ const SLIDES = [
     secondary: { href: '/life', label: 'Life @ KMGGP', icon: 'bi-stars' },
   },
   {
-    src: '/images/slider2.jpg',
+    src: null, // e.g. '/images/slider2.png' — a laboratory interior
     alt: 'Modern laboratories at Km. Mayawati Government Girls Polytechnic, Badalpur',
     eyebrow: 'World-class Infrastructure',
     icon: 'bi-cpu-fill',
@@ -44,7 +52,7 @@ const SLIDES = [
     secondary: { href: '/gallery', label: 'View Campus Gallery', icon: 'bi-images' },
   },
   {
-    src: '/images/slider3.jpg',
+    src: null, // e.g. '/images/slider3.png' — the library reading hall
     alt: 'The institute library',
     eyebrow: 'Knowledge & Research',
     icon: 'bi-book-half',
@@ -60,15 +68,19 @@ export default function HeroSlider() {
     <Carousel fade indicators interval={6000} pause="hover" nextLabel="" prevLabel="">
       {SLIDES.map((slide, index) => (
         <Carousel.Item key={slide.src + index} className="hero-slide">
-          <Image
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            sizes="100vw"
-            className="hero-photo"
-            style={{ objectFit: 'cover', objectPosition: slide.position ?? 'center' }}
-            priority={index === 0}
-          />
+          {slide.src ? (
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              sizes="100vw"
+              className="hero-photo"
+              style={{ objectFit: 'cover', objectPosition: slide.position ?? 'center' }}
+              priority={index === 0}
+            />
+          ) : (
+            <div className="hero-photo-pending" role="img" aria-label={slide.alt} />
+          )}
           <div className="hero-overlay" />
           <div className="hero-vignette" />
 
