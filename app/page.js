@@ -82,6 +82,9 @@ const DEPARTMENTS = [
     name: 'Computer Science & Engineering',
     text: 'Programming, data structures, databases and modern software development.',
     href: '/department/cse',
+    // Optional. Sits behind the card under a white scrim, so the icon, copy
+    // and links keep the same colours and contrast as a card without one.
+    image: '/images/departments/cse.png',
   },
   {
     icon: 'bi-hdd-network-fill',
@@ -234,24 +237,38 @@ export default function Home() {
             {DEPARTMENTS.map((dept) => (
               <Col lg={4} md={6} key={dept.name}>
                 <div className="premium-card is-featured h-100 p-4">
-                  <span className="icon-tile mb-4">
-                    <i className={`bi ${dept.icon}`} />
-                  </span>
-                  <h5 className="fw-bold mb-3">{dept.name}</h5>
-                  <p className="small">{dept.text}</p>
-                  <div className="gold-rule-thin my-3" />
-                  <div className="d-flex flex-wrap gap-3 small">
-                    <Link href={`${dept.href}/faculty`} className="text-decoration-none text-primary-blue fw-semibold">
-                      <i className="bi bi-person-badge me-1" />
-                      Faculty
-                    </Link>
-                    <Link href={`${dept.href}/labs`} className="text-decoration-none text-primary-blue fw-semibold">
-                      <i className="bi bi-beaker me-1" />
-                      Labs
-                    </Link>
-                    <Link href={dept.href} className="text-decoration-none text-primary-blue fw-semibold ms-auto">
-                      Visit <i className="bi bi-arrow-right" />
-                    </Link>
+                  {dept.image && (
+                    <div className="dept-media" aria-hidden="true">
+                      <Image
+                        src={dept.image}
+                        alt=""
+                        fill
+                        sizes="(max-width: 767px) 100vw, 33vw"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  )}
+
+                  <div className="dept-body">
+                    <span className="icon-tile mb-4">
+                      <i className={`bi ${dept.icon}`} />
+                    </span>
+                    <h5 className="fw-bold mb-3">{dept.name}</h5>
+                    <p className="small">{dept.text}</p>
+                    <div className="gold-rule-thin my-3" />
+                    <div className="d-flex flex-wrap gap-3 small">
+                      <Link href={`${dept.href}/faculty`} className="text-decoration-none text-primary-blue fw-semibold">
+                        <i className="bi bi-person-badge me-1" />
+                        Faculty
+                      </Link>
+                      <Link href={`${dept.href}/labs`} className="text-decoration-none text-primary-blue fw-semibold">
+                        <i className="bi bi-beaker me-1" />
+                        Labs
+                      </Link>
+                      <Link href={dept.href} className="text-decoration-none text-primary-blue fw-semibold ms-auto">
+                        Visit <i className="bi bi-arrow-right" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </Col>

@@ -966,6 +966,53 @@ a {
 /* Always-on gold edge variant */
 .premium-card.is-featured::before {
   transform: scaleX(1);
+  z-index: 3;
+}
+
+/* ---------- Department card artwork ----------------------------------- */
+
+/* An optional photograph behind a department card. It sits under a heavy
+   white scrim so every colour above it — icon tile, heading, body copy,
+   links — keeps the contrast it has on a plain card. Read as texture, not
+   as an image the card has to work around. */
+.dept-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dept-media img {
+  transition: transform 0.7s var(--ease);
+}
+
+/* Two passes. The first thickens towards the foot of the card, where the
+   photograph is busiest and the Faculty/Labs/Visit links sit; the second
+   veils the left column the copy runs down. What is left uncovered is the
+   upper right, which is where the artwork actually reads. */
+.dept-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.82) 0%,
+      rgba(255, 255, 255, 0.88) 48%,
+      rgba(255, 255, 255, 0.96) 100%
+    ),
+    linear-gradient(100deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0) 62%);
+}
+
+.premium-card:hover .dept-media img {
+  transform: scale(1.06);
+}
+
+/* Lifts the content clear of the artwork without changing any of its styling. */
+.dept-body {
+  position: relative;
+  z-index: 2;
 }
 
 .icon-tile {
