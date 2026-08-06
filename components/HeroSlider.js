@@ -52,7 +52,7 @@ const SLIDES = [
     secondary: { href: '/gallery', label: 'View Campus Gallery', icon: 'bi-images' },
   },
   {
-    src: null, // e.g. '/images/slider3.png' — the library reading hall
+    src: '/images/slider3.png',
     alt: 'The institute library',
     eyebrow: 'Knowledge & Research',
     icon: 'bi-book-half',
