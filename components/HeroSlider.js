@@ -21,7 +21,7 @@ const SLIDES = [
     secondary: { href: '/about', label: 'Discover the Institute', icon: 'bi-arrow-right' },
   },
   {
-    src: '/images/slider1.jpg',
+    src: '/images/slider1.png',
     alt: 'The academic block of Km. Mayawati Government Girls Polytechnic, Badalpur',
     // The name board sits high in this frame, so bias the crop upward — at the
     // hero's wide ratio a centred crop clips it.
