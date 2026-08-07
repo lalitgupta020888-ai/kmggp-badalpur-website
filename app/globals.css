@@ -1444,6 +1444,48 @@ a {
   max-height: 340px;
 }
 
+/* ---------- Home aside (notice board + principal) ---------------------- */
+
+/* The column runs the full height of the row so the notice board can take up
+   the slack the shorter aside would otherwise leave under the principal's
+   card. Below lg the two cards simply stack at their natural heights. */
+@media (min-width: 992px) {
+  .home-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .home-aside > .notice-card {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* Freed from the fixed cap, the list fills whatever the flex box gives it,
+     and the notices share the extra room between them instead of leaving a
+     dead band above the footer link. */
+  .home-aside .notice-list {
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-aside .notice-item {
+    flex: 1 1 auto;
+    align-items: center;
+  }
+
+  .home-aside > .principal-card {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .home-aside > .principal-card {
+    margin-top: 1.5rem;
+  }
+}
+
 .notice-item {
   padding: 15px 22px;
   border-bottom: 1px solid var(--hairline);

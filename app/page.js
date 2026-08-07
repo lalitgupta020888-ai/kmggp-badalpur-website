@@ -142,7 +142,7 @@ export default function Home() {
       {/* Welcome + notice board */}
       <section className="section" style={{ background: 'var(--white)' }}>
         <Container>
-          <Row className="g-5 align-items-start">
+          <Row className="g-5">
             <Col lg={7}>
               <SectionHead
                 align="start"
@@ -209,11 +209,11 @@ export default function Home() {
               </div>
             </Col>
 
-            <Col lg={5}>
+            {/* The notice board absorbs whatever height the left column runs
+                to, so both columns finish on the same line */}
+            <Col lg={5} className="home-aside">
               <NoticeBoard />
-              <div className="mt-4">
-                <PrincipalCard />
-              </div>
+              <PrincipalCard />
             </Col>
           </Row>
         </Container>
