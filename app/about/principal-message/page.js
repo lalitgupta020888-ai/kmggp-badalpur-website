@@ -109,7 +109,7 @@ export default function PrincipalMessagePage() {
 
                   <p>
                     It gives me great pleasure to welcome you to Km. Mayawati Government Girls
-                    Polytechnic, Badalpur. Established by the Government of Uttar Pradesh, this
+                    Polytechnic, Badalpur. Established in 2002 by the Government of Uttar Pradesh, this
                     institute exists for a clear and important reason — to make quality technical
                     education accessible to young women, and to help them build careers of
                     independence and dignity.

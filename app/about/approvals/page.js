@@ -12,7 +12,7 @@ const BODIES = [
     name: 'Government of Uttar Pradesh',
     role: 'Establishing Authority',
     detail:
-      'The institute is established, funded and administered by the Government of Uttar Pradesh through the Directorate of Technical Education.',
+      'The institute was established in 2002 and is funded and administered by the Government of Uttar Pradesh through the Directorate of Technical Education.',
   },
   {
     icon: 'bi-patch-check-fill',

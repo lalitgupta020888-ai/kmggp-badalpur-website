@@ -16,7 +16,7 @@ const STATS = [
   { icon: 'bi-people-fill', value: '500+', label: 'Students Enrolled' },
   { icon: 'bi-diagram-3-fill', value: '03', label: 'Engineering Branches' },
   { icon: 'bi-graph-up-arrow', value: '88%', label: 'Placement Rate' },
-  { icon: 'bi-calendar2-check-fill', value: '15+', label: 'Years of Excellence' },
+  { icon: 'bi-calendar2-check-fill', value: '2002', label: 'Established In' },
 ];
 
 const HIGHLIGHTS = [
@@ -51,7 +51,7 @@ const PILLARS = [
   {
     icon: 'bi-buildings-fill',
     title: 'Modern Infrastructure',
-    text: 'Well-equipped laboratories, smart classrooms, a rich library and a green, secure campus.',
+    text: 'Well-equipped laboratories, smart classrooms and a rich library on a green, secure 7.3-acre campus.',
   },
   {
     icon: 'bi-person-video3',
@@ -171,7 +171,7 @@ export default function Home() {
               </figure>
 
               <p className="lead">
-                Established with a vision to empower women through technical education, our institute
+                Established in 2002 with a vision to empower women through technical education, our institute
                 is a premier government polytechnic offering AICTE-approved diploma programmes,
                 affiliated to BTEUP, across leading engineering disciplines.
               </p>

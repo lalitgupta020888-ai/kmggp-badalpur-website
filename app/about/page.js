@@ -31,8 +31,12 @@ const VALUES = [
 
 const MILESTONES = [
   {
-    title: 'Established by the Government of Uttar Pradesh',
+    title: 'Established in 2002 by the Government of Uttar Pradesh',
     text: 'Founded to widen access to technical education for women across Gautam Buddha Nagar and beyond.',
+  },
+  {
+    title: 'A 7.3-Acre Campus at Badalpur',
+    text: 'Academic blocks, laboratories, the library, hostel and playgrounds spread across 7.3 acres of green campus.',
   },
   {
     title: 'Approved by AICTE',
@@ -75,9 +79,9 @@ export default function AboutPage() {
               />
               <p className="lead">
                 Km. Mayawati Government Girls Polytechnic, Badalpur, Gautam Buddha Nagar is a premier
-                technical institution established by the Government of Uttar Pradesh to promote
-                technical education among women. Its diploma programmes are approved by AICTE, New
-                Delhi and affiliated to BTEUP, Lucknow.
+                technical institution established in 2002 by the Government of Uttar Pradesh to
+                promote technical education among women. Spread over 7.3 acres, its diploma
+                programmes are approved by AICTE, New Delhi and affiliated to BTEUP, Lucknow.
               </p>
               <p>
                 Our goal is to foster an environment of academic excellence, innovation and holistic
@@ -195,7 +199,16 @@ export default function AboutPage() {
                     </span>
                     <div>
                       <div className="label">Established By</div>
-                      <p className="value">Government of Uttar Pradesh</p>
+                      <p className="value">Government of Uttar Pradesh, in 2002</p>
+                    </div>
+                  </div>
+                  <div className="contact-line">
+                    <span className="icon-tile icon-tile-sm">
+                      <i className="bi bi-rulers" />
+                    </span>
+                    <div>
+                      <div className="label">Campus Area</div>
+                      <p className="value">7.3 acres</p>
                     </div>
                   </div>
                   <div className="contact-line">
