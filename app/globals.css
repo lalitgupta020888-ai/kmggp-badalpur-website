@@ -3376,19 +3376,26 @@ a {
    inside the usual container, so the two panels reach both edges. */
 .gallery-map-bleed {
   width: 100%;
-  padding-inline: clamp(10px, 1.2vw, 22px);
+  padding-inline: 8px;
 }
 
 .gallery-map-grid {
   display: grid;
   grid-template-columns: minmax(0, 30fr) minmax(0, 70fr);
-  gap: clamp(14px, 1.6vw, 28px);
-  align-items: start;
+  gap: 24px;
+  align-items: stretch;
 }
 
+/* Both panels stand the same height, and each one's media area takes whatever
+   room is left after its header (and, on the map, its address bar). */
 .gm-panel {
   display: flex;
   flex-direction: column;
+}
+
+.gm-panel > .gm-slider,
+.gm-panel > .gm-map {
+  flex: 1 1 auto;
 }
 
 .gm-header {
