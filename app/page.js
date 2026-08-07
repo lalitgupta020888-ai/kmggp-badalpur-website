@@ -11,6 +11,7 @@ import NoticeBoard from '@/components/NoticeBoard';
 import Leadership from '@/components/Leadership';
 import PrincipalCard from '@/components/PrincipalCard';
 import SectionHead from '@/components/SectionHead';
+import GalleryMapBand from '@/components/GalleryMapBand';
 
 const STATS = [
   { icon: 'bi-people-fill', value: '500+', label: 'Students Enrolled' },
@@ -409,6 +410,9 @@ export default function Home() {
           </Row>
         </Container>
       </section>
+
+      {/* Gallery strip beside the campus map */}
+      <GalleryMapBand />
 
       {/* Closing CTA */}
       <section className="cta-band">

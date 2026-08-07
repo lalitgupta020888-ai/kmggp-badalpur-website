@@ -1,0 +1,144 @@
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { GALLERY_IMAGES } from '@/lib/gallery';
+
+/**
+ * The paired band that closes the home page: a self-advancing gallery strip on
+ * the left and the campus map on the right, both wearing the same navy header.
+ *
+ * The strip is a single track translated by one slide-width every few seconds,
+ * so the photographs walk past one by one rather than cross-fading in place.
+ */
+
+const LOCATION = {
+  name: 'Km. Mayawati Government Girls Polytechnic, Badalpur, Gautambuddh Nagar, Uttar Pradesh - 203207',
+  lat: 28.593145,
+  lng: 77.51895,
+};
+
+const MAP_POINT = `${LOCATION.lat},${LOCATION.lng}`;
+const MAP_EMBED = `https://www.google.com/maps?q=${MAP_POINT}&z=16&hl=en&output=embed`;
+const MAP_VIEW = `https://www.google.com/maps/search/?api=1&query=${MAP_POINT}`;
+
+const SLIDE_MS = 3500;
+
+export default function GalleryMapBand() {
+  const slides = GALLERY_IMAGES;
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused || slides.length < 2) return undefined;
+    const timer = setInterval(() => {
+      setIndex((current) => (current + 1) % slides.length);
+    }, SLIDE_MS);
+    return () => clearInterval(timer);
+  }, [paused, slides.length]);
+
+  return (
+    <section className="section gallery-map-band" style={{ background: 'var(--paper)' }}>
+      <div className="container-xl">
+        <div className="gallery-map-grid">
+          {/* Gallery — the photographs move past one at a time */}
+          <div className="panel gm-panel">
+            <div className="panel-header gm-header">
+              <i className="bi bi-camera-fill" />
+              <span>GALLERY</span>
+              <Link href="/gallery" className="gm-header-link">
+                VIEW ALL
+              </Link>
+            </div>
+
+            <div
+              className="gm-slider"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            >
+              <div
+                className="gm-track"
+                style={{ transform: `translateX(-${index * 100}%)` }}
+              >
+                {slides.map((image, position) => (
+                  <div className="gm-slide" key={`${image.src}-${position}`}>
+                    <Image
+                      src={image.src}
+                      alt={image.caption}
+                      fill
+                      sizes="(max-width: 991px) 100vw, 45vw"
+                      style={{ objectFit: 'cover' }}
+                      priority={position === 0}
+                    />
+                    <span className="gm-slide-caption">
+                      <i className="bi bi-camera-fill me-2" />
+                      {image.caption}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className="gm-nav gm-nav-prev"
+                aria-label="Previous photograph"
+                onClick={() => setIndex((current) => (current - 1 + slides.length) % slides.length)}
+              >
+                <i className="bi bi-chevron-left" />
+              </button>
+              <button
+                type="button"
+                className="gm-nav gm-nav-next"
+                aria-label="Next photograph"
+                onClick={() => setIndex((current) => (current + 1) % slides.length)}
+              >
+                <i className="bi bi-chevron-right" />
+              </button>
+
+              <div className="gm-dots">
+                {slides.map((image, position) => (
+                  <button
+                    type="button"
+                    key={`dot-${image.src}-${position}`}
+                    className={`gm-dot${position === index ? ' is-active' : ''}`}
+                    aria-label={`Show ${image.caption}`}
+                    aria-current={position === index}
+                    onClick={() => setIndex(position)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Map */}
+          <div className="panel gm-panel">
+            <div className="panel-header gm-header">
+              <i className="bi bi-globe2" />
+              <span>Find US ON MAP</span>
+            </div>
+
+            <div className="gm-map">
+              <iframe
+                title="Km. Mayawati Government Girls Polytechnic, Badalpur on Google Maps"
+                src={MAP_EMBED}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <a className="gm-map-open" href={MAP_VIEW} target="_blank" rel="noreferrer">
+                Open in Maps
+                <i className="bi bi-box-arrow-up-right ms-2" />
+              </a>
+            </div>
+
+            <p className="gm-map-address">
+              <i className="bi bi-geo-alt-fill" />
+              {LOCATION.name}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

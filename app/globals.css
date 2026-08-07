@@ -3370,6 +3370,193 @@ a {
   }
 }
 
+/* ============ HOME — GALLERY + MAP BAND ============ */
+.gallery-map-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.gm-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.gm-header {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.gm-header-link {
+  margin-left: auto;
+  color: var(--gold-300);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.gm-header-link:hover {
+  color: var(--white);
+}
+
+/* ---------- The moving photograph strip -------------------------------- */
+
+.gm-slider {
+  position: relative;
+  overflow: hidden;
+  height: 340px;
+  background: var(--mist);
+}
+
+.gm-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gm-slide {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+}
+
+.gm-slide-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 34px 20px 18px;
+  background: linear-gradient(to top, rgba(4, 16, 31, 0.88), rgba(4, 16, 31, 0));
+  color: var(--white);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.gm-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(4, 16, 31, 0.55);
+  color: var(--white);
+  font-size: 1.1rem;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+
+.gm-slider:hover .gm-nav,
+.gm-nav:focus-visible {
+  opacity: 1;
+}
+
+.gm-nav:hover {
+  background: var(--navy-800);
+}
+
+.gm-nav-prev {
+  left: 12px;
+}
+
+.gm-nav-next {
+  right: 12px;
+}
+
+.gm-dots {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.gm-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.gm-dot.is-active {
+  background: var(--gold-400);
+  border-color: var(--gold-400);
+  transform: scale(1.2);
+}
+
+/* ---------- The map half ----------------------------------------------- */
+
+.gm-map {
+  position: relative;
+  height: 340px;
+  background: var(--mist);
+}
+
+.gm-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.gm-map-open {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  color: var(--navy-800);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.gm-map-open:hover {
+  color: var(--navy-600);
+}
+
+.gm-map-address {
+  margin: 0;
+  padding: 14px 20px;
+  border-top: 1px solid var(--hairline);
+  background: var(--white);
+  color: var(--navy-800);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.gm-map-address i {
+  color: #d64545;
+  margin-right: 8px;
+}
+
+@media (max-width: 991.98px) {
+  .gallery-map-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gm-slider,
+  .gm-map {
+    height: 280px;
+  }
+
+  .gm-nav {
+    opacity: 1;
+  }
+}
+
 /* ---------- Download note (table → PDF link) --------------------------- */
 
 .download-note {
