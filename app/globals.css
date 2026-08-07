@@ -3371,10 +3371,18 @@ a {
 }
 
 /* ============ HOME — GALLERY + MAP BAND ============ */
+
+/* Full-bleed: this band runs the width of the viewport rather than sitting
+   inside the usual container, so the two panels reach both edges. */
+.gallery-map-bleed {
+  width: 100%;
+  padding-inline: clamp(10px, 1.2vw, 22px);
+}
+
 .gallery-map-grid {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 28px;
+  grid-template-columns: minmax(0, 30fr) minmax(0, 70fr);
+  gap: clamp(14px, 1.6vw, 28px);
   align-items: start;
 }
 

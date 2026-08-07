@@ -40,7 +40,7 @@ export default function GalleryMapBand() {
 
   return (
     <section className="section gallery-map-band" style={{ background: 'var(--paper)' }}>
-      <div className="container-xl">
+      <div className="gallery-map-bleed">
         <div className="gallery-map-grid">
           {/* Gallery — the photographs move past one at a time */}
           <div className="panel gm-panel">
