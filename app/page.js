@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { RECRUITERS } from '@/lib/recruiters';
 import HeroSlider from '@/components/HeroSlider';
 import NoticeBoard from '@/components/NoticeBoard';
+import NewsTicker from '@/components/NewsTicker';
 import Leadership from '@/components/Leadership';
 import PrincipalCard from '@/components/PrincipalCard';
 import SectionHead from '@/components/SectionHead';
@@ -138,6 +139,9 @@ export default function Home() {
           </Row>
         </Container>
       </section>
+
+      {/* Running announcements, straight under the figures */}
+      <NewsTicker />
 
       {/* Welcome + notice board */}
       <section className="section" style={{ background: 'var(--white)' }}>
