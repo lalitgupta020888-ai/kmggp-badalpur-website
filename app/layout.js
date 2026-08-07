@@ -24,7 +24,7 @@ export const metadata = {
     template: '%s | Km. Mayawati Government Girls Polytechnic, Badalpur',
   },
   description:
-    'Official website of Km. Mayawati Government Girls Polytechnic, Badalpur, Gautam Buddha Nagar — empowering women through excellence in technical education.',
+    'Official website of Km. Mayawati Government Girls Polytechnic, Badalpur, Gautam Buddha Nagar — approved by AICTE, affiliated to BTEUP, empowering women through excellence in technical education.',
 };
 
 export default function RootLayout({ children }) {

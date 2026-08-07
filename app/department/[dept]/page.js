@@ -25,9 +25,10 @@ export default function DepartmentHome({ params }) {
         <div className="panel-body">
           <p className="lead">{department.intro}</p>
           <p>
-            We offer comprehensive coursework, state-of-the-art laboratory facilities and experienced
-            faculty to ensure that students acquire both the theoretical knowledge and the practical
-            skills the industry expects today.
+            The programme is approved by AICTE, New Delhi and follows the curriculum prescribed by
+            BTEUP. We offer comprehensive coursework, state-of-the-art laboratory facilities and
+            experienced faculty to ensure that students acquire both the theoretical knowledge and
+            the practical skills the industry expects today.
           </p>
 
           <div className="gold-rule-thin my-4" />

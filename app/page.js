@@ -172,8 +172,8 @@ export default function Home() {
 
               <p className="lead">
                 Established with a vision to empower women through technical education, our institute
-                is a premier government polytechnic offering diploma programmes across leading
-                engineering disciplines.
+                is a premier government polytechnic offering AICTE-approved diploma programmes,
+                affiliated to BTEUP, across leading engineering disciplines.
               </p>
               <p>
                 The campus is equipped with state-of-the-art infrastructure, modern laboratories and a

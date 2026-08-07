@@ -118,7 +118,7 @@ export default function Footer() {
           </p>
           <p className="mb-0 d-flex align-items-center gap-2">
             <i className="bi bi-patch-check-fill text-gold" />
-            Affiliated to BTEUP, Government of Uttar Pradesh
+            Approved by AICTE · Affiliated to BTEUP, Government of Uttar Pradesh
           </p>
         </div>
 

@@ -93,7 +93,7 @@ export default function Navigation() {
           <div className="d-flex align-items-center gap-3">
             <span className="topbar-item d-none d-xl-inline">
               <i className="bi bi-award-fill" />
-              Govt. of Uttar Pradesh | Affiliated to BTEUP
+              Govt. of Uttar Pradesh | Approved by AICTE | Affiliated to BTEUP
             </span>
             <div className="topbar-social d-flex gap-2">
               <a href="#" aria-label="Facebook"><i className="bi bi-facebook" /></a>

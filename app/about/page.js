@@ -35,6 +35,10 @@ const MILESTONES = [
     text: 'Founded to widen access to technical education for women across Gautam Buddha Nagar and beyond.',
   },
   {
+    title: 'Approved by AICTE',
+    text: 'All diploma programmes run under the approval of the All India Council for Technical Education, New Delhi.',
+  },
+  {
     title: 'Affiliated to BTEUP',
     text: 'All diploma programmes follow the curriculum prescribed by the Board of Technical Education, Uttar Pradesh.',
   },
@@ -72,7 +76,8 @@ export default function AboutPage() {
               <p className="lead">
                 Km. Mayawati Government Girls Polytechnic, Badalpur, Gautam Buddha Nagar is a premier
                 technical institution established by the Government of Uttar Pradesh to promote
-                technical education among women.
+                technical education among women. Its diploma programmes are approved by AICTE, New
+                Delhi and affiliated to BTEUP, Lucknow.
               </p>
               <p>
                 Our goal is to foster an environment of academic excellence, innovation and holistic
@@ -191,6 +196,17 @@ export default function AboutPage() {
                     <div>
                       <div className="label">Established By</div>
                       <p className="value">Government of Uttar Pradesh</p>
+                    </div>
+                  </div>
+                  <div className="contact-line">
+                    <span className="icon-tile icon-tile-sm">
+                      <i className="bi bi-award-fill" />
+                    </span>
+                    <div>
+                      <div className="label">Approval</div>
+                      <p className="value">
+                        All India Council for Technical Education (AICTE), New Delhi
+                      </p>
                     </div>
                   </div>
                   <div className="contact-line">
