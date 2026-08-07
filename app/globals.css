@@ -1104,25 +1104,32 @@ a {
 }
 
 /* Section heading block */
+/* The block runs wider than its prose so a long title keeps to one line; the
+   subtitle is pulled back to a comfortable 720px reading measure. */
 .section-head {
   text-align: center;
-  max-width: 720px;
+  max-width: min(1100px, 100%);
   margin: 0 auto 52px;
 }
 
 .section-head h2 {
   font-size: clamp(1.7rem, 3vw, 2.5rem);
   font-weight: 700;
+  text-wrap: balance;
 }
 
 .section-head p {
   color: var(--ink-faint);
-  margin-top: 16px;
-  margin-bottom: 0;
+  max-width: 720px;
+  margin: 16px auto 0;
 }
 
 .section-head-start {
   text-align: left;
+  margin-left: 0;
+}
+
+.section-head-start p {
   margin-left: 0;
 }
 
