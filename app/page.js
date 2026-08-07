@@ -150,6 +150,26 @@ export default function Home() {
                 icon="bi-buildings-fill"
                 title="Km. Mayawati Government Girls Polytechnic, Badalpur"
               />
+
+              {/* The campus itself, between the name and the prose */}
+              <figure className="welcome-figure">
+                <Image
+                  src="/images/slider1.png"
+                  alt="The academic block of Km. Mayawati Government Girls Polytechnic, Badalpur"
+                  width={1280}
+                  height={556}
+                  sizes="(max-width: 991px) 100vw, 58vw"
+                  priority
+                />
+                <figcaption>
+                  <span className="welcome-figure-rule" />
+                  <span>
+                    <i className="bi bi-geo-alt-fill me-2" />
+                    The Academic Block, Badalpur Campus
+                  </span>
+                </figcaption>
+              </figure>
+
               <p className="lead">
                 Established with a vision to empower women through technical education, our institute
                 is a premier government polytechnic offering diploma programmes across leading

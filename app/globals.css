@@ -1133,6 +1133,103 @@ a {
   margin-left: 0;
 }
 
+/* ---------- Welcome figure (home) ------------------------------------- */
+
+/* The campus photograph that sits between the institute name and the prose.
+   A gold cap rail and a soft inner hairline keep it reading as a framed
+   plate rather than a bare image dropped into the column. */
+.welcome-figure {
+  position: relative;
+  /* Pulled up so the photograph sits as close to the title as the prose does
+     below it — the section head's own 52px would otherwise leave it adrift. */
+  margin: -18px 0 32px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: var(--navy-950);
+  isolation: isolate;
+}
+
+.welcome-figure::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--gold-bar);
+  z-index: 3;
+}
+
+/* The hairline sits above the photograph, so the frame survives light images */
+.welcome-figure::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.welcome-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.welcome-figure:hover img {
+  transform: scale(1.04);
+}
+
+.welcome-figure figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  padding: 46px 22px 18px;
+  background: linear-gradient(to top, rgba(4, 16, 31, 0.86) 20%, rgba(4, 16, 31, 0));
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.welcome-figure figcaption i {
+  color: var(--gold-400);
+}
+
+.welcome-figure-rule {
+  display: block;
+  width: 46px;
+  height: 2px;
+  margin-bottom: 10px;
+  background: var(--gold-bar);
+}
+
+@media (max-width: 575.98px) {
+  .welcome-figure {
+    margin-bottom: 24px;
+  }
+
+  .welcome-figure img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .welcome-figure figcaption {
+    padding: 38px 16px 14px;
+    font-size: 0.84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-figure img,
+  .welcome-figure:hover img {
+    transition: none;
+    transform: none;
+  }
+}
+
 /* ---------- Lists ----------------------------------------------------- */
 
 .gold-list {
