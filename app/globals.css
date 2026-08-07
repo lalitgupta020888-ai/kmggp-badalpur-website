@@ -1456,7 +1456,12 @@ a {
     gap: 1.5rem;
   }
 
+  /* Spare height is split 1:2 — the board stays compact and the principal's
+     card, which was the runt of the column, gets the larger share. */
   .home-aside > .notice-card {
+    /* The card's own height:100% would resolve against the column and swallow
+       every spare pixel before flex-grow ever gets a say. */
+    height: auto;
     flex: 1 1 auto;
     min-height: 0;
   }
@@ -1475,8 +1480,42 @@ a {
     align-items: center;
   }
 
+  /* The two cards share the spare height — the board keeps the larger share,
+     the principal's card takes enough to stop looking like an afterthought. */
   .home-aside > .principal-card {
-    flex: 0 0 auto;
+    flex: 2 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-aside .principal-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 28px 26px;
+  }
+
+  /* Given the extra room, the teaser can carry a portrait and a quote at a
+     size that matches the weight of the notice board beside it. */
+  .home-aside .principal-photo {
+    width: 84px;
+    height: 84px;
+    flex-basis: 84px;
+    font-size: 2rem;
+  }
+
+  .home-aside .principal-name {
+    font-size: 1.2rem;
+  }
+
+  .home-aside .principal-role {
+    font-size: 0.84rem;
+  }
+
+  .home-aside .principal-quote {
+    font-size: 1.02rem;
+    line-height: 1.8;
   }
 }
 

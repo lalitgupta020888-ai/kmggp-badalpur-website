@@ -171,14 +171,12 @@ export default function Home() {
               </figure>
 
               <p className="lead">
-                Established in 2002 with a vision to empower women through technical education, our institute
-                is a premier government polytechnic offering AICTE-approved diploma programmes,
-                affiliated to BTEUP, across leading engineering disciplines.
-              </p>
-              <p>
-                The campus is equipped with state-of-the-art infrastructure, modern laboratories and a
-                highly qualified faculty dedicated to shaping the future of young women. We focus on
-                holistic development, academic excellence and comprehensive placement assistance.
+                Established in 2002 with a vision to empower women through technical education, our
+                institute is a premier government polytechnic offering AICTE-approved diploma
+                programmes, affiliated to BTEUP, across leading engineering disciplines — equipped
+                with modern laboratories, state-of-the-art infrastructure and a highly qualified
+                faculty dedicated to holistic development, academic excellence and comprehensive
+                placement assistance.
               </p>
 
               <Row className="g-3 mt-3">
