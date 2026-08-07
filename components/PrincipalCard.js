@@ -21,23 +21,24 @@ export default function PrincipalCard() {
       </div>
 
       <div className="principal-body">
+        {/* Portrait leads, with the post and the institute stacked beneath it */}
         <div className="principal-person">
           <span className="principal-photo">
             {PHOTO ? (
-              <Image src={PHOTO} alt="Principal" fill sizes="72px" style={{ objectFit: 'cover' }} />
+              <Image src={PHOTO} alt="Principal" fill sizes="96px" style={{ objectFit: 'cover' }} />
             ) : (
               <i className="bi bi-person-fill" />
             )}
           </span>
-          <div>
-            <span className="principal-name">Principal</span>
-            <span className="principal-role">
-              Km. Mayawati Government Girls Polytechnic, Badalpur
-            </span>
-          </div>
+          <span className="principal-name">Principal</span>
+          <span className="principal-role">
+            Km. Mayawati Government Girls Polytechnic, Badalpur
+          </span>
         </div>
 
-        <div className="gold-rule-thin my-3" />
+        <div className="gold-flourish principal-flourish">
+          <i className="bi bi-diamond-fill" />
+        </div>
 
         <blockquote className="principal-quote">
           <i className="bi bi-quote" />
