@@ -4,7 +4,6 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
-import { GALLERY_PREVIEW } from '@/lib/gallery';
 import { RECRUITERS } from '@/lib/recruiters';
 import HeroSlider from '@/components/HeroSlider';
 import NoticeBoard from '@/components/NoticeBoard';
@@ -281,52 +280,6 @@ export default function Home() {
               </Col>
             ))}
           </Row>
-        </Container>
-      </section>
-
-      {/* Gallery preview — a lead tile beside a stack, then the recruiters band */}
-      <section className="section" style={{ background: 'var(--paper)' }}>
-        <Container>
-          <SectionHead
-            eyebrow="Campus Moments"
-            icon="bi-camera-fill"
-            title="A Glimpse of Life on Campus"
-            subtitle="Classrooms, laboratories, the library and the grounds our students learn in every day."
-          />
-
-          <div className="gallery-mosaic">
-            {GALLERY_PREVIEW.map((image, index) => (
-              <Link
-                href="/gallery"
-                key={`${image.src}-${index}`}
-                className={`gallery-tile gallery-mosaic-item${index === 0 ? ' is-lead' : ''}`}
-                aria-label={`${image.caption} — open the full gallery`}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.caption}
-                  fill
-                  sizes={index === 0 ? '(max-width: 767px) 100vw, 50vw' : '(max-width: 767px) 50vw, 25vw'}
-                  style={{ objectFit: 'cover' }}
-                />
-                <span className="gallery-badge">{image.tag}</span>
-                <span className="gallery-veil">
-                  <span className="gold-rule-thin" />
-                  <span>
-                    <i className="bi bi-camera-fill me-2" />
-                    {image.caption}
-                  </span>
-                </span>
-              </Link>
-            ))}
-          </div>
-
-          <div className="text-center mt-5">
-            <Link href="/gallery" className="btn-gold">
-              <i className="bi bi-images me-2" />
-              View Full Gallery
-            </Link>
-          </div>
         </Container>
       </section>
 
