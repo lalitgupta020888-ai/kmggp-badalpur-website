@@ -3,9 +3,11 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
+import SectionHead from '@/components/SectionHead';
 
 /**
- * Dignitaries grid — three cards on the first row, two centred beneath.
+ * Dignitaries grid, under the standard gold section heading — five cards on
+ * one line from lg up, wrapping and staying centred below that.
  *
  * To add a portrait, drop the file into `public/images/leadership/` and set
  * `photo` to its path below. Entries without a photo fall back to a gold
@@ -58,8 +60,15 @@ function monogram(name) {
 
 export default function Leadership() {
   return (
-    <section className="section-sm" style={{ background: 'var(--paper)' }}>
+    <section className="section" style={{ background: 'var(--paper)' }}>
       <Container>
+        <SectionHead
+          eyebrow="Under Their Guidance"
+          icon="bi-award-fill"
+          title="Leadership That Lights Our Way"
+          subtitle="The dignitaries whose vision and stewardship guide technical education across Uttar Pradesh."
+        />
+
         {/* All five sit on one line from lg up; below that they wrap and stay centred */}
         <Row className="g-4 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 justify-content-center">
           {LEADERS.map((leader) => (
