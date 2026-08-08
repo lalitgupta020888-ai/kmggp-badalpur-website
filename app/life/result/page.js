@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
 
-const BTEUP_RESULT_PORTAL = 'https://result.bteexam.com/';
+const BTEUP_RESULT_PORTAL = 'https://result.bteexam.com/EVEN/main/';
 const BTEUP_SITE = 'https://bteup.ac.in/';
 
 /**
