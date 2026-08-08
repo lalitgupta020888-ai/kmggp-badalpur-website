@@ -5,6 +5,7 @@ import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
+import { OFFICE_HOURS } from '@/lib/institute';
 
 const ASSURANCES = [
   {
@@ -311,7 +312,7 @@ export default function AdmissionEnquiry() {
                     </span>
                     <div>
                       <div className="label">Office Hours</div>
-                      <p className="value">Monday – Saturday, 9:00 AM – 5:00 PM</p>
+                      <p className="value">{OFFICE_HOURS}</p>
                     </div>
                   </div>
                   <div className="contact-line">

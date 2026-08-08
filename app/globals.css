@@ -309,45 +309,25 @@ a {
 }
 
 /* The header spans wider than the 1320px page container so that nine nav
-   items and the action buttons fit without crowding. */
+   items and four action buttons fit without crowding. The last action is the
+   widest, so the shell keeps growing past the point where the page content
+   stops — otherwise that button is what gets clipped. */
 .nav-shell {
-  max-width: 1640px;
-  padding-left: 26px;
-  padding-right: 26px;
+  max-width: 1760px;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+@media (min-width: 1840px) {
+  .nav-shell {
+    max-width: 1840px;
+  }
 }
 
 @media (max-width: 575.98px) {
   .nav-shell {
     padding-left: 16px;
     padding-right: 16px;
-  }
-
-  /* The brand must yield here, or it pushes the toggler off screen */
-  .navbar-custom .navbar-brand {
-    margin-right: 0.5rem;
-    min-width: 0;
-    flex-shrink: 1;
-  }
-
-  .brand-crest {
-    width: 40px;
-    height: 40px;
-    flex: 0 0 40px;
-    font-size: 1.05rem;
-  }
-
-  .brand-text {
-    min-width: 0;
-  }
-
-  .brand-line-1,
-  .brand-line-2 {
-    font-size: 0.78rem;
-  }
-
-  .navbar-custom .navbar-toggler {
-    flex-shrink: 0;
-    padding: 0.35rem 0.6rem;
   }
 }
 
@@ -381,9 +361,9 @@ a {
 }
 
 .brand-crest {
-  width: 46px;
-  height: 46px;
-  flex: 0 0 46px;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -420,7 +400,7 @@ a {
 .brand-line-1,
 .brand-line-2 {
   font-family: var(--font-display), Georgia, serif;
-  font-size: 0.95rem;
+  font-size: 1.06rem;
   font-weight: 700;
   line-height: 1.25;
   white-space: nowrap;
@@ -432,6 +412,58 @@ a {
 
 .brand-line-2 {
   color: var(--gold-300);
+}
+
+/* Phone tier. This has to sit after the base brand rules, not with the other
+   small-screen overrides above — same specificity, so source order decides. */
+@media (max-width: 575.98px) {
+  /* The brand must yield here, or it pushes the toggler off screen */
+  .navbar-custom .navbar-brand {
+    margin-right: 0.5rem;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .brand-crest {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    font-size: 1.05rem;
+  }
+
+  .brand-text {
+    min-width: 0;
+  }
+
+  .brand-line-1,
+  .brand-line-2 {
+    font-size: 0.74rem;
+  }
+
+  .navbar-custom .navbar-toggler {
+    flex-shrink: 0;
+    padding: 0.35rem 0.6rem;
+  }
+}
+
+/* Smallest phones — the brand and the toggler share the row alone, and the
+   toggler must survive. The wordmark gives way first. */
+@media (max-width: 400px) {
+  .navbar-custom .navbar-brand {
+    margin-right: 0.25rem;
+    gap: 8px;
+  }
+
+  .brand-crest {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+  }
+
+  .brand-line-1,
+  .brand-line-2 {
+    font-size: 0.68rem;
+  }
 }
 
 .navbar-custom .nav-link,
@@ -458,9 +490,10 @@ a {
   transition: transform 0.3s var(--ease);
 }
 
-/* Compact tier — the expanded bar's tightest usable width (1200–1399px).
-   Everything shrinks a notch so all nine items stay on one line. */
-@media (min-width: 1200px) and (max-width: 1399.98px) {
+/* Compact tier — every expanded width below 1800px. Nine nav links plus four
+   action buttons is a lot to fit, and the last button is the widest, so the
+   bar stays in its tight sizing until there is genuinely room to spare. */
+@media (min-width: 1400px) and (max-width: 1799.98px) {
   .navbar-custom .nav-link,
   .navbar-custom .dropdown-toggle {
     font-size: 0.8rem;
@@ -477,29 +510,30 @@ a {
   }
 
   .brand-crest {
-    width: 38px;
-    height: 38px;
-    flex: 0 0 38px;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
     font-size: 1.05rem;
   }
 
   .brand-line-1,
   .brand-line-2 {
-    font-size: 0.8rem;
+    font-size: 0.88rem;
   }
 }
 
-/* Roomier once there is space to spare */
-@media (min-width: 1500px) {
+/* Roomier once there is space to spare — but the gap between links is the
+   cheapest width to give back to the action buttons, so it stays modest. */
+@media (min-width: 1800px) {
   .navbar-custom .nav-link,
   .navbar-custom .dropdown-toggle {
-    font-size: 0.88rem;
-    padding: 0.6rem 0.85rem !important;
+    font-size: 0.86rem;
+    padding: 0.6rem 0.6rem !important;
   }
 
   .navbar-custom .nav-link::after {
-    left: 0.85rem;
-    right: 0.85rem;
+    left: 0.6rem;
+    right: 0.6rem;
   }
 }
 
@@ -562,7 +596,7 @@ a {
 /* Open menus on hover for large screens.
    Requires `renderMenuOnMount` on each NavDropdown — React-Bootstrap
    otherwise keeps the menu out of the DOM until it is clicked. */
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .navbar-custom .nav-item.dropdown:hover > .dropdown-menu {
     display: block;
     animation: menuDrop 0.22s var(--ease) both;
@@ -584,6 +618,58 @@ a {
    its department page, where the sidebar carries Faculty / Labs / etc. */
 .navbar-custom #department-dropdown + .dropdown-menu {
   min-width: 290px;
+}
+
+/* Counselling is the live admission cycle, so it sits in the action group
+   beside the enquiry CTA rather than among the permanent sections. Two filled
+   gold pills side by side would compete, so this one is the outlined
+   counterpart — the same shape and weight, a quieter fill. It has no dropdown;
+   the counselling page carries its own sidebar of sub-pages. */
+.nav-highlight {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.2;
+  background: rgba(201, 162, 39, 0.14) !important;
+  border: 1px solid var(--gold-500) !important;
+  color: var(--gold-300) !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.02em;
+  border-radius: 999px !important;
+  padding: 0.52rem 1.1rem !important;
+  transition: all 0.25s var(--ease);
+}
+
+.nav-highlight:hover,
+.nav-highlight:focus,
+.nav-highlight.active {
+  background: var(--gold-bar) !important;
+  border-color: transparent !important;
+  color: var(--navy-900) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Sizing across the width tiers is shared with .nav-cta — see the label rules
+   further down, where both buttons switch between their short and full text. */
+
+/* In the collapsed menu the action buttons stack full width — the pill sheds
+   its fixed shape and sits flush with Login, IGRS and Enquiry above it. */
+@media (max-width: 1399.98px) {
+  .nav-highlight {
+    width: 100%;
+    transform: none;
+  }
+
+  .nav-highlight:hover,
+  .nav-highlight:focus,
+  .nav-highlight.active {
+    transform: none;
+  }
 }
 
 /* The action group must never be squeezed by the nav links beside it */
@@ -642,7 +728,7 @@ a {
 /* On the expanded desktop bar Login and IGRS collapse to icon buttons,
    reclaiming the space the nav links need. Labels return in the
    collapsed menu, where there is room for them. */
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .nav-ghost.nav-icon-only {
     width: 38px;
     height: 38px;
@@ -659,12 +745,14 @@ a {
   }
 }
 
-/* The CTA carries its short label only in the compact tier */
+/* Both action buttons carry a short label until the bar is wide enough for the
+   full ones. "Counselling & Admission 2026" is the widest thing in the header,
+   so the switch happens late — below 1800px it reads "Counselling 2026". */
 .cta-label-short {
   display: none;
 }
 
-@media (min-width: 1200px) and (max-width: 1399.98px) {
+@media (min-width: 1400px) and (max-width: 1799.98px) {
   .cta-label-full {
     display: none;
   }
@@ -673,8 +761,9 @@ a {
     display: inline;
   }
 
-  .nav-cta {
-    padding: 0.5rem 0.95rem !important;
+  .nav-cta,
+  .nav-highlight {
+    padding: 0.5rem 0.9rem !important;
   }
 
   .nav-ghost.nav-icon-only {
@@ -683,9 +772,10 @@ a {
   }
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1800px) {
   .nav-cta,
-  .nav-ghost {
+  .nav-ghost,
+  .nav-highlight {
     font-size: 0.82rem !important;
   }
 
@@ -695,7 +785,7 @@ a {
 }
 
 /* In the collapsed menu the actions sit full width and keep their labels */
-@media (max-width: 1199.98px) {
+@media (max-width: 1399.98px) {
   .nav-actions {
     flex-wrap: wrap;
   }
@@ -2250,6 +2340,193 @@ a {
   color: var(--navy-800);
 }
 
+/* Groupwise eligibility table — the group code is a single letter, so its
+   column is pinned narrow and the width it gives up goes to the course and
+   qualification text, which would otherwise wrap a word per line. */
+.eligibility-table {
+  table-layout: fixed;
+  min-width: 780px;
+}
+
+.eligibility-table th:nth-child(1),
+.eligibility-table td:nth-child(1) {
+  width: 74px;
+}
+
+.eligibility-table th:nth-child(2),
+.eligibility-table td:nth-child(2) {
+  width: 30%;
+}
+
+.eligibility-table th:nth-child(3),
+.eligibility-table td:nth-child(3) {
+  width: 28%;
+}
+
+.eligibility-table th:nth-child(4),
+.eligibility-table td:nth-child(4),
+.eligibility-table th:nth-child(5),
+.eligibility-table td:nth-child(5) {
+  width: 15%;
+}
+
+.eligibility-table td {
+  vertical-align: top;
+}
+
+/* Marks and duration are short phrases — let them sit on one line each */
+.eligibility-table td:nth-child(5) {
+  white-space: nowrap;
+}
+
+/* Gold pill instead of the red "new" flash — it marks a standing fact, not a
+   fresh notice, and it must never break across two lines. */
+.badge-offered {
+  display: inline-block;
+  background: var(--gold-bar);
+  color: var(--navy-900);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* Counselling schedule — the round cell is merged across its activities with
+   rowspan, so the usual zebra striping would cut across a round instead of
+   marking it. Rounds are separated by a gold rule instead. */
+.schedule-table {
+  table-layout: fixed;
+  min-width: 660px;
+}
+
+.schedule-table th:nth-child(1),
+.schedule-table td:nth-child(1) {
+  width: 108px;
+}
+
+.schedule-table th:nth-child(3),
+.schedule-table td:nth-child(3) {
+  width: 210px;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.schedule-table tbody tr:nth-child(even) {
+  background: transparent;
+}
+
+.schedule-table tbody tr.is-round-start:not(:first-child) td {
+  border-top: 2px solid var(--gold-500);
+}
+
+.schedule-table tbody td {
+  vertical-align: top;
+  font-size: 0.9rem;
+}
+
+.schedule-table .round-cell {
+  vertical-align: middle;
+  text-align: center;
+  background: var(--paper);
+}
+
+.round-chip {
+  display: inline-block;
+  background: var(--navy-wash);
+  color: var(--white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* A date range is wider than the column at some breakpoints. It wraps at the
+   dash rather than being clipped by the table's rounded overflow, and each
+   individual date stays whole on its line. */
+.schedule-date {
+  display: block;
+  font-weight: 700;
+  color: var(--navy-800);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+}
+
+.schedule-deadline {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--gold-700);
+  white-space: nowrap;
+}
+
+/* Daily period timings — six one-hour periods around a lunch break. The break
+   row is set apart with a gold wash so the day reads as two halves rather than
+   seven equal rows. */
+.period-table {
+  table-layout: fixed;
+  min-width: 460px;
+}
+
+.period-table th:nth-child(1),
+.period-table td:nth-child(1) {
+  width: 34%;
+}
+
+.period-table th:nth-child(2),
+.period-table td:nth-child(2) {
+  width: 36%;
+}
+
+.period-time {
+  font-weight: 700;
+  color: var(--navy-800);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.period-table tbody tr.is-break,
+.period-table tbody tr.is-break:nth-child(even) {
+  background: var(--gold-100);
+}
+
+.period-table tbody tr.is-break td {
+  border-top: 2px solid var(--gold-500);
+  border-bottom: 2px solid var(--gold-500);
+  font-style: italic;
+}
+
+.period-table tbody tr.is-break .period-time {
+  font-style: normal;
+}
+
+/* Quiet navy chip marking which JEECUP group a branch admits under. Sits
+   inline beside a branch name, so it must never break the line. */
+.badge-group {
+  display: inline-block;
+  background: var(--mist);
+  border: 1px solid var(--hairline);
+  color: var(--navy-700);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
 .table-wrap {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -3257,6 +3534,14 @@ a {
   white-space: nowrap;
 }
 
+/* Metadata chip — publication date, date range and the like. Neutral, so it
+   never reads as a grievance status. */
+.status-pill.is-meta {
+  background: var(--mist);
+  color: var(--navy-700);
+  border-color: var(--hairline);
+}
+
 .status-pill.is-pending {
   background: #fdf3d7;
   color: #8a6d14;
@@ -3552,8 +3837,8 @@ a {
 
 /* ---------- Responsive ------------------------------------------------- */
 
-/* Navbar collapses at xl, so its stacked-menu styling starts below 1200px */
-@media (max-width: 1199.98px) {
+/* Navbar collapses at xxl, so its stacked-menu styling starts below 1400px */
+@media (max-width: 1399.98px) {
   .navbar-custom .navbar-collapse {
     padding: 12px 0 6px;
     margin-top: 10px;

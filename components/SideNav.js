@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 /**
- * Sticky sidebar used by the department and placements sections.
- * items: [{ href, label, icon }]
+ * Sticky sidebar used by the department, placements and counselling sections.
+ * items: [{ href, label, icon, external }] — an external item opens the
+ * government portal in a new tab and never reads as the current page.
  */
 export default function SideNav({ eyebrow, title, items, cta }) {
   const pathname = usePathname();
@@ -23,16 +24,30 @@ export default function SideNav({ eyebrow, title, items, cta }) {
           )}
           <h5>{title}</h5>
         </div>
-        {items.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`side-nav-link ${pathname === item.href ? 'is-active' : ''}`}
-          >
-            <i className={`bi ${item.icon}`} />
-            {item.label}
-          </Link>
-        ))}
+        {items.map((item) =>
+          item.external ? (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="side-nav-link"
+            >
+              <i className={`bi ${item.icon}`} />
+              {item.label}
+              <i className="bi bi-box-arrow-up-right ms-auto small" aria-hidden="true" />
+            </a>
+          ) : (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`side-nav-link ${pathname === item.href ? 'is-active' : ''}`}
+            >
+              <i className={`bi ${item.icon}`} />
+              {item.label}
+            </Link>
+          )
+        )}
       </nav>
 
       {cta && (

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { NOTICES } from '@/lib/notices';
+import { TICKER_NOTICES } from '@/lib/notices';
 
 /**
  * The running announcement line that sits under the stat strip.
@@ -12,7 +12,7 @@ import { NOTICES } from '@/lib/notices';
  * marquee pauses on hover and stands still under `prefers-reduced-motion`.
  */
 export default function NewsTicker() {
-  const items = [...NOTICES, ...NOTICES];
+  const items = [...TICKER_NOTICES, ...TICKER_NOTICES];
 
   return (
     <section className="news-ticker" aria-label="News updates and announcements">
@@ -23,20 +23,28 @@ export default function NewsTicker() {
 
       <div className="news-ticker-viewport">
         <div className="news-ticker-track">
-          {items.map((notice, index) => (
-            <Link
-              href={notice.link}
-              key={`${notice.id}-${index}`}
-              className="news-ticker-item"
-              aria-hidden={index >= NOTICES.length}
-              tabIndex={index >= NOTICES.length ? -1 : undefined}
-            >
-              <i className={`bi ${notice.icon}`} />
-              <span>{notice.title}</span>
-              {notice.isNew && <span className="news-ticker-new">NEW</span>}
-              <span className="news-ticker-dot" aria-hidden="true" />
-            </Link>
-          ))}
+          {items.map((notice, index) => {
+            const isClone = index >= TICKER_NOTICES.length;
+            const Item = notice.external ? 'a' : Link;
+            const linkProps = notice.external
+              ? { href: notice.link, target: '_blank', rel: 'noopener noreferrer' }
+              : { href: notice.link };
+
+            return (
+              <Item
+                key={`${notice.id}-${index}`}
+                {...linkProps}
+                className="news-ticker-item"
+                aria-hidden={isClone}
+                tabIndex={isClone ? -1 : undefined}
+              >
+                <i className={`bi ${notice.icon}`} />
+                <span>{notice.title}</span>
+                {notice.isNew && <span className="news-ticker-new">NEW</span>}
+                <span className="news-ticker-dot" aria-hidden="true" />
+              </Item>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { OFFICE_HOURS } from '@/lib/institute';
 
 const OBJECTIVES = [
   'Invite reputed companies for on-campus and off-campus recruitment drives.',
@@ -123,7 +124,7 @@ export default function TNPDepartment() {
                 </span>
                 <div>
                   <div className="label">Office Hours</div>
-                  <p className="value">Monday – Saturday, 9:00 AM – 5:00 PM</p>
+                  <p className="value">{OFFICE_HOURS}</p>
                 </div>
               </div>
             </Col>

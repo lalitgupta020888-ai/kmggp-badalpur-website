@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
+import { OFFICE_DAYS, OFFICE_TIME } from '@/lib/institute';
 
 const STATS = [
   { icon: 'bi-journals', value: '8,000+', label: 'Books & Volumes' },
@@ -129,8 +130,8 @@ export default function LibraryPage() {
                       <i className="bi bi-calendar-week-fill" />
                     </span>
                     <div>
-                      <div className="label">Monday – Saturday</div>
-                      <p className="value">10:00 AM – 5:00 PM</p>
+                      <div className="label">{OFFICE_DAYS}</div>
+                      <p className="value">{OFFICE_TIME}</p>
                     </div>
                   </div>
                   <div className="contact-line">
@@ -139,7 +140,7 @@ export default function LibraryPage() {
                     </span>
                     <div>
                       <div className="label">Book Issue &amp; Return</div>
-                      <p className="value">11:00 AM – 4:00 PM on working days</p>
+                      <p className="value">{OFFICE_TIME} on working days</p>
                     </div>
                   </div>
                   <div className="contact-line">

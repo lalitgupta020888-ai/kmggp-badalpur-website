@@ -4,6 +4,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
+import { OFFICE_HOURS } from '@/lib/institute';
 
 const QUICK_LINKS = [
   { href: '/about', label: 'About Us' },
@@ -106,7 +107,7 @@ export default function Footer() {
             </div>
             <div className="footer-contact-item">
               <i className="bi bi-clock-fill" />
-              <span>Mon – Sat, 10:00 AM – 5:00 PM</span>
+              <span>{OFFICE_HOURS}</span>
             </div>
           </Col>
         </Row>

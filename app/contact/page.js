@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
+import { OFFICE_HOURS } from '@/lib/institute';
 
 const LOCATION = {
   name: 'Km. Mayawati Govt. Girls Polytechnic',
@@ -33,7 +34,7 @@ const CONTACT_LINES = [
   },
   { icon: 'bi-telephone-fill', label: 'Phone', value: '+91 XXXXX XXXXX' },
   { icon: 'bi-envelope-fill', label: 'Email', value: 'info@kmggp.ac.in' },
-  { icon: 'bi-clock-fill', label: 'Office Hours', value: 'Monday – Saturday, 9:00 AM – 5:00 PM' },
+  { icon: 'bi-clock-fill', label: 'Office Hours', value: OFFICE_HOURS },
 ];
 
 const DESKS = [

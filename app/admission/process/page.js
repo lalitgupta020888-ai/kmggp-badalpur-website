@@ -22,7 +22,7 @@ const STEPS = [
   },
   {
     title: 'Appear for the Entrance Examination',
-    text: 'Sit the JEECUP examination for Group A (Engineering & Technology) at your allotted centre.',
+    text: 'Sit the JEECUP examination at your allotted centre — Group A for first-year admission, or Group K if you are applying for lateral entry into the second year.',
   },
   {
     title: 'Participate in Online Counselling',
@@ -47,6 +47,23 @@ const ELIGIBILITY = [
   'Appeared and qualified in the JEECUP entrance examination for Group A.',
   'Admission is open to female candidates only, as this is a Government Girls Polytechnic.',
   'Candidates awaiting Class 10th results may apply provisionally, subject to result submission.',
+];
+
+/**
+ * Lateral entry runs through the same counselling, one group and one year apart —
+ * Group K instead of A, third semester instead of first.
+ */
+const LATERAL_ELIGIBILITY = [
+  'Passed Class 12th (Intermediate) with Science and Mathematics, minimum 35% marks.',
+  'Or passed Class 12th with a vocational or technical subject relevant to the branch.',
+  'Or passed a two-year ITI course, after Class 10th, in a trade related to the branch.',
+  'Appeared and qualified in the JEECUP entrance examination for Group K.',
+];
+
+const LATERAL_DOCUMENTS = [
+  'Class 12th marksheet and passing certificate, or the two-year ITI certificate with marksheets',
+  'Class 10th marksheet, as proof of age and of the qualification preceding ITI',
+  'JEECUP Group K rank card and seat allotment letter',
 ];
 
 const DOCUMENTS = [
@@ -137,6 +154,58 @@ export default function AdmissionProcess() {
               </div>
             </Col>
           </Row>
+
+          <div className="panel mt-4">
+            <div className="panel-header">
+              <i className="bi bi-box-arrow-in-right" />
+              Lateral Entry (Group K) — Admission to the Second Year
+            </div>
+            <div className="panel-body">
+              <p className="lead">
+                All three branches also admit lateral entry candidates directly into the third
+                semester. The process is the same as above — only the JEECUP group differs.
+              </p>
+
+              <Row className="g-4 mt-1">
+                <Col lg={6}>
+                  <h5 className="fw-bold mb-3">
+                    <i className="bi bi-patch-check-fill text-gold me-2" />
+                    Eligibility for Lateral Entry
+                  </h5>
+                  <ul className="gold-list">
+                    {LATERAL_ELIGIBILITY.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </Col>
+
+                <Col lg={6}>
+                  <h5 className="fw-bold mb-3">
+                    <i className="bi bi-folder-plus text-gold me-2" />
+                    Additional Documents
+                  </h5>
+                  <ul className="gold-list">
+                    {LATERAL_DOCUMENTS.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <p className="small mb-0">
+                    These are required in addition to the common documents listed above.
+                  </p>
+                </Col>
+              </Row>
+
+              <div className="callout mt-4">
+                <i className="bi bi-exclamation-triangle-fill" />
+                <p>
+                  Register under <strong>Group K</strong> to be considered for lateral entry.
+                  Qualifying in Group A only makes you eligible for first-year admission. Full group
+                  details are on the <Link href="/counselling/eligibility">Groupwise Eligibility</Link>{' '}
+                  page.
+                </p>
+              </div>
+            </div>
+          </div>
 
           <div className="callout mt-4">
             <i className="bi bi-calendar-check-fill" />

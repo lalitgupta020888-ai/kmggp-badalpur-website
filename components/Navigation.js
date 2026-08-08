@@ -24,6 +24,7 @@ const ACADEMIC = [
   { href: '/academic/calendar', label: 'Academic Calendar', icon: 'bi-calendar3' },
   { href: '/academic/holidays', label: 'List of Holidays', icon: 'bi-calendar-event' },
   { href: '/academic/syllabus', label: 'Syllabus', icon: 'bi-journal-bookmark' },
+  { href: '/academic/time-table', label: 'Time-Table', icon: 'bi-clock-history' },
   { href: '/academic/verification', label: 'Educational Verification', icon: 'bi-patch-check' },
   {
     href: '/academic/caution-money-refund',
@@ -54,6 +55,7 @@ const LIFE = [
   { href: '/life/events', label: 'Events', icon: 'bi-balloon-fill' },
   { href: '/life/hostels', label: 'Hostels', icon: 'bi-house-heart-fill' },
   { href: '/life/library', label: 'Library', icon: 'bi-book-half' },
+  { href: '/life/result', label: 'Result', icon: 'bi-file-earmark-text' },
 ];
 
 function DropdownLinks({ items }) {
@@ -105,7 +107,10 @@ export default function Navigation() {
         </Container>
       </div>
 
-      <Navbar expand="xl" className="navbar-custom" collapseOnSelect>
+      {/* Nine nav links plus four action buttons need more than xl to breathe —
+          below 1400px the bar collapses to the toggler instead of crushing
+          the last button off the edge. */}
+      <Navbar expand="xxl" className="navbar-custom" collapseOnSelect>
         <Container fluid className="nav-shell">
           <Navbar.Brand as={Link} href="/">
             <span className="brand-crest brand-crest--logo">
@@ -199,6 +204,20 @@ export default function Navigation() {
                 <i className="bi bi-send-fill" />
                 <span className="cta-label-full">Admission Enquiry</span>
                 <span className="cta-label-short">Enquiry</span>
+              </Button>
+
+              {/* No dropdown — the counselling page carries every sub-page in
+                  its own sidebar. The year in the label marks it as the live
+                  admission cycle rather than a permanent section. */}
+              <Button
+                as={Link}
+                href="/counselling"
+                size="sm"
+                className={`nav-highlight ${isActive('/counselling') ? 'active' : ''}`}
+              >
+                <i className="bi bi-clipboard2-check-fill" />
+                <span className="cta-label-full">Counselling &amp; Admission 2026</span>
+                <span className="cta-label-short">Counselling 2026</span>
               </Button>
             </Nav>
           </Navbar.Collapse>
