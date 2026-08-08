@@ -319,7 +319,7 @@ function AdminDashboard({ onLogout }) {
                     </div>
 
                     <div className="table-wrap mb-3">
-                      <table className="premium-table">
+                      <table className="premium-table kv-table">
                         <tbody>
                           <tr>
                             <td>Type</td>

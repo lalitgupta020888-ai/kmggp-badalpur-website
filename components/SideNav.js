@@ -12,8 +12,10 @@ import { usePathname } from 'next/navigation';
 export default function SideNav({ eyebrow, title, items, cta }) {
   const pathname = usePathname();
 
+  // The nav and the CTA are pinned together as one rail — pinning only the nav
+  // would let the CTA scroll away from under it.
   return (
-    <>
+    <div className="side-rail">
       <nav className="side-nav">
         <div className="side-nav-head">
           {eyebrow && (
@@ -61,6 +63,6 @@ export default function SideNav({ eyebrow, title, items, cta }) {
           </Link>
         </aside>
       )}
-    </>
+    </div>
   );
 }

@@ -12,6 +12,8 @@ const QUICK_LINKS = [
   { href: '/academic/calendar', label: 'Academic Calendar' },
   { href: '/admission/fee', label: 'Fee Structure' },
   { href: '/contact', label: 'Contact Us' },
+  // The topbar link is desktop-only, so this is the route in on a phone.
+  { href: '/employee', label: 'Employee Section' },
 ];
 
 /* Official portals students and staff need most — all external. */

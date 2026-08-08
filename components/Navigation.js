@@ -91,6 +91,15 @@ export default function Navigation() {
               <i className="bi bi-envelope-fill" />
               info@kmggp.ac.in
             </a>
+            {/* Staff-facing, so it sits in the utility bar rather than taking a
+                slot in the main menu students use. */}
+            <Link
+              href="/employee"
+              className={`topbar-item topbar-link ${isActive('/employee') ? 'is-active' : ''}`}
+            >
+              <i className="bi bi-person-vcard-fill" />
+              Employee Section
+            </Link>
           </div>
           <div className="d-flex align-items-center gap-3">
             <span className="topbar-item d-none d-xl-inline">

@@ -280,6 +280,23 @@ a {
   margin-right: 7px;
 }
 
+/* A navigable item among the static contact details — it carries a gold hairline
+   so it reads as something to click, not another line of address. */
+.topbar .topbar-link {
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-weight: 600;
+  transition: all 0.25s var(--ease);
+}
+
+.topbar .topbar-link:hover,
+.topbar .topbar-link.is-active {
+  background: rgba(201, 162, 39, 0.14);
+  border-color: var(--gold-500);
+  color: var(--gold-300);
+}
+
 .topbar-social a {
   width: 30px;
   height: 30px;
@@ -2509,6 +2526,392 @@ a {
   font-style: normal;
 }
 
+/* ---------- Calculators (employee section) ---------------------------- */
+
+/* Result tile — the headline figure a calculator produces. The primary variant
+   carries the number the user actually came for. */
+.calc-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 26px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--paper);
+  border-top: 3px solid var(--gold-500);
+}
+
+.calc-tile-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.calc-tile-value {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--navy-800);
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-tile-note {
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+.calc-tile-primary {
+  background: var(--navy-wash);
+  border-color: transparent;
+}
+
+.calc-tile-primary .calc-tile-label {
+  color: var(--gold-300);
+}
+
+.calc-tile-primary .calc-tile-value {
+  color: var(--white);
+}
+
+.calc-tile-primary .calc-tile-note {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Slab strip — the seven bands read at a glance before any figure is entered. */
+.slab-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.slab-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--gold-500);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+}
+
+.slab-chip-band {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.slab-chip-rate {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--navy-800);
+}
+
+/* Salary statement — sixteen rows of seven figures. Cells are tight so the
+   whole year fits without the table becoming a scroll marathon. */
+.salary-table {
+  min-width: 1150px;
+}
+
+.salary-table tbody td {
+  padding: 6px 10px;
+}
+
+.salary-table .salary-month {
+  font-weight: 600;
+  color: var(--navy-800);
+  white-space: nowrap;
+}
+
+.salary-table tbody tr.is-extra .salary-month {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* Derived columns — no input, so they carry a gold wash to read as results
+   rather than fields left blank. */
+.salary-table .salary-computed {
+  text-align: right;
+  white-space: nowrap;
+  font-weight: 700;
+  color: var(--navy-800);
+  font-variant-numeric: tabular-nums;
+  background: rgba(201, 162, 39, 0.09);
+}
+
+.salary-table thead th:nth-child(5),
+.salary-table thead th:nth-child(10) {
+  color: var(--gold-300);
+}
+
+.salary-input {
+  width: 100%;
+  min-width: 84px;
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background: var(--paper);
+  padding: 6px 9px;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--navy-800);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.2s var(--ease);
+}
+
+.salary-input:focus {
+  outline: none;
+  border-color: var(--gold-500);
+  background: var(--white);
+  box-shadow: 0 0 0 0.18rem rgba(201, 162, 39, 0.16);
+}
+
+/* The spinners steal width the figures need */
+.salary-input::-webkit-outer-spin-button,
+.salary-input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.salary-input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Running subtotal inside a computation statement — lighter than the final
+   total, heavier than an ordinary line. */
+.calc-table tbody tr.is-subtotal,
+.calc-table tbody tr.is-subtotal:nth-child(even) {
+  background: var(--mist);
+}
+
+.calc-table tbody tr.is-subtotal td {
+  font-weight: 700;
+  color: var(--navy-800);
+}
+
+/* Action bar under a calculator's result tiles — the point at which the figures
+   are settled and a printed copy is wanted. */
+.calc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 24px;
+  padding: 20px 26px;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--gold-500);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.calc-actions h6 {
+  color: var(--navy-800);
+}
+
+.calc-actions p {
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+/* Masthead and footer that exist only on the printed slip */
+.print-only {
+  display: none;
+}
+
+.slip-masthead h2 {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+}
+
+.slip-masthead p {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.slip-title {
+  display: inline-block;
+  border-top: 2px solid var(--navy-800);
+  border-bottom: 2px solid var(--navy-800);
+  padding: 4px 22px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* The slip itself — a single ruled table, the way a pay slip is read: earnings
+   on the left, deductions on the right, totals across the foot. */
+.slip-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+  font-size: 0.86rem;
+}
+
+.slip-table th,
+.slip-table td {
+  border: 1px solid var(--navy-800);
+  padding: 7px 12px;
+  vertical-align: middle;
+}
+
+.slip-table th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--navy-900);
+  background: var(--mist);
+}
+
+.slip-table .slip-amount {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  width: 18%;
+}
+
+.slip-table .slip-identity th {
+  width: 16%;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.slip-table .slip-head th {
+  background: var(--navy-800);
+  color: var(--white);
+  text-align: center;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  padding: 8px 12px;
+}
+
+.slip-table .slip-subtotal th,
+.slip-table .slip-subtotal td {
+  background: var(--gold-100);
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.slip-table .slip-net th,
+.slip-table .slip-net td {
+  background: var(--navy-800);
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+}
+
+.slip-table .slip-words td {
+  font-style: italic;
+}
+
+/* Two ruled lines, well clear of the table, for the signatures a slip carries */
+.slip-signatures {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 64px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.slip-signatures span {
+  border-top: 1px solid var(--navy-800);
+  padding-top: 6px;
+  min-width: 210px;
+  text-align: center;
+}
+
+.slip-foot {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin-top: 26px;
+  text-align: center;
+}
+
+@media print {
+  .no-print,
+  .site-header,
+  .footer,
+  .page-header,
+  .side-nav,
+  .side-cta {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  .slip-masthead {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  /* Ruled borders and filled header bands must survive the printer's default
+     of dropping backgrounds. */
+  .slip-table th,
+  .slip-table td,
+  .slip-table .slip-head th,
+  .slip-table .slip-net th,
+  .slip-table .slip-net td,
+  .slip-table .slip-subtotal th,
+  .slip-table .slip-subtotal td {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pay-slip {
+    break-inside: avoid;
+  }
+
+  .panel,
+  .calc-tile {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  /* The sidebar column collapses away, so the content column takes the sheet */
+  .section > .container > .row > [class*='col-'] {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
+/* Figures column right-aligned on tabular numerals, so the digits stack. */
+.calc-table .calc-amount {
+  text-align: right;
+  white-space: nowrap;
+  font-weight: 700;
+  color: var(--navy-800);
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-table thead th:last-child {
+  text-align: right;
+}
+
+.calc-table tbody tr.is-total,
+.calc-table tbody tr.is-total:nth-child(even) {
+  background: var(--gold-100);
+}
+
+.calc-table tbody tr.is-total td {
+  border-top: 2px solid var(--gold-500);
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
 /* Quiet navy chip marking which JEECUP group a branch admits under. Sits
    inline beside a branch name, so it must never break the line. */
 .badge-group {
@@ -3143,15 +3546,52 @@ a {
 
 /* ---------- Side navigation (department / placements) ----------------- */
 
+/* The sidebar rail — nav plus the help block under it — is pinned as one piece.
+   Pinning only the nav left the CTA to scroll out from under it.
+   If the rail is taller than the screen it scrolls within itself rather than
+   pushing its own foot out of reach. */
+.side-rail {
+  position: sticky;
+  /* Clears the pinned header (utility bar + navbar) plus a little breathing room */
+  top: 122px;
+  max-height: calc(100vh - 142px);
+  overflow-y: auto;
+  /* Room for the panels' shadows, which the overflow would otherwise clip */
+  padding: 4px 6px;
+  margin: -4px -6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 162, 39, 0.5) transparent;
+}
+
+.side-rail::-webkit-scrollbar {
+  width: 6px;
+}
+
+.side-rail::-webkit-scrollbar-thumb {
+  background: rgba(201, 162, 39, 0.5);
+  border-radius: 999px;
+}
+
+.side-rail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Stacked above the content on smaller screens — pinning a full-width rail
+   there would cover the page it belongs to. */
+@media (max-width: 991.98px) {
+  .side-rail {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 .side-nav {
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--hairline);
   box-shadow: var(--shadow-md);
   background: var(--white);
-  position: sticky;
-  /* Clears the pinned header (utility bar + navbar) plus a little breathing room */
-  top: 122px;
 }
 
 .side-nav-head {
@@ -3609,8 +4049,11 @@ a {
   padding: 4px 12px;
 }
 
-/* Compact key/value table inside dashboard cards */
-.panel .premium-table tbody td:first-child {
+/* Compact key/value table inside dashboard cards.
+   Scoped to .kv-table — as `.panel .premium-table` it was matching every table
+   on the site that happens to sit inside a panel, uppercasing the first column
+   and pinning it to 34%. */
+.kv-table tbody td:first-child {
   width: 34%;
   font-size: 0.78rem;
   letter-spacing: 0.06em;
