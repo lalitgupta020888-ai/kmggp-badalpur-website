@@ -102,7 +102,9 @@ export default function Navigation() {
             </Link>
           </div>
           <div className="d-flex align-items-center gap-3">
-            <span className="topbar-item d-none d-xl-inline">
+            {/* The longest line in the bar — it only appears once there is
+                genuinely room, otherwise the contact details wrap. */}
+            <span className="topbar-item topbar-accred">
               <i className="bi bi-award-fill" />
               Govt. of Uttar Pradesh | Approved by AICTE | Affiliated to BTEUP
             </span>

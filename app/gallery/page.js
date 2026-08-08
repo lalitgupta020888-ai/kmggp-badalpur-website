@@ -3,9 +3,10 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
+import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import { GALLERY_IMAGES as IMAGES } from '@/lib/gallery';
+import { GALLERY_ALBUMS, GALLERY_IMAGES, albumCover } from '@/lib/gallery';
 
 export default function GalleryPage() {
   return (
@@ -23,32 +24,44 @@ export default function GalleryPage() {
           <SectionHead
             eyebrow="Our Campus in Pictures"
             icon="bi-camera-fill"
-            title="Life, Learning and Facilities"
-            subtitle="A visual walk through our classrooms, laboratories, library and campus grounds."
+            title="Albums"
+            subtitle="Open an album to see every photograph inside it."
           />
 
           <Row className="g-4">
-            {IMAGES.map((image, index) => (
-              <Col lg={4} md={6} key={`${image.src}-${index}`}>
-                <figure className="gallery-tile m-0">
-                  <Image
-                    src={image.src}
-                    alt={image.caption}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    style={{ objectFit: 'cover' }}
-                  />
-                  <figcaption className="gallery-veil">
-                    <div className="gold-rule-thin" />
-                    <span>
-                      <i className="bi bi-camera-fill me-2" />
-                      {image.caption}
+            {GALLERY_ALBUMS.map((album) => (
+              <Col lg={4} md={6} key={album.slug}>
+                {/* The sheets peeking out behind the cover are what make this
+                    read as a folder of photographs, not a single picture. */}
+                <Link href={`/gallery/${album.slug}`} className="album-card">
+                  <span className="album-stack" aria-hidden="true" />
+                  <span className="album-cover">
+                    <Image
+                      src={albumCover(album)}
+                      alt={album.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: 'cover' }}
+                    />
+                    <span className="album-veil" />
+                    <span className="album-count">
+                      <i className="bi bi-images" />
+                      {album.photos.length} {album.photos.length === 1 ? 'Photo' : 'Photos'}
                     </span>
-                    <span className="small mt-1" style={{ color: 'var(--gold-300)' }}>
-                      {image.tag}
+                    <span className="album-open">
+                      <i className="bi bi-folder2-open" />
+                      Open Album
                     </span>
-                  </figcaption>
-                </figure>
+                  </span>
+
+                  <span className="album-body">
+                    <span className="album-title">
+                      <i className={`bi ${album.icon}`} />
+                      {album.title}
+                    </span>
+                    <span className="album-text">{album.description}</span>
+                  </span>
+                </Link>
               </Col>
             ))}
           </Row>
@@ -56,8 +69,9 @@ export default function GalleryPage() {
           <div className="callout mt-5">
             <i className="bi bi-info-circle-fill" />
             <p>
-              More photographs from annual functions, technical festivals and industrial visits will
-              be added to this gallery through the academic session.
+              {GALLERY_IMAGES.length} photographs across {GALLERY_ALBUMS.length} albums. More from
+              annual functions, technical festivals and industrial visits will be added through the
+              academic session.
             </p>
           </div>
         </Container>

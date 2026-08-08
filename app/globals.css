@@ -280,6 +280,21 @@ a {
   margin-right: 7px;
 }
 
+/* Contact details are one line each or they are not worth reading */
+.topbar .topbar-item {
+  white-space: nowrap;
+}
+
+.topbar-accred {
+  display: none;
+}
+
+@media (min-width: 1620px) {
+  .topbar-accred {
+    display: inline;
+  }
+}
+
 /* A navigable item among the static contact details — it carries a gold hairline
    so it reads as something to click, not another line of address. */
 .topbar .topbar-link {
@@ -536,6 +551,42 @@ a {
   .brand-line-1,
   .brand-line-2 {
     font-size: 0.88rem;
+  }
+}
+
+/* Right at the collapse breakpoint the bar has the least room it will ever
+   have while expanded — everything takes one more notch off. */
+@media (min-width: 1400px) and (max-width: 1499.98px) {
+  .navbar-custom .nav-link,
+  .navbar-custom .dropdown-toggle {
+    font-size: 0.78rem;
+    padding: 0.55rem 0.36rem !important;
+  }
+
+  .navbar-custom .nav-link::after {
+    left: 0.36rem;
+    right: 0.36rem;
+  }
+
+  .navbar-custom .navbar-brand {
+    margin-right: 0.5rem;
+  }
+
+  .brand-crest {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+  }
+
+  .brand-line-1,
+  .brand-line-2 {
+    font-size: 0.83rem;
+  }
+
+  .nav-cta,
+  .nav-highlight {
+    font-size: 0.76rem !important;
+    padding: 0.48rem 0.78rem !important;
   }
 }
 
@@ -3204,6 +3255,427 @@ a {
 
 .gallery-tile:hover .gallery-veil .gold-rule-thin {
   transform: translateY(0);
+}
+
+/* ---------- Gallery albums -------------------------------------------- */
+
+.album-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  padding-top: 12px;
+  transition: transform 0.4s var(--ease);
+}
+
+/* Two sheets peeking out behind the cover — the folder read. They fan a little
+   wider on hover, the way a stack of prints does when you pick it up. */
+.album-stack::before,
+.album-stack::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 24px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  border-bottom: none;
+  box-shadow: 0 -3px 12px rgba(7, 28, 51, 0.06);
+  transition: all 0.4s var(--ease);
+}
+
+.album-stack::before {
+  left: 18px;
+  right: 18px;
+  top: 0;
+}
+
+.album-stack::after {
+  left: 9px;
+  right: 9px;
+  top: 6px;
+  background: var(--paper);
+}
+
+.album-card:hover .album-stack::before {
+  left: 12px;
+  right: 12px;
+  top: -4px;
+}
+
+.album-card:hover .album-stack::after {
+  left: 6px;
+  right: 6px;
+  top: 1px;
+}
+
+.album-cover {
+  position: relative;
+  display: block;
+  height: 250px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  border-bottom: none;
+  background: var(--mist);
+}
+
+.album-cover img {
+  transition: transform 0.7s var(--ease);
+}
+
+.album-card:hover .album-cover img {
+  transform: scale(1.07);
+}
+
+.album-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(4, 16, 31, 0.72) 0%,
+    rgba(4, 16, 31, 0.12) 52%,
+    transparent 100%
+  );
+  z-index: 2;
+}
+
+.album-count {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(4, 16, 31, 0.66);
+  border: 1px solid rgba(201, 162, 39, 0.5);
+  color: var(--gold-300);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.album-open {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translate(-50%, 14px);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: var(--gold-bar);
+  color: var(--navy-900);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.35s var(--ease);
+}
+
+.album-card:hover .album-open,
+.album-card:focus-visible .album-open {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.album-body {
+  display: block;
+  padding: 18px 20px 20px;
+  border: 1px solid var(--hairline);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.4s var(--ease);
+}
+
+.album-card:hover {
+  transform: translateY(-6px);
+}
+
+.album-card:hover .album-body {
+  box-shadow: var(--shadow-lg);
+}
+
+.album-card:focus-visible {
+  outline: 3px solid var(--gold-500);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.album-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--navy-800);
+  margin-bottom: 6px;
+}
+
+.album-title i {
+  color: var(--gold-600);
+  font-size: 1.05rem;
+}
+
+.album-text {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* Album page — back link and the chips to its sibling albums */
+.album-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.album-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+  color: var(--navy-800);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+}
+
+.album-back:hover {
+  border-color: var(--gold-500);
+  background: var(--gold-100);
+  color: var(--navy-900);
+}
+
+.album-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: var(--white);
+  color: var(--navy-800);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+}
+
+.album-chip i {
+  color: var(--gold-600);
+}
+
+.album-chip:hover {
+  border-color: var(--gold-500);
+  background: var(--gold-100);
+  transform: translateY(-2px);
+}
+
+.album-chip-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--mist);
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+@media (max-width: 575.98px) {
+  .album-cover {
+    height: 210px;
+  }
+}
+
+/* A tile that opens the viewer says so — cursor, focus ring and a corner
+   badge that surfaces on hover. */
+.gallery-tile.is-clickable {
+  cursor: zoom-in;
+}
+
+.gallery-tile.is-clickable:focus-visible {
+  outline: 3px solid var(--gold-500);
+  outline-offset: 3px;
+}
+
+.gallery-zoom {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(4, 16, 31, 0.6);
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  color: var(--gold-300);
+  font-size: 0.92rem;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.35s var(--ease);
+}
+
+.gallery-tile:hover .gallery-zoom,
+.gallery-tile:focus-visible .gallery-zoom {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Lightbox --------------------------------------------------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 26px 18px;
+  background: rgba(4, 16, 31, 0.94);
+  backdrop-filter: blur(6px);
+  animation: lightboxIn 0.25s var(--ease) both;
+}
+
+@keyframes lightboxIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: min(1200px, 100%);
+  width: 100%;
+}
+
+/* No frame around the stage. Photographs vary in shape, so a fixed box would
+   draw a border round a lot of empty space; letting the spare area fall back to
+   the backdrop reads as intentional instead. */
+.lightbox-stage {
+  position: relative;
+  width: 100%;
+  height: min(76vh, 780px);
+}
+
+.lightbox-stage img {
+  filter: drop-shadow(0 24px 60px rgba(0, 0, 0, 0.6));
+}
+
+.lightbox-caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+  color: var(--white);
+}
+
+.lightbox-caption strong {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.lightbox-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+.lightbox-count {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+.lightbox-close,
+.lightbox-nav {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--gold-300);
+  transition: all 0.25s var(--ease);
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover,
+.lightbox-close:focus-visible,
+.lightbox-nav:focus-visible {
+  background: var(--gold-bar);
+  border-color: transparent;
+  color: var(--navy-900);
+  transform: scale(1.06);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  width: 44px;
+  height: 44px;
+  font-size: 1rem;
+  z-index: 4;
+}
+
+.lightbox-nav {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  font-size: 1.3rem;
+}
+
+@media (max-width: 767.98px) {
+  .lightbox {
+    padding: 16px 12px;
+  }
+
+  .lightbox-stage {
+    height: 52vh;
+  }
+
+  /* Arrows move off the sides and under the photograph, where a thumb reaches */
+  .lightbox {
+    flex-wrap: wrap;
+  }
+
+  .lightbox-frame {
+    order: -1;
+    flex: 0 0 100%;
+  }
+
+  .lightbox-nav {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+  }
 }
 
 /* ---------- Home gallery mosaic --------------------------------------- */
