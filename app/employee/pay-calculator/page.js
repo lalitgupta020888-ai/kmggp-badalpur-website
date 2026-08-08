@@ -12,6 +12,9 @@ import Link from 'next/link';
  * the rate instead of asserting it. HRA is drawn as a fixed monthly amount, so
  * it is entered in rupees.
  */
+/** Treasury portal where the actual month-wise drawn statement is published. */
+const KOSHVANI_DRAWN_STATEMENT = 'https://koshvani.up.nic.in/KoshReports/EmpSalDetail.aspx';
+
 const DEFAULTS = {
   basic: '',
   da: '55',
@@ -452,7 +455,23 @@ export default function PayCalculator() {
 
       <div className="panel mt-4 no-print">
         <div className="panel-body">
-          <div className="callout">
+          <div className="download-note">
+            <p>
+              Your month-wise drawn statement — the salary actually paid, as recorded by the
+              treasury — is published on the Koshvani portal of the Government of Uttar Pradesh.
+            </p>
+            <a
+              className="btn-gold"
+              href={KOSHVANI_DRAWN_STATEMENT}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="bi bi-box-arrow-up-right" />
+              Drawn Statement
+            </a>
+          </div>
+
+          <div className="callout mt-4">
             <i className="bi bi-info-circle-fill" />
             <p>
               The DA and NPS rates above are only defaults — they are revised by government order

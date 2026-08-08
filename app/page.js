@@ -127,8 +127,10 @@ export default function Home() {
       <section className="stat-strip">
         <Container>
           <Row className="g-0">
+            {/* Two up on a phone — stacked one per row the strip ran for most
+                of a screen before the page even began. */}
             {STATS.map((stat) => (
-              <Col key={stat.label} md={3} sm={6}>
+              <Col key={stat.label} md={3} xs={6}>
                 <div className="stat-item">
                   <i className={`bi ${stat.icon}`} />
                   <div className="stat-value">{stat.value}</div>
