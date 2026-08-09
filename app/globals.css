@@ -1854,6 +1854,22 @@ a {
   .home-aside > .principal-card {
     margin-top: 1.5rem;
   }
+
+  /* Stacked, the column is stretched to the height of both cards, which turns
+     the board's own height:100% into that full height — the capped list and the
+     footer then leave a dead white band underneath. Both cards size to their
+     own content instead. */
+  .home-aside > .notice-card {
+    height: auto;
+  }
+
+  /* A scroll region nested inside the page scroll is a trap on touch, and it
+     was hiding two of the five notices. All of them read straight through. */
+  .notice-list {
+    max-height: none;
+    overflow-y: visible;
+  }
+
 }
 
 .notice-item {
@@ -1863,6 +1879,12 @@ a {
   gap: 13px;
   transition: background 0.25s var(--ease);
   position: relative;
+}
+
+/* The footer already carries a top rule — a second hairline under the last
+   notice reads as a doubled line. */
+.notice-item:last-child {
+  border-bottom: none;
 }
 
 .notice-item::before {
@@ -1941,6 +1963,33 @@ a {
 
 .notice-foot a:hover {
   color: var(--gold-700);
+}
+
+/* Phone sizing sits after the base rules so it wins on equal specificity. */
+@media (max-width: 991.98px) {
+  .notice-item {
+    padding: 14px 18px;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .notice-item a {
+    font-size: 0.92rem;
+  }
+
+  /* The footer link earns a full-width tap target and reads as the card's own
+     closing bar rather than a line of text floating in the padding. */
+  .notice-foot {
+    padding: 13px 18px;
+  }
+
+  .notice-foot a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 24px;
+  }
 }
 
 /* ---------- Principal's message teaser -------------------------------- */
