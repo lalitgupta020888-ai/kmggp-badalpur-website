@@ -71,18 +71,13 @@ const HOVER_QUERY = '(min-width: 1400px)';
 const CLOSE_DELAY = 280;
 
 /**
- * A NavDropdown that opens on hover and — the point of the exercise — does not
- * shut the moment the pointer leaves the link.
- *
- * Pure CSS cannot do this reliably. The menu is a DOM child of the nav item but
- * sits below it in layout, past the gap under the link, so `:hover` on the item
- * drops out mid-journey and a `display` toggle has nothing to transition. Mouse
- * events follow the DOM tree rather than the layout, so `onMouseLeave` on the
- * item fires once for the whole pair — and the close is deferred, giving the
- * pointer time to arrive before anything disappears.
+ * Which menu is open is held for the whole bar, not per dropdown — one id, so
+ * only one menu can be open at a time. Moving to a neighbouring link claims the
+ * id, and the menu that held it goes the same instant: no delay, no pair of
+ * menus briefly on screen together.
  */
-function HoverDropdown({ title, id, children }) {
-  const [show, setShow] = useState(false);
+function useMenuBar() {
+  const [openId, setOpenId] = useState(null);
   const timer = useRef(null);
   const hoverable = useRef(false);
 
@@ -100,33 +95,64 @@ function HoverDropdown({ title, id, children }) {
     };
   }, []);
 
-  const open = useCallback(() => {
+  const open = useCallback((id) => {
     if (!hoverable.current) return;
     clearTimeout(timer.current);
-    setShow(true);
+    setOpenId(id);
   }, []);
 
-  const close = useCallback(() => {
+  /**
+   * Deferred, and conditional on the id not having moved on. A menu the pointer
+   * has already left keeps its pending close, but if a neighbour claimed the
+   * bar in the meantime that close must not fire — it would shut the new menu.
+   */
+  const close = useCallback((id) => {
     if (!hoverable.current) return;
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setShow(false), CLOSE_DELAY);
+    timer.current = setTimeout(() => {
+      setOpenId((current) => (current === id ? null : current));
+    }, CLOSE_DELAY);
   }, []);
 
-  // Clicks and the Escape key still route through React-Bootstrap, so the menu
-  // keeps its keyboard behaviour and closes when a link inside it is followed.
-  const handleToggle = useCallback((next) => {
+  // Clicks and the Escape key still route through React-Bootstrap, so the menus
+  // keep their keyboard behaviour and close when a link inside one is followed.
+  const toggle = useCallback((id, next) => {
     clearTimeout(timer.current);
-    setShow(next);
+    setOpenId((current) => (next ? id : current === id ? null : current));
   }, []);
 
+  /* The plain links in the bar carry no menu of their own, so arriving at one
+     is the same signal as arriving at a neighbouring dropdown: whatever is open
+     is no longer what the pointer is on. */
+  const closeNow = useCallback(() => {
+    if (!hoverable.current) return;
+    clearTimeout(timer.current);
+    setOpenId(null);
+  }, []);
+
+  return { openId, open, close, toggle, closeNow };
+}
+
+/**
+ * A NavDropdown that opens on hover and — the point of the exercise — does not
+ * shut the moment the pointer leaves the link.
+ *
+ * Pure CSS cannot do this reliably. The menu is a DOM child of the nav item but
+ * sits below it in layout, past the gap under the link, so `:hover` on the item
+ * drops out mid-journey and a `display` toggle has nothing to transition. Mouse
+ * events follow the DOM tree rather than the layout, so `onMouseLeave` on the
+ * item fires once for the whole pair — and the close is deferred, giving the
+ * pointer time to arrive before anything disappears.
+ */
+function HoverDropdown({ bar, title, id, children }) {
   return (
     <NavDropdown
       title={title}
       id={id}
-      show={show}
-      onToggle={handleToggle}
-      onMouseEnter={open}
-      onMouseLeave={close}
+      show={bar.openId === id}
+      onToggle={(next) => bar.toggle(id, next)}
+      onMouseEnter={() => bar.open(id)}
+      onMouseLeave={() => bar.close(id)}
       renderMenuOnMount
     >
       {children}
@@ -146,6 +172,7 @@ function DropdownLinks({ items }) {
 export default function Navigation() {
   const pathname = usePathname();
   const isActive = (href) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+  const bar = useMenuBar();
 
   return (
     // The whole header stays pinned while the page scrolls — the utility
@@ -218,11 +245,11 @@ export default function Navigation() {
           <Navbar.Toggle aria-controls="main-navbar" />
           <Navbar.Collapse id="main-navbar">
             <Nav className="me-auto">
-              <HoverDropdown title="About" id="about-dropdown">
+              <HoverDropdown bar={bar} title="About" id="about-dropdown">
                 <DropdownLinks items={ABOUT} />
               </HoverDropdown>
 
-              <HoverDropdown title="Departments" id="department-dropdown">
+              <HoverDropdown bar={bar} title="Departments" id="department-dropdown">
                 {DEPARTMENTS.map((dept) => (
                   <NavDropdown.Item as={Link} href={`/department/${dept.slug}`} key={dept.slug}>
                     <i className={`bi ${dept.icon}`} />
@@ -231,15 +258,15 @@ export default function Navigation() {
                 ))}
               </HoverDropdown>
 
-              <HoverDropdown title="Academics" id="academic-dropdown">
+              <HoverDropdown bar={bar} title="Academics" id="academic-dropdown">
                 <DropdownLinks items={ACADEMIC} />
               </HoverDropdown>
 
-              <HoverDropdown title="Admissions" id="admission-dropdown">
+              <HoverDropdown bar={bar} title="Admissions" id="admission-dropdown">
                 <DropdownLinks items={ADMISSION} />
               </HoverDropdown>
 
-              <HoverDropdown title="Student Section" id="student-dropdown">
+              <HoverDropdown bar={bar} title="Student Section" id="student-dropdown">
                 <DropdownLinks items={STUDENT} />
               </HoverDropdown>
 
@@ -249,22 +276,36 @@ export default function Navigation() {
                 as={Link}
                 href="/placements/tnp-department"
                 className={isActive('/placements') ? 'active' : ''}
+                onMouseEnter={bar.closeNow}
               >
                 Placements
               </Nav.Link>
 
-              <HoverDropdown title="Life@KMGGP" id="life-dropdown">
+              <HoverDropdown bar={bar} title="Life@KMGGP" id="life-dropdown">
                 <DropdownLinks items={LIFE} />
               </HoverDropdown>
-              <Nav.Link as={Link} href="/gallery" className={isActive('/gallery') ? 'active' : ''}>
+              <Nav.Link
+                as={Link}
+                href="/gallery"
+                className={isActive('/gallery') ? 'active' : ''}
+                onMouseEnter={bar.closeNow}
+              >
                 Gallery
               </Nav.Link>
-              <Nav.Link as={Link} href="/contact" className={isActive('/contact') ? 'active' : ''}>
+              <Nav.Link
+                as={Link}
+                href="/contact"
+                className={isActive('/contact') ? 'active' : ''}
+                onMouseEnter={bar.closeNow}
+              >
                 Contact
               </Nav.Link>
             </Nav>
 
-            <Nav className="nav-actions gap-2 align-items-xl-center mt-3 mt-xl-0">
+            <Nav
+              className="nav-actions gap-2 align-items-xl-center mt-3 mt-xl-0"
+              onMouseEnter={bar.closeNow}
+            >
               <Button
                 as={Link}
                 href="/login"
