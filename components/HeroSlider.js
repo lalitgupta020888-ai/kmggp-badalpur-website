@@ -86,7 +86,7 @@ export default function HeroSlider() {
 
           <div className="hero-caption">
             <Container>
-              <div style={{ maxWidth: '760px' }}>
+              <div style={{ maxWidth: '860px' }}>
                 <span className="eyebrow eyebrow-light anim-up anim-up-1">
                   <i className={`bi ${slide.icon}`} />
                   {slide.eyebrow}

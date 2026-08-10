@@ -867,7 +867,7 @@ a {
 /* ---------- Hero ------------------------------------------------------ */
 
 .hero-slide {
-  height: 640px;
+  height: 720px;
   position: relative;
 }
 
@@ -891,13 +891,13 @@ a {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  /* The caption sits in the left ~760px, so the scrim stays heavy there and
+  /* The caption sits in the left ~860px, so the scrim stays heavy there and
      thins out to the right — contrast where the text needs it, and a brighter
      photograph across the half nobody reads over. */
   background: linear-gradient(
       100deg,
       rgba(4, 16, 31, 0.86) 0%,
-      rgba(7, 28, 51, 0.56) 45%,
+      rgba(7, 28, 51, 0.56) 50%,
       rgba(10, 37, 64, 0.1) 100%
     );
 }
@@ -923,7 +923,7 @@ a {
   font-weight: 700;
   line-height: 1.14;
   text-shadow: 0 4px 26px rgba(0, 0, 0, 0.45);
-  max-width: 16ch;
+  max-width: 18ch;
 }
 
 .hero-caption p {
@@ -4910,7 +4910,7 @@ a {
 
 @media (max-width: 991.98px) {
   .hero-slide {
-    height: 520px;
+    height: 580px;
   }
 
   .section {
@@ -4928,7 +4928,7 @@ a {
 
 @media (max-width: 575.98px) {
   .hero-slide {
-    height: 470px;
+    height: 520px;
   }
 
   .page-header {
