@@ -1027,6 +1027,29 @@ a {
   }
 }
 
+/* ---------- Staff portrait -------------------------------------------- */
+
+/* Used by the staff directory. Sized larger than the faculty initial avatar —
+   a photograph is the point of the card, so it leads. Falls back to the gold
+   person glyph on the navy wash until a portrait is supplied. */
+.staff-photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 132px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--navy-wash);
+  border: 3px solid var(--gold-400);
+  box-shadow: var(--shadow-gold);
+  color: var(--gold-400);
+  font-size: 2.9rem;
+  line-height: 1;
+}
+
 /* ---------- Stat strip ------------------------------------------------ */
 
 .stat-strip {

@@ -2,6 +2,7 @@
 
 import React, { use } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import Image from 'next/image';
 import { getDepartment } from '@/lib/departments';
 
 const HIGHLIGHTS = [
@@ -11,9 +12,58 @@ const HIGHLIGHTS = [
   { icon: 'bi-patch-check-fill', value: 'BTEUP', label: 'Affiliation' },
 ];
 
+/**
+ * A staff department carries no programme, laboratories or achievements — the
+ * listing below is the whole of its section: a photograph and the person's
+ * details, and nothing more.
+ */
+function StaffDirectory({ department }) {
+  return (
+    <div className="panel">
+      <div className="panel-header">
+        <i className={`bi ${department.icon}`} />
+        {department.name}
+      </div>
+      <div className="panel-body">
+        <Row className="g-4">
+          {department.staff.map((member) => (
+            <Col lg={4} md={6} key={member.name}>
+              <div className="premium-card h-100 p-4 text-center">
+                <span className="staff-photo">
+                  {member.photo ? (
+                    <Image
+                      src={member.photo}
+                      alt={member.name}
+                      fill
+                      sizes="132px"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <i className="bi bi-person-fill" />
+                  )}
+                </span>
+                <h5 className="fw-bold mb-1">{member.name}</h5>
+                <span className="eyebrow">{member.designation}</span>
+                {member.detail && (
+                  <>
+                    <div className="gold-rule-thin my-3" />
+                    <p className="small mb-0">{member.detail}</p>
+                  </>
+                )}
+              </div>
+            </Col>
+          ))}
+        </Row>
+      </div>
+    </div>
+  );
+}
+
 export default function DepartmentHome({ params }) {
   const { dept } = use(params);
   const department = getDepartment(dept);
+
+  if (department.staff) return <StaffDirectory department={department} />;
 
   return (
     <>

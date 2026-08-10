@@ -2,6 +2,7 @@
 
 import React, { use } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { notFound } from 'next/navigation';
 import { getDepartment } from '@/lib/departments';
 
 const FACULTY = [
@@ -31,6 +32,10 @@ const FACULTY = [
 export default function FacultyPage({ params }) {
   const { dept } = use(params);
   const department = getDepartment(dept);
+
+  // A staff listing has no faculty page — the sidebar never links here, and the
+  // URL typed by hand must not render an empty one either.
+  if (department.staff) notFound();
 
   return (
     <>

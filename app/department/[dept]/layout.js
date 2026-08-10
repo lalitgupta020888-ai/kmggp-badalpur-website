@@ -4,14 +4,14 @@ import React, { use } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
 import SideNav from '@/components/SideNav';
-import { getDepartment, DEPT_NAV } from '@/lib/departments';
+import { getDepartment, getDeptNav } from '@/lib/departments';
 
 export default function DepartmentLayout({ children, params }) {
   // In Next.js 16 `params` is a Promise, unwrapped with React's `use` hook.
   const { dept } = use(params);
   const department = getDepartment(dept);
 
-  const navItems = DEPT_NAV.map((item) => ({
+  const navItems = getDeptNav(department).map((item) => ({
     href: `/department/${dept}${item.path}`,
     label: item.label,
     icon: item.icon,
@@ -21,7 +21,7 @@ export default function DepartmentLayout({ children, params }) {
     <>
       <PageHeader
         icon={department.icon}
-        eyebrow="Academic Department"
+        eyebrow={department.eyebrow ?? 'Academic Department'}
         title={department.name}
         subtitle={department.tagline}
         crumbs={[{ label: 'Departments' }, { label: department.name }]}
@@ -32,7 +32,7 @@ export default function DepartmentLayout({ children, params }) {
           <Row className="g-4">
             <Col lg={3}>
               <SideNav
-                eyebrow="Department"
+                eyebrow={department.staff ? 'Staff' : 'Department'}
                 title={department.name}
                 items={navItems}
                 cta={{

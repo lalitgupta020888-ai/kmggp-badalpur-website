@@ -2,6 +2,7 @@
 
 import React, { use } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { notFound } from 'next/navigation';
 import { getDepartment } from '@/lib/departments';
 
 const FEATURES = [
@@ -14,6 +15,9 @@ const FEATURES = [
 export default function LabsPage({ params }) {
   const { dept } = use(params);
   const department = getDepartment(dept);
+
+  // A staff listing has no laboratories — see the faculty page for the reason.
+  if (department.staff) notFound();
 
   return (
     <>
