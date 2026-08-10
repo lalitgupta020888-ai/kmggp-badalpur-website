@@ -70,16 +70,23 @@ const HOVER_QUERY = '(min-width: 1400px)';
    item down, and short enough that a menu never feels stuck open. */
 const CLOSE_DELAY = 280;
 
+/* How long hover is ignored after a menu link is followed — long enough for
+   the navbar to re-render and the new page to settle, short enough that a
+   deliberate move back up to the bar is never refused. */
+const REOPEN_LOCK = 500;
+
 /**
  * Which menu is open is held for the whole bar, not per dropdown — one id, so
  * only one menu can be open at a time. Moving to a neighbouring link claims the
  * id, and the menu that held it goes the same instant: no delay, no pair of
  * menus briefly on screen together.
  */
-function useMenuBar() {
+function useMenuBar(pathname) {
   const [openId, setOpenId] = useState(null);
   const timer = useRef(null);
+  const lockTimer = useRef(null);
   const hoverable = useRef(false);
+  const locked = useRef(false);
 
   useEffect(() => {
     const query = window.matchMedia(HOVER_QUERY);
@@ -92,11 +99,18 @@ function useMenuBar() {
     return () => {
       query.removeEventListener('change', sync);
       clearTimeout(timer.current);
+      clearTimeout(lockTimer.current);
     };
   }, []);
 
   const open = useCallback((id) => {
-    if (!hoverable.current) return;
+    // `locked` covers the moment just after a link inside a menu was followed.
+    // The navbar re-renders on select and the page swaps underneath, and the
+    // bar can slide a link under a pointer that never moved — which fires
+    // mouseenter and reopens the menu the click just closed. Nothing opens on
+    // hover until that has settled; a pointer genuinely on a menu only has to
+    // move for the enter to fire again.
+    if (!hoverable.current || locked.current) return;
     clearTimeout(timer.current);
     setOpenId(id);
   }, []);
@@ -135,8 +149,23 @@ function useMenuBar() {
      select too; this runs first and does not depend on it. */
   const closeAll = useCallback(() => {
     clearTimeout(timer.current);
+    clearTimeout(lockTimer.current);
+    locked.current = true;
     setOpenId(null);
+    lockTimer.current = setTimeout(() => {
+      locked.current = false;
+    }, REOPEN_LOCK);
   }, []);
+
+  /* A completed navigation is the same signal as the click that started it,
+     and catches the cases the click handler cannot see — the browser's back
+     button, or a link followed from somewhere else on the page. No lock here:
+     the click that navigated already set one, and this also runs on the first
+     render, where locking would deaden the bar for half a second on load. */
+  useEffect(() => {
+    clearTimeout(timer.current);
+    setOpenId(null);
+  }, [pathname]);
 
   return { openId, open, close, toggle, closeNow, closeAll };
 }
@@ -180,7 +209,7 @@ function DropdownLinks({ bar, items }) {
 export default function Navigation() {
   const pathname = usePathname();
   const isActive = (href) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
-  const bar = useMenuBar();
+  const bar = useMenuBar(pathname);
 
   return (
     // The whole header stays pinned while the page scrolls — the utility
