@@ -1781,22 +1781,6 @@ a {
   white-space: nowrap;
 }
 
-/* Marks a programme that does not run to the three-year, six-semester scheme
-   the cards around it share. */
-.syllabus-scheme {
-  align-self: flex-start;
-  margin-top: 4px;
-  padding: 4px 11px;
-  border-radius: 999px;
-  background: var(--gold-100);
-  border: 1px solid rgba(201, 162, 39, 0.35);
-  color: var(--gold-700);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
 .doc-link-soon {
   margin-left: auto;
   padding: 3px 10px;

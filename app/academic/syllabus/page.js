@@ -30,9 +30,6 @@ const BRANCHES = [
     icon: 'bi-shop',
     name: 'P. G. Diploma in Retail Management',
     text: 'Retail operations, visual merchandising, supply chain, retail marketing and customer relationship management.',
-    // One year over two semesters rather than three years over six, so it is
-    // marked out here instead of being read as one more diploma branch.
-    scheme: '1 Year · 2 Semesters',
   },
 ];
 
@@ -80,7 +77,6 @@ export default function Syllabus() {
                   </span>
                   <h5 className="fw-bold mb-3">{branch.name}</h5>
                   <p className="small flex-grow-1">{branch.text}</p>
-                  {branch.scheme && <span className="syllabus-scheme">{branch.scheme}</span>}
                   <div className="gold-rule-thin my-3" />
                   <Link href={`/academic/syllabus/${branch.slug}`} className="doc-link mb-0">
                     <i className="bi bi-file-earmark-pdf-fill" />
