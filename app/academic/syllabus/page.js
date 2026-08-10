@@ -25,6 +25,15 @@ const BRANCHES = [
     name: 'Information Technology',
     text: 'Computer networks, web technologies, cloud fundamentals, cyber security and IT infrastructure.',
   },
+  {
+    slug: 'retail-management',
+    icon: 'bi-shop',
+    name: 'P. G. Diploma in Retail Management',
+    text: 'Retail operations, visual merchandising, supply chain, retail marketing and customer relationship management.',
+    // One year over two semesters rather than three years over six, so it is
+    // marked out here instead of being read as one more diploma branch.
+    scheme: '1 Year · 2 Semesters',
+  },
 ];
 
 const SEMESTERS = [
@@ -51,23 +60,24 @@ export default function Syllabus() {
           <SectionHead
             eyebrow="Download Centre"
             icon="bi-download"
-            title="Curriculum by Branch"
-            subtitle="Select your branch to download the complete three-year diploma curriculum."
+            title="Curriculum by Programme"
+            subtitle="Select your programme to download its complete curriculum."
           />
 
           <Row className="g-4">
             {BRANCHES.map((branch) => (
-              <Col lg={4} md={6} key={branch.name}>
+              <Col xl={3} md={6} key={branch.name}>
                 <div className="premium-card h-100 p-4 d-flex flex-column">
                   <span className="icon-tile mb-4">
                     <i className={`bi ${branch.icon}`} />
                   </span>
                   <h5 className="fw-bold mb-3">{branch.name}</h5>
                   <p className="small flex-grow-1">{branch.text}</p>
+                  {branch.scheme && <span className="syllabus-scheme">{branch.scheme}</span>}
                   <div className="gold-rule-thin my-3" />
                   <Link href={`/academic/syllabus/${branch.slug}`} className="doc-link mb-0">
                     <i className="bi bi-file-earmark-pdf-fill" />
-                    Download Syllabus (PDF)
+                    <span className="flex-grow-1">Download Syllabus (PDF)</span>
                     <i className="bi bi-arrow-right-short" />
                   </Link>
                 </div>

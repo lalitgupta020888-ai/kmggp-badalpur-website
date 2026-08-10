@@ -1763,6 +1763,40 @@ a {
   opacity: 0.7;
 }
 
+/* Stands in for the download button on a paper whose document has not been
+   published. Same size and place as the gold button beside it, so the row
+   keeps its rhythm, but plainly not a thing to press. */
+.btn-awaited {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0.7rem 1.5rem;
+  border: 1px dashed var(--hairline);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink-faint);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Marks a programme that does not run to the three-year, six-semester scheme
+   the cards around it share. */
+.syllabus-scheme {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--gold-100);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  color: var(--gold-700);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
 .doc-link-soon {
   margin-left: auto;
   padding: 3px 10px;

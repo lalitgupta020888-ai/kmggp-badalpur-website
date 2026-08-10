@@ -38,12 +38,7 @@ export default function BranchSyllabus({ params }) {
                 </div>
                 <div className="panel-body">
                   <p className="lead">{syllabus.intro}</p>
-                  <p>
-                    The three-year diploma is delivered under the curriculum prescribed by the Board
-                    of Technical Education, Uttar Pradesh. The first year is common to all
-                    engineering and technology branches; specialisation begins in the second year and
-                    concludes with a major project and industrial training in the final year.
-                  </p>
+                  <p>{syllabus.structure}</p>
                 </div>
               </div>
             </Col>
@@ -68,8 +63,8 @@ export default function BranchSyllabus({ params }) {
           <SectionHead
             eyebrow="Download Centre"
             icon="bi-download"
-            title="Year-wise Syllabus"
-            subtitle="Download the official BTEUP syllabus document for each year of the diploma."
+            title={syllabus.downloadsTitle}
+            subtitle={syllabus.downloadsNote}
           />
 
           <div className="panel">
@@ -84,10 +79,24 @@ export default function BranchSyllabus({ params }) {
                     <h6 className="syllabus-year-title">{year.title}</h6>
                     <p className="syllabus-year-note">{year.note}</p>
                   </div>
-                  <a className="btn-gold" href={year.file} target="_blank" rel="noopener noreferrer">
-                    <i className="bi bi-file-earmark-pdf-fill" />
-                    Download Here
-                  </a>
+                  {/* Listed either way — a paper with no document yet still
+                      tells the reader what the scheme covers. */}
+                  {year.file ? (
+                    <a
+                      className="btn-gold"
+                      href={year.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="bi bi-file-earmark-pdf-fill" />
+                      Download Here
+                    </a>
+                  ) : (
+                    <span className="btn-awaited">
+                      <i className="bi bi-hourglass-split" />
+                      Awaited
+                    </span>
+                  )}
                 </div>
               ))}
             </div>
