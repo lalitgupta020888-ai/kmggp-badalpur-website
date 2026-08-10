@@ -665,12 +665,12 @@ a {
    Requires `renderMenuOnMount` on each NavDropdown — React-Bootstrap
    otherwise keeps the menu out of the DOM until it is clicked.
 
-   The menu stays in flow as `display: block` and is hidden with
-   opacity/visibility instead of being toggled in and out of `display`. Only
-   that way can the close be *transitioned*: `display` is not animatable, so a
-   plain `display: none` on mouse-out snaps the menu away the instant the
-   pointer leaves the link — including while it is still travelling towards the
-   menu. Everything below exists to make that journey forgiving. */
+   The grace period that keeps a menu open while the pointer travels down to it
+   lives in `HoverDropdown` (components/Navigation.js), not here — CSS `:hover`
+   drops out in the gap under the link and cannot wait. This block only styles
+   the two states: the menu stays as `display: block` and is hidden with
+   opacity/visibility, because `display` is not animatable and a menu that
+   vanished on one frame would undo the whole effect. */
 @media (min-width: 1400px) {
   .navbar-custom .nav-item.dropdown > .dropdown-menu {
     display: block;
@@ -681,13 +681,12 @@ a {
     pointer-events: none;
     transform: translateY(-10px) scale(0.985);
     transform-origin: top left;
-    /* Closing: hold for 220ms first, so a cursor that clips the edge of the
-       link on its way down finds the menu still open, then fade out. The
-       visibility flip waits for the fade to finish. */
+    /* Closing: the wait already happened in JS, so this is just the fade. The
+       visibility flip is held back until the fade has finished. */
     transition:
-      opacity 0.2s var(--ease) 0.22s,
-      transform 0.2s var(--ease) 0.22s,
-      visibility 0s linear 0.42s;
+      opacity 0.2s var(--ease),
+      transform 0.2s var(--ease),
+      visibility 0s linear 0.2s;
   }
 
   /* The 0.5rem margin under the toggle is a gap the pointer must cross, and a
@@ -710,8 +709,6 @@ a {
     visibility: visible;
     pointer-events: auto;
     transform: translateY(0) scale(1);
-    /* Opening is immediate — the delay above is a courtesy on the way out
-       only, and a menu that hesitated before appearing would feel broken. */
     transition:
       opacity 0.22s var(--ease),
       transform 0.22s var(--ease),
@@ -723,8 +720,8 @@ a {
   .navbar-custom .nav-item.dropdown > .dropdown-menu {
     transform: none;
     transition:
-      opacity 0.01s linear 0.22s,
-      visibility 0s linear 0.23s;
+      opacity 0.01s linear,
+      visibility 0s linear 0.01s;
   }
 
   .navbar-custom .nav-item.dropdown:hover > .dropdown-menu,

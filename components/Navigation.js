@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -60,6 +60,79 @@ const LIFE = [
   { href: '/life/library', label: 'Library', icon: 'bi-book-half' },
   { href: '/life/result', label: 'Result', icon: 'bi-file-earmark-text' },
 ];
+
+/* Below this the navbar is collapsed into the toggler, where a menu belongs to
+   whichever item was tapped — hover has no business opening anything. */
+const HOVER_QUERY = '(min-width: 1400px)';
+
+/* How long an open menu survives after the pointer leaves it. Long enough to
+   cross the gap under the link, or to cut a corner on the way to the third
+   item down, and short enough that a menu never feels stuck open. */
+const CLOSE_DELAY = 280;
+
+/**
+ * A NavDropdown that opens on hover and — the point of the exercise — does not
+ * shut the moment the pointer leaves the link.
+ *
+ * Pure CSS cannot do this reliably. The menu is a DOM child of the nav item but
+ * sits below it in layout, past the gap under the link, so `:hover` on the item
+ * drops out mid-journey and a `display` toggle has nothing to transition. Mouse
+ * events follow the DOM tree rather than the layout, so `onMouseLeave` on the
+ * item fires once for the whole pair — and the close is deferred, giving the
+ * pointer time to arrive before anything disappears.
+ */
+function HoverDropdown({ title, id, children }) {
+  const [show, setShow] = useState(false);
+  const timer = useRef(null);
+  const hoverable = useRef(false);
+
+  useEffect(() => {
+    const query = window.matchMedia(HOVER_QUERY);
+    const sync = () => {
+      hoverable.current = query.matches;
+    };
+
+    sync();
+    query.addEventListener('change', sync);
+    return () => {
+      query.removeEventListener('change', sync);
+      clearTimeout(timer.current);
+    };
+  }, []);
+
+  const open = useCallback(() => {
+    if (!hoverable.current) return;
+    clearTimeout(timer.current);
+    setShow(true);
+  }, []);
+
+  const close = useCallback(() => {
+    if (!hoverable.current) return;
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setShow(false), CLOSE_DELAY);
+  }, []);
+
+  // Clicks and the Escape key still route through React-Bootstrap, so the menu
+  // keeps its keyboard behaviour and closes when a link inside it is followed.
+  const handleToggle = useCallback((next) => {
+    clearTimeout(timer.current);
+    setShow(next);
+  }, []);
+
+  return (
+    <NavDropdown
+      title={title}
+      id={id}
+      show={show}
+      onToggle={handleToggle}
+      onMouseEnter={open}
+      onMouseLeave={close}
+      renderMenuOnMount
+    >
+      {children}
+    </NavDropdown>
+  );
+}
 
 function DropdownLinks({ items }) {
   return items.map((item) => (
@@ -145,30 +218,30 @@ export default function Navigation() {
           <Navbar.Toggle aria-controls="main-navbar" />
           <Navbar.Collapse id="main-navbar">
             <Nav className="me-auto">
-              <NavDropdown title="About" id="about-dropdown" renderMenuOnMount>
+              <HoverDropdown title="About" id="about-dropdown">
                 <DropdownLinks items={ABOUT} />
-              </NavDropdown>
+              </HoverDropdown>
 
-              <NavDropdown title="Departments" id="department-dropdown" renderMenuOnMount>
+              <HoverDropdown title="Departments" id="department-dropdown">
                 {DEPARTMENTS.map((dept) => (
                   <NavDropdown.Item as={Link} href={`/department/${dept.slug}`} key={dept.slug}>
                     <i className={`bi ${dept.icon}`} />
                     {dept.name}
                   </NavDropdown.Item>
                 ))}
-              </NavDropdown>
+              </HoverDropdown>
 
-              <NavDropdown title="Academics" id="academic-dropdown" renderMenuOnMount>
+              <HoverDropdown title="Academics" id="academic-dropdown">
                 <DropdownLinks items={ACADEMIC} />
-              </NavDropdown>
+              </HoverDropdown>
 
-              <NavDropdown title="Admissions" id="admission-dropdown" renderMenuOnMount>
+              <HoverDropdown title="Admissions" id="admission-dropdown">
                 <DropdownLinks items={ADMISSION} />
-              </NavDropdown>
+              </HoverDropdown>
 
-              <NavDropdown title="Student Section" id="student-dropdown" renderMenuOnMount>
+              <HoverDropdown title="Student Section" id="student-dropdown">
                 <DropdownLinks items={STUDENT} />
-              </NavDropdown>
+              </HoverDropdown>
 
               {/* No dropdown here — the placements section carries its own
                   sidebar with every sub-page. */}
@@ -180,9 +253,9 @@ export default function Navigation() {
                 Placements
               </Nav.Link>
 
-              <NavDropdown title="Life@KMGGP" id="life-dropdown" renderMenuOnMount>
+              <HoverDropdown title="Life@KMGGP" id="life-dropdown">
                 <DropdownLinks items={LIFE} />
-              </NavDropdown>
+              </HoverDropdown>
               <Nav.Link as={Link} href="/gallery" className={isActive('/gallery') ? 'active' : ''}>
                 Gallery
               </Nav.Link>
