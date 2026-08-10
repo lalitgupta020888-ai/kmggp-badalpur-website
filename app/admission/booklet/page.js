@@ -18,8 +18,17 @@ const CONTENTS = [
 
 const JEECUP_BOOKLET_FILE = '/documents/jeecup-information-booklet.pdf';
 
+/**
+ * `file` unset means the document has not been published yet — the row still
+ * lists what is coming, but is rendered as text rather than a link that leads
+ * nowhere. Set `file` as each PDF is released.
+ */
 const DOWNLOADS = [
-  { icon: 'bi-file-earmark-pdf-fill', label: 'Information Booklet 2026-27 (PDF)' },
+  {
+    icon: 'bi-file-earmark-pdf-fill',
+    label: 'Information Booklet 2026-27 (PDF)',
+    file: JEECUP_BOOKLET_FILE,
+  },
   { icon: 'bi-file-earmark-text-fill', label: 'Admission Application Form (PDF)' },
   { icon: 'bi-file-earmark-ruled-fill', label: 'Fee Structure Notification (PDF)' },
   { icon: 'bi-file-earmark-check-fill', label: 'Document Checklist (PDF)' },
@@ -56,23 +65,6 @@ export default function InformationBooklet() {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
-
-                  <div className="download-note mt-4">
-                    <p>
-                      The official JEECUP information booklet, containing the entrance examination
-                      and counselling details for admission to all diploma programmes, is available
-                      for download.
-                    </p>
-                    <a
-                      className="btn-gold"
-                      href={JEECUP_BOOKLET_FILE}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="bi bi-file-earmark-pdf-fill" />
-                      Download JEECUP Booklet
-                    </a>
-                  </div>
                 </div>
               </div>
             </Col>
@@ -84,13 +76,27 @@ export default function InformationBooklet() {
                   Download Centre
                 </div>
                 <div className="panel-body">
-                  {DOWNLOADS.map((item) => (
-                    <a href="#" className="doc-link" key={item.label}>
-                      <i className={`bi ${item.icon}`} />
-                      {item.label}
-                      <i className="bi bi-arrow-right-short" />
-                    </a>
-                  ))}
+                  {DOWNLOADS.map((item) =>
+                    item.file ? (
+                      <a
+                        href={item.file}
+                        className="doc-link"
+                        key={item.label}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className={`bi ${item.icon}`} />
+                        <span className="flex-grow-1">{item.label}</span>
+                        <i className="bi bi-download doc-link-external" />
+                      </a>
+                    ) : (
+                      <span className="doc-link is-pending" key={item.label}>
+                        <i className={`bi ${item.icon}`} />
+                        <span className="flex-grow-1">{item.label}</span>
+                        <span className="doc-link-soon">Awaited</span>
+                      </span>
+                    )
+                  )}
 
                   <div className="callout mt-4">
                     <i className="bi bi-info-circle-fill" />

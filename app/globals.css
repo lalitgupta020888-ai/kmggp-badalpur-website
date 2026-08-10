@@ -1744,6 +1744,38 @@ a {
   color: var(--gold-600);
 }
 
+/* A download glyph travels down, not out. */
+.doc-link:hover .bi-download.doc-link-external {
+  transform: translateY(2px);
+}
+
+/* A row for a document that has not been published yet. It keeps its place in
+   the list so the reader can see what is coming, but it is not a link and does
+   not pretend to be one — no hover lift, no pointer, and the label says why. */
+.doc-link.is-pending {
+  color: var(--ink-faint);
+  background: var(--paper);
+  cursor: default;
+}
+
+.doc-link.is-pending i:first-child {
+  color: var(--ink-faint);
+  opacity: 0.7;
+}
+
+.doc-link-soon {
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--mist);
+  color: var(--ink-faint);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 /* ---------- Page header banner ---------------------------------------- */
 
 .page-header {
