@@ -64,11 +64,24 @@ const SUMMARY = [
   },
 ];
 
+/**
+ * Every entry is the body's own site, opened in a new tab — a visitor checking
+ * an approval is mid-task on this page and should not lose it. `upted.gov.in`
+ * is served over plain HTTP; it is linked as the department publishes it.
+ */
 const DIRECTORY = [
-  { icon: 'bi-globe2', label: 'AICTE — aicte-india.org' },
-  { icon: 'bi-globe2', label: 'BTEUP — bteup.ac.in' },
-  { icon: 'bi-globe2', label: 'JEECUP — jeecup.admissions.nic.in' },
-  { icon: 'bi-globe2', label: 'Directorate of Technical Education, UP' },
+  { icon: 'bi-globe2', label: 'AICTE — aicte-india.org', href: 'https://www.aicte-india.org/' },
+  { icon: 'bi-globe2', label: 'BTEUP — bteup.ac.in', href: 'https://bteup.ac.in/' },
+  {
+    icon: 'bi-globe2',
+    label: 'JEECUP — jeecup.admissions.nic.in',
+    href: 'https://jeecup.admissions.nic.in/',
+  },
+  {
+    icon: 'bi-globe2',
+    label: 'Directorate of Technical Education, UP',
+    href: 'http://upted.gov.in/directorate',
+  },
 ];
 
 export default function ApprovalsPage() {
@@ -159,10 +172,16 @@ export default function ApprovalsPage() {
                 </div>
                 <div className="panel-body">
                   {DIRECTORY.map((item) => (
-                    <a href="#" className="doc-link" key={item.label}>
+                    <a
+                      href={item.href}
+                      className="doc-link"
+                      key={item.label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <i className={`bi ${item.icon}`} />
-                      {item.label}
-                      <i className="bi bi-arrow-right-short" />
+                      <span className="flex-grow-1">{item.label}</span>
+                      <i className="bi bi-box-arrow-up-right doc-link-external" />
                     </a>
                   ))}
                 </div>

@@ -1729,6 +1729,21 @@ a {
   color: var(--gold-600);
 }
 
+/* A link that leaves the site says so before it is followed, not after. The
+   glyph replaces the forward arrow, and lifts away rather than sliding on —
+   the direction of travel is out of the page, not further along it. */
+.doc-link-external {
+  margin-left: auto;
+  font-size: 0.95rem;
+  color: var(--ink-faint);
+  transition: transform 0.28s var(--ease), color 0.28s var(--ease);
+}
+
+.doc-link:hover .doc-link-external {
+  transform: translate(2px, -2px);
+  color: var(--gold-600);
+}
+
 /* ---------- Page header banner ---------------------------------------- */
 
 .page-header {
