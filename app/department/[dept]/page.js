@@ -5,12 +5,36 @@ import { Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
 import { getDepartment } from '@/lib/departments';
 
-const HIGHLIGHTS = [
-  { icon: 'bi-people-fill', value: '75', label: 'Seats per Year' },
-  { icon: 'bi-hourglass-split', value: '3 Yrs', label: 'Programme Duration' },
-  { icon: 'bi-beaker', value: '04', label: 'Dedicated Labs' },
-  { icon: 'bi-patch-check-fill', value: 'BTEUP', label: 'Affiliation' },
-];
+/**
+ * The figure tiles are derived from the department rather than fixed, because
+ * they differ per department: the PG diploma runs a single year, Applied
+ * Sciences intakes no cohort of its own, and the lab count is simply however
+ * many laboratories the department lists.
+ */
+function highlightsFor(department) {
+  const tiles = [];
+
+  if (department.seats) {
+    tiles.push({ icon: 'bi-people-fill', value: department.seats, label: 'Seats per Year' });
+  }
+  if (department.duration) {
+    tiles.push({
+      icon: 'bi-hourglass-split',
+      value: department.duration,
+      label: 'Programme Duration',
+    });
+  }
+  if (department.labs.length > 0) {
+    tiles.push({
+      icon: 'bi-beaker',
+      value: String(department.labs.length).padStart(2, '0'),
+      label: 'Dedicated Labs',
+    });
+  }
+  tiles.push({ icon: 'bi-patch-check-fill', value: 'BTEUP', label: 'Affiliation' });
+
+  return tiles;
+}
 
 /**
  * A staff department carries no programme, laboratories or achievements — the
@@ -65,6 +89,8 @@ export default function DepartmentHome({ params }) {
 
   if (department.staff) return <StaffDirectory department={department} />;
 
+  const highlights = highlightsFor(department);
+
   return (
     <>
       <div className="panel">
@@ -84,8 +110,8 @@ export default function DepartmentHome({ params }) {
           <div className="gold-rule-thin my-4" />
 
           <Row className="g-3">
-            {HIGHLIGHTS.map((item) => (
-              <Col md={3} sm={6} key={item.label}>
+            {highlights.map((item) => (
+              <Col md={Math.floor(12 / highlights.length)} sm={6} key={item.label}>
                 <div className="feature-row align-items-center h-100">
                   <span className="icon-tile icon-tile-sm">
                     <i className={`bi ${item.icon}`} />
