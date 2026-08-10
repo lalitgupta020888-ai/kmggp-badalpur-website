@@ -33,7 +33,7 @@ export default function NoticeBoard() {
       </ul>
 
       <div className="notice-foot">
-        <Link href="/academic/calendar">
+        <Link href="/notices">
           View All Notices <i className="bi bi-arrow-right" />
         </Link>
       </div>
