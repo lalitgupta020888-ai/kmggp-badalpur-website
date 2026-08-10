@@ -10,7 +10,7 @@ const CATEGORIES = [
   {
     icon: 'bi-cpu-fill',
     title: 'Technical Festival',
-    text: 'Project exhibitions, coding contests, circuit design challenges and technical quizzes across all three branches.',
+    text: 'Project exhibitions, coding contests, circuit design challenges and technical quizzes across every branch.',
   },
   {
     icon: 'bi-music-note-beamed',

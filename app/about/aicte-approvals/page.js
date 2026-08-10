@@ -5,6 +5,13 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
+import {
+  PROGRAMMES,
+  PROGRAMME_COUNT,
+  TOTAL_INTAKE,
+  TOTAL_LATERAL,
+  TOTAL_SEATS,
+} from '@/lib/programmes';
 
 const LETTERS = [
   { session: '2026-27', type: 'Extension of Approval (EOA)', status: 'Approved' },
@@ -12,12 +19,6 @@ const LETTERS = [
   { session: '2024-25', type: 'Extension of Approval (EOA)', status: 'Approved' },
   { session: '2023-24', type: 'Extension of Approval (EOA)', status: 'Approved' },
   { session: '2022-23', type: 'Extension of Approval (EOA)', status: 'Approved' },
-];
-
-const PROGRAMMES = [
-  { name: 'Diploma in Electronics Engineering', intake: 75, icon: 'bi-cpu-fill' },
-  { name: 'Diploma in Computer Science & Engineering', intake: 75, icon: 'bi-pc-display' },
-  { name: 'Diploma in Information Technology', intake: 75, icon: 'bi-hdd-network-fill' },
 ];
 
 export default function AicteApprovalsPage() {
@@ -113,7 +114,9 @@ export default function AicteApprovalsPage() {
                     </span>
                     <div>
                       <div className="label">Total Sanctioned Intake</div>
-                      <p className="value">246 seats across 3 programmes (with Lateral Entry)</p>
+                      <p className="value">
+                        {TOTAL_SEATS} seats across {PROGRAMME_COUNT} programmes (with Lateral Entry)
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -154,12 +157,31 @@ export default function AicteApprovalsPage() {
                           <i className={`bi ${programme.icon} text-gold me-2`} />
                           {programme.name}
                         </td>
-                        <td>Diploma</td>
-                        <td>3 Years</td>
-                        <td>{programme.intake}</td>
+                        <td>{programme.level}</td>
+                        <td>{programme.years}</td>
+                        <td>
+                          {programme.intake}
+                          {programme.lateral ? ` + ${programme.lateral} lateral` : ''}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
+                  <tfoot>
+                    <tr className="table-total">
+                      <td>
+                        <i className="bi bi-people-fill text-gold me-2" />
+                        Total Approved Intake
+                      </td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>
+                        {TOTAL_SEATS}
+                        <span className="table-total-note">
+                          {TOTAL_INTAKE} sanctioned + {TOTAL_LATERAL} lateral
+                        </span>
+                      </td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>

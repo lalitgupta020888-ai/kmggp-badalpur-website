@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
+import { PROGRAMME_COUNT, TOTAL_INTAKE, TOTAL_LATERAL } from '@/lib/programmes';
 
 const VALUES = [
   {
@@ -47,8 +48,8 @@ const MILESTONES = [
     text: 'All diploma programmes follow the curriculum prescribed by the Board of Technical Education, Uttar Pradesh.',
   },
   {
-    title: 'Three Engineering Disciplines',
-    text: 'Electronics Engineering, Computer Science & Engineering and Information Technology, with 75 seats each.',
+    title: 'Four Disciplines Offered',
+    text: 'Diplomas in Electronics, Computer Science and Information Technology, and a PG diploma in Retail Management — 75 seats each.',
   },
   {
     title: 'A Growing Placement Network',
@@ -237,7 +238,10 @@ export default function AboutPage() {
                     </span>
                     <div>
                       <div className="label">Programmes</div>
-                      <p className="value">3 diploma branches · 3 years each · 75 seats per branch</p>
+                      <p className="value">
+                        {PROGRAMME_COUNT} programmes · {TOTAL_INTAKE} sanctioned seats ·{' '}
+                        {TOTAL_LATERAL} lateral entry seats
+                      </p>
                     </div>
                   </div>
                   <div className="contact-line">

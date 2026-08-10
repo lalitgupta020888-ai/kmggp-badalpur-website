@@ -15,7 +15,7 @@ import GalleryMapBand from '@/components/GalleryMapBand';
 
 const STATS = [
   { icon: 'bi-people-fill', value: '500+', label: 'Students Enrolled' },
-  { icon: 'bi-diagram-3-fill', value: '03', label: 'Engineering Branches' },
+  { icon: 'bi-diagram-3-fill', value: '04', label: 'Courses Offered' },
   { icon: 'bi-graph-up-arrow', value: '88%', label: 'Placement Rate' },
   { icon: 'bi-calendar2-check-fill', value: '2002', label: 'Established In' },
 ];
@@ -24,7 +24,7 @@ const HIGHLIGHTS = [
   {
     icon: 'bi-collection-fill',
     title: 'Courses Offered',
-    text: 'Three-year AICTE-approved diploma programmes in Electronics, Computer Science and Information Technology.',
+    text: 'Four AICTE-approved programmes — diplomas in Electronics, Computer Science and Information Technology, and a PG diploma in Retail Management.',
     href: '/admission/courses',
   },
   {
@@ -98,6 +98,15 @@ const DEPARTMENTS = [
     text: 'Networking, web technologies, cloud fundamentals and IT infrastructure.',
     href: '/department/it',
     image: '/images/departments/it.jpg',
+  },
+  {
+    icon: 'bi-shop',
+    name: 'P. G. Diploma in Retail Management',
+    text: 'Store operations, merchandising, supply chain and customer relationship management.',
+    href: '/department/retail-management',
+    // No photograph supplied yet — the card renders without the media band,
+    // exactly as the comment above this list describes.
+    image: null,
   },
 ];
 
@@ -179,7 +188,8 @@ export default function Home() {
               <p className="lead">
                 Established in 2002 with a vision to empower women through technical education, our
                 institute is a premier government polytechnic offering AICTE-approved diploma
-                programmes, affiliated to BTEUP, across leading engineering disciplines — equipped
+                programmes, affiliated to BTEUP, across engineering and management disciplines —
+                equipped
                 with modern laboratories, state-of-the-art infrastructure and a highly qualified
                 faculty dedicated to holistic development, academic excellence and comprehensive
                 placement assistance.
@@ -260,12 +270,14 @@ export default function Home() {
           <SectionHead
             eyebrow="Academic Departments"
             icon="bi-diagram-3-fill"
-            title="Three Disciplines, One Standard of Excellence"
+            title="Four Disciplines, One Standard of Excellence"
             subtitle="Each department combines a rigorous curriculum with practical, laboratory-led learning."
           />
           <Row className="g-4">
+            {/* Two up from md and four across at xl — at lg the fourth card
+                would otherwise sit alone on a row below the other three. */}
             {DEPARTMENTS.map((dept) => (
-              <Col lg={4} md={6} key={dept.name}>
+              <Col xl={3} md={6} key={dept.name}>
                 <div className="premium-card is-featured h-100 p-4">
                   {dept.image && (
                     <div className="dept-media" aria-hidden="true">

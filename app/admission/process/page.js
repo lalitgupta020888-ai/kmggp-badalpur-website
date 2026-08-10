@@ -4,6 +4,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import { LATERAL_INTAKE } from '@/lib/programmes';
 
 const JEECUP_PORTAL = 'https://jeecup.admissions.nic.in/';
 
@@ -162,8 +163,9 @@ export default function AdmissionProcess() {
             </div>
             <div className="panel-body">
               <p className="lead">
-                All three branches also admit lateral entry candidates directly into the third
-                semester. The process is the same as above — only the JEECUP group differs.
+                All three diploma branches also admit lateral entry candidates directly into the
+                third semester, on <strong>{LATERAL_INTAKE} supernumerary seats each</strong>. The
+                process is the same as above — only the JEECUP group differs.
               </p>
 
               <Row className="g-4 mt-1">

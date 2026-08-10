@@ -18,7 +18,7 @@ const SECTIONS = [
   {
     icon: 'bi-book-half',
     title: 'Text Book Section',
-    text: 'Prescribed BTEUP textbooks for all three branches, available in multiple copies for issue.',
+    text: 'Prescribed BTEUP textbooks for every programme offered, available in multiple copies for issue.',
   },
   {
     icon: 'bi-journals',

@@ -55,7 +55,7 @@ const QUICK_LINKS = [
     href: '/admission/courses',
     label: 'Courses Offered',
     icon: 'bi-collection',
-    text: 'All three diploma programmes with duration and sanctioned intake.',
+    text: 'All four programmes with duration and sanctioned intake.',
   },
   {
     href: '/admission/fee',

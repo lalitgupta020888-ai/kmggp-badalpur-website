@@ -47,7 +47,8 @@ export default function CounsellingHome() {
             centre and institute allotted to you.
           </p>
           <p className="mb-0">
-            All three branches admit under two groups — <strong>Group A</strong> for first-year
+            All three diploma branches admit under two groups — <strong>Group A</strong> for
+            first-year
             entry after Class 10, and <strong>Group K</strong> for lateral entry straight into the
             second year after Class 12 or a two-year ITI. Both routes follow the same counselling
             steps; see the{' '}

@@ -5,41 +5,20 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-
-const COURSES = [
-  {
-    icon: 'bi-cpu-fill',
-    name: 'Diploma in Electronics Engineering',
-    short: 'Electronics Engineering',
-    duration: '3 Years (6 Semesters)',
-    intake: 75,
-    href: '/department/electronics',
-    text: 'Analog and digital circuits, microprocessors, communication systems and embedded design.',
-  },
-  {
-    icon: 'bi-pc-display',
-    name: 'Diploma in Computer Science & Engineering',
-    short: 'Computer Science & Engineering',
-    duration: '3 Years (6 Semesters)',
-    intake: 75,
-    href: '/department/cse',
-    text: 'Programming, data structures, databases, operating systems and software development.',
-  },
-  {
-    icon: 'bi-hdd-network-fill',
-    name: 'Diploma in Information Technology',
-    short: 'Information Technology',
-    duration: '3 Years (6 Semesters)',
-    intake: 75,
-    href: '/department/it',
-    text: 'Computer networks, web technologies, cloud fundamentals and IT infrastructure.',
-  },
-];
+import {
+  PROGRAMMES,
+  LATERAL_PROGRAMMES,
+  LATERAL_INTAKE,
+  TOTAL_INTAKE,
+  TOTAL_LATERAL,
+  TOTAL_SEATS,
+} from '@/lib/programmes';
 
 /**
- * Lateral entry admits the same three branches under JEECUP Group K, straight
- * into the third semester. Seats are supernumerary, so no fixed count is
- * published here — AICTE fixes it as a percentage of the sanctioned intake.
+ * Lateral entry admits the three engineering branches under JEECUP Group K,
+ * straight into the third semester, on seats supernumerary to the sanctioned
+ * first-year intake. The one year PG diploma has no second year to enter, so it
+ * is absent from every Group K listing on this page.
  */
 const LATERAL_ELIGIBILITY = [
   'Class 12 (Intermediate) passed with Science and Mathematics, minimum 35% marks.',
@@ -51,7 +30,11 @@ const LATERAL_ELIGIBILITY = [
 const LATERAL_POINTS = [
   { icon: 'bi-box-arrow-in-right', label: 'Entry Point', value: 'Third semester (second year)' },
   { icon: 'bi-hourglass-split', label: 'Duration', value: '2 Years (4 Semesters)' },
-  { icon: 'bi-people-fill', label: 'Seats', value: 'Supernumerary, as per AICTE norms' },
+  {
+    icon: 'bi-people-fill',
+    label: 'Seats',
+    value: `${LATERAL_INTAKE} per branch — supernumerary, as per AICTE norms`,
+  },
   { icon: 'bi-diagram-3-fill', label: 'JEECUP Group', value: 'Group K' },
 ];
 
@@ -62,7 +45,7 @@ export default function CoursesOffered() {
         icon="bi-collection"
         eyebrow="Admissions"
         title="Courses Offered"
-        subtitle="Three-year diploma programmes approved by AICTE and affiliated to BTEUP, Uttar Pradesh — with lateral entry into the second year."
+        subtitle="Four programmes approved by AICTE and affiliated to BTEUP, Uttar Pradesh — three diploma branches with lateral entry into the second year, and a one year post graduate diploma."
         crumbs={[{ label: 'Admissions' }, { label: 'Courses Offered' }]}
       />
 
@@ -71,30 +54,45 @@ export default function CoursesOffered() {
           <SectionHead
             eyebrow="Our Programmes"
             icon="bi-mortarboard-fill"
-            title="Choose Your Engineering Discipline"
+            title="Four Disciplines, One Standard of Excellence"
             subtitle="Each programme combines a rigorous curriculum with extensive laboratory practice."
           />
 
+          {/* Four across on the widest screens, two up from md — the fourth
+              card must never be left stranded alone on a row of its own. */}
           <Row className="g-4">
-            {COURSES.map((course) => (
-              <Col lg={4} md={6} key={course.name}>
-                <div className="premium-card h-100 p-4 d-flex flex-column">
+            {PROGRAMMES.map((course) => (
+              <Col xl={3} md={6} key={course.name}>
+                <div className="premium-card course-card h-100 p-4 d-flex flex-column">
+                  <span className="course-level">{course.level}</span>
                   <span className="icon-tile mb-4">
                     <i className={`bi ${course.icon}`} />
                   </span>
                   <h5 className="fw-bold mb-3">{course.short}</h5>
                   <p className="small flex-grow-1">{course.text}</p>
                   <div className="gold-rule-thin my-3" />
-                  <div className="d-flex justify-content-between small fw-semibold text-primary-blue mb-3">
+                  <div className="d-flex justify-content-between small fw-semibold text-primary-blue mb-2">
                     <span>
                       <i className="bi bi-hourglass-split text-gold me-1" />
-                      {course.duration.split(' (')[0]}
+                      {course.years}
                     </span>
                     <span>
                       <i className="bi bi-people-fill text-gold me-1" />
                       {course.intake} Seats
                     </span>
                   </div>
+                  {/* Held to a fixed height whether or not the programme takes
+                      lateral entry, so the buttons below stay on one line. */}
+                  <p className="course-lateral small mb-3">
+                    {course.lateral ? (
+                      <>
+                        <i className="bi bi-box-arrow-in-right text-gold me-1" />
+                        {course.lateral} lateral entry seats
+                      </>
+                    ) : (
+                      <span className="course-lateral-none">No lateral entry</span>
+                    )}
+                  </p>
                   <Link href={course.href} className="btn-outline-navy justify-content-center">
                     Visit Department
                     <i className="bi bi-arrow-right" />
@@ -121,7 +119,7 @@ export default function CoursesOffered() {
                     </tr>
                   </thead>
                   <tbody>
-                    {COURSES.map((course) => (
+                    {PROGRAMMES.map((course) => (
                       <tr key={course.name}>
                         <td>
                           <i className={`bi ${course.icon} text-gold me-2`} />
@@ -129,10 +127,10 @@ export default function CoursesOffered() {
                         </td>
                         <td>{course.duration}</td>
                         <td>{course.intake}</td>
-                        <td>Class 10th passed (min. 35%)</td>
+                        <td>{course.eligibility}</td>
                       </tr>
                     ))}
-                    {COURSES.map((course) => (
+                    {LATERAL_PROGRAMMES.map((course) => (
                       <tr key={`${course.name}-lateral`}>
                         <td>
                           <i className={`bi ${course.icon} text-gold me-2`} />
@@ -140,11 +138,30 @@ export default function CoursesOffered() {
                           <span className="badge-group">Lateral Entry</span>
                         </td>
                         <td>2 Years (4 Semesters)</td>
-                        <td>Supernumerary</td>
+                        <td>{course.lateral}</td>
                         <td>Class 12th with Science &amp; Maths, or 2-year ITI</td>
                       </tr>
                     ))}
                   </tbody>
+                  {/* The figure every parent scrolls for. Totalled from the
+                      rows above rather than typed, so it cannot fall behind
+                      them. */}
+                  <tfoot>
+                    <tr className="table-total">
+                      <td>
+                        <i className="bi bi-people-fill text-gold me-2" />
+                        Total Seats
+                      </td>
+                      <td>—</td>
+                      <td>
+                        {TOTAL_SEATS}
+                        <span className="table-total-note">
+                          {TOTAL_INTAKE} sanctioned + {TOTAL_LATERAL} lateral
+                        </span>
+                      </td>
+                      <td>—</td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>
@@ -157,9 +174,10 @@ export default function CoursesOffered() {
             </div>
             <div className="panel-body">
               <p className="lead">
-                All three branches above also admit lateral entry candidates. If you have passed
-                Class 12 with Science and Mathematics, or a two-year ITI, you can join the diploma
-                directly in the third semester and complete it in two years.
+                All three diploma branches above admit lateral entry candidates on{' '}
+                <strong>{LATERAL_INTAKE} seats each</strong>. If you have passed Class 12 with
+                Science and Mathematics, or a two-year ITI, you can join the diploma directly in the
+                third semester and complete it in two years.
               </p>
 
               <Row className="g-3 mt-1">
@@ -191,6 +209,21 @@ export default function CoursesOffered() {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
+
+                  <div className="seat-matrix">
+                    {LATERAL_PROGRAMMES.map((course) => (
+                      <div className="seat-matrix-item" key={course.slug}>
+                        <i className={`bi ${course.icon}`} />
+                        <span className="seat-matrix-count">{course.lateral}</span>
+                        <span className="seat-matrix-label">{course.short}</span>
+                      </div>
+                    ))}
+                    <div className="seat-matrix-item is-total">
+                      <i className="bi bi-box-arrow-in-right" />
+                      <span className="seat-matrix-count">{TOTAL_LATERAL}</span>
+                      <span className="seat-matrix-label">Total Lateral Seats</span>
+                    </div>
+                  </div>
                 </Col>
 
                 <Col lg={5}>

@@ -4,6 +4,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import { JEECUP_PORTAL } from '@/lib/counselling';
+import { LATERAL_INTAKE } from '@/lib/programmes';
 
 /**
  * The groupwise table follows the JEECUP group codes. Only Group A is offered at
@@ -126,7 +127,7 @@ const ENTRY_ROUTES = [
     icon: 'bi-box-arrow-in-right',
     duration: '2 Years (4 Semesters)',
     entry: 'Class 12 with Science / Maths, or a two-year ITI in a trade related to the branch',
-    note: 'Candidates join directly in the third semester against supernumerary seats, as per AICTE norms.',
+    note: `Candidates join directly in the third semester against ${LATERAL_INTAKE} supernumerary seats per branch, as per AICTE norms.`,
   },
 ];
 
@@ -140,7 +141,7 @@ const LATERAL_ELIGIBILITY = [
 
 const LATERAL_NOTES = [
   'Lateral entry candidates are admitted directly to the third semester (second year) of the diploma.',
-  'Seats are supernumerary — over and above the sanctioned first-year intake, as permitted by AICTE.',
+  `Seats are supernumerary — ${LATERAL_INTAKE} per branch, over and above the sanctioned first-year intake, as permitted by AICTE.`,
   'The branch allotted depends on your Group K rank, choice order and seat availability during counselling.',
   'The course, examination and certification are identical to those of first-year entrants from the third semester onwards.',
   'An ITI candidate must produce the trade certificate along with the Class 10 marksheet at verification.',

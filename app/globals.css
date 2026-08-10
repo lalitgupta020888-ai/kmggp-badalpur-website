@@ -2535,6 +2535,145 @@ a {
   color: var(--navy-800);
 }
 
+/* The closing row of a seat table. Reads as a rule drawn under the figures
+   rather than one more row of them — navy ground, gold hairline above. */
+.premium-table tfoot .table-total td {
+  background: var(--navy-wash);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.94rem;
+  padding: 15px 18px;
+  border: none;
+  border-top: 3px solid var(--gold-500);
+  vertical-align: middle;
+}
+
+.premium-table tfoot .table-total td:first-child,
+.premium-table tfoot .table-total td:nth-child(3) {
+  color: var(--white);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.table-total-note {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+/* ---------- Courses offered ------------------------------------------- */
+
+/* Programmes sit at two levels now — the ribbon says which without the card
+   having to spend a line of copy on it. */
+.course-card {
+  padding-top: 2.6rem !important;
+}
+
+.course-level {
+  position: absolute;
+  /* Clears the 3px gold edge the card draws on hover, rather than covering
+     the right end of it. */
+  top: 3px;
+  right: 0;
+  z-index: 2;
+  padding: 0.36rem 0.85rem;
+  border-radius: 0 0 0 12px;
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+  color: var(--navy-900);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.3);
+}
+
+/* Reserved whether or not the programme takes lateral entry, so the buttons
+   below it stay on one line across the row. */
+.course-lateral {
+  min-height: 1.35rem;
+  color: var(--navy-700);
+  font-weight: 600;
+}
+
+.course-lateral-none {
+  color: var(--ink-faint);
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* The lateral entry seat count, branch by branch, beside the eligibility
+   list — a reader looking only for the number should not have to read a
+   paragraph to find it. */
+.seat-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(122px, 1fr));
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.seat-matrix-item {
+  position: relative;
+  padding: 16px 12px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  text-align: center;
+  overflow: hidden;
+}
+
+.seat-matrix-item::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--gold-bar);
+}
+
+.seat-matrix-item i {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--gold-600);
+  margin-bottom: 6px;
+}
+
+.seat-matrix-count {
+  display: block;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--navy-800);
+}
+
+.seat-matrix-label {
+  display: block;
+  margin-top: 7px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.seat-matrix-item.is-total {
+  background: var(--navy-wash);
+  border-color: transparent;
+}
+
+.seat-matrix-item.is-total i,
+.seat-matrix-item.is-total .seat-matrix-count {
+  color: var(--gold-300);
+}
+
+.seat-matrix-item.is-total .seat-matrix-label {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 /* Groupwise eligibility table — the group code is a single letter, so its
    column is pinned narrow and the width it gives up goes to the course and
    qualification text, which would otherwise wrap a word per line. */
