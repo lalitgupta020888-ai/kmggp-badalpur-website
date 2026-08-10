@@ -1250,29 +1250,6 @@ a {
   transform: scale(1.06);
 }
 
-/* An illustration on white rather than a photograph. It carries no dark mass
-   for the scrim above to hold back, so that scrim would simply erase it —
-   this one is lighter, and thickens towards the foot of the card where the
-   artwork is at its most saturated and the links sit over it. The image is
-   contained and anchored to the bottom edge, so the composition arrives whole
-   instead of cropped to its middle column. */
-.dept-media.is-artwork::after {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.7) 0%,
-      rgba(255, 255, 255, 0.8) 55%,
-      rgba(255, 255, 255, 0.9) 100%
-    ),
-    linear-gradient(100deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 66%);
-}
-
-/* Contained artwork has nothing to gain from the photo cards' slow zoom — it
-   would only push the illustration past the card edge. It lifts instead. */
-.premium-card:hover .dept-media.is-artwork img {
-  transform: translateY(-5px) scale(1.02);
-}
-
 /* Lifts the content clear of the artwork without changing any of its styling. */
 .dept-body {
   position: relative;

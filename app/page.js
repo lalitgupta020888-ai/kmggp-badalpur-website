@@ -105,11 +105,6 @@ const DEPARTMENTS = [
     text: 'Store operations, merchandising, supply chain and customer relationship management.',
     href: '/department/retail-management',
     image: '/images/departments/retail-management.png',
-    // A flat illustration on white, not a photograph. `cover` would crop a
-    // composition this wide to its middle column and the scrim tuned for a
-    // dark photo would erase what is left, so this one is contained and given
-    // a lighter veil — see `.dept-media.is-artwork`.
-    artwork: true,
   },
 ];
 
@@ -283,19 +278,13 @@ export default function Home() {
               <Col xl={3} md={6} key={dept.name}>
                 <div className="premium-card is-featured h-100 p-4">
                   {dept.image && (
-                    <div
-                      className={`dept-media ${dept.artwork ? 'is-artwork' : ''}`}
-                      aria-hidden="true"
-                    >
+                    <div className="dept-media" aria-hidden="true">
                       <Image
                         src={dept.image}
                         alt=""
                         fill
                         sizes="(max-width: 767px) 100vw, 25vw"
-                        style={{
-                          objectFit: dept.artwork ? 'contain' : 'cover',
-                          objectPosition: dept.artwork ? 'center bottom' : 'center',
-                        }}
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                   )}
