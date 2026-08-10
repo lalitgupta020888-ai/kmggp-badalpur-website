@@ -702,8 +702,10 @@ a {
     height: calc(0.5rem + 6px);
   }
 
-  .navbar-custom .nav-item.dropdown:hover > .dropdown-menu,
-  .navbar-custom .nav-item.dropdown:focus-within > .dropdown-menu,
+  /* `.show` and nothing else. A `:hover` clause here would outlive every close
+     the bar decides on — clicking a link inside a menu leaves the pointer
+     sitting on it, and the menu would stay up until the pointer wandered off.
+     Hover is decided in `useMenuBar`, which is also what closes it. */
   .navbar-custom .nav-item.dropdown > .dropdown-menu.show {
     opacity: 1;
     visibility: visible;
@@ -724,8 +726,6 @@ a {
       visibility 0s linear 0.01s;
   }
 
-  .navbar-custom .nav-item.dropdown:hover > .dropdown-menu,
-  .navbar-custom .nav-item.dropdown:focus-within > .dropdown-menu,
   .navbar-custom .nav-item.dropdown > .dropdown-menu.show {
     transform: none;
   }

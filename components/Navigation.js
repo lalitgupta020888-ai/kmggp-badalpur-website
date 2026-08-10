@@ -130,7 +130,15 @@ function useMenuBar() {
     setOpenId(null);
   }, []);
 
-  return { openId, open, close, toggle, closeNow };
+  /* Following a link inside a menu — the one close that must happen at every
+     width, so it is not behind the hover guard. React-Bootstrap closes on
+     select too; this runs first and does not depend on it. */
+  const closeAll = useCallback(() => {
+    clearTimeout(timer.current);
+    setOpenId(null);
+  }, []);
+
+  return { openId, open, close, toggle, closeNow, closeAll };
 }
 
 /**
@@ -160,9 +168,9 @@ function HoverDropdown({ bar, title, id, children }) {
   );
 }
 
-function DropdownLinks({ items }) {
+function DropdownLinks({ bar, items }) {
   return items.map((item) => (
-    <NavDropdown.Item as={Link} href={item.href} key={item.href}>
+    <NavDropdown.Item as={Link} href={item.href} key={item.href} onClick={bar.closeAll}>
       <i className={`bi ${item.icon}`} />
       {item.label}
     </NavDropdown.Item>
@@ -246,12 +254,17 @@ export default function Navigation() {
           <Navbar.Collapse id="main-navbar">
             <Nav className="me-auto">
               <HoverDropdown bar={bar} title="About" id="about-dropdown">
-                <DropdownLinks items={ABOUT} />
+                <DropdownLinks bar={bar} items={ABOUT} />
               </HoverDropdown>
 
               <HoverDropdown bar={bar} title="Departments" id="department-dropdown">
                 {DEPARTMENTS.map((dept) => (
-                  <NavDropdown.Item as={Link} href={`/department/${dept.slug}`} key={dept.slug}>
+                  <NavDropdown.Item
+                    as={Link}
+                    href={`/department/${dept.slug}`}
+                    key={dept.slug}
+                    onClick={bar.closeAll}
+                  >
                     <i className={`bi ${dept.icon}`} />
                     {dept.name}
                   </NavDropdown.Item>
@@ -259,15 +272,15 @@ export default function Navigation() {
               </HoverDropdown>
 
               <HoverDropdown bar={bar} title="Academics" id="academic-dropdown">
-                <DropdownLinks items={ACADEMIC} />
+                <DropdownLinks bar={bar} items={ACADEMIC} />
               </HoverDropdown>
 
               <HoverDropdown bar={bar} title="Admissions" id="admission-dropdown">
-                <DropdownLinks items={ADMISSION} />
+                <DropdownLinks bar={bar} items={ADMISSION} />
               </HoverDropdown>
 
               <HoverDropdown bar={bar} title="Student Section" id="student-dropdown">
-                <DropdownLinks items={STUDENT} />
+                <DropdownLinks bar={bar} items={STUDENT} />
               </HoverDropdown>
 
               {/* No dropdown here — the placements section carries its own
@@ -282,7 +295,7 @@ export default function Navigation() {
               </Nav.Link>
 
               <HoverDropdown bar={bar} title="Life@KMGGP" id="life-dropdown">
-                <DropdownLinks items={LIFE} />
+                <DropdownLinks bar={bar} items={LIFE} />
               </HoverDropdown>
               <Nav.Link
                 as={Link}
