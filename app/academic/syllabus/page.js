@@ -36,6 +36,13 @@ const BRANCHES = [
   },
 ];
 
+/** `href` unset means there is nothing to point at yet — see the render. */
+const REFERENCES = [
+  { icon: 'bi-globe2', label: 'BTEUP Official Website', href: 'https://bteup.ac.in/' },
+  { icon: 'bi-file-earmark-ruled-fill', label: 'Examination Scheme' },
+  { icon: 'bi-journals', label: 'Recommended Reading List' },
+];
+
 const SEMESTERS = [
   'First & Second Semester (Common Curriculum)',
   'Third Semester — Branch Specialisation Begins',
@@ -109,21 +116,29 @@ export default function Syllabus() {
                   Reference Links
                 </div>
                 <div className="panel-body">
-                  <a href="#" className="doc-link">
-                    <i className="bi bi-globe2" />
-                    BTEUP Official Website
-                    <i className="bi bi-arrow-right-short" />
-                  </a>
-                  <a href="#" className="doc-link">
-                    <i className="bi bi-file-earmark-ruled-fill" />
-                    Examination Scheme
-                    <i className="bi bi-arrow-right-short" />
-                  </a>
-                  <a href="#" className="doc-link mb-0">
-                    <i className="bi bi-journals" />
-                    Recommended Reading List
-                    <i className="bi bi-arrow-right-short" />
-                  </a>
+                  {REFERENCES.map((item, index) => {
+                    const last = index === REFERENCES.length - 1 ? ' mb-0' : '';
+
+                    return item.href ? (
+                      <a
+                        href={item.href}
+                        className={`doc-link${last}`}
+                        key={item.label}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className={`bi ${item.icon}`} />
+                        <span className="flex-grow-1">{item.label}</span>
+                        <i className="bi bi-box-arrow-up-right doc-link-external" />
+                      </a>
+                    ) : (
+                      <span className={`doc-link is-pending${last}`} key={item.label}>
+                        <i className={`bi ${item.icon}`} />
+                        <span className="flex-grow-1">{item.label}</span>
+                        <span className="doc-link-soon">Awaited</span>
+                      </span>
+                    );
+                  })}
 
                   <div className="callout mt-4">
                     <i className="bi bi-info-circle-fill" />
