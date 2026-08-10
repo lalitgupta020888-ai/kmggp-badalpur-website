@@ -10,6 +10,8 @@ const DEPARTMENTS = [
   { slug: 'electronics', name: 'Electronics Engineering', icon: 'bi-cpu-fill' },
   { slug: 'cse', name: 'Computer Science & Engineering', icon: 'bi-pc-display' },
   { slug: 'it', name: 'Information Technology', icon: 'bi-hdd-network-fill' },
+  { slug: 'retail-management', name: 'P. G. Diploma in Retail Management', icon: 'bi-shop' },
+  { slug: 'applied-sciences', name: 'Applied Sciences & Humanities', icon: 'bi-rulers' },
 ];
 
 const ABOUT = [

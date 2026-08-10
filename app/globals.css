@@ -1047,9 +1047,15 @@ a {
 .stat-strip::before { top: 0; }
 .stat-strip::after { bottom: 0; }
 
+/* Narrower than the page container — the four figures read as one compact
+   band instead of drifting to the far edges of a wide screen. */
+.stat-strip .container {
+  max-width: 1040px;
+}
+
 .stat-item {
   text-align: center;
-  padding: 34px 12px;
+  padding: 24px 10px;
   position: relative;
 }
 
@@ -1064,15 +1070,15 @@ a {
 }
 
 .stat-item i {
-  font-size: 1.7rem;
+  font-size: 1.45rem;
   color: var(--gold-400);
-  margin-bottom: 10px;
+  margin-bottom: 7px;
   display: block;
 }
 
 .stat-value {
   font-family: var(--font-display), Georgia, serif;
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--white);
   line-height: 1;
@@ -1083,7 +1089,7 @@ a {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.66);
-  margin-top: 9px;
+  margin-top: 7px;
   font-weight: 600;
 }
 
@@ -4936,11 +4942,11 @@ a {
   }
 
   .stat-value {
-    font-size: 1.9rem;
+    font-size: 1.7rem;
   }
 
   .stat-item {
-    padding: 26px 8px;
+    padding: 20px 8px;
   }
 
   /* The carousel arrows sit over the caption at this width and the first word
