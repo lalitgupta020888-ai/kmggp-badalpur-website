@@ -663,22 +663,74 @@ a {
 
 /* Open menus on hover for large screens.
    Requires `renderMenuOnMount` on each NavDropdown — React-Bootstrap
-   otherwise keeps the menu out of the DOM until it is clicked. */
+   otherwise keeps the menu out of the DOM until it is clicked.
+
+   The menu stays in flow as `display: block` and is hidden with
+   opacity/visibility instead of being toggled in and out of `display`. Only
+   that way can the close be *transitioned*: `display` is not animatable, so a
+   plain `display: none` on mouse-out snaps the menu away the instant the
+   pointer leaves the link — including while it is still travelling towards the
+   menu. Everything below exists to make that journey forgiving. */
 @media (min-width: 1400px) {
-  .navbar-custom .nav-item.dropdown:hover > .dropdown-menu {
+  .navbar-custom .nav-item.dropdown > .dropdown-menu {
     display: block;
-    animation: menuDrop 0.22s var(--ease) both;
+    top: 100%;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px) scale(0.985);
+    transform-origin: top left;
+    /* Closing: hold for 220ms first, so a cursor that clips the edge of the
+       link on its way down finds the menu still open, then fade out. The
+       visibility flip waits for the fade to finish. */
+    transition:
+      opacity 0.2s var(--ease) 0.22s,
+      transform 0.2s var(--ease) 0.22s,
+      visibility 0s linear 0.42s;
+  }
+
+  /* The 0.5rem margin under the toggle is a gap the pointer must cross, and a
+     gap nothing hovers is a gap that closes the menu. This pad reclaims it —
+     invisible, sitting directly above the menu and a little wider on each side
+     to cover a diagonal approach. */
+  .navbar-custom .nav-item.dropdown > .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    top: calc(-0.5rem - 6px);
+    height: calc(0.5rem + 6px);
+  }
+
+  .navbar-custom .nav-item.dropdown:hover > .dropdown-menu,
+  .navbar-custom .nav-item.dropdown:focus-within > .dropdown-menu,
+  .navbar-custom .nav-item.dropdown > .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    /* Opening is immediate — the delay above is a courtesy on the way out
+       only, and a menu that hesitated before appearing would feel broken. */
+    transition:
+      opacity 0.22s var(--ease),
+      transform 0.22s var(--ease),
+      visibility 0s;
   }
 }
 
-@keyframes menuDrop {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
+@media (prefers-reduced-motion: reduce) {
+  .navbar-custom .nav-item.dropdown > .dropdown-menu {
+    transform: none;
+    transition:
+      opacity 0.01s linear 0.22s,
+      visibility 0s linear 0.23s;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .navbar-custom .nav-item.dropdown:hover > .dropdown-menu,
+  .navbar-custom .nav-item.dropdown:focus-within > .dropdown-menu,
+  .navbar-custom .nav-item.dropdown > .dropdown-menu.show {
+    transform: none;
   }
 }
 
