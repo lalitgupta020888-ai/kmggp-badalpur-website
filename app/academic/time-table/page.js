@@ -2,13 +2,16 @@
 
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
+import { PERIODS, NOTES } from '@/lib/timetable';
 
 /**
- * Branch-wise class time-tables. Each entry points at the PDF published for the
- * current session; drop a replacement at the same path when the timetable is
- * revised and nothing here needs to change.
+ * Each card opens the programme's own page, where the schedule is published a
+ * year at a time — one card cannot carry three of them, and a single PDF per
+ * branch left a first year student downloading the final year's week.
+ * The years themselves live in `lib/timetable.js`.
  */
 const BRANCHES = [
   {
@@ -16,44 +19,25 @@ const BRANCHES = [
     icon: 'bi-cpu-fill',
     name: 'Electronics Engineering',
     text: 'Lecture, tutorial and laboratory slots for all six semesters of the Electronics diploma.',
-    file: '/documents/time-table-electronics.pdf',
   },
   {
     slug: 'cse',
     icon: 'bi-pc-display',
     name: 'Computer Science & Engineering',
     text: 'Weekly class schedule with programming and project laboratory allocations.',
-    file: '/documents/time-table-cse.pdf',
   },
   {
     slug: 'it',
     icon: 'bi-hdd-network-fill',
     name: 'Information Technology',
     text: 'Weekly class schedule covering networking, web technology and security laboratories.',
-    file: '/documents/time-table-it.pdf',
   },
-];
-
-/**
- * Six one-hour periods with a lunch break in the middle, filling the institute
- * day of 10:00 AM to 5:00 PM. `isBreak` marks the recess row so it reads as a
- * divider rather than another period.
- */
-const PERIODS = [
-  { period: 'I', time: '10:00 AM – 11:00 AM', kind: 'Theory' },
-  { period: 'II', time: '11:00 AM – 12:00 Noon', kind: 'Theory' },
-  { period: 'III', time: '12:00 Noon – 01:00 PM', kind: 'Theory' },
-  { period: 'Lunch / Break', time: '01:00 PM – 02:00 PM', kind: 'Recess', isBreak: true },
-  { period: 'IV', time: '02:00 PM – 03:00 PM', kind: 'Practical' },
-  { period: 'V', time: '03:00 PM – 04:00 PM', kind: 'Practical' },
-  { period: 'VI', time: '04:00 PM – 05:00 PM', kind: 'Practical / Remedial' },
-];
-
-const NOTES = [
-  'Classes run Monday to Saturday, 10:00 AM to 5:00 PM, with a lunch break from 1:00 PM to 2:00 PM.',
-  'Saturday is reserved for remedial and project work.',
-  'Laboratory batches are split as notified on the department notice board.',
-  'Any change in the schedule is announced by the department a day in advance.',
+  {
+    slug: 'retail-management',
+    icon: 'bi-shop',
+    name: 'P. G. Diploma in Retail Management',
+    text: 'Weekly schedule for the retail operations, merchandising and business computing sessions.',
+  },
 ];
 
 export default function TimeTable() {
@@ -72,13 +56,13 @@ export default function TimeTable() {
           <SectionHead
             eyebrow="Download Centre"
             icon="bi-download"
-            title="Time-Table by Branch"
-            subtitle="Select your branch to download the current semester time-table."
+            title="Time-Table by Programme"
+            subtitle="Select your programme to download its year-wise class time-table."
           />
 
           <Row className="g-4">
             {BRANCHES.map((branch) => (
-              <Col lg={4} md={6} key={branch.slug}>
+              <Col xl={3} md={6} key={branch.slug}>
                 <div className="premium-card h-100 p-4 d-flex flex-column">
                   <span className="icon-tile mb-4">
                     <i className={`bi ${branch.icon}`} />
@@ -86,16 +70,11 @@ export default function TimeTable() {
                   <h5 className="fw-bold mb-3">{branch.name}</h5>
                   <p className="small flex-grow-1">{branch.text}</p>
                   <div className="gold-rule-thin my-3" />
-                  <a
-                    href={branch.file}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="doc-link mb-0"
-                  >
+                  <Link href={`/academic/time-table/${branch.slug}`} className="doc-link mb-0">
                     <i className="bi bi-file-earmark-pdf-fill" />
-                    Download Time-Table (PDF)
+                    <span className="flex-grow-1">Download Time-Table (PDF)</span>
                     <i className="bi bi-arrow-right-short" />
-                  </a>
+                  </Link>
                 </div>
               </Col>
             ))}
