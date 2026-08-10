@@ -5703,9 +5703,10 @@ a {
   white-space: nowrap;
 }
 
-/* Which semesters a time-table year covers. Rides alongside the year rather
-   than under it — a student looks for "III & IV" as fast as for "Second Year",
-   and the note below is already carrying the description. */
+/* Which year a time-table semester falls in. Rides alongside the semester
+   rather than under it — a student who thinks in years finds their row as
+   fast as one who thinks in semesters, and the note below is already
+   carrying the description. */
 .year-semesters {
   margin-left: 12px;
   padding: 3px 10px;

@@ -90,8 +90,8 @@ export default function BranchTimeTable({ params }) {
           <SectionHead
             eyebrow="Download Centre"
             icon="bi-download"
-            title="Year-wise Time-Table"
-            subtitle="Download the weekly class and laboratory schedule for each year of the programme."
+            title="Semester-wise Time-Table"
+            subtitle="Download the weekly class and laboratory schedule for each running semester."
           />
 
           <div className="panel">
@@ -100,21 +100,21 @@ export default function BranchTimeTable({ params }) {
               {timetable.name}
             </div>
             <div className="panel-body">
-              {timetable.years.map((year) => (
-                <div className="syllabus-year" key={year.key}>
+              {timetable.semesters.map((semester) => (
+                <div className="syllabus-year" key={semester.key}>
                   <div>
                     <h6 className="syllabus-year-title">
-                      {year.title}
-                      <span className="year-semesters">{year.semesters}</span>
+                      {semester.title}
+                      <span className="year-semesters">{semester.year}</span>
                     </h6>
-                    <p className="syllabus-year-note">{year.note}</p>
+                    <p className="syllabus-year-note">{semester.note}</p>
                   </div>
-                  {/* Listed either way — a year with no document published yet
-                      still tells the reader how its week is shaped. */}
-                  {year.file ? (
+                  {/* Listed either way — a semester with no document published
+                      yet still tells the reader how its week is shaped. */}
+                  {semester.file ? (
                     <a
                       className="btn-gold"
-                      href={year.file}
+                      href={semester.file}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

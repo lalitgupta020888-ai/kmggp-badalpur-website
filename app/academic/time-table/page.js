@@ -9,9 +9,9 @@ import { PERIODS, NOTES } from '@/lib/timetable';
 
 /**
  * Each card opens the programme's own page, where the schedule is published a
- * year at a time — one card cannot carry three of them, and a single PDF per
- * branch left a first year student downloading the final year's week.
- * The years themselves live in `lib/timetable.js`.
+ * semester at a time — one card cannot carry three of them, and a single PDF
+ * per branch left a first semester student downloading the fifth semester's
+ * week. The semesters themselves live in `lib/timetable.js`.
  */
 const BRANCHES = [
   {
@@ -57,7 +57,7 @@ export default function TimeTable() {
             eyebrow="Download Centre"
             icon="bi-download"
             title="Time-Table by Programme"
-            subtitle="Select your programme to download its year-wise class time-table."
+            subtitle="Select your programme to download its semester-wise class time-table."
           />
 
           <Row className="g-4">
