@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import Image from 'next/image';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
@@ -102,6 +103,26 @@ export default function LibraryPage() {
                 icon="bi-book-half"
                 title="The Institute Library"
               />
+
+              {/* The reading hall itself, between the heading and the prose */}
+              <figure className="welcome-figure">
+                <Image
+                  src="/images/slider3.png"
+                  alt="Students reading in the reading hall of the institute library"
+                  width={1408}
+                  height={768}
+                  sizes="(max-width: 991px) 100vw, 58vw"
+                  priority
+                />
+                <figcaption>
+                  <span className="welcome-figure-rule" />
+                  <span>
+                    <i className="bi bi-book-half me-2" />
+                    The Reading Hall, Institute Library
+                  </span>
+                </figcaption>
+              </figure>
+
               <p className="lead">
                 The library is the academic heart of the campus — a calm, well-lit space where
                 students read, revise and research through every semester of the diploma.
