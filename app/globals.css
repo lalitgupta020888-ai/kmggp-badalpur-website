@@ -966,33 +966,19 @@ a {
   z-index: 3;
 }
 
-/* The copy sits inset from the container edge rather than flush against it —
-   flush-left over a photograph reads as an accident of the grid, the inset
-   reads as a decision. The gold rail runs the height of the block and is what
-   the eye takes as the true left edge, so the indent has something to sit
-   against. Both are dropped on phones, where the gutter is all the room there
-   is. */
-.hero-caption-inner {
-  position: relative;
-  max-width: 860px;
-  padding-left: clamp(26px, 3.4vw, 58px);
+/* The caption breaks out of the centred container and runs to the page gutter
+   instead. On a wide screen the container's own left edge sits ~300px in, which
+   leaves the headline floating in the middle of the photograph; anchored to the
+   gutter it reads as the frame's own left edge. The gutter still grows with the
+   viewport so the copy never touches the screen. */
+.hero-caption .container {
+  max-width: none;
+  width: 100%;
+  padding-left: clamp(22px, 3.6vw, 72px);
 }
 
-.hero-caption-inner::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 4px;
-  bottom: 6px;
-  width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(201, 162, 39, 0.85) 18%,
-    rgba(201, 162, 39, 0.85) 82%,
-    transparent 100%
-  );
+.hero-caption-inner {
+  max-width: 860px;
 }
 
 .hero-caption h2 {
@@ -5554,15 +5540,6 @@ a {
   .hero-caption .container {
     padding-left: 22px;
     padding-right: 22px;
-  }
-
-  /* No room left to indent into once the gutter is down to 22px */
-  .hero-caption-inner {
-    padding-left: 0;
-  }
-
-  .hero-caption-inner::before {
-    display: none;
   }
 
   .hero-caption p {
