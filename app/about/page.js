@@ -49,7 +49,7 @@ const MILESTONES = [
   },
   {
     title: 'Four Disciplines Offered',
-    text: 'Diplomas in Electronics, Computer Science and Information Technology, and a PG diploma in Retail Management — 75 seats each.',
+    text: 'Diplomas in Electronics, Computer Science and Information Technology with 75 seats each, and a PG diploma in Retail Management with 37 seats.',
   },
   {
     title: 'A Growing Placement Network',
