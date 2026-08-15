@@ -6028,39 +6028,106 @@ a {
   font-size: 0.88rem;
 }
 
-/* ---------- Album film ------------------------------------------------- */
+/* ---------- Film tile --------------------------------------------------
+   The film sits in the photograph grid at the same size, so it is dressed to
+   read as a film rather than a still: a gold hairline, a darkening sheen, a
+   play badge at the centre and a small ribbon in the corner. */
 
-.album-film {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--hairline);
-  box-shadow: var(--shadow-sm);
-  background: var(--navy-950);
+.gallery-tile.is-film {
+  cursor: pointer;
+  border-color: rgba(201, 162, 39, 0.5);
 }
 
-.album-film video {
-  display: block;
-  width: 100%;
-  max-height: 560px;
-  background: var(--navy-950);
+.film-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(4, 16, 31, 0.18) 0%, rgba(4, 16, 31, 0.62) 78%),
+    linear-gradient(to top, rgba(4, 16, 31, 0.72) 0%, transparent 62%);
+  transition: opacity 0.4s var(--ease);
 }
 
-.album-film figcaption {
-  padding: 14px 20px;
-  background: var(--navy-900);
-  color: var(--white);
-  font-weight: 600;
-  font-size: 0.92rem;
+.gallery-tile.is-film:hover .film-sheen {
+  opacity: 0.72;
 }
 
-.album-film figcaption i {
+.film-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold-bar);
+  color: var(--navy-900);
+  font-size: 1.9rem;
+  /* Optically centred: a play triangle sits left of the circle's middle. */
+  padding-left: 5px;
+  box-shadow: 0 12px 30px rgba(4, 16, 31, 0.45);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+/* The ring pulses outward from under the badge — a still tile does not do this,
+   which is the whole point of it. */
+.film-badge::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 162, 39, 0.6);
+  animation: filmPulse 2.6s var(--ease) infinite;
+}
+
+@keyframes filmPulse {
+  0% { transform: scale(0.86); opacity: 0.9; }
+  70% { transform: scale(1.28); opacity: 0; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+
+.gallery-tile.is-film:hover .film-badge,
+.gallery-tile.is-film:focus-visible .film-badge {
+  transform: translate(-50%, -50%) scale(1.09);
+  box-shadow: 0 16px 38px rgba(4, 16, 31, 0.55);
+}
+
+.film-ribbon {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: rgba(4, 16, 31, 0.62);
+  border: 1px solid rgba(201, 162, 39, 0.55);
   color: var(--gold-300);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-/* ---------- Welcome film popup ----------------------------------------- */
+/* The film's own veil must clear the badge, so it only carries its caption. */
+.gallery-tile.is-film .gallery-veil {
+  justify-content: flex-end;
+}
 
-.intro-video {
+@media (prefers-reduced-motion: reduce) {
+  .film-badge::before {
+    animation: none;
+  }
+}
+
+/* ---------- Film viewer ----------------------------------------- */
+
+.video-modal {
   position: fixed;
   inset: 0;
   z-index: 2100;
@@ -6073,7 +6140,7 @@ a {
   animation: lightboxIn 0.25s var(--ease) both;
 }
 
-.intro-video-frame {
+.video-modal-frame {
   position: relative;
   width: min(980px, 100%);
   border-radius: var(--radius);
@@ -6083,7 +6150,7 @@ a {
   background: var(--navy-950);
 }
 
-.intro-video-player {
+.video-modal-player {
   display: block;
   width: 100%;
   /* Leaves room for the bar beneath it on a short screen. */
@@ -6091,7 +6158,7 @@ a {
   background: var(--navy-950);
 }
 
-.intro-video-close {
+.video-modal-close {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -6107,15 +6174,15 @@ a {
   transition: all 0.25s var(--ease);
 }
 
-.intro-video-close:hover,
-.intro-video-close:focus-visible {
+.video-modal-close:hover,
+.video-modal-close:focus-visible {
   background: var(--gold-bar);
   border-color: transparent;
   color: var(--navy-900);
   transform: scale(1.06);
 }
 
-.intro-video-bar {
+.video-modal-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -6126,7 +6193,7 @@ a {
   border-top: 1px solid rgba(201, 162, 39, 0.28);
 }
 
-.intro-video-title {
+.video-modal-title {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -6135,17 +6202,17 @@ a {
   font-size: 0.95rem;
 }
 
-.intro-video-title i {
+.video-modal-title i {
   color: var(--gold-300);
 }
 
-.intro-video-actions {
+.video-modal-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
 }
 
-.intro-video-btn {
+.video-modal-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -6160,34 +6227,36 @@ a {
   transition: all 0.25s var(--ease);
 }
 
-.intro-video-btn:hover,
-.intro-video-btn:focus-visible {
+.video-modal-btn:hover,
+.video-modal-btn:focus-visible {
   background: var(--gold-bar);
   border-color: transparent;
   color: var(--navy-900);
 }
 
-.intro-video-btn.is-gold {
+.video-modal-btn.is-gold {
   background: var(--gold-bar);
   border-color: transparent;
   color: var(--navy-900);
 }
 
-.intro-video-btn.is-gold:hover {
+.video-modal-btn.is-gold:hover {
   filter: brightness(1.08);
 }
 
 @media (max-width: 575.98px) {
-  .intro-video {
+  .video-modal {
     padding: 14px 10px;
   }
 
-  .intro-video-bar {
+  .video-modal-bar {
     justify-content: center;
     text-align: center;
   }
 
-  .album-film video {
-    max-height: 320px;
+  .film-badge {
+    width: 62px;
+    height: 62px;
+    font-size: 1.6rem;
   }
 }

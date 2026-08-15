@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import Lightbox from '@/components/Lightbox';
+import VideoModal from '@/components/VideoModal';
 import { getAlbum, GALLERY_ALBUMS } from '@/lib/gallery';
 
 export default function AlbumPage({ params }) {
@@ -15,6 +16,7 @@ export default function AlbumPage({ params }) {
 
   // null while the viewer is closed; otherwise the photograph on show.
   const [openAt, setOpenAt] = useState(null);
+  const [filmOpen, setFilmOpen] = useState(false);
 
   if (!album) notFound();
 
@@ -39,32 +41,66 @@ export default function AlbumPage({ params }) {
               <i className="bi bi-arrow-left" />
               All Albums
             </Link>
-            <span className="status-pill is-meta">
-              <i className="bi bi-images me-2" />
-              {photos.length} {photos.length === 1 ? 'Photograph' : 'Photographs'}
+            <span className="d-flex flex-wrap gap-2">
+              {album.video && (
+                <span className="status-pill is-meta">
+                  <i className="bi bi-camera-reels-fill me-2" />1 Film
+                </span>
+              )}
+              <span className="status-pill is-meta">
+                <i className="bi bi-images me-2" />
+                {photos.length} {photos.length === 1 ? 'Photograph' : 'Photographs'}
+              </span>
             </span>
           </div>
 
-          {album.video && (
-            <figure className="album-film mt-4 mb-0">
-              <video
-                controls
-                playsInline
-                preload="metadata"
-                poster={album.video.poster}
-                aria-label={album.video.caption}
-              >
-                <source src={album.video.src} type="video/mp4" />
-                Your browser cannot play this video.
-              </video>
-              <figcaption>
-                <i className="bi bi-play-btn-fill me-2" />
-                {album.video.caption}
-              </figcaption>
-            </figure>
-          )}
-
           <Row className="g-4 mt-1">
+            {/* The film sits in the grid as one more tile, the same size as the
+                photographs — its poster with a play badge over it. */}
+            {album.video && (
+              <Col lg={4} md={6}>
+                <figure
+                  className="gallery-tile is-clickable is-film m-0"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Play ${album.video.caption}`}
+                  onClick={() => setFilmOpen(true)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      setFilmOpen(true);
+                    }
+                  }}
+                >
+                  <Image
+                    src={album.video.poster}
+                    alt={album.video.caption}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <span className="film-sheen" aria-hidden="true" />
+                  <span className="film-badge" aria-hidden="true">
+                    <i className="bi bi-play-fill" />
+                  </span>
+                  <span className="film-ribbon" aria-hidden="true">
+                    <i className="bi bi-camera-reels-fill" />
+                    Film
+                  </span>
+                  <figcaption className="gallery-veil">
+                    <div className="gold-rule-thin" />
+                    <span>
+                      <i className="bi bi-camera-reels-fill me-2" />
+                      {album.video.caption}
+                    </span>
+                    <span className="small mt-1" style={{ color: 'var(--gold-300)' }}>
+                      Watch the film
+                    </span>
+                  </figcaption>
+                </figure>
+              </Col>
+            )}
+
             {photos.map((photo, index) => (
               <Col lg={4} md={6} key={`${photo.src}-${index}`}>
                 <figure
@@ -132,6 +168,15 @@ export default function AlbumPage({ params }) {
         onClose={() => setOpenAt(null)}
         onIndexChange={setOpenAt}
       />
+
+      {album.video && (
+        <VideoModal
+          video={album.video}
+          icon={album.icon}
+          open={filmOpen}
+          onClose={() => setFilmOpen(false)}
+        />
+      )}
     </>
   );
 }
