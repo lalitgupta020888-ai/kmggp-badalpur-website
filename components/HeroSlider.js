@@ -13,6 +13,20 @@ import Link from 'next/link';
  */
 const SLIDES = [
   {
+    src: '/images/independence-day.jpg',
+    alt: 'Independence Day decorations at KMGGP Badalpur — a tricolour display board and a "Happy Independence Day" rangoli in the campus corridor',
+    // A 16:9 frame in a hero that goes much wider than that: cover crops the
+    // top and bottom. Biasing above the midpoint keeps the display board whole;
+    // the rangoli loses only its lowest edge.
+    position: 'center 42%',
+    eyebrow: 'Independence Day 2026',
+    icon: 'bi-flag-fill',
+    title: 'Celebrating the Spirit of Freedom',
+    text: 'The campus came alive with rangoli, tricolour displays and student artwork as KMGGP Badalpur marked the 15th of August.',
+    primary: { href: '/gallery', label: 'View Campus Gallery', icon: 'bi-images' },
+    secondary: { href: '/life', label: 'Life @ KMGGP', icon: 'bi-stars' },
+  },
+  {
     src: '/images/campus.png',
     alt: 'The main entrance of Km. Mayawati Government Girls Polytechnic, Badalpur',
     // A wide panorama in a 2.2:1 hero: cover trims a good part of the width.
