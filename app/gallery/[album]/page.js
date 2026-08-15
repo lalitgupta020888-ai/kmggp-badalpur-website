@@ -45,6 +45,25 @@ export default function AlbumPage({ params }) {
             </span>
           </div>
 
+          {album.video && (
+            <figure className="album-film mt-4 mb-0">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster={album.video.poster}
+                aria-label={album.video.caption}
+              >
+                <source src={album.video.src} type="video/mp4" />
+                Your browser cannot play this video.
+              </video>
+              <figcaption>
+                <i className="bi bi-play-btn-fill me-2" />
+                {album.video.caption}
+              </figcaption>
+            </figure>
+          )}
+
           <Row className="g-4 mt-1">
             {photos.map((photo, index) => (
               <Col lg={4} md={6} key={`${photo.src}-${index}`}>

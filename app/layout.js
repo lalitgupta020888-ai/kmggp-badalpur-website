@@ -2,6 +2,7 @@ import { Playfair_Display, Inter } from 'next/font/google';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import IntroVideo from '@/components/IntroVideo';
 import './globals.css';
 
 const display = Playfair_Display({
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
         <Footer />
         <ScrollToTop />
+        <IntroVideo />
       </body>
     </html>
   );

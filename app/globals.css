@@ -6027,3 +6027,167 @@ a {
   padding: 0.62rem 1.5rem;
   font-size: 0.88rem;
 }
+
+/* ---------- Album film ------------------------------------------------- */
+
+.album-film {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-sm);
+  background: var(--navy-950);
+}
+
+.album-film video {
+  display: block;
+  width: 100%;
+  max-height: 560px;
+  background: var(--navy-950);
+}
+
+.album-film figcaption {
+  padding: 14px 20px;
+  background: var(--navy-900);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.album-film figcaption i {
+  color: var(--gold-300);
+}
+
+/* ---------- Welcome film popup ----------------------------------------- */
+
+.intro-video {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 26px 18px;
+  background: rgba(4, 16, 31, 0.94);
+  backdrop-filter: blur(6px);
+  animation: lightboxIn 0.25s var(--ease) both;
+}
+
+.intro-video-frame {
+  position: relative;
+  width: min(980px, 100%);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  box-shadow: var(--shadow-lg);
+  background: var(--navy-950);
+}
+
+.intro-video-player {
+  display: block;
+  width: 100%;
+  /* Leaves room for the bar beneath it on a short screen. */
+  max-height: min(74vh, 620px);
+  background: var(--navy-950);
+}
+
+.intro-video-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  background: rgba(4, 16, 31, 0.72);
+  color: var(--gold-300);
+  transition: all 0.25s var(--ease);
+}
+
+.intro-video-close:hover,
+.intro-video-close:focus-visible {
+  background: var(--gold-bar);
+  border-color: transparent;
+  color: var(--navy-900);
+  transform: scale(1.06);
+}
+
+.intro-video-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--navy-900);
+  border-top: 1px solid rgba(201, 162, 39, 0.28);
+}
+
+.intro-video-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.intro-video-title i {
+  color: var(--gold-300);
+}
+
+.intro-video-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.intro-video-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--gold-300);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+}
+
+.intro-video-btn:hover,
+.intro-video-btn:focus-visible {
+  background: var(--gold-bar);
+  border-color: transparent;
+  color: var(--navy-900);
+}
+
+.intro-video-btn.is-gold {
+  background: var(--gold-bar);
+  border-color: transparent;
+  color: var(--navy-900);
+}
+
+.intro-video-btn.is-gold:hover {
+  filter: brightness(1.08);
+}
+
+@media (max-width: 575.98px) {
+  .intro-video {
+    padding: 14px 10px;
+  }
+
+  .intro-video-bar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .album-film video {
+    max-height: 320px;
+  }
+}
