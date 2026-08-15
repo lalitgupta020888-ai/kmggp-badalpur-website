@@ -13,7 +13,7 @@ import Link from 'next/link';
  */
 const SLIDES = [
   {
-    src: '/images/independence-day.jpg',
+    src: '/images/har-ghar-tiranga/rangoli-display.jpg',
     alt: 'Independence Day decorations at KMGGP Badalpur — a tricolour display board and a "Happy Independence Day" rangoli in the campus corridor',
     // A 16:9 frame in a hero that goes much wider than that: cover crops the
     // top and bottom. Biasing above the midpoint keeps the display board whole;
@@ -23,7 +23,7 @@ const SLIDES = [
     icon: 'bi-flag-fill',
     title: 'Celebrating the Spirit of Freedom',
     text: 'The campus came alive with rangoli, tricolour displays and student artwork as KMGGP Badalpur marked the 15th of August.',
-    primary: { href: '/gallery', label: 'View Campus Gallery', icon: 'bi-images' },
+    primary: { href: '/gallery/har-ghar-tiranga', label: 'View the Album', icon: 'bi-images' },
     secondary: { href: '/life', label: 'Life @ KMGGP', icon: 'bi-stars' },
   },
   {
