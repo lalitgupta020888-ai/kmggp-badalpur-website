@@ -1,14 +1,19 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import { GALLERY_ALBUMS, GALLERY_IMAGES, albumCover } from '@/lib/gallery';
+import { albumCover } from '@/lib/gallery';
+import { getAlbums, getGalleryImages } from '@/lib/server/content';
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  const [albums, images] = await Promise.all([getAlbums(), getGalleryImages()]);
+
+  // An album with no photographs has no cover to show, so it is left off the
+  // index rather than rendered as an empty tile.
+  const shown = albums.filter((album) => album.photos?.length > 0);
+
   return (
     <>
       <PageHeader
@@ -29,7 +34,7 @@ export default function GalleryPage() {
           />
 
           <Row className="g-4">
-            {GALLERY_ALBUMS.map((album) => (
+            {shown.map((album) => (
               <Col lg={4} md={6} key={album.slug}>
                 {/* The sheets peeking out behind the cover are what make this
                     read as a folder of photographs, not a single picture. */}
@@ -69,9 +74,8 @@ export default function GalleryPage() {
           <div className="callout mt-5">
             <i className="bi bi-info-circle-fill" />
             <p>
-              {GALLERY_IMAGES.length} photographs across {GALLERY_ALBUMS.length} albums. More from
-              annual functions, technical festivals and industrial visits will be added through the
-              academic session.
+              {images.length} photographs across {shown.length} albums. More from annual functions,
+              technical festivals and industrial visits will be added through the academic session.
             </p>
           </div>
         </Container>

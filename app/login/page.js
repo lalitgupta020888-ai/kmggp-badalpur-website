@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import React, { useActionState, useState } from 'react';
+import { Container, Form, Button, Alert, Spinner } from 'react-bootstrap';
 import Link from 'next/link';
+
+import { signIn } from './actions';
 
 const NOTICES = [
   {
@@ -21,11 +23,7 @@ const NOTICES = [
 
 export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Admin authentication will be connected to the backend.');
-  };
+  const [state, formAction, pending] = useActionState(signIn, null);
 
   return (
     <div className="auth-wrap">
@@ -48,13 +46,21 @@ export default function AdminLoginPage() {
               </span>
             </Alert>
 
-            <Form onSubmit={handleSubmit} className="premium-form">
+            {state?.error && (
+              <Alert variant="danger" className="d-flex align-items-start gap-3 border-0 small mb-4">
+                <i className="bi bi-x-octagon-fill fs-5 lh-1 mt-1" />
+                <span>{state.error}</span>
+              </Alert>
+            )}
+
+            <Form action={formAction} className="premium-form">
               <Form.Group className="mb-3">
                 <Form.Label>Admin ID / Username</Form.Label>
                 <div className="input-icon">
                   <i className="bi bi-person-badge-fill" />
                   <Form.Control
                     type="text"
+                    name="username"
                     placeholder="Enter your admin ID"
                     autoComplete="username"
                     required
@@ -68,6 +74,7 @@ export default function AdminLoginPage() {
                   <i className="bi bi-key-fill" />
                   <Form.Control
                     type={showPassword ? 'text' : 'password'}
+                    name="password"
                     placeholder="Enter your password"
                     autoComplete="current-password"
                     required
@@ -101,9 +108,22 @@ export default function AdminLoginPage() {
                 </Link>
               </div>
 
-              <Button type="submit" className="btn-gold w-100 justify-content-center">
-                <i className="bi bi-box-arrow-in-right" />
-                Sign In to Dashboard
+              <Button
+                type="submit"
+                className="btn-gold w-100 justify-content-center"
+                disabled={pending}
+              >
+                {pending ? (
+                  <>
+                    <Spinner animation="border" size="sm" />
+                    Signing in…
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-box-arrow-in-right" />
+                    Sign In to Dashboard
+                  </>
+                )}
               </Button>
             </Form>
 

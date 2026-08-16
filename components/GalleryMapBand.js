@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { GALLERY_IMAGES } from '@/lib/gallery';
 
 /**
  * The paired band that closes the home page: a self-advancing gallery strip on
@@ -25,9 +24,17 @@ const MAP_VIEW = `https://www.google.com/maps/search/?api=1&query=${MAP_POINT}`;
 
 const SLIDE_MS = 3500;
 
-export default function GalleryMapBand() {
-  const slides = GALLERY_IMAGES;
+export default function GalleryMapBand({ images = [] }) {
+  const slides = images;
   const [index, setIndex] = useState(0);
+  // Deleting photographs in the panel can leave `index` past the end of a
+  // shorter list, and an empty gallery would turn the modulo arithmetic below
+  // into NaN — so the position actually rendered is always clamped.
+  const activeIndex = slides.length ? Math.min(index, slides.length - 1) : 0;
+  const step = (direction) => {
+    if (slides.length === 0) return;
+    setIndex((current) => (current + direction + slides.length) % slides.length);
+  };
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
@@ -59,7 +66,7 @@ export default function GalleryMapBand() {
             >
               <div
                 className="gm-track"
-                style={{ transform: `translateX(-${index * 100}%)` }}
+                style={{ transform: `translateX(-${activeIndex * 100}%)` }}
               >
                 {slides.map((image, position) => (
                   <div className="gm-slide" key={`${image.src}-${position}`}>
@@ -83,7 +90,7 @@ export default function GalleryMapBand() {
                 type="button"
                 className="gm-nav gm-nav-prev"
                 aria-label="Previous photograph"
-                onClick={() => setIndex((current) => (current - 1 + slides.length) % slides.length)}
+                onClick={() => step(-1)}
               >
                 <i className="bi bi-chevron-left" />
               </button>
@@ -91,7 +98,7 @@ export default function GalleryMapBand() {
                 type="button"
                 className="gm-nav gm-nav-next"
                 aria-label="Next photograph"
-                onClick={() => setIndex((current) => (current + 1) % slides.length)}
+                onClick={() => step(1)}
               >
                 <i className="bi bi-chevron-right" />
               </button>
@@ -101,9 +108,9 @@ export default function GalleryMapBand() {
                   <button
                     type="button"
                     key={`dot-${image.src}-${position}`}
-                    className={`gm-dot${position === index ? ' is-active' : ''}`}
+                    className={`gm-dot${position === activeIndex ? ' is-active' : ''}`}
                     aria-label={`Show ${image.caption}`}
-                    aria-current={position === index}
+                    aria-current={position === activeIndex}
                     onClick={() => setIndex(position)}
                   />
                 ))}

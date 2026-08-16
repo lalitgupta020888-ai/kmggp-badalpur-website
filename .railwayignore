@@ -4,6 +4,9 @@ node_modules
 out
 build
 
+# Local admin content; production keeps this on the mounted volume instead
+.data
+
 # Source archives, not served by the app (public/ holds the served copies)
 assets
 PDF

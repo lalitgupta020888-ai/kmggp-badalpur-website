@@ -20,6 +20,10 @@
 # production
 /build
 
+# Admin panel content and uploads when running locally. In production this
+# lives on the hosting volume; it is site data, never source.
+/.data
+
 # misc
 .DS_Store
 *.pem

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import VideoModal from '@/components/VideoModal';
-import { FEATURED_VIDEO_ALBUM } from '@/lib/gallery';
 
 /**
  * The welcome film — the video carried by the featured gallery album, played
@@ -13,9 +12,12 @@ import { FEATURED_VIDEO_ALBUM } from '@/lib/gallery';
  * It opens on every fresh load of the site. Moving between pages afterwards
  * does not replay it: this sits in the root layout, so it stays mounted across
  * client-side navigation and only runs again on a real reload or a new visit.
+ *
+ * The album arrives as a prop from the root layout, which reads it on the
+ * server — so whichever album the admin marks as featured is the one that
+ * plays, without this component reaching for content itself.
  */
-export default function IntroVideo() {
-  const album = FEATURED_VIDEO_ALBUM;
+export default function IntroVideo({ album }) {
   // Opened from an effect rather than initial state, so the server-rendered
   // markup and the first client render agree before it appears.
   const [open, setOpen] = useState(false);

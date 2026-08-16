@@ -1,10 +1,9 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
 import { RECRUITERS } from '@/lib/recruiters';
+import { getHomeContent } from '@/lib/server/content';
 import HeroSlider from '@/components/HeroSlider';
 import NoticeBoard from '@/components/NoticeBoard';
 import NewsTicker from '@/components/NewsTicker';
@@ -125,7 +124,11 @@ const TESTIMONIALS = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  // The ticker, the notice board and the gallery band all show content the
+  // admin panel owns, so the page reads it on the server and hands it down.
+  const { ticker, notices, images } = await getHomeContent();
+
   return (
     <>
       <HeroSlider />
@@ -150,7 +153,7 @@ export default function Home() {
       </section>
 
       {/* Running announcements, straight under the figures */}
-      <NewsTicker />
+      <NewsTicker notices={ticker} />
 
       {/* Welcome + notice board */}
       <section className="section" style={{ background: 'var(--white)' }}>
@@ -224,7 +227,7 @@ export default function Home() {
             {/* The notice board absorbs whatever height the left column runs
                 to, so both columns finish on the same line */}
             <Col lg={5} className="home-aside">
-              <NoticeBoard />
+              <NoticeBoard notices={notices} />
               <PrincipalCard />
             </Col>
           </Row>
@@ -399,7 +402,7 @@ export default function Home() {
       </section>
 
       {/* Gallery strip beside the campus map */}
-      <GalleryMapBand />
+      <GalleryMapBand images={images} />
 
       {/* Closing CTA */}
       <section className="cta-band">

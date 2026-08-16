@@ -1,8 +1,6 @@
 import { Playfair_Display, Inter } from 'next/font/google';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import ScrollToTop from '@/components/ScrollToTop';
-import IntroVideo from '@/components/IntroVideo';
+import SiteFrame from '@/components/SiteFrame';
+import { getFeaturedVideoAlbum } from '@/lib/server/content';
 import './globals.css';
 
 const display = Playfair_Display({
@@ -28,15 +26,13 @@ export const metadata = {
     'Official website of Km. Mayawati Government Girls Polytechnic, Badalpur, Gautam Buddha Nagar — approved by AICTE, affiliated to BTEUP, empowering women through excellence in technical education.',
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const videoAlbum = await getFeaturedVideoAlbum();
+
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
-        <ScrollToTop />
-        <IntroVideo />
+        <SiteFrame videoAlbum={videoAlbum}>{children}</SiteFrame>
       </body>
     </html>
   );
