@@ -1,9 +1,7 @@
-"use client";
-
-import React, { use } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
-import { getDepartment } from '@/lib/departments';
+import { getDepartment } from '@/lib/server/departments';
 
 const FEATURES = [
   { icon: 'bi-pc-display', label: 'Modern equipment and workstations' },
@@ -12,9 +10,9 @@ const FEATURES = [
   { icon: 'bi-clock-fill', label: 'Extended access during project work' },
 ];
 
-export default function LabsPage({ params }) {
-  const { dept } = use(params);
-  const department = getDepartment(dept);
+export default async function LabsPage({ params }) {
+  const { dept } = await params;
+  const department = await getDepartment(dept);
 
   // A staff listing has no laboratories — see the faculty page for the reason.
   if (department.staff) notFound();

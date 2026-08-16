@@ -1,17 +1,9 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import {
-  PROGRAMMES,
-  PROGRAMME_COUNT,
-  TOTAL_INTAKE,
-  TOTAL_LATERAL,
-  TOTAL_SEATS,
-} from '@/lib/programmes';
+import { getProgrammeTotals } from '@/lib/server/programmes';
 
 const LETTERS = [
   { session: '2026-27', type: 'Extension of Approval (EOA)', status: 'Approved' },
@@ -21,7 +13,17 @@ const LETTERS = [
   { session: '2022-23', type: 'Extension of Approval (EOA)', status: 'Approved' },
 ];
 
-export default function AicteApprovalsPage() {
+export default async function AicteApprovalsPage() {
+  const {
+    programmes: PROGRAMMES,
+    lateralProgrammes: LATERAL_PROGRAMMES,
+    programmeCount: PROGRAMME_COUNT,
+    totalIntake: TOTAL_INTAKE,
+    totalLateral: TOTAL_LATERAL,
+    totalSeats: TOTAL_SEATS,
+    lateralIntake: LATERAL_INTAKE,
+  } = await getProgrammeTotals();
+
   return (
     <>
       <PageHeader

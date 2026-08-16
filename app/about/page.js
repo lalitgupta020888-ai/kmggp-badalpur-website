@@ -1,63 +1,29 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import { PROGRAMME_COUNT, TOTAL_INTAKE, TOTAL_LATERAL } from '@/lib/programmes';
+import { getProgrammeTotals } from '@/lib/server/programmes';
+import { getSection } from '@/lib/server/sections';
+import { paragraphs } from '@/lib/pages';
 
-const VALUES = [
-  {
-    icon: 'bi-lightbulb-fill',
-    title: 'Academic Excellence',
-    text: 'A rigorous, industry-aligned curriculum delivered by experienced and dedicated faculty.',
-  },
-  {
-    icon: 'bi-gender-female',
-    title: 'Women Empowerment',
-    text: 'A campus built exclusively for young women to learn, lead and thrive with confidence.',
-  },
-  {
-    icon: 'bi-tools',
-    title: 'Practical Learning',
-    text: 'Laboratory-led teaching that turns theory into demonstrable, employable skill.',
-  },
-  {
-    icon: 'bi-heart-fill',
-    title: 'Ethics & Values',
-    text: 'Integrity, discipline and social responsibility woven through campus life.',
-  },
-];
 
-const MILESTONES = [
-  {
-    title: 'Established in 2002 by the Government of Uttar Pradesh',
-    text: 'Founded to widen access to technical education for women across Gautam Buddha Nagar and beyond.',
-  },
-  {
-    title: 'A 7.3-Acre Campus at Badalpur',
-    text: 'Academic blocks, laboratories, the library, hostel and playgrounds spread across 7.3 acres of green campus.',
-  },
-  {
-    title: 'Approved by AICTE',
-    text: 'All diploma programmes run under the approval of the All India Council for Technical Education, New Delhi.',
-  },
-  {
-    title: 'Affiliated to BTEUP',
-    text: 'All diploma programmes follow the curriculum prescribed by the Board of Technical Education, Uttar Pradesh.',
-  },
-  {
-    title: 'Four Disciplines Offered',
-    text: 'Diplomas in Electronics, Computer Science and Information Technology with 75 seats each, and a PG diploma in Retail Management with 37 seats.',
-  },
-  {
-    title: 'A Growing Placement Network',
-    text: 'Strong ties with leading recruiters supported by a dedicated Training & Placement cell.',
-  },
-];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const {
+    programmes: PROGRAMMES,
+    lateralProgrammes: LATERAL_PROGRAMMES,
+    programmeCount: PROGRAMME_COUNT,
+    totalIntake: TOTAL_INTAKE,
+    totalLateral: TOTAL_LATERAL,
+    totalSeats: TOTAL_SEATS,
+    lateralIntake: LATERAL_INTAKE,
+  } = await getProgrammeTotals();
+
+  const page = await getSection('page-about');
+  const VALUES = page.values || [];
+  const MILESTONES = page.milestones || [];
+
   return (
     <>
       <PageHeader
@@ -74,36 +40,24 @@ export default function AboutPage() {
             <Col lg={7}>
               <SectionHead
                 align="start"
-                eyebrow="Our Story"
+                eyebrow={page.eyebrow}
                 icon="bi-bookmark-star-fill"
-                title="Education That Opens Doors"
+                title={page.title}
               />
-              <p className="lead">
-                Km. Mayawati Government Girls Polytechnic, Badalpur, Gautam Buddha Nagar is a premier
-                technical institution established in 2002 by the Government of Uttar Pradesh to
-                promote technical education among women. Spread over 7.3 acres, its diploma
-                programmes are approved by AICTE, New Delhi and affiliated to BTEUP, Lucknow.
-              </p>
-              <p>
-                Our goal is to foster an environment of academic excellence, innovation and holistic
-                development. The institute offers diploma courses across several engineering
-                disciplines, supported by state-of-the-art infrastructure and highly experienced
-                faculty who mentor every student individually.
-              </p>
-              <p>
-                Beyond the classroom, students take part in technical clubs, cultural festivals,
-                sports and community initiatives — building the confidence and character that employers
-                value as highly as technical skill.
-              </p>
+              <p className="lead">{page.lead}</p>
 
-              <div className="callout mt-4">
-                <i className="bi bi-quote" />
-                <p>
-                  <strong>Our vision</strong> is to empower young women with technical skills,
-                  leadership qualities and ethical values, enabling them to excel in a competitive
-                  global landscape.
-                </p>
-              </div>
+              {/* The body is stored as one block with blank lines between
+                  paragraphs, so the panel can offer a single text box. */}
+              {paragraphs(page.body).map((text) => (
+                <p key={text.slice(0, 40)}>{text}</p>
+              ))}
+
+              {page.callout && (
+                <div className="callout mt-4">
+                  <i className="bi bi-quote" />
+                  <p>{page.callout}</p>
+                </div>
+              )}
             </Col>
 
             <Col lg={5}>

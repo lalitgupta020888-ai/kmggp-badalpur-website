@@ -1,15 +1,13 @@
-"use client";
-
-import React, { use } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import { getSyllabus } from '@/lib/syllabus';
+import { getSyllabusFor } from '@/lib/server/syllabus';
 
-export default function BranchSyllabus({ params }) {
-  const { branch } = use(params);
-  const syllabus = getSyllabus(branch);
+export default async function BranchSyllabus({ params }) {
+  const { branch } = await params;
+  const syllabus = await getSyllabusFor(branch);
 
   if (!syllabus) notFound();
 

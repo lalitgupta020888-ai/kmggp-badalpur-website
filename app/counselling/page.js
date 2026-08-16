@@ -1,9 +1,8 @@
-"use client";
-
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
-import { COUNSELLING_LINKS, JEECUP_PORTAL } from '@/lib/counselling';
+import { JEECUP_PORTAL } from '@/lib/counselling';
+import { getSection } from '@/lib/server/sections';
 
 /**
  * The section landing page — the same seven entries as the sidebar, laid out as
@@ -27,7 +26,9 @@ const STAGES = [
   { icon: 'bi-building-check', title: 'Reporting at the Institute', text: 'Deposit the admission fee and submit your documents at KMGGP, Badalpur.' },
 ];
 
-export default function CounsellingHome() {
+export default async function CounsellingHome() {
+  const COUNSELLING_LINKS = await getSection('counselling-links');
+
   return (
     <>
       <div className="panel">

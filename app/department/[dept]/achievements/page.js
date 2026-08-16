@@ -1,43 +1,15 @@
-"use client";
-
-import React, { use } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
-import { getDepartment } from '@/lib/departments';
+import { getDepartment } from '@/lib/server/departments';
 
-const ACHIEVEMENTS = [
-  {
-    icon: 'bi-mortarboard-fill',
-    title: 'Student Excellence',
-    text: 'Many of our students have secured top ranks in the Board of Technical Education (BTEUP) examinations consistently over the last five years.',
-  },
-  {
-    icon: 'bi-briefcase-fill',
-    title: 'Placements',
-    text: 'Over 85% of eligible students were placed in leading multinational companies including Tech Mahindra, Wipro and Infosys during the recent placement drive.',
-  },
-  {
-    icon: 'bi-trophy-fill',
-    title: 'Projects & Hackathons',
-    text: 'Final year students recently won first prize at the State Level Technical Project Exhibition for their innovative Smart Campus project.',
-  },
-  {
-    icon: 'bi-people-fill',
-    title: 'Workshops & Seminars',
-    text: 'The department regularly hosts industry experts for technical seminars on emerging technologies and career pathways.',
-  },
-];
 
-const AWARDS = [
-  { year: '2026', title: 'First Prize — State Level Technical Project Exhibition', icon: 'bi-award-fill' },
-  { year: '2025', title: 'Best Performing Department — Institute Annual Awards', icon: 'bi-trophy-fill' },
-  { year: '2025', title: 'Top Ranks in BTEUP Diploma Examinations', icon: 'bi-star-fill' },
-  { year: '2024', title: 'Winners — Inter-Polytechnic Technical Quiz', icon: 'bi-patch-check-fill' },
-];
 
-export default function AchievementsPage({ params }) {
-  const { dept } = use(params);
-  const department = getDepartment(dept);
+export default async function AchievementsPage({ params }) {
+  const { dept } = await params;
+  const department = await getDepartment(dept);
+  const ACHIEVEMENTS = department.achievements || [];
+  const AWARDS = department.awards || [];
 
   // A staff listing has no achievements page — see the faculty page for the reason.
   if (department.staff) notFound();

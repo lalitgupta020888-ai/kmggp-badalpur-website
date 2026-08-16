@@ -1,9 +1,7 @@
-"use client";
-
-import React, { use } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
-import { getDepartment } from '@/lib/departments';
+import { getDepartment } from '@/lib/server/departments';
 
 /**
  * The figure tiles are derived from the department rather than fixed, because
@@ -83,9 +81,9 @@ function StaffDirectory({ department }) {
   );
 }
 
-export default function DepartmentHome({ params }) {
-  const { dept } = use(params);
-  const department = getDepartment(dept);
+export default async function DepartmentHome({ params }) {
+  const { dept } = await params;
+  const department = await getDepartment(dept);
 
   if (department.staff) return <StaffDirectory department={department} />;
 

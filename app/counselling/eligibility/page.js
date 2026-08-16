@@ -1,10 +1,8 @@
-"use client";
-
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import { JEECUP_PORTAL } from '@/lib/counselling';
-import { LATERAL_INTAKE } from '@/lib/programmes';
+import { getProgrammeTotals } from '@/lib/server/programmes';
 
 /**
  * The groupwise table follows the JEECUP group codes. Only Group A is offered at
@@ -108,44 +106,8 @@ const BRANCHES = [
   { branch: 'Information Technology', slug: 'it', icon: 'bi-hdd-network-fill' },
 ];
 
-/**
- * Both entry routes lead to the same three branches — Group A from Class 10 into
- * the first year, Group K from Class 12 or ITI straight into the second.
- */
-const ENTRY_ROUTES = [
-  {
-    code: 'A',
-    label: 'Group A — First Year Entry',
-    icon: 'bi-mortarboard-fill',
-    duration: '3 Years (6 Semesters)',
-    entry: 'Class 10 passed with Science and Mathematics',
-    note: 'The regular route. Candidates join the first semester and complete all six semesters.',
-  },
-  {
-    code: 'K',
-    label: 'Group K — Lateral Entry',
-    icon: 'bi-box-arrow-in-right',
-    duration: '2 Years (4 Semesters)',
-    entry: 'Class 12 with Science / Maths, or a two-year ITI in a trade related to the branch',
-    note: `Candidates join directly in the third semester against ${LATERAL_INTAKE} supernumerary seats per branch, as per AICTE norms.`,
-  },
-];
 
-const LATERAL_ELIGIBILITY = [
-  'Passed Class 12 (Intermediate) with Science and Mathematics from a recognised board, with a minimum of 35% marks.',
-  'Or passed Class 12 with a vocational or technical subject relevant to the branch applied for.',
-  'Or passed a two-year ITI course, after Class 10, in a trade related to the branch applied for.',
-  'Qualified in the JEECUP entrance examination under Group K for the current session.',
-  'Admission is open to female candidates only, as this is a Government Girls Polytechnic.',
-];
 
-const LATERAL_NOTES = [
-  'Lateral entry candidates are admitted directly to the third semester (second year) of the diploma.',
-  `Seats are supernumerary — ${LATERAL_INTAKE} per branch, over and above the sanctioned first-year intake, as permitted by AICTE.`,
-  'The branch allotted depends on your Group K rank, choice order and seat availability during counselling.',
-  'The course, examination and certification are identical to those of first-year entrants from the third semester onwards.',
-  'An ITI candidate must produce the trade certificate along with the Class 10 marksheet at verification.',
-];
 
 const COMMON = [
   'The candidate must be a citizen of India.',
@@ -155,7 +117,57 @@ const COMMON = [
   'This institute admits women candidates only, across every branch offered.',
 ];
 
-export default function GroupwiseEligibility() {
+export default async function GroupwiseEligibility() {
+  const {
+    programmes: PROGRAMMES,
+    lateralProgrammes: LATERAL_PROGRAMMES,
+    programmeCount: PROGRAMME_COUNT,
+    totalIntake: TOTAL_INTAKE,
+    totalLateral: TOTAL_LATERAL,
+    totalSeats: TOTAL_SEATS,
+    lateralIntake: LATERAL_INTAKE,
+  } = await getProgrammeTotals();
+
+  /**
+   * Both entry routes lead to the same three branches — Group A from Class 10 into
+   * the first year, Group K from Class 12 or ITI straight into the second.
+   */
+  const ENTRY_ROUTES = [
+    {
+      code: 'A',
+      label: 'Group A — First Year Entry',
+      icon: 'bi-mortarboard-fill',
+      duration: '3 Years (6 Semesters)',
+      entry: 'Class 10 passed with Science and Mathematics',
+      note: 'The regular route. Candidates join the first semester and complete all six semesters.',
+    },
+    {
+      code: 'K',
+      label: 'Group K — Lateral Entry',
+      icon: 'bi-box-arrow-in-right',
+      duration: '2 Years (4 Semesters)',
+      entry: 'Class 12 with Science / Maths, or a two-year ITI in a trade related to the branch',
+      note: `Candidates join directly in the third semester against ${LATERAL_INTAKE} supernumerary seats per branch, as per AICTE norms.`,
+    },
+  ];
+
+  const LATERAL_ELIGIBILITY = [
+    'Passed Class 12 (Intermediate) with Science and Mathematics from a recognised board, with a minimum of 35% marks.',
+    'Or passed Class 12 with a vocational or technical subject relevant to the branch applied for.',
+    'Or passed a two-year ITI course, after Class 10, in a trade related to the branch applied for.',
+    'Qualified in the JEECUP entrance examination under Group K for the current session.',
+    'Admission is open to female candidates only, as this is a Government Girls Polytechnic.',
+  ];
+
+  const LATERAL_NOTES = [
+    'Lateral entry candidates are admitted directly to the third semester (second year) of the diploma.',
+    `Seats are supernumerary — ${LATERAL_INTAKE} per branch, over and above the sanctioned first-year intake, as permitted by AICTE.`,
+    'The branch allotted depends on your Group K rank, choice order and seat availability during counselling.',
+    'The course, examination and certification are identical to those of first-year entrants from the third semester onwards.',
+    'An ITI candidate must produce the trade certificate along with the Class 10 marksheet at verification.',
+  ];
+
+
   return (
     <>
       <div className="panel">

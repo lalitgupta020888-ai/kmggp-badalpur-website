@@ -1,10 +1,8 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
 import SideNav from '@/components/SideNav';
-import { COUNSELLING_LINKS } from '@/lib/counselling';
+import { getSection } from '@/lib/server/sections';
 
 /**
  * The counselling section mirrors the JEECUP portal's layout — a standing
@@ -12,7 +10,9 @@ import { COUNSELLING_LINKS } from '@/lib/counselling';
  * The item list comes from lib/counselling so the navbar dropdown and this
  * sidebar always show the same seven entries.
  */
-export default function CounsellingLayout({ children }) {
+export default async function CounsellingLayout({ children }) {
+  const COUNSELLING_LINKS = await getSection('counselling-links');
+
   return (
     <>
       <PageHeader

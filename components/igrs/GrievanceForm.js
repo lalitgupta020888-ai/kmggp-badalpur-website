@@ -3,14 +3,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Link from 'next/link';
-import {
-  CATEGORIES,
-  COURSES,
-  DEPARTMENTS,
-  RELATIONS,
-  YEARS,
-  saveGrievance,
-} from '@/lib/igrs';
+import { CATEGORIES, saveGrievance } from '@/lib/igrs';
 
 const STEPS = [
   { icon: 'bi-pencil-square', title: 'Fill the form', text: 'Share your details and describe the issue.' },
@@ -92,7 +85,7 @@ function Receipt({ grievance, type }) {
  * The only difference between the three is the identity block at the top and
  * the category list, so the rest of the form is written once here.
  */
-export default function GrievanceForm({ type, heading, icon }) {
+export default function GrievanceForm({ type, heading, icon, options = {} }) {
   const [receipt, setReceipt] = useState(null);
 
   const handleSubmit = (event) => {
@@ -145,7 +138,7 @@ export default function GrievanceForm({ type, heading, icon }) {
                       <Field label="Course" required>
                         <Form.Select name="course" required defaultValue="">
                           <option value="" disabled>Select course</option>
-                          {COURSES.map((c) => (
+                          {(options.courses || []).map((c) => (
                             <option key={c.value} value={c.value}>{c.label}</option>
                           ))}
                         </Form.Select>
@@ -155,7 +148,7 @@ export default function GrievanceForm({ type, heading, icon }) {
                       <Field label="Year" required>
                         <Form.Select name="year" required defaultValue="">
                           <option value="" disabled>Select year</option>
-                          {YEARS.map((y) => (
+                          {(options.years || []).map((y) => (
                             <option key={y.value} value={y.value}>{y.label}</option>
                           ))}
                         </Form.Select>
@@ -177,7 +170,7 @@ export default function GrievanceForm({ type, heading, icon }) {
                       <Field label="Relation with Student" required>
                         <Form.Select name="relation" required defaultValue="">
                           <option value="" disabled>Select relation</option>
-                          {RELATIONS.map((r) => (
+                          {(options.relations || []).map((r) => (
                             <option key={r.value} value={r.value}>{r.label}</option>
                           ))}
                         </Form.Select>
@@ -218,7 +211,7 @@ export default function GrievanceForm({ type, heading, icon }) {
                       <Field label="Department" required>
                         <Form.Select name="department" required defaultValue="">
                           <option value="" disabled>Select department</option>
-                          {DEPARTMENTS.map((d) => (
+                          {(options.departments || []).map((d) => (
                             <option key={d.value} value={d.value}>{d.label}</option>
                           ))}
                         </Form.Select>

@@ -1,53 +1,19 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
+import { getSection } from '@/lib/server/sections';
 
-const MISSION = [
-  'Provide a rigorous academic environment that fosters innovation, enquiry and continuous learning.',
-  'Deliver laboratory-led instruction so every student converts theory into demonstrable skill.',
-  'Build lasting industry collaborations for practical exposure and stronger placement outcomes.',
-  'Create a safe, inclusive campus where each student can realise her full potential.',
-  'Instil ethical values, discipline and a sense of responsibility towards society.',
-  'Encourage entrepreneurship and higher studies alongside conventional career pathways.',
-];
 
-const OBJECTIVES = [
-  {
-    icon: 'bi-mortarboard-fill',
-    title: 'Academic Quality',
-    text: 'Maintain a consistently high pass percentage and produce top rank holders in BTEUP examinations.',
-  },
-  {
-    icon: 'bi-briefcase-fill',
-    title: 'Employability',
-    text: 'Equip every eligible student with the technical and soft skills required to secure meaningful employment.',
-  },
-  {
-    icon: 'bi-lightbulb-fill',
-    title: 'Innovation',
-    text: 'Encourage student projects, technical competitions and exposure to emerging technologies.',
-  },
-  {
-    icon: 'bi-gender-female',
-    title: 'Women Empowerment',
-    text: 'Build confidence, leadership and financial independence among young women through technical education.',
-  },
-];
 
-const VALUES = [
-  { icon: 'bi-shield-check', label: 'Integrity' },
-  { icon: 'bi-people-fill', label: 'Inclusivity' },
-  { icon: 'bi-stars', label: 'Excellence' },
-  { icon: 'bi-hand-thumbs-up-fill', label: 'Discipline' },
-  { icon: 'bi-lightbulb-fill', label: 'Innovation' },
-  { icon: 'bi-heart-fill', label: 'Empathy' },
-];
 
-export default function VisionMissionPage() {
+export default async function VisionMissionPage() {
+  const page = await getSection('page-vision-mission');
+  const MISSION = (page.mission || []).map((item) => item.text);
+  const OBJECTIVES = page.objectives || [];
+  const VALUES = page.values || [];
+
   return (
     <>
       <PageHeader
@@ -71,11 +37,7 @@ export default function VisionMissionPage() {
                   <span className="icon-tile mb-4">
                     <i className="bi bi-eye-fill" />
                   </span>
-                  <p className="lead">
-                    To be recognised as a centre of excellence in technical education for women —
-                    producing skilled, confident and ethical professionals who lead in industry and
-                    contribute meaningfully to society.
-                  </p>
+                  <p className="lead">{page.vision}</p>
                   <div className="gold-rule-thin my-4" />
                   <p className="mb-0">
                     We aspire to a campus where every young woman, regardless of her background,

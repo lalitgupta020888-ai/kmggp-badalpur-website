@@ -1,18 +1,9 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import {
-  PROGRAMMES,
-  LATERAL_PROGRAMMES,
-  LATERAL_INTAKE,
-  TOTAL_INTAKE,
-  TOTAL_LATERAL,
-  TOTAL_SEATS,
-} from '@/lib/programmes';
+import { getProgrammeTotals } from '@/lib/server/programmes';
 
 /**
  * Lateral entry admits the three engineering branches under JEECUP Group K,
@@ -27,18 +18,30 @@ const LATERAL_ELIGIBILITY = [
   'Qualified in the JEECUP entrance examination under Group K.',
 ];
 
-const LATERAL_POINTS = [
-  { icon: 'bi-box-arrow-in-right', label: 'Entry Point', value: 'Third semester (second year)' },
-  { icon: 'bi-hourglass-split', label: 'Duration', value: '2 Years (4 Semesters)' },
-  {
-    icon: 'bi-people-fill',
-    label: 'Seats',
-    value: `${LATERAL_INTAKE} per branch — supernumerary, as per AICTE norms`,
-  },
-  { icon: 'bi-diagram-3-fill', label: 'JEECUP Group', value: 'Group K' },
-];
 
-export default function CoursesOffered() {
+export default async function CoursesOffered() {
+  const {
+    programmes: PROGRAMMES,
+    lateralProgrammes: LATERAL_PROGRAMMES,
+    programmeCount: PROGRAMME_COUNT,
+    totalIntake: TOTAL_INTAKE,
+    totalLateral: TOTAL_LATERAL,
+    totalSeats: TOTAL_SEATS,
+    lateralIntake: LATERAL_INTAKE,
+  } = await getProgrammeTotals();
+
+  const LATERAL_POINTS = [
+    { icon: 'bi-box-arrow-in-right', label: 'Entry Point', value: 'Third semester (second year)' },
+    { icon: 'bi-hourglass-split', label: 'Duration', value: '2 Years (4 Semesters)' },
+    {
+      icon: 'bi-people-fill',
+      label: 'Seats',
+      value: `${LATERAL_INTAKE} per branch — supernumerary, as per AICTE norms`,
+    },
+    { icon: 'bi-diagram-3-fill', label: 'JEECUP Group', value: 'Group K' },
+  ];
+  
+
   return (
     <>
       <PageHeader

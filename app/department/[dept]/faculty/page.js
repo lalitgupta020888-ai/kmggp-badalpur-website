@@ -1,37 +1,14 @@
-"use client";
-
-import React, { use } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
-import { getDepartment } from '@/lib/departments';
+import { getDepartment } from '@/lib/server/departments';
+import { monogram } from '@/lib/leadership';
 
-const FACULTY = [
-  {
-    name: 'Dr. Example Name',
-    designation: 'Head of Department',
-    qualification: 'Ph.D., M.Tech.',
-    experience: '15 Years',
-    initial: 'D',
-  },
-  {
-    name: 'Mrs. Faculty Two',
-    designation: 'Lecturer',
-    qualification: 'M.Tech.',
-    experience: '8 Years',
-    initial: 'F',
-  },
-  {
-    name: 'Ms. Faculty Three',
-    designation: 'Lecturer',
-    qualification: 'B.Tech.',
-    experience: '3 Years',
-    initial: 'F',
-  },
-];
 
-export default function FacultyPage({ params }) {
-  const { dept } = use(params);
-  const department = getDepartment(dept);
+export default async function FacultyPage({ params }) {
+  const { dept } = await params;
+  const department = await getDepartment(dept);
+  const FACULTY = department.faculty || [];
 
   // A staff listing has no faculty page — the sidebar never links here, and the
   // URL typed by hand must not render an empty one either.
@@ -52,10 +29,25 @@ export default function FacultyPage({ params }) {
 
           <Row className="g-4 mt-1">
             {FACULTY.map((member) => (
-              <Col lg={4} md={6} key={member.name}>
+              <Col lg={4} md={6} key={member.id || member.name}>
                 <div className="premium-card h-100 p-4 text-center">
-                  <span className="quote-avatar mx-auto mb-3" style={{ width: 64, height: 64, flex: '0 0 64px', fontSize: '1.5rem' }}>
-                    {member.initial}
+                  {/* A portrait if one has been uploaded, otherwise the initial
+                      of the name — the same fallback the leadership grid uses,
+                      so a department reads properly before photographs arrive. */}
+                  <span
+                    className="quote-avatar mx-auto mb-3"
+                    style={{
+                      width: 64,
+                      height: 64,
+                      flex: '0 0 64px',
+                      fontSize: '1.5rem',
+                      overflow: 'hidden',
+                      backgroundImage: member.photo ? `url(${member.photo})` : undefined,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'top center',
+                    }}
+                  >
+                    {member.photo ? '' : monogram(member.name)}
                   </span>
                   <h5 className="fw-bold mb-1">{member.name}</h5>
                   <span className="eyebrow">{member.designation}</span>
@@ -94,7 +86,7 @@ export default function FacultyPage({ params }) {
               </thead>
               <tbody>
                 {FACULTY.map((member, index) => (
-                  <tr key={member.name}>
+                  <tr key={member.id || member.name}>
                     <td>{index + 1}</td>
                     <td>
                       <i className="bi bi-person-circle text-gold me-2" />

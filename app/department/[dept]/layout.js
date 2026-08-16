@@ -1,17 +1,15 @@
-"use client";
-
-import React, { use } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
 import SideNav from '@/components/SideNav';
-import { getDepartment, getDeptNav } from '@/lib/departments';
+import { getDepartment, deptNav } from '@/lib/server/departments';
 
-export default function DepartmentLayout({ children, params }) {
+export default async function DepartmentLayout({ children, params }) {
   // In Next.js 16 `params` is a Promise, unwrapped with React's `use` hook.
-  const { dept } = use(params);
-  const department = getDepartment(dept);
+  const { dept } = await params;
+  const department = await getDepartment(dept);
 
-  const navItems = getDeptNav(department).map((item) => ({
+  const navItems = deptNav(department).map((item) => ({
     href: `/department/${dept}${item.path}`,
     label: item.label,
     icon: item.icon,

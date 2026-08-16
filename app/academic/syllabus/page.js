@@ -1,37 +1,10 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
+import { getSection } from '@/lib/server/sections';
 
-const BRANCHES = [
-  {
-    slug: 'electronics',
-    icon: 'bi-cpu-fill',
-    name: 'Electronics Engineering',
-    text: 'Circuit theory, digital electronics, microprocessors, communication systems and embedded design.',
-  },
-  {
-    slug: 'cse',
-    icon: 'bi-pc-display',
-    name: 'Computer Science & Engineering',
-    text: 'Programming fundamentals, data structures, databases, operating systems and software engineering.',
-  },
-  {
-    slug: 'it',
-    icon: 'bi-hdd-network-fill',
-    name: 'Information Technology',
-    text: 'Computer networks, web technologies, cloud fundamentals, cyber security and IT infrastructure.',
-  },
-  {
-    slug: 'retail-management',
-    icon: 'bi-shop',
-    name: 'P. G. Diploma in Retail Management',
-    text: 'Retail operations, visual merchandising, supply chain, retail marketing and customer relationship management.',
-  },
-];
 
 /** `href` unset means there is nothing to point at yet — see the render. */
 const REFERENCES = [
@@ -48,7 +21,9 @@ const SEMESTERS = [
   'Sixth Semester — Major Project & Industrial Training',
 ];
 
-export default function Syllabus() {
+export default async function Syllabus() {
+  const BRANCHES = await getSection('syllabus');
+
   return (
     <>
       <PageHeader

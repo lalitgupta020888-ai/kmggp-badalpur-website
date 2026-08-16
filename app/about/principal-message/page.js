@@ -1,34 +1,14 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import { getSection } from '@/lib/server/sections';
+import { paragraphs } from '@/lib/pages';
 
-const PRIORITIES = [
-  {
-    icon: 'bi-mortarboard-fill',
-    title: 'Academic Rigour',
-    text: 'Disciplined teaching, regular assessment and individual attention for every student.',
-  },
-  {
-    icon: 'bi-tools',
-    title: 'Practical Skill',
-    text: 'Laboratory work and live projects that make classroom concepts tangible.',
-  },
-  {
-    icon: 'bi-briefcase-fill',
-    title: 'Career Readiness',
-    text: 'Training, mentoring and placement support from the first semester onward.',
-  },
-  {
-    icon: 'bi-shield-lock-fill',
-    title: 'A Safe Campus',
-    text: 'A secure, respectful environment where students can focus entirely on learning.',
-  },
-];
+export default async function PrincipalMessagePage() {
+  const page = await getSection('page-principal-message');
+  const PRIORITIES = page.priorities || [];
 
-export default function PrincipalMessagePage() {
   return (
     <>
       <PageHeader
@@ -64,7 +44,7 @@ export default function PrincipalMessagePage() {
                     </span>
                     <div className="text-start">
                       <div className="label">Email</div>
-                      <p className="value">principal@kmggp.ac.in</p>
+                      <p className="value">{page.email}</p>
                     </div>
                   </div>
                   <div className="contact-line">
@@ -73,7 +53,7 @@ export default function PrincipalMessagePage() {
                     </span>
                     <div className="text-start">
                       <div className="label">Office</div>
-                      <p className="value">+91 XXXXX XXXXX</p>
+                      <p className="value">{page.phone}</p>
                     </div>
                   </div>
                 </div>
@@ -100,58 +80,23 @@ export default function PrincipalMessagePage() {
                   <div className="quote-card border-0 shadow-none p-0 mb-4" style={{ borderLeft: 'none' }}>
                     <span className="quote-mark">&rdquo;</span>
                     <p className="lead" style={{ fontStyle: 'italic' }}>
-                      Education is the most powerful instrument a young woman can hold. Our purpose
-                      here is to place that instrument firmly in her hands.
+                      {page.quote}
                     </p>
                   </div>
 
                   <div className="gold-rule-thin mb-4" />
 
-                  <p>
-                    It gives me great pleasure to welcome you to Km. Mayawati Government Girls
-                    Polytechnic, Badalpur. Established in 2002 by the Government of Uttar Pradesh, this
-                    institute exists for a clear and important reason — to make quality technical
-                    education accessible to young women, and to help them build careers of
-                    independence and dignity.
-                  </p>
-
-                  <p>
-                    Over the years we have grown into a campus with modern laboratories, a rich
-                    library and a committed faculty who know their students by name. Our diploma
-                    programmes in Electronics Engineering, Computer Science &amp; Engineering and
-                    Information Technology follow the BTEUP curriculum, but our teaching goes
-                    further — we insist that every concept taught in the classroom is proved on a
-                    workbench.
-                  </p>
-
-                  <p>
-                    Equally important is what happens beyond academics. Through clubs, cultural
-                    festivals, sports and community outreach, our students learn to speak with
-                    confidence, work in teams and lead. Employers tell us these qualities matter as
-                    much as technical knowledge, and our placement record reflects that.
-                  </p>
-
-                  <p>
-                    To parents, I offer this assurance: your daughter will study in a safe,
-                    disciplined and supportive environment where her progress is watched closely and
-                    her wellbeing is taken seriously.
-                  </p>
-
-                  <p className="mb-0">
-                    To our students — be curious, be diligent, and never underestimate what you are
-                    capable of achieving. The institute and its faculty stand with you at every step
-                    of your journey.
-                  </p>
+                  {paragraphs(page.body).map((text) => (
+                    <p key={text.slice(0, 40)}>{text}</p>
+                  ))}
 
                   <div className="quote-author mt-4">
                     <span className="quote-avatar">
                       <i className="bi bi-pen-fill" />
                     </span>
                     <div>
-                      <div className="quote-name">Principal</div>
-                      <div className="quote-meta">
-                        Km. Mayawati Government Girls Polytechnic, Badalpur
-                      </div>
+                      <div className="quote-name">{page.signatureName}</div>
+                      <div className="quote-meta">{page.signatureRole}</div>
                     </div>
                   </div>
                 </div>

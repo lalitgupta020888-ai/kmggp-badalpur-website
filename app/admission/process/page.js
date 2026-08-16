@@ -1,10 +1,8 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
-import { LATERAL_INTAKE } from '@/lib/programmes';
+import { getProgrammeTotals } from '@/lib/server/programmes';
 
 const JEECUP_PORTAL = 'https://jeecup.admissions.nic.in/';
 
@@ -78,7 +76,17 @@ const DOCUMENTS = [
   'Medical fitness certificate',
 ];
 
-export default function AdmissionProcess() {
+export default async function AdmissionProcess() {
+  const {
+    programmes: PROGRAMMES,
+    lateralProgrammes: LATERAL_PROGRAMMES,
+    programmeCount: PROGRAMME_COUNT,
+    totalIntake: TOTAL_INTAKE,
+    totalLateral: TOTAL_LATERAL,
+    totalSeats: TOTAL_SEATS,
+    lateralIntake: LATERAL_INTAKE,
+  } = await getProgrammeTotals();
+
   return (
     <>
       <PageHeader
