@@ -32,8 +32,24 @@ export default async function RootLayout({ children }) {
   // rather than in each of the sixty routes underneath.
   const [videoAlbum, sections] = await Promise.all([
     getFeaturedVideoAlbum(),
-    getSections(['nav-menus', 'nav-actions', 'topbar', 'social-links', 'brand', 'institute']),
+    getSections([
+      'nav-menus',
+      'nav-actions',
+      'topbar',
+      'social-links',
+      'brand',
+      'institute',
+      'welcome-popup',
+    ]),
   ]);
+
+  // The popup is a client component, so whatever is handed to it travels to
+  // every visitor's browser in the page payload. An announcement that is
+  // switched off — or one being drafted — has no business being sent, so the
+  // props are decided here and only what is actually shown goes out.
+  const popupSection = sections['welcome-popup'];
+  const usesGalleryFilm = popupSection?.kind === 'Gallery film';
+  const popup = popupSection?.enabled ? popupSection : null;
 
   const institute = sections.institute;
   const chrome = {
@@ -48,7 +64,11 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
-        <SiteFrame videoAlbum={videoAlbum} chrome={chrome}>
+        <SiteFrame
+          videoAlbum={popup && usesGalleryFilm ? videoAlbum : null}
+          popup={popup}
+          chrome={chrome}
+        >
           {children}
         </SiteFrame>
       </body>

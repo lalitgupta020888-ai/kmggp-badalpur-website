@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
-import IntroVideo from '@/components/IntroVideo';
+import WelcomePopup from '@/components/WelcomePopup';
 
 /**
  * The public site's chrome — navigation, footer, and the two floating extras.
@@ -20,7 +20,7 @@ import IntroVideo from '@/components/IntroVideo';
  * `children` is passed straight through, so the pages inside stay server
  * components even though this wrapper is a client one.
  */
-export default function SiteFrame({ children, videoAlbum, chrome = {} }) {
+export default function SiteFrame({ children, videoAlbum, popup, chrome = {} }) {
   const pathname = usePathname();
 
   if (pathname.startsWith('/admin')) {
@@ -39,7 +39,7 @@ export default function SiteFrame({ children, videoAlbum, chrome = {} }) {
       <main>{children}</main>
       <Footer officeHours={chrome.officeHours} social={chrome.social} topbar={chrome.topbar} />
       <ScrollToTop />
-      <IntroVideo album={videoAlbum} />
+      <WelcomePopup popup={popup} galleryAlbum={videoAlbum} />
     </>
   );
 }
