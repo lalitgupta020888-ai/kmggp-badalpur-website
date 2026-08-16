@@ -1,0 +1,15 @@
+# Build output and dependencies — Railway installs and builds these itself
+node_modules
+.next
+out
+build
+
+# Source archives, not served by the app (public/ holds the served copies)
+assets
+PDF
+
+# Local and other-platform config
+.git
+.vercel
+.env*
+*.log
