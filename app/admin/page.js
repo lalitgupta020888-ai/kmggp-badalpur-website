@@ -54,6 +54,30 @@ export default async function AdminDashboard() {
       body: 'Put an announcement on the notice board and the notices page.',
     },
     {
+      href: '/admin/content/leadership',
+      icon: 'bi-people-fill',
+      title: 'Change a dignitary',
+      body: 'Update a name, designation or photograph when a post changes hands.',
+    },
+    {
+      href: '/admin/content/principal-card',
+      icon: 'bi-person-video2',
+      title: 'Change the Principal',
+      body: 'Name, designation, portrait and the quotation shown on the home page.',
+    },
+    {
+      href: '/admin/content/timetable',
+      icon: 'bi-clock-history',
+      title: 'Publish a time-table',
+      body: 'Upload the PDF against a semester and it appears on the branch page.',
+    },
+    {
+      href: '/admin/content/nav-menus',
+      icon: 'bi-list-nested',
+      title: 'Edit the menu',
+      body: 'Add, rename, reorder or remove any menu and its dropdown links.',
+    },
+    {
       href: '/admin/orders',
       icon: 'bi-file-earmark-arrow-up-fill',
       title: 'Publish a document',

@@ -1,8 +1,6 @@
-"use client";
-
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { RECRUITERS } from '@/lib/recruiters';
+import { getSection } from '@/lib/server/sections';
 
 const SECTORS = [
   { icon: 'bi-code-slash', title: 'IT & Software Services', text: 'Development, testing, technical support and IT operations roles.' },
@@ -11,7 +9,9 @@ const SECTORS = [
   { icon: 'bi-headset', title: 'Business Process Services', text: 'Technical helpdesk, process associate and analyst positions.' },
 ];
 
-export default function Recruiters() {
+export default async function Recruiters() {
+  const RECRUITERS = await getSection('recruiters');
+
   return (
     <>
       <div className="panel">

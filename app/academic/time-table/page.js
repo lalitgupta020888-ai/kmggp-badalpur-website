@@ -1,46 +1,19 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import { PERIODS, NOTES } from '@/lib/timetable';
+import { getSections } from '@/lib/server/sections';
 
-/**
- * Each card opens the programme's own page, where the schedule is published a
- * semester at a time — one card cannot carry three of them, and a single PDF
- * per branch left a first semester student downloading the fifth semester's
- * week. The semesters themselves live in `lib/timetable.js`.
- */
-const BRANCHES = [
-  {
-    slug: 'electronics',
-    icon: 'bi-cpu-fill',
-    name: 'Electronics Engineering',
-    text: 'Lecture, tutorial and laboratory slots for all six semesters of the Electronics diploma.',
-  },
-  {
-    slug: 'cse',
-    icon: 'bi-pc-display',
-    name: 'Computer Science & Engineering',
-    text: 'Weekly class schedule with programming and project laboratory allocations.',
-  },
-  {
-    slug: 'it',
-    icon: 'bi-hdd-network-fill',
-    name: 'Information Technology',
-    text: 'Weekly class schedule covering networking, web technology and security laboratories.',
-  },
-  {
-    slug: 'retail-management',
-    icon: 'bi-shop',
-    name: 'P. G. Diploma in Retail Management',
-    text: 'Weekly schedule for the retail operations, merchandising and business computing sessions.',
-  },
-];
 
-export default function TimeTable() {
+export default async function TimeTable() {
+  // Programmes, the period grid and the notes are all admin-owned now; the
+  // cards below are built from the same list the branch pages read.
+  const sections = await getSections(['timetable', 'periods', 'timetable-notes']);
+  const BRANCHES = sections.timetable;
+  const PERIODS = sections.periods;
+  const NOTES = sections['timetable-notes'].map((note) => note.text);
+
   return (
     <>
       <PageHeader

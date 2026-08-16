@@ -1,8 +1,6 @@
-"use client";
-
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { OFFICE_HOURS } from '@/lib/institute';
+import { getSection } from '@/lib/server/sections';
 
 const OBJECTIVES = [
   'Invite reputed companies for on-campus and off-campus recruitment drives.',
@@ -30,7 +28,10 @@ const SERVICES = [
   },
 ];
 
-export default function TNPDepartment() {
+export default async function TNPDepartment() {
+  const institute = await getSection('institute');
+  const OFFICE_HOURS = `${institute.officeDays}, ${institute.officeTime}`;
+
   return (
     <>
       <div className="panel">

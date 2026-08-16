@@ -4,7 +4,6 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
-import { OFFICE_HOURS } from '@/lib/institute';
 
 const QUICK_LINKS = [
   { href: '/about', label: 'About Us' },
@@ -27,7 +26,9 @@ const IMPORTANT_LINKS = [
   { href: 'https://scholarship.up.gov.in/', label: 'SCHOLARSHIP' },
 ];
 
-export default function Footer() {
+export default function Footer({ officeHours = '', social = [], topbar = {} }) {
+  const shownSocial = social.filter((item) => item.href);
+
   return (
     <footer className="footer mt-auto">
       <Container>
@@ -51,12 +52,21 @@ export default function Footer() {
               Km. Mayawati Government Girls Polytechnic, Badalpur is committed to providing quality
               technical education to women and empowering them to lead in the engineering profession.
             </p>
-            <div className="footer-social">
-              <a href="#" aria-label="Facebook"><i className="bi bi-facebook" /></a>
-              <a href="#" aria-label="Instagram"><i className="bi bi-instagram" /></a>
-              <a href="#" aria-label="YouTube"><i className="bi bi-youtube" /></a>
-              <a href="#" aria-label="LinkedIn"><i className="bi bi-linkedin" /></a>
-            </div>
+            {shownSocial.length > 0 && (
+              <div className="footer-social">
+                {shownSocial.map((item) => (
+                  <a
+                    key={item.id || item.label}
+                    href={item.href}
+                    aria-label={item.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className={`bi ${item.icon}`} />
+                  </a>
+                ))}
+              </div>
+            )}
           </Col>
 
           <Col lg={2} md={6}>
@@ -101,15 +111,15 @@ export default function Footer() {
             </div>
             <div className="footer-contact-item">
               <i className="bi bi-telephone-fill" />
-              <a href="tel:+910000000000">+91 XXXXX XXXXX</a>
+              <a href={topbar.phoneHref || `tel:${topbar.phone}`}>{topbar.phone}</a>
             </div>
             <div className="footer-contact-item">
               <i className="bi bi-envelope-fill" />
-              <a href="mailto:info@kmggp.ac.in">info@kmggp.ac.in</a>
+              <a href={`mailto:${topbar.email}`}>{topbar.email}</a>
             </div>
             <div className="footer-contact-item">
               <i className="bi bi-clock-fill" />
-              <span>{OFFICE_HOURS}</span>
+              <span>{officeHours}</span>
             </div>
           </Col>
         </Row>

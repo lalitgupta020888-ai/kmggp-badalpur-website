@@ -12,19 +12,14 @@ import Image from 'next/image';
  * so the photographs walk past one by one rather than cross-fading in place.
  */
 
-const LOCATION = {
-  name: 'Km. Mayawati Government Girls Polytechnic, Badalpur, Gautambuddh Nagar, Uttar Pradesh - 203207',
-  lat: 28.593145,
-  lng: 77.51895,
-};
-
-const MAP_POINT = `${LOCATION.lat},${LOCATION.lng}`;
-const MAP_EMBED = `https://www.google.com/maps?q=${MAP_POINT}&z=16&hl=en&output=embed`;
-const MAP_VIEW = `https://www.google.com/maps/search/?api=1&query=${MAP_POINT}`;
-
 const SLIDE_MS = 3500;
 
-export default function GalleryMapBand({ images = [] }) {
+export default function GalleryMapBand({ images = [], location = {} }) {
+  // The pin and the address under the map are admin-editable, so the map URLs
+  // are built per render rather than frozen into module constants.
+  const point = `${location.lat || '28.593145'},${location.lng || '77.51895'}`;
+  const mapEmbed = `https://www.google.com/maps?q=${point}&z=16&hl=en&output=embed`;
+  const mapView = `https://www.google.com/maps/search/?api=1&query=${point}`;
   const slides = images;
   const [index, setIndex] = useState(0);
   // Deleting photographs in the panel can leave `index` past the end of a
@@ -128,12 +123,12 @@ export default function GalleryMapBand({ images = [] }) {
             <div className="gm-map">
               <iframe
                 title="Km. Mayawati Government Girls Polytechnic, Badalpur on Google Maps"
-                src={MAP_EMBED}
+                src={mapEmbed}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-              <a className="gm-map-open" href={MAP_VIEW} target="_blank" rel="noreferrer">
+              <a className="gm-map-open" href={mapView} target="_blank" rel="noreferrer">
                 Open in Maps
                 <i className="bi bi-box-arrow-up-right ms-2" />
               </a>
@@ -141,7 +136,7 @@ export default function GalleryMapBand({ images = [] }) {
 
             <p className="gm-map-address">
               <i className="bi bi-geo-alt-fill" />
-              {LOCATION.name}
+              {location.name}
             </p>
           </div>
         </div>

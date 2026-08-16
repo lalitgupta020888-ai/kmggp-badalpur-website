@@ -1,12 +1,10 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import { OFFICE_DAYS, OFFICE_TIME } from '@/lib/institute';
+import { getSection } from '@/lib/server/sections';
 
 const STATS = [
   { icon: 'bi-journals', value: '8,000+', label: 'Books & Volumes' },
@@ -66,7 +64,9 @@ const SERVICES = [
   { icon: 'bi-mortarboard-fill', label: 'Reading support during examination periods' },
 ];
 
-export default function LibraryPage() {
+export default async function LibraryPage() {
+  const { officeDays: OFFICE_DAYS, officeTime: OFFICE_TIME } = await getSection('institute');
+
   return (
     <>
       <PageHeader

@@ -20,7 +20,7 @@ import IntroVideo from '@/components/IntroVideo';
  * `children` is passed straight through, so the pages inside stay server
  * components even though this wrapper is a client one.
  */
-export default function SiteFrame({ children, videoAlbum }) {
+export default function SiteFrame({ children, videoAlbum, chrome = {} }) {
   const pathname = usePathname();
 
   if (pathname.startsWith('/admin')) {
@@ -29,9 +29,15 @@ export default function SiteFrame({ children, videoAlbum }) {
 
   return (
     <>
-      <Navigation />
+      <Navigation
+        menus={chrome.menus}
+        actions={chrome.actions}
+        topbar={chrome.topbar}
+        social={chrome.social}
+        brand={chrome.brand}
+      />
       <main>{children}</main>
-      <Footer />
+      <Footer officeHours={chrome.officeHours} social={chrome.social} topbar={chrome.topbar} />
       <ScrollToTop />
       <IntroVideo album={videoAlbum} />
     </>

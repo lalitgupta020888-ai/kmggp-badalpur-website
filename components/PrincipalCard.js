@@ -7,12 +7,13 @@ import Link from 'next/link';
 /**
  * Compact Principal's Message teaser shown under the notice board.
  *
- * To add a portrait, drop the file into `public/images/leadership/` and set
- * PHOTO to its path — the gold emblem placeholder is used until then.
+ * Name, post, portrait and quotation all come from the admin panel, so a change
+ * of Principal is one edit in one place. Without a portrait the card shows the
+ * gold emblem placeholder rather than a broken frame.
  */
-const PHOTO = null; // e.g. '/images/leadership/principal.jpg'
+export default function PrincipalCard({ principal = {} }) {
+  const { name, role, photo, quote, linkLabel } = principal;
 
-export default function PrincipalCard() {
   return (
     <section className="principal-card">
       <div className="principal-head">
@@ -24,30 +25,35 @@ export default function PrincipalCard() {
         {/* Portrait leads, with the post and the institute stacked beneath it */}
         <div className="principal-person">
           <span className="principal-photo">
-            {PHOTO ? (
-              <Image src={PHOTO} alt="Principal" fill sizes="96px" style={{ objectFit: 'cover' }} />
+            {photo ? (
+              <Image
+                src={photo}
+                alt={name || 'Principal'}
+                fill
+                sizes="96px"
+                style={{ objectFit: 'cover' }}
+              />
             ) : (
               <i className="bi bi-person-fill" />
             )}
           </span>
-          <span className="principal-name">Principal</span>
-          <span className="principal-role">
-            Km. Mayawati Government Girls Polytechnic, Badalpur
-          </span>
+          <span className="principal-name">{name || 'Principal'}</span>
+          <span className="principal-role">{role}</span>
         </div>
 
         <div className="gold-flourish principal-flourish">
           <i className="bi bi-diamond-fill" />
         </div>
 
-        <blockquote className="principal-quote">
-          <i className="bi bi-quote" />
-          Education is the most powerful instrument a young woman can hold. Our purpose here is to
-          place that instrument firmly in her hands.
-        </blockquote>
+        {quote && (
+          <blockquote className="principal-quote">
+            <i className="bi bi-quote" />
+            {quote}
+          </blockquote>
+        )}
 
         <Link href="/about/principal-message" className="principal-link">
-          Read Full Message
+          {linkLabel || 'Read Full Message'}
           <i className="bi bi-arrow-right" />
         </Link>
       </div>

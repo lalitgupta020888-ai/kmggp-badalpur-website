@@ -5,10 +5,18 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { signOut } from '@/app/login/actions';
+import { sectionGroups } from '@/lib/sections/schema';
 
+/**
+ * The sidebar is part hand-written, part generated.
+ *
+ * The four sections below came first and have purpose-built pages. Everything
+ * described in the schema is appended automatically, so making a new part of
+ * the site editable puts it in this menu without touching this file.
+ */
 const NAV = [
   {
-    group: 'Content',
+    group: 'Announcements',
     items: [
       { href: '/admin', label: 'Dashboard', icon: 'bi-speedometer2', exact: true },
       { href: '/admin/news', label: 'News & Updates', icon: 'bi-broadcast-pin' },
@@ -17,6 +25,14 @@ const NAV = [
       { href: '/admin/orders', label: 'Orders & Circulars', icon: 'bi-file-earmark-pdf-fill' },
     ],
   },
+  ...sectionGroups().map((group) => ({
+    group: group.name,
+    items: group.sections.map((section) => ({
+      href: `/admin/content/${section.key}`,
+      label: section.title,
+      icon: section.icon,
+    })),
+  })),
   {
     group: 'Library',
     items: [{ href: '/admin/media', label: 'Media Library', icon: 'bi-collection-fill' }],
@@ -47,7 +63,21 @@ export default function AdminShell({ username, children }) {
   const titleKey = Object.keys(TITLES)
     .filter((key) => pathname === key || pathname.startsWith(`${key}/`))
     .sort((a, b) => b.length - a.length)[0];
-  const [title, subtitle] = TITLES[titleKey] || ['Admin', ''];
+
+  // Schema-described sections all live under one route, so their heading comes
+  // from the schema rather than needing an entry in TITLES.
+  const sectionKey = pathname.startsWith('/admin/content/')
+    ? pathname.slice('/admin/content/'.length).split('/')[0]
+    : null;
+  const section = sectionKey
+    ? sectionGroups()
+        .flatMap((group) => group.sections)
+        .find((entry) => entry.key === sectionKey)
+    : null;
+
+  const [title, subtitle] = section
+    ? [section.title, section.group]
+    : TITLES[titleKey] || ['Admin', ''];
 
   // A tap on a nav link on a phone should close the drawer behind it.
   useEffect(() => {

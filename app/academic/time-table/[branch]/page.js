@@ -1,17 +1,19 @@
-"use client";
-
-import React, { use } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
-import { getTimetable, PERIODS, NOTES } from '@/lib/timetable';
+import { getSections } from '@/lib/server/sections';
 
-export default function BranchTimeTable({ params }) {
-  const { branch } = use(params);
-  const timetable = getTimetable(branch);
+export default async function BranchTimeTable({ params }) {
+  const { branch } = await params;
+  const sections = await getSections(['timetable', 'periods', 'timetable-notes']);
 
+  const timetable = sections.timetable.find((entry) => entry.slug === branch);
   if (!timetable) notFound();
+
+  const PERIODS = sections.periods;
+  const NOTES = sections['timetable-notes'].map((note) => note.text);
 
   return (
     <>
@@ -19,11 +21,11 @@ export default function BranchTimeTable({ params }) {
         icon={timetable.icon}
         eyebrow="Academics"
         title={`${timetable.name} Time-Table`}
-        subtitle={timetable.tagline}
+        subtitle={timetable.text}
         crumbs={[
           { label: 'Academics' },
           { label: 'Time-Table', href: '/academic/time-table' },
-          { label: timetable.short },
+          { label: timetable.name },
         ]}
       />
 

@@ -6,6 +6,8 @@ import { requireAdmin, setCredentials, checkCredentials, getSession } from '@/li
 import { COLLECTIONS } from '@/lib/server/content';
 import { deleteMedia, saveUpload, updateMedia } from '@/lib/server/media';
 import { resetCollection, writeCollection, newId } from '@/lib/server/store';
+import { sanitiseSection } from '@/lib/server/schema-sanitise';
+import { SECTIONS } from '@/lib/sections/schema';
 import * as s from '@/lib/server/sanitise';
 
 /**
@@ -235,10 +237,40 @@ export async function changePassword(_previous, formData) {
   });
 }
 
+/* --------------------------- Schema-driven ------------------------------ */
+
+/**
+ * Save any section described in `lib/sections/schema.js`.
+ *
+ * One action serves every schema-described area of the site. The payload is
+ * rebuilt field by field from the schema before it is written, so what reaches
+ * the disk is decided here rather than by whatever the browser posted.
+ */
+export async function saveSection(key, payload) {
+  return guarded(async () => {
+    const section = SECTIONS[key];
+    if (!section) return fail('Unknown section.');
+
+    const cleaned = sanitiseSection(key, payload);
+    await writeCollection(section.collection, section.type === 'single' ? [cleaned] : cleaned);
+    publish();
+
+    const count = Array.isArray(cleaned) ? cleaned.length : 1;
+    return ok(
+      section.type === 'single'
+        ? `Saved ${section.title}.`
+        : `Saved ${count} entr${count === 1 ? 'y' : 'ies'}.`,
+    );
+  });
+}
+
 /** Drop a collection's saved records so it falls back to the built-in list. */
 export async function restoreDefaults(collection) {
   return guarded(async () => {
-    const allowed = Object.values(COLLECTIONS);
+    const allowed = [
+      ...Object.values(COLLECTIONS),
+      ...Object.values(SECTIONS).map((section) => section.collection),
+    ];
     if (!allowed.includes(collection)) return fail('Unknown section.');
 
     await resetCollection(collection);
