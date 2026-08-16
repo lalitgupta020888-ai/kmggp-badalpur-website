@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
 import { getDepartment } from '@/lib/server/departments';
+import { getSection } from '@/lib/server/sections';
 
 const FEATURES = [
   { icon: 'bi-pc-display', label: 'Modern equipment and workstations' },
@@ -13,6 +14,7 @@ const FEATURES = [
 export default async function LabsPage({ params }) {
   const { dept } = await params;
   const department = await getDepartment(dept);
+  const text = await getSection('department-pages');
 
   // A staff listing has no laboratories — see the faculty page for the reason.
   if (department.staff) notFound();
@@ -25,11 +27,7 @@ export default async function LabsPage({ params }) {
           Laboratory Facilities — {department.name}
         </div>
         <div className="panel-body">
-          <p>
-            Practical work sits at the heart of every diploma programme. Our laboratories are equipped
-            to give each student direct, hands-on experience with the tools and instruments used in
-            industry.
-          </p>
+          <p>{text.labsIntro}</p>
 
           <Row className="g-4 mt-1">
             {department.labs.map((lab) => (

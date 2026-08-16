@@ -3,12 +3,14 @@ import { Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
 import { getDepartment } from '@/lib/server/departments';
 import { monogram } from '@/lib/leadership';
+import { getSection } from '@/lib/server/sections';
 
 
 export default async function FacultyPage({ params }) {
   const { dept } = await params;
   const department = await getDepartment(dept);
   const FACULTY = department.faculty || [];
+  const text = await getSection('department-pages');
 
   // A staff listing has no faculty page — the sidebar never links here, and the
   // URL typed by hand must not render an empty one either.
@@ -22,10 +24,7 @@ export default async function FacultyPage({ params }) {
           Faculty — {department.name}
         </div>
         <div className="panel-body">
-          <p>
-            Our faculty combine strong academic credentials with industry awareness, mentoring every
-            student individually through the three-year diploma programme.
-          </p>
+          <p>{text.facultyIntro}</p>
 
           <Row className="g-4 mt-1">
             {FACULTY.map((member) => (
@@ -105,10 +104,7 @@ export default async function FacultyPage({ params }) {
 
       <div className="callout mt-4">
         <i className="bi bi-info-circle-fill" />
-        <p>
-          Faculty details are updated at the start of every academic session. For departmental
-          enquiries, please contact the institute office.
-        </p>
+        <p>{text.facultyNote}</p>
       </div>
     </>
   );

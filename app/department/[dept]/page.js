@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
 import { getDepartment } from '@/lib/server/departments';
+import { getSection } from '@/lib/server/sections';
 
 /**
  * The figure tiles are derived from the department rather than fixed, because
@@ -84,6 +85,7 @@ function StaffDirectory({ department }) {
 export default async function DepartmentHome({ params }) {
   const { dept } = await params;
   const department = await getDepartment(dept);
+  const text = await getSection('department-pages');
 
   if (department.staff) return <StaffDirectory department={department} />;
 
@@ -94,7 +96,7 @@ export default async function DepartmentHome({ params }) {
       <div className="panel">
         <div className="panel-header">
           <i className={`bi ${department.icon}`} />
-          Welcome to {department.name}
+          {text.homeIntroHeading} {department.name}
         </div>
         <div className="panel-body">
           <p className="lead">{department.intro}</p>

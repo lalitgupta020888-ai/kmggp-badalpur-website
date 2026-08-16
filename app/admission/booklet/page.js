@@ -1,40 +1,17 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import { getSection } from '@/lib/server/sections';
 
-const CONTENTS = [
-  'Introduction to the institute, its vision and mission',
-  'Details of all diploma programmes and sanctioned intake',
-  'Eligibility criteria and the complete JEECUP admission process',
-  'Fee structure, scholarship schemes and fee concessions',
-  'Faculty profiles and departmental laboratory facilities',
-  'Hostel, library, transport and campus amenities',
-  'Academic calendar, examination scheme and rules of discipline',
-  'Training & placement activities and recruiter list',
-];
 
-const JEECUP_BOOKLET_FILE = '/documents/jeecup-information-booklet.pdf';
 
-/**
- * `file` unset means the document has not been published yet — the row still
- * lists what is coming, but is rendered as text rather than a link that leads
- * nowhere. Set `file` as each PDF is released.
- */
-const DOWNLOADS = [
-  {
-    icon: 'bi-file-earmark-pdf-fill',
-    label: 'Information Booklet 2026-27 (PDF)',
-    file: JEECUP_BOOKLET_FILE,
-  },
-  { icon: 'bi-file-earmark-text-fill', label: 'Admission Application Form (PDF)' },
-  { icon: 'bi-file-earmark-ruled-fill', label: 'Fee Structure Notification (PDF)' },
-  { icon: 'bi-file-earmark-check-fill', label: 'Document Checklist (PDF)' },
-];
+export default async function InformationBooklet() {
+  const booklet = await getSection('booklet');
+  const JEECUP_BOOKLET_FILE = booklet.file;
+  const CONTENTS = (booklet.contents || []).map((item) => item.text);
+  const DOWNLOADS = booklet.downloads || [];
 
-export default function InformationBooklet() {
   return (
     <>
       <PageHeader

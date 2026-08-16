@@ -2,12 +2,14 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
 import { getDepartment } from '@/lib/server/departments';
+import { getSection } from '@/lib/server/sections';
 
 
 
 export default async function AchievementsPage({ params }) {
   const { dept } = await params;
   const department = await getDepartment(dept);
+  const text = await getSection('department-pages');
   const ACHIEVEMENTS = department.achievements || [];
   const AWARDS = department.awards || [];
 
@@ -22,10 +24,7 @@ export default async function AchievementsPage({ params }) {
           Achievements — {department.name}
         </div>
         <div className="panel-body">
-          <p>
-            Our students and faculty consistently distinguish themselves in academics, competitions and
-            campus recruitment. A few highlights from recent years are listed below.
-          </p>
+          <p>{text.achievementsIntro}</p>
 
           <Row className="g-4 mt-1">
             {ACHIEVEMENTS.map((item) => (

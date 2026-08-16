@@ -1,25 +1,10 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import { getSection } from '@/lib/server/sections';
 
-const ACADEMIC_CALENDAR_FILE = '/documents/academic-calendar-2026-27.pdf';
 
-const ODD_SEMESTER = [
-  { icon: 'bi-play-circle-fill', event: 'Odd Semester Classes Begin', date: 'July 2026' },
-  { icon: 'bi-pencil-square', event: 'Mid Semester Examinations', date: 'October 2026' },
-  { icon: 'bi-journal-check', event: 'Practical Examinations', date: 'November 2026' },
-  { icon: 'bi-mortarboard-fill', event: 'Odd Semester Theory Examinations', date: 'November 2026' },
-];
-
-const EVEN_SEMESTER = [
-  { icon: 'bi-play-circle-fill', event: 'Even Semester Classes Begin', date: 'January 2027' },
-  { icon: 'bi-pencil-square', event: 'Mid Semester Examinations', date: 'March 2027' },
-  { icon: 'bi-journal-check', event: 'Practical Examinations', date: 'April 2027' },
-  { icon: 'bi-mortarboard-fill', event: 'Even Semester Theory Examinations', date: 'May 2027' },
-];
 
 function SemesterPanel({ title, icon, rows }) {
   return (
@@ -55,7 +40,12 @@ function SemesterPanel({ title, icon, rows }) {
   );
 }
 
-export default function AcademicCalendar() {
+export default async function AcademicCalendar() {
+  const calendar = await getSection('academic-calendar');
+  const ACADEMIC_CALENDAR_FILE = calendar.file;
+  const ODD_SEMESTER = calendar.oddSemester || [];
+  const EVEN_SEMESTER = calendar.evenSemester || [];
+
   return (
     <>
       <PageHeader

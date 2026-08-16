@@ -1,20 +1,12 @@
-"use client";
-
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
+import { getSection } from '@/lib/server/sections';
 
-const HOLIDAYS = [
-  { date: 'August 15, 2026', occasion: 'Independence Day', day: 'Saturday', icon: 'bi-flag-fill' },
-  { date: 'October 2, 2026', occasion: 'Gandhi Jayanti', day: 'Friday', icon: 'bi-flower1' },
-  { date: 'October 24, 2026', occasion: 'Diwali', day: 'Saturday', icon: 'bi-lamp-fill' },
-  { date: 'November 5, 2026', occasion: 'Guru Nanak Jayanti', day: 'Thursday', icon: 'bi-brightness-high-fill' },
-  { date: 'December 25, 2026', occasion: 'Christmas Day', day: 'Friday', icon: 'bi-snow' },
-  { date: 'January 26, 2027', occasion: 'Republic Day', day: 'Tuesday', icon: 'bi-flag-fill' },
-  { date: 'March 4, 2027', occasion: 'Holi', day: 'Thursday', icon: 'bi-palette-fill' },
-];
 
-export default function ListOfHolidays() {
+export default async function ListOfHolidays() {
+  const HOLIDAYS = await getSection('holidays');
+
   return (
     <>
       <PageHeader

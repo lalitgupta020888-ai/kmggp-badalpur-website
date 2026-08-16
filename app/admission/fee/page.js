@@ -1,35 +1,19 @@
-"use client";
-
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import { getSection } from '@/lib/server/sections';
 
-const FEES = [
-  { head: 'Tuition Fee', amount: '₹ 10,370', period: 'Per Annum', icon: 'bi-mortarboard-fill' },
-  { head: 'Admission & Registration', amount: 'As per norms', period: 'One Time', icon: 'bi-file-earmark-text-fill' },
-  { head: 'Examination Fee', amount: 'As per BTEUP', period: 'Per Semester', icon: 'bi-pencil-square' },
-  { head: 'Hostel Fee', amount: 'As per govt. norms', period: 'Per Annum', icon: 'bi-house-heart-fill' },
-  { head: 'Caution Money (Refundable)', amount: 'As per norms', period: 'One Time', icon: 'bi-piggy-bank-fill' },
-];
 
-const FEE_GO_FILE = '/documents/FeeStructureGO.pdf';
 
-const CONCESSIONS = [
-  'SC / ST category students are eligible for fee reimbursement under state government schemes.',
-  'Students from economically weaker sections may apply for a full or partial fee waiver.',
-  'The AICTE Pragati Scholarship provides additional financial support for girl students.',
-  'Post-matric scholarship covers tuition fees for eligible candidates through direct benefit transfer.',
-];
 
-const PAYMENT_MODES = [
-  { icon: 'bi-bank', label: 'Online transfer to the institute account' },
-  { icon: 'bi-credit-card-fill', label: 'Debit card, credit card or net banking' },
-  { icon: 'bi-upc-scan', label: 'UPI payment at the institute counter' },
-  { icon: 'bi-receipt', label: 'Demand draft in favour of the Principal' },
-];
+export default async function FeeStructure() {
+  const fee = await getSection('fee-structure');
+  const FEES = fee.fees || [];
+  const FEE_GO_FILE = fee.goFile;
+  const CONCESSIONS = (fee.concessions || []).map((item) => item.text);
+  const PAYMENT_MODES = fee.paymentModes || [];
 
-export default function FeeStructure() {
   return (
     <>
       <PageHeader

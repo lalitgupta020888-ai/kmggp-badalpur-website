@@ -4,14 +4,8 @@ import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
 import { getProgrammeTotals } from '@/lib/server/programmes';
+import { getSection } from '@/lib/server/sections';
 
-const LETTERS = [
-  { session: '2026-27', type: 'Extension of Approval (EOA)', status: 'Approved' },
-  { session: '2025-26', type: 'Extension of Approval (EOA)', status: 'Approved' },
-  { session: '2024-25', type: 'Extension of Approval (EOA)', status: 'Approved' },
-  { session: '2023-24', type: 'Extension of Approval (EOA)', status: 'Approved' },
-  { session: '2022-23', type: 'Extension of Approval (EOA)', status: 'Approved' },
-];
 
 export default async function AicteApprovalsPage() {
   const {
@@ -23,6 +17,8 @@ export default async function AicteApprovalsPage() {
     totalSeats: TOTAL_SEATS,
     lateralIntake: LATERAL_INTAKE,
   } = await getProgrammeTotals();
+
+  const LETTERS = await getSection('aicte-letters');
 
   return (
     <>
@@ -51,18 +47,43 @@ export default async function AicteApprovalsPage() {
                   Approval Letters
                 </div>
                 <div className="panel-body">
-                  {LETTERS.map((letter) => (
-                    <a href="#" className="doc-link" key={letter.session}>
-                      <i className="bi bi-file-earmark-pdf-fill" />
-                      <span>
-                        EOA {letter.session}
-                        <span className="d-block small fw-normal" style={{ color: 'var(--ink-faint)' }}>
-                          {letter.type}
+                  {/* A letter is a real download once its PDF has been uploaded.
+                      Until then the row still lists the session, but as text —
+                      it used to link to "#", which looked live and went nowhere. */}
+                  {LETTERS.map((letter) => {
+                    const body = (
+                      <>
+                        <i className="bi bi-file-earmark-pdf-fill" />
+                        <span>
+                          EOA {letter.session}
+                          <span
+                            className="d-block small fw-normal"
+                            style={{ color: 'var(--ink-faint)' }}
+                          >
+                            {letter.type}
+                            {!letter.file && ' — not yet published'}
+                          </span>
                         </span>
+                        {letter.file && <i className="bi bi-arrow-right-short" />}
+                      </>
+                    );
+
+                    return letter.file ? (
+                      <a
+                        href={letter.file}
+                        className="doc-link"
+                        key={letter.id || letter.session}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {body}
+                      </a>
+                    ) : (
+                      <span className="doc-link" key={letter.id || letter.session}>
+                        {body}
                       </span>
-                      <i className="bi bi-arrow-right-short" />
-                    </a>
-                  ))}
+                    );
+                  })}
 
                   <div className="callout mt-4">
                     <i className="bi bi-info-circle-fill" />
