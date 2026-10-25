@@ -10,7 +10,7 @@ function SemesterPanel({ title, icon, rows }) {
   return (
     <div className="panel h-100">
       <div className="panel-header">
-        <i className={`bi ${icon}`} />
+        <i className={`bi ${icon}`} aria-hidden="true" />
         {title}
       </div>
       <div className="panel-body p-0">
@@ -18,15 +18,15 @@ function SemesterPanel({ title, icon, rows }) {
           <table className="premium-table">
             <thead>
               <tr>
-                <th>Event</th>
-                <th>Schedule</th>
+                <th scope="col">Event</th>
+                <th scope="col">Schedule</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((row) => (
                 <tr key={row.event}>
                   <td>
-                    <i className={`bi ${row.icon} text-gold me-2`} />
+                    <i className={`bi ${row.icon} text-gold me-2`} aria-hidden="true" />
                     {row.event}
                   </td>
                   <td>{row.date}</td>
@@ -78,13 +78,13 @@ export default async function AcademicCalendar() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="bi bi-file-earmark-pdf-fill" />
+              <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
               Download Academic Calendar
             </a>
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Dates are indicative and follow the schedule notified by the Board of Technical
               Education, Uttar Pradesh (BTEUP). The final calendar and any revisions will be published
@@ -96,7 +96,7 @@ export default async function AcademicCalendar() {
             <Col md={4}>
               <Link href="/academic/holidays" className="premium-card h-100 p-4 d-block text-decoration-none">
                 <span className="icon-tile mb-3">
-                  <i className="bi bi-calendar-event" />
+                  <i className="bi bi-calendar-event" aria-hidden="true" />
                 </span>
                 <h5 className="fw-bold mb-2">List of Holidays</h5>
                 <p className="small mb-0">The official holiday calendar for the current session.</p>
@@ -105,7 +105,7 @@ export default async function AcademicCalendar() {
             <Col md={4}>
               <Link href="/academic/syllabus" className="premium-card h-100 p-4 d-block text-decoration-none">
                 <span className="icon-tile mb-3">
-                  <i className="bi bi-journal-bookmark" />
+                  <i className="bi bi-journal-bookmark" aria-hidden="true" />
                 </span>
                 <h5 className="fw-bold mb-2">Syllabus</h5>
                 <p className="small mb-0">Branch-wise syllabus as prescribed by BTEUP.</p>
@@ -114,7 +114,7 @@ export default async function AcademicCalendar() {
             <Col md={4}>
               <Link href="/admission/courses" className="premium-card h-100 p-4 d-block text-decoration-none">
                 <span className="icon-tile mb-3">
-                  <i className="bi bi-collection" />
+                  <i className="bi bi-collection" aria-hidden="true" />
                 </span>
                 <h5 className="fw-bold mb-2">Courses Offered</h5>
                 <p className="small mb-0">Programmes, duration and sanctioned intake.</p>

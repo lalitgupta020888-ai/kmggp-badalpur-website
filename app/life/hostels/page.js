@@ -125,7 +125,7 @@ export default function HostelsPage() {
               </p>
 
               <div className="callout mt-4">
-                <i className="bi bi-shield-check" />
+                <i className="bi bi-shield-check" aria-hidden="true" />
                 <p>
                   <strong>Anti-ragging assurance:</strong> ragging in any form is strictly prohibited
                   in the hostel and on campus. Any incident is dealt with immediately under the
@@ -137,14 +137,14 @@ export default function HostelsPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-shield-lock-fill" />
+                  <i className="bi bi-shield-lock-fill" aria-hidden="true" />
                   Safety &amp; Security
                 </div>
                 <div className="panel-body">
                   {SAFETY.map((item) => (
                     <div className="feature-row align-items-center mb-3" key={item.label}>
                       <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${item.icon}`} />
+                        <i className={`bi ${item.icon}`} aria-hidden="true" />
                       </span>
                       <h5 className="mb-0">{item.label}</h5>
                     </div>
@@ -168,7 +168,7 @@ export default function HostelsPage() {
               <Col lg={3} md={6} key={amenity.title}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile mb-3">
-                    <i className={`bi ${amenity.icon}`} />
+                    <i className={`bi ${amenity.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-2">{amenity.title}</h5>
                   <p className="small mb-0">{amenity.text}</p>
@@ -185,7 +185,7 @@ export default function HostelsPage() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-list-ol" />
+                  <i className="bi bi-list-ol" aria-hidden="true" />
                   How to Apply for Hostel Accommodation
                 </div>
                 <div className="panel-body">
@@ -204,7 +204,7 @@ export default function HostelsPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-clipboard-check-fill" />
+                  <i className="bi bi-clipboard-check-fill" aria-hidden="true" />
                   Hostel Rules
                 </div>
                 <div className="panel-body">
@@ -217,19 +217,19 @@ export default function HostelsPage() {
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-person-badge-fill side-cta-icon" />
+                <i className="bi bi-person-badge-fill side-cta-icon" aria-hidden="true" />
                 <h6>Hostel Enquiries</h6>
                 <p>Contact the institute office or the hostel warden for allotment and fee details.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
           </Row>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Hostel accommodation is subject to availability of seats. Hostel and mess charges are
               levied as per Government of Uttar Pradesh norms and are notified at the time of

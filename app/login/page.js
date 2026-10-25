@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
         <div className="auth-card">
           <div className="auth-head">
             <span className="auth-emblem">
-              <i className="bi bi-shield-lock-fill" />
+              <i className="bi bi-shield-lock-fill" aria-hidden="true" />
             </span>
             <h4>Admin Login</h4>
             <p>Restricted access — Km. Mayawati Government Girls Polytechnic, Badalpur</p>
@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
 
           <div className="p-4 p-sm-5">
             <Alert variant="warning" className="d-flex align-items-start gap-3 border-0 small mb-4">
-              <i className="bi bi-exclamation-triangle-fill fs-5 lh-1 mt-1" />
+              <i className="bi bi-exclamation-triangle-fill fs-5 lh-1 mt-1" aria-hidden="true" />
               <span>
                 Authorised personnel only. Unauthorised access attempts are logged and may invite
                 disciplinary or legal action.
@@ -48,16 +48,16 @@ export default function AdminLoginPage() {
 
             {state?.error && (
               <Alert variant="danger" className="d-flex align-items-start gap-3 border-0 small mb-4">
-                <i className="bi bi-x-octagon-fill fs-5 lh-1 mt-1" />
+                <i className="bi bi-x-octagon-fill fs-5 lh-1 mt-1" aria-hidden="true" />
                 <span>{state.error}</span>
               </Alert>
             )}
 
             <Form action={formAction} className="premium-form">
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="login-admin-id-username">
                 <Form.Label>Admin ID / Username</Form.Label>
                 <div className="input-icon">
-                  <i className="bi bi-person-badge-fill" />
+                  <i className="bi bi-person-badge-fill" aria-hidden="true" />
                   <Form.Control
                     type="text"
                     name="username"
@@ -68,10 +68,10 @@ export default function AdminLoginPage() {
                 </div>
               </Form.Group>
 
-              <Form.Group className="mb-4">
+              <Form.Group className="mb-4" controlId="login-password">
                 <Form.Label>Password</Form.Label>
                 <div className="input-icon input-icon-action">
-                  <i className="bi bi-key-fill" />
+                  <i className="bi bi-key-fill" aria-hidden="true" />
                   <Form.Control
                     type={showPassword ? 'text' : 'password'}
                     name="password"
@@ -86,7 +86,7 @@ export default function AdminLoginPage() {
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                     title={showPassword ? 'Hide password' : 'Show password'}
                   >
-                    <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`} />
+                    <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`} aria-hidden="true" />
                   </button>
                 </div>
               </Form.Group>
@@ -103,7 +103,7 @@ export default function AdminLoginPage() {
                   className="text-decoration-none small"
                   style={{ color: 'var(--gold-700)' }}
                 >
-                  <i className="bi bi-question-circle me-1" />
+                  <i className="bi bi-question-circle me-1" aria-hidden="true" />
                   Forgot Password?
                 </Link>
               </div>
@@ -120,7 +120,7 @@ export default function AdminLoginPage() {
                   </>
                 ) : (
                   <>
-                    <i className="bi bi-box-arrow-in-right" />
+                    <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
                     Sign In to Dashboard
                   </>
                 )}
@@ -132,7 +132,7 @@ export default function AdminLoginPage() {
             <div className="auth-notes">
               {NOTICES.map((notice) => (
                 <div className="auth-note" key={notice.text}>
-                  <i className={`bi ${notice.icon}`} />
+                  <i className={`bi ${notice.icon}`} aria-hidden="true" />
                   <span>{notice.text}</span>
                 </div>
               ))}
@@ -140,7 +140,7 @@ export default function AdminLoginPage() {
 
             <div className="text-center mt-4">
               <Link href="/" className="text-decoration-none small text-muted">
-                <i className="bi bi-arrow-left me-1" />
+                <i className="bi bi-arrow-left me-1" aria-hidden="true" />
                 Back to Home
               </Link>
             </div>

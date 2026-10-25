@@ -144,7 +144,7 @@ export default function GalleryEditor({ initial }) {
 
       <div className="d-flex flex-wrap gap-2 align-items-center mb-3">
         <button type="button" className="admin-btn" onClick={addAlbum} disabled={pending}>
-          <i className="bi bi-folder-plus" />
+          <i className="bi bi-folder-plus" aria-hidden="true" />
           Add album
         </button>
         <button
@@ -153,7 +153,7 @@ export default function GalleryEditor({ initial }) {
           onClick={save}
           disabled={pending || !dirty}
         >
-          <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-check-lg'}`} />
+          <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-check-lg'}`} aria-hidden="true" />
           {pending ? 'Saving…' : dirty ? 'Save changes' : 'Saved'}
         </button>
         <button
@@ -162,7 +162,7 @@ export default function GalleryEditor({ initial }) {
           onClick={restore}
           disabled={pending}
         >
-          <i className="bi bi-arrow-counterclockwise" />
+          <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
           Restore original albums
         </button>
       </div>
@@ -170,7 +170,7 @@ export default function GalleryEditor({ initial }) {
       {albums.length === 0 && (
         <div className="admin-card">
           <div className="admin-empty">
-            <i className="bi bi-images" />
+            <i className="bi bi-images" aria-hidden="true" />
             <strong>No albums yet</strong>
             Add an album, then upload photographs into it.
           </div>
@@ -184,7 +184,7 @@ export default function GalleryEditor({ initial }) {
         return (
           <div className="admin-card" key={key}>
             <div className="admin-card-head">
-              <i className={`bi ${album.icon || 'bi-images'} head-icon`} />
+              <i className={`bi ${album.icon || 'bi-images'} head-icon`} aria-hidden="true" />
               <div className="min-w-0">
                 <h2>{album.title || 'Untitled album'}</h2>
                 <p>
@@ -201,7 +201,7 @@ export default function GalleryEditor({ initial }) {
                   disabled={index === 0}
                   aria-label="Move album up"
                 >
-                  <i className="bi bi-arrow-up" />
+                  <i className="bi bi-arrow-up" aria-hidden="true" />
                 </button>
                 <button
                   type="button"
@@ -210,7 +210,7 @@ export default function GalleryEditor({ initial }) {
                   disabled={index === albums.length - 1}
                   aria-label="Move album down"
                 >
-                  <i className="bi bi-arrow-down" />
+                  <i className="bi bi-arrow-down" aria-hidden="true" />
                 </button>
                 <button
                   type="button"
@@ -224,7 +224,7 @@ export default function GalleryEditor({ initial }) {
                     })
                   }
                 >
-                  <i className={`bi ${expanded ? 'bi-chevron-up' : 'bi-pencil'}`} />
+                  <i className={`bi ${expanded ? 'bi-chevron-up' : 'bi-pencil'}`} aria-hidden="true" />
                   {expanded ? 'Close' : 'Edit'}
                 </button>
                 <button
@@ -237,7 +237,7 @@ export default function GalleryEditor({ initial }) {
                   }}
                   aria-label="Delete album"
                 >
-                  <i className="bi bi-trash3" />
+                  <i className="bi bi-trash3" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -293,7 +293,7 @@ export default function GalleryEditor({ initial }) {
                           color: 'var(--gold-300)',
                         }}
                       >
-                        <i className={`bi ${album.icon || 'bi-images'}`} />
+                        <i className={`bi ${album.icon || 'bi-images'}`} aria-hidden="true" />
                       </span>
                       <input
                         className="admin-input"
@@ -318,7 +318,7 @@ export default function GalleryEditor({ initial }) {
                   }}
                 >
                   <div className="d-flex align-items-center gap-2 mb-3">
-                    <i className="bi bi-film" style={{ color: 'var(--gold-600)' }} />
+                    <i className="bi bi-film" style={{ color: 'var(--gold-600)' }} aria-hidden="true" />
                     <strong style={{ fontSize: '0.88rem' }}>Film (optional)</strong>
                     <span className="admin-badge ms-1">Plays as the site&apos;s welcome video</span>
                   </div>
@@ -340,7 +340,7 @@ export default function GalleryEditor({ initial }) {
                           className="admin-btn flex-shrink-0"
                           onClick={() => setPicker({ key, target: 'video', kind: 'video' })}
                         >
-                          <i className="bi bi-folder2-open" />
+                          <i className="bi bi-folder2-open" aria-hidden="true" />
                           Browse
                         </button>
                         {album.video?.src && (
@@ -350,7 +350,7 @@ export default function GalleryEditor({ initial }) {
                             onClick={() => patch(key, { video: null })}
                             aria-label="Remove film"
                           >
-                            <i className="bi bi-x-lg" />
+                            <i className="bi bi-x-lg" aria-hidden="true" />
                           </button>
                         )}
                       </div>
@@ -377,7 +377,7 @@ export default function GalleryEditor({ initial }) {
                               className="admin-btn flex-shrink-0"
                               onClick={() => setPicker({ key, target: 'poster', kind: 'image' })}
                             >
-                              <i className="bi bi-folder2-open" />
+                              <i className="bi bi-folder2-open" aria-hidden="true" />
                             </button>
                           </div>
                           <div className="hint">The still shown before the film starts.</div>
@@ -402,7 +402,7 @@ export default function GalleryEditor({ initial }) {
                 {/* --------------------------- Photographs -------------------------- */}
 
                 <div className="d-flex align-items-center gap-2 mt-4 mb-3">
-                  <i className="bi bi-images" style={{ color: 'var(--gold-600)' }} />
+                  <i className="bi bi-images" style={{ color: 'var(--gold-600)' }} aria-hidden="true" />
                   <strong style={{ fontSize: '0.88rem' }}>
                     Photographs ({photos.length})
                   </strong>
@@ -411,14 +411,14 @@ export default function GalleryEditor({ initial }) {
                     className="admin-btn admin-btn-primary ms-auto"
                     onClick={() => setPicker({ key, target: 'photos', kind: 'image', multiple: true })}
                   >
-                    <i className="bi bi-cloud-arrow-up-fill" />
+                    <i className="bi bi-cloud-arrow-up-fill" aria-hidden="true" />
                     Upload / add photographs
                   </button>
                 </div>
 
                 {photos.length === 0 ? (
                   <div className="admin-empty" style={{ padding: '30px 20px' }}>
-                    <i className="bi bi-image" />
+                    <i className="bi bi-image" aria-hidden="true" />
                     <strong>No photographs in this album</strong>
                     The first photograph you add becomes the album&apos;s cover.
                   </div>
@@ -449,7 +449,7 @@ export default function GalleryEditor({ initial }) {
                               disabled={photoIndex === 0}
                               aria-label="Move left"
                             >
-                              <i className="bi bi-arrow-left" />
+                              <i className="bi bi-arrow-left" aria-hidden="true" />
                             </button>
                             <button
                               type="button"
@@ -458,7 +458,7 @@ export default function GalleryEditor({ initial }) {
                               disabled={photoIndex === photos.length - 1}
                               aria-label="Move right"
                             >
-                              <i className="bi bi-arrow-right" />
+                              <i className="bi bi-arrow-right" aria-hidden="true" />
                             </button>
                             <button
                               type="button"
@@ -466,7 +466,7 @@ export default function GalleryEditor({ initial }) {
                               onClick={() => removePhoto(key, photoIndex)}
                               aria-label="Remove photograph"
                             >
-                              <i className="bi bi-trash3" />
+                              <i className="bi bi-trash3" aria-hidden="true" />
                             </button>
                           </div>
                         </div>

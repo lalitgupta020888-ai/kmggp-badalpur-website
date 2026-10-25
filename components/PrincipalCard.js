@@ -17,7 +17,7 @@ export default function PrincipalCard({ principal = {} }) {
   return (
     <section className="principal-card">
       <div className="principal-head">
-        <i className="bi bi-chat-quote-fill" />
+        <i className="bi bi-chat-quote-fill" aria-hidden="true" />
         Principal&apos;s Message
       </div>
 
@@ -34,7 +34,7 @@ export default function PrincipalCard({ principal = {} }) {
                 style={{ objectFit: 'cover' }}
               />
             ) : (
-              <i className="bi bi-person-fill" />
+              <i className="bi bi-person-fill" aria-hidden="true" />
             )}
           </span>
           <span className="principal-name">{name || 'Principal'}</span>
@@ -42,19 +42,19 @@ export default function PrincipalCard({ principal = {} }) {
         </div>
 
         <div className="gold-flourish principal-flourish">
-          <i className="bi bi-diamond-fill" />
+          <i className="bi bi-diamond-fill" aria-hidden="true" />
         </div>
 
         {quote && (
           <blockquote className="principal-quote">
-            <i className="bi bi-quote" />
+            <i className="bi bi-quote" aria-hidden="true" />
             {quote}
           </blockquote>
         )}
 
         <Link href="/about/principal-message" className="principal-link">
           {linkLabel || 'Read Full Message'}
-          <i className="bi bi-arrow-right" />
+          <i className="bi bi-arrow-right" aria-hidden="true" />
         </Link>
       </div>
     </section>

@@ -38,15 +38,15 @@ export default async function TimeTable() {
               <Col xl={3} md={6} key={branch.slug}>
                 <div className="premium-card h-100 p-4 d-flex flex-column">
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${branch.icon}`} />
+                    <i className={`bi ${branch.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{branch.name}</h5>
                   <p className="small flex-grow-1">{branch.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <Link href={`/academic/time-table/${branch.slug}`} className="doc-link mb-0">
-                    <i className="bi bi-file-earmark-pdf-fill" />
+                    <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                     <span className="flex-grow-1">Download Time-Table (PDF)</span>
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                 </div>
               </Col>
@@ -57,7 +57,7 @@ export default async function TimeTable() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-hourglass-split" />
+                  <i className="bi bi-hourglass-split" aria-hidden="true" />
                   Daily Period Timings
                 </div>
                 <div className="panel-body p-0">
@@ -65,9 +65,9 @@ export default async function TimeTable() {
                     <table className="premium-table period-table">
                       <thead>
                         <tr>
-                          <th>Period</th>
-                          <th>Timing</th>
-                          <th>Type</th>
+                          <th scope="col">Period</th>
+                          <th scope="col">Timing</th>
+                          <th scope="col">Type</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -75,8 +75,7 @@ export default async function TimeTable() {
                           <tr key={slot.period} className={slot.isBreak ? 'is-break' : ''}>
                             <td>
                               <i
-                                className={`bi ${slot.isBreak ? 'bi-cup-hot-fill' : 'bi-clock'} text-gold me-2`}
-                              />
+                                className={`bi ${slot.isBreak ? 'bi-cup-hot-fill' : 'bi-clock'} text-gold me-2`} aria-hidden="true" />
                               {slot.period}
                             </td>
                             <td>
@@ -95,7 +94,7 @@ export default async function TimeTable() {
             <Col lg={5}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-info-square-fill" />
+                  <i className="bi bi-info-square-fill" aria-hidden="true" />
                   Points to Note
                 </div>
                 <div className="panel-body">
@@ -106,7 +105,7 @@ export default async function TimeTable() {
                   </ul>
 
                   <div className="callout mt-4">
-                    <i className="bi bi-info-circle-fill" />
+                    <i className="bi bi-info-circle-fill" aria-hidden="true" />
                     <p>
                       The time-table is revised at the start of every semester. Always check the
                       session and semester printed on the document before following it.

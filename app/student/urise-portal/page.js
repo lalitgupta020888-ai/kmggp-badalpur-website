@@ -117,7 +117,7 @@ export default function UrisePortalPage() {
               </p>
 
               <div className="callout mt-4">
-                <i className="bi bi-shield-check" />
+                <i className="bi bi-shield-check" aria-hidden="true" />
                 <p>
                   Always register through the official address <strong>urise.up.gov.in</strong>. The
                   institute never asks for your portal password, and no fee is charged for
@@ -132,11 +132,11 @@ export default function UrisePortalPage() {
                   rel="noopener noreferrer"
                   className="btn-gold"
                 >
-                  <i className="bi bi-box-arrow-up-right" />
+                  <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
                   Visit URISE Portal
                 </a>
                 <Link href="/scholarship" className="btn-outline-navy">
-                  <i className="bi bi-cash-stack" />
+                  <i className="bi bi-cash-stack" aria-hidden="true" />
                   Scholarship Information
                 </Link>
               </div>
@@ -145,7 +145,7 @@ export default function UrisePortalPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-list-check" />
+                  <i className="bi bi-list-check" aria-hidden="true" />
                   Keep These Ready
                 </div>
                 <div className="panel-body">
@@ -158,12 +158,12 @@ export default function UrisePortalPage() {
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-headset side-cta-icon" />
+                <i className="bi bi-headset side-cta-icon" aria-hidden="true" />
                 <h6>Trouble Registering?</h6>
                 <p>The institute office can help verify your enrolment details for the portal.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
@@ -183,7 +183,7 @@ export default function UrisePortalPage() {
               <Col lg={4} md={6} key={feature.title}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${feature.icon}`} />
+                    <i className={`bi ${feature.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{feature.title}</h5>
                   <p className="small mb-0">{feature.text}</p>
@@ -200,7 +200,7 @@ export default function UrisePortalPage() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-list-ol" />
+                  <i className="bi bi-list-ol" aria-hidden="true" />
                   How to Register
                 </div>
                 <div className="panel-body">
@@ -219,14 +219,14 @@ export default function UrisePortalPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-lightbulb-fill" />
+                  <i className="bi bi-lightbulb-fill" aria-hidden="true" />
                   Good Practice
                 </div>
                 <div className="panel-body">
                   {TIPS.map((tip) => (
                     <div className="feature-row align-items-center mb-3" key={tip.label}>
                       <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${tip.icon}`} />
+                        <i className={`bi ${tip.icon}`} aria-hidden="true" />
                       </span>
                       <h5 className="mb-0">{tip.label}</h5>
                     </div>
@@ -236,24 +236,24 @@ export default function UrisePortalPage() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-link-45deg" />
+                  <i className="bi bi-link-45deg" aria-hidden="true" />
                   Related Links
                 </div>
                 <div className="panel-body">
                   <Link href="/scholarship" className="doc-link">
-                    <i className="bi bi-cash-stack" />
+                    <i className="bi bi-cash-stack" aria-hidden="true" />
                     Scholarship Schemes
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                   <Link href="/academic/certificate-issuance" className="doc-link">
-                    <i className="bi bi-award-fill" />
+                    <i className="bi bi-award-fill" aria-hidden="true" />
                     Certificate Issuance
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                   <Link href="/academic/calendar" className="doc-link mb-0">
-                    <i className="bi bi-calendar3" />
+                    <i className="bi bi-calendar3" aria-hidden="true" />
                     Academic Calendar
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                 </div>
               </div>
@@ -261,7 +261,7 @@ export default function UrisePortalPage() {
           </Row>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Portal features and registration requirements are governed by the Government of Uttar
               Pradesh and may change. Refer to the official URISE portal for the current process and

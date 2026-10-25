@@ -22,7 +22,7 @@ export default function PlacementRecords() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-graph-up-arrow" />
+          <i className="bi bi-graph-up-arrow" aria-hidden="true" />
           Placement Highlights — 2025-26
         </div>
         <div className="panel-body">
@@ -36,7 +36,7 @@ export default function PlacementRecords() {
               <Col md={3} sm={6} key={item.label}>
                 <div className="premium-card is-featured h-100 p-4 text-center">
                   <span className="icon-tile mx-auto mb-3">
-                    <i className={`bi ${item.icon}`} />
+                    <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <h4 className="fw-bold mb-1">{item.value}</h4>
                   <p className="small mb-0">{item.label}</p>
@@ -49,7 +49,7 @@ export default function PlacementRecords() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-table" />
+          <i className="bi bi-table" aria-hidden="true" />
           Year-wise Placement Record
         </div>
         <div className="panel-body p-0">
@@ -57,18 +57,18 @@ export default function PlacementRecords() {
             <table className="premium-table">
               <thead>
                 <tr>
-                  <th>Academic Year</th>
-                  <th>Total Eligible</th>
-                  <th>Students Placed</th>
-                  <th>Placement Rate</th>
-                  <th>Top Recruiter</th>
+                  <th scope="col">Academic Year</th>
+                  <th scope="col">Total Eligible</th>
+                  <th scope="col">Students Placed</th>
+                  <th scope="col">Placement Rate</th>
+                  <th scope="col">Top Recruiter</th>
                 </tr>
               </thead>
               <tbody>
                 {RECORDS.map((record) => (
                   <tr key={record.year}>
                     <td>
-                      <i className="bi bi-calendar3 text-gold me-2" />
+                      <i className="bi bi-calendar3 text-gold me-2" aria-hidden="true" />
                       {record.year}
                     </td>
                     <td>{record.eligible}</td>
@@ -86,7 +86,7 @@ export default function PlacementRecords() {
       </div>
 
       <div className="callout mt-4">
-        <i className="bi bi-info-circle-fill" />
+        <i className="bi bi-info-circle-fill" aria-hidden="true" />
         <p>
           Placement figures are compiled at the close of each recruitment season and include both
           on-campus and off-campus offers verified by the Training &amp; Placement cell.

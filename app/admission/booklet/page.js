@@ -28,7 +28,7 @@ export default async function InformationBooklet() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-journal-richtext" />
+                  <i className="bi bi-journal-richtext" aria-hidden="true" />
                   What the Booklet Contains
                 </div>
                 <div className="panel-body">
@@ -49,7 +49,7 @@ export default async function InformationBooklet() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-download" />
+                  <i className="bi bi-download" aria-hidden="true" />
                   Download Centre
                 </div>
                 <div className="panel-body">
@@ -62,13 +62,13 @@ export default async function InformationBooklet() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <i className={`bi ${item.icon}`} />
+                        <i className={`bi ${item.icon}`} aria-hidden="true" />
                         <span className="flex-grow-1">{item.label}</span>
-                        <i className="bi bi-download doc-link-external" />
+                        <i className="bi bi-download doc-link-external" aria-hidden="true" />
                       </a>
                     ) : (
                       <span className="doc-link is-pending" key={item.label}>
-                        <i className={`bi ${item.icon}`} />
+                        <i className={`bi ${item.icon}`} aria-hidden="true" />
                         <span className="flex-grow-1">{item.label}</span>
                         <span className="doc-link-soon">Awaited</span>
                       </span>
@@ -76,7 +76,7 @@ export default async function InformationBooklet() {
                   )}
 
                   <div className="callout mt-4">
-                    <i className="bi bi-info-circle-fill" />
+                    <i className="bi bi-info-circle-fill" aria-hidden="true" />
                     <p>
                       Documents will be published here as soon as they are released by the institute
                       administration for the 2026-27 session.
@@ -86,12 +86,12 @@ export default async function InformationBooklet() {
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-envelope-paper-fill side-cta-icon" />
+                <i className="bi bi-envelope-paper-fill side-cta-icon" aria-hidden="true" />
                 <h6>Prefer a Printed Copy?</h6>
                 <p>Printed booklets are available at the institute admission counter during office hours.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>

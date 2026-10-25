@@ -16,7 +16,7 @@ export default async function Recruiters() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-buildings" />
+          <i className="bi bi-buildings" aria-hidden="true" />
           Our Recruiters
         </div>
         <div className="panel-body">
@@ -30,7 +30,7 @@ export default async function Recruiters() {
           <div className="chip-grid">
             {RECRUITERS.map((company) => (
               <span className="brand-chip" key={company.name}>
-                <i className="bi bi-building-fill" />
+                <i className="bi bi-building-fill" aria-hidden="true" />
                 {company.name}
               </span>
             ))}
@@ -40,7 +40,7 @@ export default async function Recruiters() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-diagram-3-fill" />
+          <i className="bi bi-diagram-3-fill" aria-hidden="true" />
           Sectors Our Students Join
         </div>
         <div className="panel-body">
@@ -49,7 +49,7 @@ export default async function Recruiters() {
               <Col md={6} key={sector.title}>
                 <div className="feature-row h-100">
                   <span className="icon-tile icon-tile-sm">
-                    <i className={`bi ${sector.icon}`} />
+                    <i className={`bi ${sector.icon}`} aria-hidden="true" />
                   </span>
                   <div>
                     <h5>{sector.title}</h5>
@@ -63,7 +63,7 @@ export default async function Recruiters() {
       </div>
 
       <div className="callout mt-4">
-        <i className="bi bi-building-check" />
+        <i className="bi bi-building-check" aria-hidden="true" />
         <p>
           Organisations wishing to conduct a campus recruitment drive may write to the Training &amp;
           Placement cell at <strong>tnp@kmggp.ac.in</strong> to schedule a visit.

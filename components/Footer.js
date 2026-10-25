@@ -62,7 +62,7 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className={`bi ${item.icon}`} />
+                    <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </a>
                 ))}
               </div>
@@ -70,12 +70,12 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
           </Col>
 
           <Col lg={2} md={6}>
-            <h5>Quick Links</h5>
-            <ul className="list-unstyled footer-links">
+            <h5 id="footer-quick">Quick Links</h5>
+            <ul className="list-unstyled footer-links" aria-labelledby="footer-quick">
               {QUICK_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}>
-                    <i className="bi bi-chevron-right" />
+                    <i className="bi bi-chevron-right" aria-hidden="true" />
                     {link.label}
                   </Link>
                 </li>
@@ -84,13 +84,14 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
           </Col>
 
           <Col lg={3} md={6}>
-            <h5>Important Links</h5>
-            <ul className="list-unstyled footer-links">
+            <h5 id="footer-important">Important Links</h5>
+            <ul className="list-unstyled footer-links" aria-labelledby="footer-important">
               {IMPORTANT_LINKS.map((link) => (
                 <li key={link.href}>
                   <a href={link.href} target="_blank" rel="noopener noreferrer">
-                    <i className="bi bi-chevron-right" />
+                    <i className="bi bi-chevron-right" aria-hidden="true" />
                     {link.label}
+                    <span className="visually-hidden"> (opens in a new tab)</span>
                   </a>
                 </li>
               ))}
@@ -100,7 +101,7 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
           <Col lg={3} md={6}>
             <h5>Reach Us</h5>
             <div className="footer-contact-item">
-              <i className="bi bi-geo-alt-fill" />
+              <i className="bi bi-geo-alt-fill" aria-hidden="true" />
               <address className="mb-0">
                 Km. Mayawati Government Girls Polytechnic, Badalpur,
                 <br />
@@ -110,16 +111,19 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
               </address>
             </div>
             <div className="footer-contact-item">
-              <i className="bi bi-telephone-fill" />
+              <i className="bi bi-telephone-fill" aria-hidden="true" />
               <a href={topbar.phoneHref || `tel:${topbar.phone}`}>{topbar.phone}</a>
             </div>
             <div className="footer-contact-item">
-              <i className="bi bi-envelope-fill" />
+              <i className="bi bi-envelope-fill" aria-hidden="true" />
               <a href={`mailto:${topbar.email}`}>{topbar.email}</a>
             </div>
             <div className="footer-contact-item">
-              <i className="bi bi-clock-fill" />
-              <span>{officeHours}</span>
+              <i className="bi bi-clock-fill" aria-hidden="true" />
+              <span>
+                <span className="visually-hidden">Office hours: </span>
+                {officeHours}
+              </span>
             </div>
           </Col>
         </Row>
@@ -130,7 +134,7 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
             All Rights Reserved.
           </p>
           <p className="mb-0 d-flex align-items-center gap-2">
-            <i className="bi bi-patch-check-fill text-gold" />
+            <i className="bi bi-patch-check-fill text-gold" aria-hidden="true" />
             Approved by AICTE · Affiliated to BTEUP, Government of Uttar Pradesh
           </p>
         </div>

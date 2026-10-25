@@ -39,7 +39,7 @@ export default function ScrollToTop() {
         transition: 'opacity .3s ease, transform .3s ease',
       }}
     >
-      <i className="bi bi-arrow-up" />
+      <i className="bi bi-arrow-up" aria-hidden="true" />
     </button>
   );
 }

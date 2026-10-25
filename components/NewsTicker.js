@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 /**
@@ -14,14 +14,21 @@ import Link from 'next/link';
  * announce the whole strip is left out rather than scrolling an empty bar.
  */
 export default function NewsTicker({ notices: source = [] }) {
+  // Moving text must be stoppable (WCAG 2.2.2); the button also helps anyone
+  // who simply reads slowly. Hover and keyboard focus pause it as well.
+  const [paused, setPaused] = useState(false);
+
   if (source.length === 0) return null;
 
   const items = [...source, ...source];
 
   return (
-    <section className="news-ticker" aria-label="News updates and announcements">
+    <section
+      className={`news-ticker ${paused ? 'is-paused' : ''}`}
+      aria-label="News updates and announcements"
+    >
       <div className="news-ticker-label">
-        <i className="bi bi-broadcast-pin" />
+        <i className="bi bi-broadcast-pin" aria-hidden="true" />
         <span>News Updates &amp; Announcement</span>
       </div>
 
@@ -46,7 +53,7 @@ export default function NewsTicker({ notices: source = [] }) {
                 aria-hidden={isClone}
                 tabIndex={isClone ? -1 : undefined}
               >
-                <i className={`bi ${notice.icon}`} />
+                <i className={`bi ${notice.icon}`} aria-hidden="true" />
                 <span>{notice.title}</span>
                 {notice.isNew && <span className="news-ticker-new">NEW</span>}
                 <span className="news-ticker-dot" aria-hidden="true" />
@@ -55,6 +62,17 @@ export default function NewsTicker({ notices: source = [] }) {
           })}
         </div>
       </div>
+
+      <button
+        type="button"
+        className="news-ticker-pause"
+        aria-pressed={paused}
+        onClick={() => setPaused((wasPaused) => !wasPaused)}
+      >
+        <i className={`bi ${paused ? 'bi-play-fill' : 'bi-pause-fill'}`} aria-hidden="true" />
+        <span className="d-none d-md-inline">{paused ? 'Play' : 'Pause'}</span>
+        <span className="visually-hidden"> news ticker</span>
+      </button>
     </section>
   );
 }

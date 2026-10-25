@@ -30,7 +30,7 @@ export default async function FeeStructure() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-table" />
+                  <i className="bi bi-table" aria-hidden="true" />
                   Fee Details — Session 2026-27
                 </div>
                 <div className="panel-body p-0">
@@ -38,16 +38,16 @@ export default async function FeeStructure() {
                     <table className="premium-table">
                       <thead>
                         <tr>
-                          <th>Fee Head</th>
-                          <th>Amount</th>
-                          <th>Frequency</th>
+                          <th scope="col">Fee Head</th>
+                          <th scope="col">Amount</th>
+                          <th scope="col">Frequency</th>
                         </tr>
                       </thead>
                       <tbody>
                         {FEES.map((fee) => (
                           <tr key={fee.head}>
                             <td>
-                              <i className={`bi ${fee.icon} text-gold me-2`} />
+                              <i className={`bi ${fee.icon} text-gold me-2`} aria-hidden="true" />
                               {fee.head}
                             </td>
                             <td>{fee.amount}</td>
@@ -77,7 +77,7 @@ export default async function FeeStructure() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <i className="bi bi-file-earmark-pdf-fill" />
+                      <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                       View GO
                     </a>
                   </div>
@@ -88,7 +88,7 @@ export default async function FeeStructure() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-gift-fill" />
+                  <i className="bi bi-gift-fill" aria-hidden="true" />
                   Concessions &amp; Waivers
                 </div>
                 <div className="panel-body">
@@ -98,7 +98,7 @@ export default async function FeeStructure() {
                     ))}
                   </ul>
                   <Link href="/scholarship" className="btn-gold mt-3">
-                    <i className="bi bi-cash-stack" />
+                    <i className="bi bi-cash-stack" aria-hidden="true" />
                     Explore Scholarships
                   </Link>
                 </div>
@@ -106,14 +106,14 @@ export default async function FeeStructure() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-wallet2" />
+                  <i className="bi bi-wallet2" aria-hidden="true" />
                   Modes of Payment
                 </div>
                 <div className="panel-body">
                   {PAYMENT_MODES.map((mode) => (
                     <div className="feature-row align-items-center mb-3" key={mode.label}>
                       <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${mode.icon}`} />
+                        <i className={`bi ${mode.icon}`} aria-hidden="true" />
                       </span>
                       <h5 className="mb-0">{mode.label}</h5>
                     </div>
@@ -124,7 +124,7 @@ export default async function FeeStructure() {
           </Row>
 
           <div className="callout mt-4">
-            <i className="bi bi-exclamation-triangle-fill" />
+            <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
             <p>
               Fees are as per the norms of the Government of Uttar Pradesh for government polytechnics
               and are subject to change by government order. The figures shown above are indicative;

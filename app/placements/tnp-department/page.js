@@ -36,7 +36,7 @@ export default async function TNPDepartment() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-building-gear" />
+          <i className="bi bi-building-gear" aria-hidden="true" />
           Training &amp; Placement Department
         </div>
         <div className="panel-body">
@@ -53,7 +53,7 @@ export default async function TNPDepartment() {
           <div className="gold-rule-thin my-4" />
 
           <h5 className="fw-bold mb-3">
-            <i className="bi bi-bullseye text-gold me-2" />
+            <i className="bi bi-bullseye text-gold me-2" aria-hidden="true" />
             Our Objectives
           </h5>
           <ul className="gold-list">
@@ -69,7 +69,7 @@ export default async function TNPDepartment() {
           <Col md={4} key={service.title}>
             <div className="premium-card h-100 p-4">
               <span className="icon-tile mb-3">
-                <i className={`bi ${service.icon}`} />
+                <i className={`bi ${service.icon}`} aria-hidden="true" />
               </span>
               <h5 className="fw-bold mb-2">{service.title}</h5>
               <p className="small mb-0">{service.text}</p>
@@ -80,7 +80,7 @@ export default async function TNPDepartment() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-telephone-inbound-fill" />
+          <i className="bi bi-telephone-inbound-fill" aria-hidden="true" />
           Contact the T&amp;P Cell
         </div>
         <div className="panel-body">
@@ -88,7 +88,7 @@ export default async function TNPDepartment() {
             <Col md={6}>
               <div className="contact-line">
                 <span className="icon-tile icon-tile-sm">
-                  <i className="bi bi-envelope-fill" />
+                  <i className="bi bi-envelope-fill" aria-hidden="true" />
                 </span>
                 <div>
                   <div className="label">Email</div>
@@ -99,7 +99,7 @@ export default async function TNPDepartment() {
             <Col md={6}>
               <div className="contact-line">
                 <span className="icon-tile icon-tile-sm">
-                  <i className="bi bi-telephone-fill" />
+                  <i className="bi bi-telephone-fill" aria-hidden="true" />
                 </span>
                 <div>
                   <div className="label">Phone</div>
@@ -110,7 +110,7 @@ export default async function TNPDepartment() {
             <Col md={6}>
               <div className="contact-line">
                 <span className="icon-tile icon-tile-sm">
-                  <i className="bi bi-person-badge-fill" />
+                  <i className="bi bi-person-badge-fill" aria-hidden="true" />
                 </span>
                 <div>
                   <div className="label">Placement Officer</div>
@@ -121,7 +121,7 @@ export default async function TNPDepartment() {
             <Col md={6}>
               <div className="contact-line">
                 <span className="icon-tile icon-tile-sm">
-                  <i className="bi bi-clock-fill" />
+                  <i className="bi bi-clock-fill" aria-hidden="true" />
                 </span>
                 <div>
                   <div className="label">Office Hours</div>

@@ -31,14 +31,24 @@ export default function GalleryMapBand({ images = [], location = {} }) {
     setIndex((current) => (current + direction + slides.length) % slides.length);
   };
   const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  // Honour the system's reduced-motion setting from the first render.
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sync = () => setPaused(query.matches);
+    sync();
+    query.addEventListener('change', sync);
+    return () => query.removeEventListener('change', sync);
+  }, []);
 
   useEffect(() => {
-    if (paused || slides.length < 2) return undefined;
+    if (paused || hovered || slides.length < 2) return undefined;
     const timer = setInterval(() => {
       setIndex((current) => (current + 1) % slides.length);
     }, SLIDE_MS);
     return () => clearInterval(timer);
-  }, [paused, slides.length]);
+  }, [paused, hovered, slides.length]);
 
   return (
     <section className="section gallery-map-band" style={{ background: 'var(--paper)' }}>
@@ -47,7 +57,7 @@ export default function GalleryMapBand({ images = [], location = {} }) {
           {/* Gallery — the photographs move past one at a time */}
           <div className="panel gm-panel">
             <div className="panel-header gm-header">
-              <i className="bi bi-camera-fill" />
+              <i className="bi bi-camera-fill" aria-hidden="true" />
               <span>GALLERY</span>
               <Link href="/gallery" className="gm-header-link">
                 VIEW ALL
@@ -56,15 +66,28 @@ export default function GalleryMapBand({ images = [], location = {} }) {
 
             <div
               className="gm-slider"
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
+              role="region"
+              aria-roledescription="carousel"
+              aria-label="Campus photographs"
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+              onFocus={() => setHovered(true)}
+              onBlur={() => setHovered(false)}
             >
               <div
                 className="gm-track"
+                aria-live={paused || hovered ? 'polite' : 'off'}
                 style={{ transform: `translateX(-${activeIndex * 100}%)` }}
               >
                 {slides.map((image, position) => (
-                  <div className="gm-slide" key={`${image.src}-${position}`}>
+                  <div
+                    className="gm-slide"
+                    key={`${image.src}-${position}`}
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label={`${position + 1} of ${slides.length}`}
+                    aria-hidden={position !== activeIndex}
+                  >
                     <Image
                       src={image.src}
                       alt={image.caption}
@@ -74,7 +97,7 @@ export default function GalleryMapBand({ images = [], location = {} }) {
                       priority={position === 0}
                     />
                     <span className="gm-slide-caption">
-                      <i className="bi bi-camera-fill me-2" />
+                      <i className="bi bi-camera-fill me-2" aria-hidden="true" />
                       {image.caption}
                     </span>
                   </div>
@@ -87,7 +110,7 @@ export default function GalleryMapBand({ images = [], location = {} }) {
                 aria-label="Previous photograph"
                 onClick={() => step(-1)}
               >
-                <i className="bi bi-chevron-left" />
+                <i className="bi bi-chevron-left" aria-hidden="true" />
               </button>
               <button
                 type="button"
@@ -95,17 +118,29 @@ export default function GalleryMapBand({ images = [], location = {} }) {
                 aria-label="Next photograph"
                 onClick={() => step(1)}
               >
-                <i className="bi bi-chevron-right" />
+                <i className="bi bi-chevron-right" aria-hidden="true" />
               </button>
 
-              <div className="gm-dots">
+              {slides.length > 1 && (
+                <button
+                  type="button"
+                  className="gm-pause"
+                  aria-pressed={paused}
+                  onClick={() => setPaused((wasPaused) => !wasPaused)}
+                >
+                  <i className={`bi ${paused ? 'bi-play-fill' : 'bi-pause-fill'}`} aria-hidden="true" />
+                  {paused ? 'Play' : 'Pause'}
+                </button>
+              )}
+
+              <div className="gm-dots" role="group" aria-label="Choose photograph">
                 {slides.map((image, position) => (
                   <button
                     type="button"
                     key={`dot-${image.src}-${position}`}
                     className={`gm-dot${position === activeIndex ? ' is-active' : ''}`}
                     aria-label={`Show ${image.caption}`}
-                    aria-current={position === activeIndex}
+                    aria-current={position === activeIndex ? 'true' : undefined}
                     onClick={() => setIndex(position)}
                   />
                 ))}
@@ -116,7 +151,7 @@ export default function GalleryMapBand({ images = [], location = {} }) {
           {/* Map */}
           <div className="panel gm-panel">
             <div className="panel-header gm-header">
-              <i className="bi bi-globe2" />
+              <i className="bi bi-globe2" aria-hidden="true" />
               <span>Find US ON MAP</span>
             </div>
 
@@ -130,12 +165,13 @@ export default function GalleryMapBand({ images = [], location = {} }) {
               />
               <a className="gm-map-open" href={mapView} target="_blank" rel="noreferrer">
                 Open in Maps
-                <i className="bi bi-box-arrow-up-right ms-2" />
+                <span className="visually-hidden"> (opens in a new tab)</span>
+                <i className="bi bi-box-arrow-up-right ms-2" aria-hidden="true" />
               </a>
             </div>
 
             <p className="gm-map-address">
-              <i className="bi bi-geo-alt-fill" />
+              <i className="bi bi-geo-alt-fill" aria-hidden="true" />
               {location.name}
             </p>
           </div>

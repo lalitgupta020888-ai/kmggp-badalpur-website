@@ -10,7 +10,7 @@ export default async function AdminGalleryPage() {
     <>
       <div className="admin-card mb-4">
         <div className="admin-card-head">
-          <i className="bi bi-images head-icon" />
+          <i className="bi bi-images head-icon" aria-hidden="true" />
           <div>
             <h2>Photographs &amp; Albums</h2>
             <p>The gallery page, each album&apos;s own page, and the band on the home page</p>

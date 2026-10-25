@@ -74,14 +74,14 @@ export default function ContactView({ officeHours, topbar = {} }) {
             <Col lg={5}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-geo-alt-fill" />
+                  <i className="bi bi-geo-alt-fill" aria-hidden="true" />
                   Contact Information
                 </div>
                 <div className="panel-body">
                   {CONTACT_LINES.map((line) => (
                     <div className="contact-line" key={line.label}>
                       <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${line.icon}`} />
+                        <i className={`bi ${line.icon}`} aria-hidden="true" />
                       </span>
                       <div>
                         <div className="label">{line.label}</div>
@@ -93,13 +93,13 @@ export default function ContactView({ officeHours, topbar = {} }) {
                   <div className="gold-rule-thin my-4" />
 
                   <h6 className="fw-bold mb-3">
-                    <i className="bi bi-signpost-2-fill text-gold me-2" />
+                    <i className="bi bi-signpost-2-fill text-gold me-2" aria-hidden="true" />
                     Departmental Desks
                   </h6>
                   {DESKS.map((desk) => (
                     <div className="contact-line" key={desk.title}>
                       <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${desk.icon}`} />
+                        <i className={`bi ${desk.icon}`} aria-hidden="true" />
                       </span>
                       <div>
                         <div className="label">{desk.title}</div>
@@ -114,53 +114,53 @@ export default function ContactView({ officeHours, topbar = {} }) {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-chat-dots-fill" />
+                  <i className="bi bi-chat-dots-fill" aria-hidden="true" />
                   Send Us a Message
                 </div>
                 <div className="panel-body">
                   {submitted ? (
                     <Alert variant="success" className="d-flex align-items-center gap-3 border-0">
-                      <i className="bi bi-check-circle-fill fs-4" />
+                      <i className="bi bi-check-circle-fill fs-4" aria-hidden="true" />
                       <span>Your message has been sent successfully. We will get back to you soon.</span>
                     </Alert>
                   ) : (
                     <Form onSubmit={handleSubmit} className="premium-form">
                       <Row>
                         <Col sm={6}>
-                          <Form.Group className="mb-3">
+                          <Form.Group className="mb-3" controlId="contact-your-name">
                             <Form.Label>Your Name</Form.Label>
                             <div className="input-icon">
-                              <i className="bi bi-person-fill" />
+                              <i className="bi bi-person-fill" aria-hidden="true" />
                               <Form.Control type="text" placeholder="Enter your full name" required />
                             </div>
                           </Form.Group>
                         </Col>
                         <Col sm={6}>
-                          <Form.Group className="mb-3">
+                          <Form.Group className="mb-3" controlId="contact-email-address">
                             <Form.Label>Email Address</Form.Label>
                             <div className="input-icon">
-                              <i className="bi bi-envelope-fill" />
+                              <i className="bi bi-envelope-fill" aria-hidden="true" />
                               <Form.Control type="email" placeholder="you@example.com" required />
                             </div>
                           </Form.Group>
                         </Col>
                       </Row>
 
-                      <Form.Group className="mb-3">
+                      <Form.Group className="mb-3" controlId="contact-subject">
                         <Form.Label>Subject</Form.Label>
                         <div className="input-icon">
-                          <i className="bi bi-tag-fill" />
+                          <i className="bi bi-tag-fill" aria-hidden="true" />
                           <Form.Control type="text" placeholder="What is this regarding?" required />
                         </div>
                       </Form.Group>
 
-                      <Form.Group className="mb-4">
+                      <Form.Group className="mb-4" controlId="contact-your-message">
                         <Form.Label>Your Message</Form.Label>
                         <Form.Control as="textarea" rows={5} placeholder="Write your message here..." required />
                       </Form.Group>
 
                       <Button type="submit" className="btn-gold w-100 justify-content-center">
-                        <i className="bi bi-send-fill" />
+                        <i className="bi bi-send-fill" aria-hidden="true" />
                         Send Message
                       </Button>
                     </Form>
@@ -172,7 +172,7 @@ export default function ContactView({ officeHours, topbar = {} }) {
 
           <div className="panel mt-4">
             <div className="panel-header">
-              <i className="bi bi-pin-map-fill" />
+              <i className="bi bi-pin-map-fill" aria-hidden="true" />
               Find Us on the Map
             </div>
             <div className="map-frame">
@@ -208,11 +208,11 @@ export default function ContactView({ officeHours, topbar = {} }) {
 
                 <div className="map-card-actions">
                   <a className="btn-gold" href={MAP_DIRECTIONS} target="_blank" rel="noopener noreferrer">
-                    <i className="bi bi-signpost-split-fill" />
+                    <i className="bi bi-signpost-split-fill" aria-hidden="true" />
                     Get Directions
                   </a>
                   <a className="btn-outline-navy" href={MAP_VIEW} target="_blank" rel="noopener noreferrer">
-                    <i className="bi bi-box-arrow-up-right" />
+                    <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
                     Open in Maps
                   </a>
                 </div>

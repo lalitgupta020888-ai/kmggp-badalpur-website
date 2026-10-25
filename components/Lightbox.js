@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { useFocusTrap } from '@/lib/focus-trap';
 
 /**
  * Full-screen photo viewer.
@@ -15,7 +16,10 @@ import Image from 'next/image';
 export default function Lightbox({ images, index, onClose, onIndexChange }) {
   const open = index !== null && index !== undefined;
   const closeRef = useRef(null);
+  const dialogRef = useRef(null);
   const touchStartX = useRef(null);
+
+  useFocusTrap(dialogRef, open);
 
   const step = useCallback(
     (delta) => {
@@ -64,6 +68,7 @@ export default function Lightbox({ images, index, onClose, onIndexChange }) {
 
   return (
     <div
+      ref={dialogRef}
       className="lightbox"
       role="dialog"
       aria-modal="true"
@@ -71,7 +76,7 @@ export default function Lightbox({ images, index, onClose, onIndexChange }) {
       onClick={onClose}
     >
       <button ref={closeRef} type="button" className="lightbox-close" onClick={onClose}>
-        <i className="bi bi-x-lg" />
+        <i className="bi bi-x-lg" aria-hidden="true" />
         <span className="visually-hidden">Close</span>
       </button>
 
@@ -84,7 +89,7 @@ export default function Lightbox({ images, index, onClose, onIndexChange }) {
             step(-1);
           }}
         >
-          <i className="bi bi-chevron-left" />
+          <i className="bi bi-chevron-left" aria-hidden="true" />
           <span className="visually-hidden">Previous photograph</span>
         </button>
       )}
@@ -110,7 +115,9 @@ export default function Lightbox({ images, index, onClose, onIndexChange }) {
           <span className="lightbox-tag">{image.tag}</span>
           <strong>{image.caption}</strong>
           <span className="lightbox-count">
-            {index + 1} / {images.length}
+            <span className="visually-hidden">Photograph </span>
+            {index + 1} <span aria-hidden="true">/</span>
+            <span className="visually-hidden">of</span> {images.length}
           </span>
         </figcaption>
       </figure>
@@ -124,7 +131,7 @@ export default function Lightbox({ images, index, onClose, onIndexChange }) {
             step(1);
           }}
         >
-          <i className="bi bi-chevron-right" />
+          <i className="bi bi-chevron-right" aria-hidden="true" />
           <span className="visually-hidden">Next photograph</span>
         </button>
       )}

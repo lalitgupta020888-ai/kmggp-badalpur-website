@@ -104,13 +104,13 @@ export default function CertificateIssuancePage() {
               <Col lg={4} md={6} key={certificate.title}>
                 <div className="premium-card h-100 p-4 d-flex flex-column">
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${certificate.icon}`} />
+                    <i className={`bi ${certificate.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{certificate.title}</h5>
                   <p className="small flex-grow-1">{certificate.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <p className="small mb-0">
-                    <i className="bi bi-building text-gold me-2" />
+                    <i className="bi bi-building text-gold me-2" aria-hidden="true" />
                     Issued by: {certificate.issuer}
                   </p>
                 </div>
@@ -126,7 +126,7 @@ export default function CertificateIssuancePage() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-list-ol" />
+                  <i className="bi bi-list-ol" aria-hidden="true" />
                   Application Process
                 </div>
                 <div className="panel-body">
@@ -149,7 +149,7 @@ export default function CertificateIssuancePage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-list-check" />
+                  <i className="bi bi-list-check" aria-hidden="true" />
                   Requirements Checklist
                 </div>
                 <div className="panel-body">
@@ -163,30 +163,30 @@ export default function CertificateIssuancePage() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-download" />
+                  <i className="bi bi-download" aria-hidden="true" />
                   Download Forms
                 </div>
                 <div className="panel-body">
                   <a href="#" className="doc-link">
-                    <i className="bi bi-file-earmark-pdf-fill" />
+                    <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                     Certificate Application Form (PDF)
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </a>
                   <a href="#" className="doc-link mb-0">
-                    <i className="bi bi-file-earmark-text-fill" />
+                    <i className="bi bi-file-earmark-text-fill" aria-hidden="true" />
                     Duplicate Document Affidavit Format (PDF)
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </a>
                 </div>
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-headset side-cta-icon" />
+                <i className="bi bi-headset side-cta-icon" aria-hidden="true" />
                 <h6>Need Help With Your Application?</h6>
                 <p>The institute office assists passout students during working hours.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
@@ -194,7 +194,7 @@ export default function CertificateIssuancePage() {
 
           <div className="panel mt-4">
             <div className="panel-header">
-              <i className="bi bi-clock-history" />
+              <i className="bi bi-clock-history" aria-hidden="true" />
               Indicative Processing Time
             </div>
             <div className="panel-body p-0">
@@ -202,15 +202,15 @@ export default function CertificateIssuancePage() {
                 <table className="premium-table">
                   <thead>
                     <tr>
-                      <th>Certificate</th>
-                      <th>Issuing Authority</th>
-                      <th>Processing Time</th>
+                      <th scope="col">Certificate</th>
+                      <th scope="col">Issuing Authority</th>
+                      <th scope="col">Processing Time</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>
-                        <i className="bi bi-file-earmark-text-fill text-gold me-2" />
+                        <i className="bi bi-file-earmark-text-fill text-gold me-2" aria-hidden="true" />
                         Character / Bonafide Certificate
                       </td>
                       <td>Office of the Principal</td>
@@ -218,7 +218,7 @@ export default function CertificateIssuancePage() {
                     </tr>
                     <tr>
                       <td>
-                        <i className="bi bi-arrow-left-right text-gold me-2" />
+                        <i className="bi bi-arrow-left-right text-gold me-2" aria-hidden="true" />
                         Transfer Certificate
                       </td>
                       <td>Office of the Principal</td>
@@ -226,7 +226,7 @@ export default function CertificateIssuancePage() {
                     </tr>
                     <tr>
                       <td>
-                        <i className="bi bi-journal-check text-gold me-2" />
+                        <i className="bi bi-journal-check text-gold me-2" aria-hidden="true" />
                         Migration Certificate
                       </td>
                       <td>BTEUP, via the institute</td>
@@ -234,7 +234,7 @@ export default function CertificateIssuancePage() {
                     </tr>
                     <tr>
                       <td>
-                        <i className="bi bi-files text-gold me-2" />
+                        <i className="bi bi-files text-gold me-2" aria-hidden="true" />
                         Duplicate Marksheet / Diploma
                       </td>
                       <td>BTEUP, via the institute</td>
@@ -247,7 +247,7 @@ export default function CertificateIssuancePage() {
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Certificates issued by BTEUP are processed through the institute but depend on board
               timelines. Applicants are advised to apply well in advance of any submission deadline

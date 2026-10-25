@@ -25,7 +25,7 @@ export default async function PrincipalMessagePage() {
             <Col lg={4}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-person-badge-fill" />
+                  <i className="bi bi-person-badge-fill" aria-hidden="true" />
                   The Principal
                 </div>
                 <div className="panel-body text-center">
@@ -33,14 +33,14 @@ export default async function PrincipalMessagePage() {
                     className="quote-avatar mx-auto mb-3"
                     style={{ width: 120, height: 120, flex: '0 0 120px', fontSize: '2.6rem' }}
                   >
-                    <i className="bi bi-person-fill" />
+                    <i className="bi bi-person-fill" aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-1">Principal</h5>
                   <span className="eyebrow">Km. Mayawati Government Girls Polytechnic, Badalpur</span>
                   <div className="gold-rule-thin my-3" />
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-envelope-fill" />
+                      <i className="bi bi-envelope-fill" aria-hidden="true" />
                     </span>
                     <div className="text-start">
                       <div className="label">Email</div>
@@ -49,7 +49,7 @@ export default async function PrincipalMessagePage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-telephone-fill" />
+                      <i className="bi bi-telephone-fill" aria-hidden="true" />
                     </span>
                     <div className="text-start">
                       <div className="label">Office</div>
@@ -60,12 +60,12 @@ export default async function PrincipalMessagePage() {
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-chat-dots-fill side-cta-icon" />
+                <i className="bi bi-chat-dots-fill side-cta-icon" aria-hidden="true" />
                 <h6>Want to Meet the Principal?</h6>
                 <p>Appointments can be arranged through the institute office during working hours.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
@@ -73,7 +73,7 @@ export default async function PrincipalMessagePage() {
             <Col lg={8}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-chat-quote-fill" />
+                  <i className="bi bi-chat-quote-fill" aria-hidden="true" />
                   Message from the Principal
                 </div>
                 <div className="panel-body">
@@ -92,7 +92,7 @@ export default async function PrincipalMessagePage() {
 
                   <div className="quote-author mt-4">
                     <span className="quote-avatar">
-                      <i className="bi bi-pen-fill" />
+                      <i className="bi bi-pen-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="quote-name">{page.signatureName}</div>
@@ -104,7 +104,7 @@ export default async function PrincipalMessagePage() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-list-stars" />
+                  <i className="bi bi-list-stars" aria-hidden="true" />
                   Our Priorities
                 </div>
                 <div className="panel-body">
@@ -113,7 +113,7 @@ export default async function PrincipalMessagePage() {
                       <Col md={6} key={item.title}>
                         <div className="feature-row h-100">
                           <span className="icon-tile icon-tile-sm">
-                            <i className={`bi ${item.icon}`} />
+                            <i className={`bi ${item.icon}`} aria-hidden="true" />
                           </span>
                           <div>
                             <h5>{item.title}</h5>

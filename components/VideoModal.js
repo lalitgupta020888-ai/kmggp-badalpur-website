@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useFocusTrap } from '@/lib/focus-trap';
 
 /**
  * Full-screen film viewer — the moving-picture counterpart to `Lightbox`.
@@ -23,6 +24,9 @@ export default function VideoModal({ video, open, onClose, icon, action, autoPla
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
   const closeRef = useRef(null);
+  const dialogRef = useRef(null);
+
+  useFocusTrap(dialogRef, open);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -64,6 +68,7 @@ export default function VideoModal({ video, open, onClose, icon, action, autoPla
 
   return (
     <div
+      ref={dialogRef}
       className="video-modal"
       role="dialog"
       aria-modal="true"
@@ -73,7 +78,7 @@ export default function VideoModal({ video, open, onClose, icon, action, autoPla
       {/* Clicks inside the frame must not reach the backdrop's close handler */}
       <div className="video-modal-frame" onClick={(event) => event.stopPropagation()}>
         <button ref={closeRef} type="button" className="video-modal-close" onClick={onClose}>
-          <i className="bi bi-x-lg" />
+          <i className="bi bi-x-lg" aria-hidden="true" />
           <span className="visually-hidden">Close</span>
         </button>
 
@@ -95,22 +100,22 @@ export default function VideoModal({ video, open, onClose, icon, action, autoPla
 
         <div className="video-modal-bar">
           <span className="video-modal-title">
-            <i className={`bi ${icon || 'bi-film'}`} />
+            <i className={`bi ${icon || 'bi-film'}`} aria-hidden="true" />
             {video.caption}
           </span>
 
           <div className="video-modal-actions">
             <button type="button" className="video-modal-btn" onClick={togglePlay}>
-              <i className={`bi ${playing ? 'bi-pause-fill' : 'bi-play-fill'}`} />
+              <i className={`bi ${playing ? 'bi-pause-fill' : 'bi-play-fill'}`} aria-hidden="true" />
               {playing ? 'Pause' : 'Play'}
             </button>
             <button type="button" className="video-modal-btn" onClick={toggleSound}>
-              <i className={`bi ${muted ? 'bi-volume-mute-fill' : 'bi-volume-up-fill'}`} />
+              <i className={`bi ${muted ? 'bi-volume-mute-fill' : 'bi-volume-up-fill'}`} aria-hidden="true" />
               {muted ? 'Sound on' : 'Mute'}
             </button>
             {action && (
               <Link href={action.href} className="video-modal-btn is-gold" onClick={onClose}>
-                <i className={`bi ${action.icon}`} />
+                <i className={`bi ${action.icon}`} aria-hidden="true" />
                 {action.label}
               </Link>
             )}

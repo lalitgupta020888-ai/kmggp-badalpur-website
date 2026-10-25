@@ -16,7 +16,7 @@ export default function NoticeBoard({ notices = [], limit = 5 }) {
   return (
     <section className="notice-card">
       <div className="notice-head">
-        <i className="bi bi-megaphone-fill" />
+        <i className="bi bi-megaphone-fill" aria-hidden="true" />
         Notice Board &amp; Updates
       </div>
 
@@ -37,7 +37,7 @@ export default function NoticeBoard({ notices = [], limit = 5 }) {
             return (
               <li className="notice-item" key={notice.id}>
                 <span className="icon-tile icon-tile-sm">
-                  <i className={`bi ${notice.icon}`} />
+                  <i className={`bi ${notice.icon}`} aria-hidden="true" />
                 </span>
                 <div>
                   <Title {...linkProps}>
@@ -46,7 +46,7 @@ export default function NoticeBoard({ notices = [], limit = 5 }) {
                   </Title>
                   {notice.date && (
                     <div className="notice-date">
-                      <i className="bi bi-clock" />
+                      <i className="bi bi-clock" aria-hidden="true" />
                       {notice.date}
                     </div>
                   )}
@@ -59,7 +59,7 @@ export default function NoticeBoard({ notices = [], limit = 5 }) {
 
       <div className="notice-foot">
         <Link href="/notices">
-          View All Notices <i className="bi bi-arrow-right" />
+          View All Notices <i className="bi bi-arrow-right" aria-hidden="true" />
         </Link>
       </div>
     </section>

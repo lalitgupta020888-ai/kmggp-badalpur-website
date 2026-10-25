@@ -110,7 +110,7 @@ export default function MediaLibrary({ initial }) {
             event.target.value = '';
           }}
         />
-        <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-cloud-arrow-up-fill'}`} />
+        <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-cloud-arrow-up-fill'}`} aria-hidden="true" />
         <strong>{pending ? 'Uploading…' : 'Upload files'}</strong>
         <span>
           Drag files here, or click to browse — JPG, PNG, WebP, GIF, PDF, MP4 and WebM
@@ -119,7 +119,7 @@ export default function MediaLibrary({ initial }) {
 
       <div className="admin-card">
         <div className="admin-card-head">
-          <i className="bi bi-collection-fill head-icon" />
+          <i className="bi bi-collection-fill head-icon" aria-hidden="true" />
           <div>
             <h2>
               {shown.length} file{shown.length === 1 ? '' : 's'}
@@ -134,7 +134,7 @@ export default function MediaLibrary({ initial }) {
                 className={`admin-btn${filter === option.key ? ' admin-btn-primary' : ''}`}
                 onClick={() => setFilter(option.key)}
               >
-                <i className={`bi ${option.icon}`} />
+                <i className={`bi ${option.icon}`} aria-hidden="true" />
                 <span className="d-none d-md-inline">{option.label}</span>
               </button>
             ))}
@@ -144,7 +144,7 @@ export default function MediaLibrary({ initial }) {
         <div className="admin-card-body">
           {shown.length === 0 ? (
             <div className="admin-empty">
-              <i className="bi bi-images" />
+              <i className="bi bi-images" aria-hidden="true" />
               <strong>Nothing here</strong>
               Upload a file using the box above.
             </div>
@@ -161,8 +161,7 @@ export default function MediaLibrary({ initial }) {
                         <i
                           className={`bi ${
                             item.kind === 'video' ? 'bi-film' : 'bi-file-earmark-pdf'
-                          } placeholder`}
-                        />
+                          } placeholder`} aria-hidden="true" />
                       )}
                     </div>
                   </a>
@@ -195,7 +194,7 @@ export default function MediaLibrary({ initial }) {
                             onClick={saveDetails}
                             disabled={pending}
                           >
-                            <i className="bi bi-check-lg" />
+                            <i className="bi bi-check-lg" aria-hidden="true" />
                             Save
                           </button>
                           <button
@@ -227,7 +226,7 @@ export default function MediaLibrary({ initial }) {
                             }
                             aria-label="Edit details"
                           >
-                            <i className="bi bi-pencil" />
+                            <i className="bi bi-pencil" aria-hidden="true" />
                           </button>
                           <button
                             type="button"
@@ -236,7 +235,7 @@ export default function MediaLibrary({ initial }) {
                             aria-label="Copy link"
                             title="Copy link"
                           >
-                            <i className="bi bi-link-45deg" />
+                            <i className="bi bi-link-45deg" aria-hidden="true" />
                           </button>
                           <button
                             type="button"
@@ -244,7 +243,7 @@ export default function MediaLibrary({ initial }) {
                             onClick={() => destroy(item)}
                             aria-label="Delete file"
                           >
-                            <i className="bi bi-trash3" />
+                            <i className="bi bi-trash3" aria-hidden="true" />
                           </button>
                         </div>
                       </>

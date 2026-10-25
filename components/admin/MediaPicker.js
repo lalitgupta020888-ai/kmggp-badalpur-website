@@ -103,7 +103,7 @@ export default function MediaPicker({ open, kind = 'image', multiple = false, on
     <Modal show={open} onHide={onClose} size="lg" centered scrollable>
       <Modal.Header closeButton>
         <Modal.Title style={{ fontSize: '1.05rem' }}>
-          <i className="bi bi-collection-fill me-2" style={{ color: 'var(--gold-600)' }} />
+          <i className="bi bi-collection-fill me-2" style={{ color: 'var(--gold-600)' }} aria-hidden="true" />
           Choose a {KIND_LABEL[kind] || 'file'}
         </Modal.Title>
       </Modal.Header>
@@ -111,7 +111,7 @@ export default function MediaPicker({ open, kind = 'image', multiple = false, on
       <Modal.Body>
         {error && (
           <div className="admin-flash error">
-            <i className="bi bi-exclamation-triangle-fill" />
+            <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
             <span>{error}</span>
           </div>
         )}
@@ -146,19 +146,19 @@ export default function MediaPicker({ open, kind = 'image', multiple = false, on
               event.target.value = '';
             }}
           />
-          <i className={`bi ${busy ? 'bi-hourglass-split' : 'bi-cloud-arrow-up-fill'}`} />
+          <i className={`bi ${busy ? 'bi-hourglass-split' : 'bi-cloud-arrow-up-fill'}`} aria-hidden="true" />
           <strong>{busy ? 'Uploading…' : 'Upload a new file'}</strong>
           <span>Drag a file here, or click to browse</span>
         </div>
 
         {loading ? (
           <div className="admin-empty">
-            <i className="bi bi-hourglass-split" />
+            <i className="bi bi-hourglass-split" aria-hidden="true" />
             <strong>Loading…</strong>
           </div>
         ) : items.length === 0 ? (
           <div className="admin-empty">
-            <i className="bi bi-images" />
+            <i className="bi bi-images" aria-hidden="true" />
             <strong>Nothing uploaded yet</strong>
             Upload your first file using the box above.
           </div>
@@ -195,8 +195,7 @@ export default function MediaPicker({ open, kind = 'image', multiple = false, on
                     <i
                       className={`bi ${
                         item.kind === 'video' ? 'bi-film' : 'bi-file-earmark-pdf'
-                      } placeholder`}
-                    />
+                      } placeholder`} aria-hidden="true" />
                   )}
                 </div>
                 <div className="admin-media-info">
@@ -231,7 +230,7 @@ export default function MediaPicker({ open, kind = 'image', multiple = false, on
             onClick={confirmSelection}
             disabled={chosen.length === 0}
           >
-            <i className="bi bi-plus-lg" />
+            <i className="bi bi-plus-lg" aria-hidden="true" />
             Add {chosen.length || ''} photograph{chosen.length === 1 ? '' : 's'}
           </button>
         </Modal.Footer>

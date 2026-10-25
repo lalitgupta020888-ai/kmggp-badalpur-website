@@ -48,15 +48,15 @@ export default async function Syllabus() {
               <Col xl={3} md={6} key={branch.name}>
                 <div className="premium-card h-100 p-4 d-flex flex-column">
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${branch.icon}`} />
+                    <i className={`bi ${branch.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{branch.name}</h5>
                   <p className="small flex-grow-1">{branch.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <Link href={`/academic/syllabus/${branch.slug}`} className="doc-link mb-0">
-                    <i className="bi bi-file-earmark-pdf-fill" />
+                    <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                     <span className="flex-grow-1">Download Syllabus (PDF)</span>
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                 </div>
               </Col>
@@ -67,7 +67,7 @@ export default async function Syllabus() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-list-ol" />
+                  <i className="bi bi-list-ol" aria-hidden="true" />
                   Semester-wise Structure
                 </div>
                 <div className="panel-body">
@@ -83,7 +83,7 @@ export default async function Syllabus() {
             <Col lg={5}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-link-45deg" />
+                  <i className="bi bi-link-45deg" aria-hidden="true" />
                   Reference Links
                 </div>
                 <div className="panel-body">
@@ -98,13 +98,13 @@ export default async function Syllabus() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <i className={`bi ${item.icon}`} />
+                        <i className={`bi ${item.icon}`} aria-hidden="true" />
                         <span className="flex-grow-1">{item.label}</span>
-                        <i className="bi bi-box-arrow-up-right doc-link-external" />
+                        <i className="bi bi-box-arrow-up-right doc-link-external" aria-hidden="true" />
                       </a>
                     ) : (
                       <span className={`doc-link is-pending${last}`} key={item.label}>
-                        <i className={`bi ${item.icon}`} />
+                        <i className={`bi ${item.icon}`} aria-hidden="true" />
                         <span className="flex-grow-1">{item.label}</span>
                         <span className="doc-link-soon">Awaited</span>
                       </span>
@@ -112,7 +112,7 @@ export default async function Syllabus() {
                   })}
 
                   <div className="callout mt-4">
-                    <i className="bi bi-info-circle-fill" />
+                    <i className="bi bi-info-circle-fill" aria-hidden="true" />
                     <p>
                       Syllabus documents are updated whenever BTEUP revises the curriculum. Always
                       verify the session year printed on the document before use.

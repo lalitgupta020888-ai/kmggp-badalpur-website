@@ -44,7 +44,7 @@ function StaffDirectory({ department }) {
   return (
     <div className="panel">
       <div className="panel-header">
-        <i className={`bi ${department.icon}`} />
+        <i className={`bi ${department.icon}`} aria-hidden="true" />
         {department.name}
       </div>
       <div className="panel-body">
@@ -62,7 +62,7 @@ function StaffDirectory({ department }) {
                       style={{ objectFit: 'cover' }}
                     />
                   ) : (
-                    <i className="bi bi-person-fill" />
+                    <i className="bi bi-person-fill" aria-hidden="true" />
                   )}
                 </span>
                 <h5 className="fw-bold mb-1">{member.name}</h5>
@@ -95,7 +95,7 @@ export default async function DepartmentHome({ params }) {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className={`bi ${department.icon}`} />
+          <i className={`bi ${department.icon}`} aria-hidden="true" />
           {text.homeIntroHeading} {department.name}
         </div>
         <div className="panel-body">
@@ -114,7 +114,7 @@ export default async function DepartmentHome({ params }) {
               <Col md={Math.floor(12 / highlights.length)} sm={6} key={item.label}>
                 <div className="feature-row align-items-center h-100">
                   <span className="icon-tile icon-tile-sm">
-                    <i className={`bi ${item.icon}`} />
+                    <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <div>
                     <h5 className="mb-0">{item.value}</h5>
@@ -131,7 +131,7 @@ export default async function DepartmentHome({ params }) {
         <Col md={6}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-eye-fill" />
+              <i className="bi bi-eye-fill" aria-hidden="true" />
               Vision
             </div>
             <div className="panel-body">
@@ -147,7 +147,7 @@ export default async function DepartmentHome({ params }) {
         <Col md={6}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-bullseye" />
+              <i className="bi bi-bullseye" aria-hidden="true" />
               Mission
             </div>
             <div className="panel-body">
@@ -164,7 +164,7 @@ export default async function DepartmentHome({ params }) {
       {department.focus.length > 0 && (
         <div className="panel mt-4">
           <div className="panel-header">
-            <i className="bi bi-bookmark-star-fill" />
+            <i className="bi bi-bookmark-star-fill" aria-hidden="true" />
             Areas of Focus
           </div>
           <div className="panel-body">
@@ -173,7 +173,7 @@ export default async function DepartmentHome({ params }) {
                 <Col md={6} key={area}>
                   <div className="feature-row align-items-center h-100">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-check-lg" />
+                      <i className="bi bi-check-lg" aria-hidden="true" />
                     </span>
                     <h5 className="mb-0">{area}</h5>
                   </div>

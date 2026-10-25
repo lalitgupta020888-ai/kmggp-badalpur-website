@@ -35,7 +35,7 @@ export default async function BranchTimeTable({ params }) {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-hourglass-split" />
+                  <i className="bi bi-hourglass-split" aria-hidden="true" />
                   Daily Period Timings
                 </div>
                 <div className="panel-body p-0">
@@ -43,9 +43,9 @@ export default async function BranchTimeTable({ params }) {
                     <table className="premium-table period-table">
                       <thead>
                         <tr>
-                          <th>Period</th>
-                          <th>Timing</th>
-                          <th>Type</th>
+                          <th scope="col">Period</th>
+                          <th scope="col">Timing</th>
+                          <th scope="col">Type</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -53,8 +53,7 @@ export default async function BranchTimeTable({ params }) {
                           <tr key={slot.period} className={slot.isBreak ? 'is-break' : ''}>
                             <td>
                               <i
-                                className={`bi ${slot.isBreak ? 'bi-cup-hot-fill' : 'bi-clock'} text-gold me-2`}
-                              />
+                                className={`bi ${slot.isBreak ? 'bi-cup-hot-fill' : 'bi-clock'} text-gold me-2`} aria-hidden="true" />
                               {slot.period}
                             </td>
                             <td>
@@ -73,7 +72,7 @@ export default async function BranchTimeTable({ params }) {
             <Col lg={5}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-info-square-fill" />
+                  <i className="bi bi-info-square-fill" aria-hidden="true" />
                   Points to Note
                 </div>
                 <div className="panel-body">
@@ -98,7 +97,7 @@ export default async function BranchTimeTable({ params }) {
 
           <div className="panel">
             <div className="panel-header">
-              <i className="bi bi-calendar3-week-fill" />
+              <i className="bi bi-calendar3-week-fill" aria-hidden="true" />
               {timetable.name}
             </div>
             <div className="panel-body">
@@ -120,12 +119,12 @@ export default async function BranchTimeTable({ params }) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <i className="bi bi-file-earmark-pdf-fill" />
+                      <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                       Download Here
                     </a>
                   ) : (
                     <span className="btn-awaited">
-                      <i className="bi bi-hourglass-split" />
+                      <i className="bi bi-hourglass-split" aria-hidden="true" />
                       Awaited
                     </span>
                   )}
@@ -135,7 +134,7 @@ export default async function BranchTimeTable({ params }) {
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               The time-table is revised at the start of every semester. Always check the session and
               semester printed on the document before following it.

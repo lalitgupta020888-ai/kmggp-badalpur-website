@@ -14,7 +14,7 @@ export default async function AdminNoticesPage() {
     <>
       <div className="admin-card mb-4">
         <div className="admin-card-head">
-          <i className="bi bi-megaphone-fill head-icon" />
+          <i className="bi bi-megaphone-fill head-icon" aria-hidden="true" />
           <div>
             <h2>Notice Board</h2>
             <p>Shown on the home page panel and in full on /notices</p>

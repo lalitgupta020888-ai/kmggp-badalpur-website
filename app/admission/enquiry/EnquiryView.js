@@ -97,7 +97,7 @@ export default function EnquiryView({ officeHours }) {
               <Col md={4} key={item.title}>
                 <div className="feature-row h-100 align-items-center">
                   <span className="icon-tile icon-tile-sm">
-                    <i className={`bi ${item.icon}`} />
+                    <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <div>
                     <h5>{item.title}</h5>
@@ -117,7 +117,7 @@ export default function EnquiryView({ officeHours }) {
             <Col lg={7}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-pencil-square" />
+                  <i className="bi bi-pencil-square" aria-hidden="true" />
                   Enquiry Form
                 </div>
                 <div className="panel-body">
@@ -127,11 +127,11 @@ export default function EnquiryView({ officeHours }) {
                         className="icon-tile mx-auto mb-4"
                         style={{ width: 78, height: 78, fontSize: '2rem' }}
                       >
-                        <i className="bi bi-check-lg" />
+                        <i className="bi bi-check-lg" aria-hidden="true" />
                       </span>
                       <h4 className="fw-bold mb-2">Enquiry Submitted</h4>
                       <div className="gold-flourish">
-                        <i className="bi bi-diamond-fill" />
+                        <i className="bi bi-diamond-fill" aria-hidden="true" />
                       </div>
                       <p className="mt-3 mb-4">
                         Thank you for reaching out. Our admission team will contact you within one
@@ -139,7 +139,7 @@ export default function EnquiryView({ officeHours }) {
                       </p>
                       <div className="d-flex flex-wrap gap-3 justify-content-center">
                         <Link href="/admission/process" className="btn-gold">
-                          <i className="bi bi-signpost-split" />
+                          <i className="bi bi-signpost-split" aria-hidden="true" />
                           Read the Admission Process
                         </Link>
                         <Button
@@ -147,7 +147,7 @@ export default function EnquiryView({ officeHours }) {
                           className="btn-outline-navy"
                           onClick={() => setSubmitted(false)}
                         >
-                          <i className="bi bi-arrow-counterclockwise" />
+                          <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
                           Submit Another Enquiry
                         </Button>
                       </div>
@@ -161,23 +161,23 @@ export default function EnquiryView({ officeHours }) {
 
                       <Row>
                         <Col sm={6}>
-                          <Form.Group className="mb-3">
+                          <Form.Group className="mb-3" controlId="enquiry-full-name">
                             <Form.Label>
                               Full Name <span className="text-gold">*</span>
                             </Form.Label>
                             <div className="input-icon">
-                              <i className="bi bi-person-fill" />
+                              <i className="bi bi-person-fill" aria-hidden="true" />
                               <Form.Control type="text" placeholder="Enter your full name" required />
                             </div>
                           </Form.Group>
                         </Col>
                         <Col sm={6}>
-                          <Form.Group className="mb-3">
+                          <Form.Group className="mb-3" controlId="enquiry-mobile-number">
                             <Form.Label>
                               Mobile Number <span className="text-gold">*</span>
                             </Form.Label>
                             <div className="input-icon">
-                              <i className="bi bi-telephone-fill" />
+                              <i className="bi bi-telephone-fill" aria-hidden="true" />
                               <Form.Control
                                 type="tel"
                                 inputMode="numeric"
@@ -194,24 +194,24 @@ export default function EnquiryView({ officeHours }) {
                         </Col>
                       </Row>
 
-                      <Form.Group className="mb-3">
+                      <Form.Group className="mb-3" controlId="enquiry-email-address">
                         <Form.Label>
                           Email Address <span className="text-gold">*</span>
                         </Form.Label>
                         <div className="input-icon">
-                          <i className="bi bi-envelope-fill" />
+                          <i className="bi bi-envelope-fill" aria-hidden="true" />
                           <Form.Control type="email" placeholder="you@example.com" required />
                         </div>
                       </Form.Group>
 
                       <Row>
                         <Col sm={6}>
-                          <Form.Group className="mb-3">
+                          <Form.Group className="mb-3" controlId="enquiry-interested-course">
                             <Form.Label>
                               Interested Course <span className="text-gold">*</span>
                             </Form.Label>
                             <div className="input-icon">
-                              <i className="bi bi-collection-fill" />
+                              <i className="bi bi-collection-fill" aria-hidden="true" />
                               <Form.Select required defaultValue="">
                                 <option value="" disabled>
                                   Select a course
@@ -225,12 +225,12 @@ export default function EnquiryView({ officeHours }) {
                           </Form.Group>
                         </Col>
                         <Col sm={6}>
-                          <Form.Group className="mb-3">
+                          <Form.Group className="mb-3" controlId="enquiry-class-10th-status">
                             <Form.Label>
                               Class 10th Status <span className="text-gold">*</span>
                             </Form.Label>
                             <div className="input-icon">
-                              <i className="bi bi-mortarboard-fill" />
+                              <i className="bi bi-mortarboard-fill" aria-hidden="true" />
                               <Form.Select required defaultValue="">
                                 <option value="" disabled>
                                   Select your status
@@ -243,15 +243,15 @@ export default function EnquiryView({ officeHours }) {
                         </Col>
                       </Row>
 
-                      <Form.Group className="mb-3">
+                      <Form.Group className="mb-3" controlId="enquiry-city-district">
                         <Form.Label>City / District</Form.Label>
                         <div className="input-icon">
-                          <i className="bi bi-geo-alt-fill" />
+                          <i className="bi bi-geo-alt-fill" aria-hidden="true" />
                           <Form.Control type="text" placeholder="e.g. Gautam Buddha Nagar" />
                         </div>
                       </Form.Group>
 
-                      <Form.Group className="mb-3">
+                      <Form.Group className="mb-3" controlId="enquiry-your-query">
                         <Form.Label>Your Query</Form.Label>
                         <Form.Control
                           as="textarea"
@@ -270,7 +270,7 @@ export default function EnquiryView({ officeHours }) {
                       </Form.Group>
 
                       <Button type="submit" className="btn-gold w-100 justify-content-center">
-                        <i className="bi bi-send-fill" />
+                        <i className="bi bi-send-fill" aria-hidden="true" />
                         Submit Enquiry
                       </Button>
                     </Form>
@@ -283,13 +283,13 @@ export default function EnquiryView({ officeHours }) {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-telephone-inbound-fill" />
+                  <i className="bi bi-telephone-inbound-fill" aria-hidden="true" />
                   Speak to Us Directly
                 </div>
                 <div className="panel-body">
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-telephone-fill" />
+                      <i className="bi bi-telephone-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Admission Helpline</div>
@@ -298,7 +298,7 @@ export default function EnquiryView({ officeHours }) {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-envelope-fill" />
+                      <i className="bi bi-envelope-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Email</div>
@@ -307,7 +307,7 @@ export default function EnquiryView({ officeHours }) {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-clock-fill" />
+                      <i className="bi bi-clock-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Office Hours</div>
@@ -316,7 +316,7 @@ export default function EnquiryView({ officeHours }) {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-geo-alt-fill" />
+                      <i className="bi bi-geo-alt-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Campus</div>
@@ -328,7 +328,7 @@ export default function EnquiryView({ officeHours }) {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-signpost-2-fill" />
+                  <i className="bi bi-signpost-2-fill" aria-hidden="true" />
                   What Happens Next
                 </div>
                 <div className="panel-body">
@@ -363,13 +363,13 @@ export default function EnquiryView({ officeHours }) {
               <Col lg={3} md={6} key={link.href}>
                 <Link href={link.href} className="premium-card h-100 p-4 d-block text-decoration-none">
                   <span className="icon-tile mb-3">
-                    <i className={`bi ${link.icon}`} />
+                    <i className={`bi ${link.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-2">{link.label}</h5>
                   <p className="small mb-0">{link.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <span className="fw-bold text-primary-blue small">
-                    Read More <i className="bi bi-arrow-right" />
+                    Read More <i className="bi bi-arrow-right" aria-hidden="true" />
                   </span>
                 </Link>
               </Col>
@@ -383,7 +383,7 @@ export default function EnquiryView({ officeHours }) {
           <Row className="align-items-center g-4">
             <Col lg={8}>
               <span className="eyebrow eyebrow-light">
-                <i className="bi bi-file-earmark-pdf-fill" />
+                <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                 Information Booklet 2026-27
               </span>
               <h3>Prefer to Read Everything in One Place?</h3>
@@ -395,11 +395,11 @@ export default function EnquiryView({ officeHours }) {
             </Col>
             <Col lg={4} className="d-flex flex-column gap-3 align-items-lg-end">
               <Link href="/admission/booklet" className="btn-gold">
-                <i className="bi bi-download" />
+                <i className="bi bi-download" aria-hidden="true" />
                 Get the Booklet
               </Link>
               <Link href="/contact" className="hero-btn-ghost">
-                <i className="bi bi-geo-alt-fill" />
+                <i className="bi bi-geo-alt-fill" aria-hidden="true" />
                 Plan a Campus Visit
               </Link>
             </Col>

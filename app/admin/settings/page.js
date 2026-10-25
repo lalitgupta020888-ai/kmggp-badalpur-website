@@ -15,7 +15,7 @@ export default async function AdminSettingsPage() {
     <>
       <div className="admin-card">
         <div className="admin-card-head">
-          <i className="bi bi-person-badge-fill head-icon" />
+          <i className="bi bi-person-badge-fill head-icon" aria-hidden="true" />
           <div>
             <h2>Your sign-in</h2>
             <p>Signed in as {session?.username}</p>
@@ -28,7 +28,7 @@ export default async function AdminSettingsPage() {
 
       <div className="admin-card">
         <div className="admin-card-head">
-          <i className="bi bi-hdd-stack-fill head-icon" />
+          <i className="bi bi-hdd-stack-fill head-icon" aria-hidden="true" />
           <div>
             <h2>Where your content is stored</h2>
             <p>Everything you save and upload lives in one folder on the server</p>
@@ -59,7 +59,7 @@ export default async function AdminSettingsPage() {
 
           {!persistent && (
             <div className="admin-flash error mb-0">
-              <i className="bi bi-exclamation-triangle-fill" />
+              <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
               <span>
                 This folder is not on a persistent disk, so <strong>everything you save here will
                 be lost on the next deployment</strong>. Attach a storage volume mounted at{' '}

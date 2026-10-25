@@ -74,7 +74,7 @@ export default function InstructionForCandidates() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-info-square-fill" />
+          <i className="bi bi-info-square-fill" aria-hidden="true" />
           Instruction for Candidates
         </div>
         <div className="panel-body">
@@ -89,7 +89,7 @@ export default function InstructionForCandidates() {
             {STEPS.map((step) => (
               <li key={step.title}>
                 <h6 className="fw-bold mb-1">
-                  <i className={`bi ${step.icon} text-gold me-2`} />
+                  <i className={`bi ${step.icon} text-gold me-2`} aria-hidden="true" />
                   {step.title}
                 </h6>
                 <p className="small mb-0">{step.text}</p>
@@ -103,7 +103,7 @@ export default function InstructionForCandidates() {
         <Col lg={6}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-check2-circle" />
+              <i className="bi bi-check2-circle" aria-hidden="true" />
               Do
             </div>
             <div className="panel-body">
@@ -119,7 +119,7 @@ export default function InstructionForCandidates() {
         <Col lg={6}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-x-circle" />
+              <i className="bi bi-x-circle" aria-hidden="true" />
               Do Not
             </div>
             <div className="panel-body">
@@ -135,7 +135,7 @@ export default function InstructionForCandidates() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-signpost-2-fill" />
+          <i className="bi bi-signpost-2-fill" aria-hidden="true" />
           Freeze, Float or Withdraw
         </div>
         <div className="panel-body">
@@ -149,7 +149,7 @@ export default function InstructionForCandidates() {
               <Col md={4} key={option.term}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile icon-tile-sm mb-3">
-                    <i className="bi bi-diamond-fill" />
+                    <i className="bi bi-diamond-fill" aria-hidden="true" />
                   </span>
                   <h6 className="fw-bold mb-2">{option.term}</h6>
                   <p className="small mb-0">{option.text}</p>
@@ -164,13 +164,13 @@ export default function InstructionForCandidates() {
               information booklet is also available on this website.
             </p>
             <Link className="btn-gold" href="/admission/booklet">
-              <i className="bi bi-file-earmark-pdf-fill" />
+              <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
               Information Booklet
             </Link>
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               In case of any difference between this page and the official JEECUP brochure, the{' '}
               <a href={JEECUP_PORTAL} target="_blank" rel="noopener noreferrer">

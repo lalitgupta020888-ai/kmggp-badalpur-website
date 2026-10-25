@@ -143,14 +143,16 @@ function HoverDropdown({ bar, title, id, children }) {
 }
 
 function DropdownLinks({ bar, items }) {
+  const pathname = usePathname();
   return items.map((item, index) => (
     <NavDropdown.Item
       as={Link}
       href={item.href || '#'}
       key={item.id || `${item.href}-${index}`}
       onClick={bar.closeAll}
+      aria-current={pathname === item.href ? 'page' : undefined}
     >
-      <i className={`bi ${item.icon || 'bi-dot'}`} />
+      <i className={`bi ${item.icon || 'bi-dot'}`} aria-hidden="true" />
       {item.label}
     </NavDropdown.Item>
   ));
@@ -190,24 +192,24 @@ export default function Navigation({
     // bar and the navbar move together, not just the navbar.
     <header className="site-header">
       {/* Utility bar — contact details and social links */}
-      <div className="topbar d-none d-lg-block">
+      <div className="topbar d-none d-lg-block" role="navigation" aria-label="Contact and social links">
         <Container fluid className="nav-shell d-flex align-items-center justify-content-between py-2">
           <div className="d-flex align-items-center gap-4">
             {topbar.address && (
               <span className="topbar-item">
-                <i className="bi bi-geo-alt-fill" />
+                <i className="bi bi-geo-alt-fill" aria-hidden="true" />
                 {topbar.address}
               </span>
             )}
             {topbar.phone && (
               <a href={topbar.phoneHref || `tel:${topbar.phone}`} className="topbar-item">
-                <i className="bi bi-telephone-fill" />
+                <i className="bi bi-telephone-fill" aria-hidden="true" />
                 {topbar.phone}
               </a>
             )}
             {topbar.email && (
               <a href={`mailto:${topbar.email}`} className="topbar-item">
-                <i className="bi bi-envelope-fill" />
+                <i className="bi bi-envelope-fill" aria-hidden="true" />
                 {topbar.email}
               </a>
             )}
@@ -217,8 +219,9 @@ export default function Navigation({
               <Link
                 href={topbar.staffHref}
                 className={`topbar-item topbar-link ${isActive(topbar.staffHref) ? 'is-active' : ''}`}
+                aria-current={isActive(topbar.staffHref) ? 'page' : undefined}
               >
-                <i className="bi bi-person-vcard-fill" />
+                <i className="bi bi-person-vcard-fill" aria-hidden="true" />
                 {topbar.staffLabel}
               </Link>
             )}
@@ -228,7 +231,7 @@ export default function Navigation({
                 genuinely room, otherwise the contact details wrap. */}
             {topbar.accreditation && (
               <span className="topbar-item topbar-accred">
-                <i className="bi bi-award-fill" />
+                <i className="bi bi-award-fill" aria-hidden="true" />
                 {topbar.accreditation}
               </span>
             )}
@@ -244,7 +247,7 @@ export default function Navigation({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className={`bi ${item.icon}`} />
+                    <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </a>
                 ))}
               </div>
@@ -256,9 +259,9 @@ export default function Navigation({
       {/* Nine nav links plus four action buttons need more than xl to breathe —
           below 1400px the bar collapses to the toggler instead of crushing
           the last button off the edge. */}
-      <Navbar expand="xxl" className="navbar-custom" collapseOnSelect>
+      <Navbar expand="xxl" className="navbar-custom" collapseOnSelect aria-label="Main menu">
         <Container fluid className="nav-shell">
-          <Navbar.Brand as={Link} href="/">
+          <Navbar.Brand as={Link} href="/" aria-label={`${brand.line1 || ''} ${brand.line2 || ''} — Home`.trim()}>
             <span className="brand-crest brand-crest--logo">
               {brand.logo && (
                 <Image
@@ -276,7 +279,7 @@ export default function Navigation({
             </span>
           </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="main-navbar" />
+          <Navbar.Toggle aria-controls="main-navbar" aria-label="Open or close the menu" />
           <Navbar.Collapse id="main-navbar">
             <Nav className="me-auto">
               {menus.map((menu) =>
@@ -290,6 +293,7 @@ export default function Navigation({
                     href={menu.href || "#"}
                     key={menu.id}
                     className={isActive(menu.match || menu.href || "") ? "active" : ""}
+                    aria-current={isActive(menu.match || menu.href || "") ? 'page' : undefined}
                     onMouseEnter={bar.closeNow}
                   >
                     {menu.label}
@@ -316,8 +320,9 @@ export default function Navigation({
                   }`.trim()}
                   title={action.label}
                   aria-label={action.label}
+                  aria-current={action.match && isActive(action.match) ? 'page' : undefined}
                 >
-                  <i className={`bi ${action.icon || 'bi-arrow-right'}`} />
+                  <i className={`bi ${action.icon || 'bi-arrow-right'}`} aria-hidden="true" />
                   {action.style === 'ghost' ? (
                     <span className="nav-btn-label">{action.label}</span>
                   ) : (

@@ -21,14 +21,15 @@ export default function SideNav({ eyebrow, title, items, cta }) {
   const [open, setOpen] = useState(false);
 
   const current = items.find((item) => !item.external && item.href === pathname);
+  const listId = React.useId();
 
   return (
     <div className="side-rail">
-      <nav className={`side-nav ${open ? 'is-open' : ''}`}>
+      <nav className={`side-nav ${open ? 'is-open' : ''}`} aria-label={title}>
         <div className="side-nav-head">
           {eyebrow && (
             <span className="eyebrow eyebrow-light">
-              <i className="bi bi-bookmark-star-fill" />
+              <i className="bi bi-bookmark-star-fill" aria-hidden="true" />
               {eyebrow}
             </span>
           )}
@@ -38,14 +39,15 @@ export default function SideNav({ eyebrow, title, items, cta }) {
             type="button"
             className="side-nav-toggle"
             aria-expanded={open}
+            aria-controls={listId}
             onClick={() => setOpen((wasOpen) => !wasOpen)}
           >
             <span>{current ? current.label : 'Browse this section'}</span>
-            <i className={`bi ${open ? 'bi-chevron-up' : 'bi-chevron-down'}`} />
+            <i className={`bi ${open ? 'bi-chevron-up' : 'bi-chevron-down'}`} aria-hidden="true" />
           </button>
         </div>
 
-        <div className="side-nav-list">
+        <div className="side-nav-list" id={listId}>
           {items.map((item) =>
             item.external ? (
               <a
@@ -56,8 +58,9 @@ export default function SideNav({ eyebrow, title, items, cta }) {
                 className="side-nav-link"
                 onClick={() => setOpen(false)}
               >
-                <i className={`bi ${item.icon}`} />
+                <i className={`bi ${item.icon}`} aria-hidden="true" />
                 {item.label}
+                <span className="visually-hidden"> (opens in a new tab)</span>
                 <i className="bi bi-box-arrow-up-right ms-auto small" aria-hidden="true" />
               </a>
             ) : (
@@ -65,9 +68,10 @@ export default function SideNav({ eyebrow, title, items, cta }) {
                 key={item.href}
                 href={item.href}
                 className={`side-nav-link ${pathname === item.href ? 'is-active' : ''}`}
+                aria-current={pathname === item.href ? 'page' : undefined}
                 onClick={() => setOpen(false)}
               >
-                <i className={`bi ${item.icon}`} />
+                <i className={`bi ${item.icon}`} aria-hidden="true" />
                 {item.label}
               </Link>
             )
@@ -77,12 +81,12 @@ export default function SideNav({ eyebrow, title, items, cta }) {
 
       {cta && (
         <aside className="side-cta">
-          <i className={`bi ${cta.icon || 'bi-headset'} side-cta-icon`} />
+          <i className={`bi ${cta.icon || 'bi-headset'} side-cta-icon`} aria-hidden="true" />
           <h6>{cta.title}</h6>
           <p>{cta.text}</p>
           <Link href={cta.href} className="btn-gold btn-sm">
             {cta.label}
-            <i className="bi bi-arrow-right" />
+            <i className="bi bi-arrow-right" aria-hidden="true" />
           </Link>
         </aside>
       )}

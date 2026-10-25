@@ -200,7 +200,7 @@ export default function PayCalculator() {
 
       <div className="panel no-print">
         <div className="panel-header">
-          <i className="bi bi-calculator-fill" />
+          <i className="bi bi-calculator-fill" aria-hidden="true" />
           Pay Calculator
         </div>
         <div className="panel-body">
@@ -213,13 +213,13 @@ export default function PayCalculator() {
 
           <Form className="premium-form">
             <h6 className="fw-bold mb-3">
-              <i className="bi bi-person-vcard text-gold me-2" />
+              <i className="bi bi-person-vcard text-gold me-2" aria-hidden="true" />
               Pay Slip Details
             </h6>
             <Row className="g-3">
               <Col md={4}>
-                <Form.Label>Employee Name</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-employee-name">Employee Name</Form.Label>
+                <Form.Control id="pay-employee-name"
                   type="text"
                   placeholder="Full Name"
                   value={slip.name}
@@ -227,8 +227,8 @@ export default function PayCalculator() {
                 />
               </Col>
               <Col md={4}>
-                <Form.Label>Designation</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-designation">Designation</Form.Label>
+                <Form.Control id="pay-designation"
                   type="text"
                   placeholder="e.g. Lecturer"
                   value={slip.designation}
@@ -236,8 +236,8 @@ export default function PayCalculator() {
                 />
               </Col>
               <Col md={4}>
-                <Form.Label>Month &amp; Year</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-month-and-year">Month &amp; Year</Form.Label>
+                <Form.Control id="pay-month-and-year"
                   type="text"
                   placeholder="e.g. April 2026"
                   value={slip.month}
@@ -251,13 +251,13 @@ export default function PayCalculator() {
 
             <div className="gold-rule-thin my-4" />
             <h6 className="fw-bold mb-3">
-              <i className="bi bi-cash-stack text-gold me-2" />
+              <i className="bi bi-cash-stack text-gold me-2" aria-hidden="true" />
               Earnings
             </h6>
             <Row className="g-3">
               <Col md={4}>
-                <Form.Label>Basic Pay (₹)</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-basic-pay">Basic Pay (₹)</Form.Label>
+                <Form.Control id="pay-basic-pay"
                   type="number"
                   min="0"
                   inputMode="numeric"
@@ -267,16 +267,16 @@ export default function PayCalculator() {
                 />
               </Col>
               <Col md={4}>
-                <Form.Label>Dearness Allowance (%)</Form.Label>
-                <Form.Control type="number" min="0" value={form.da} onChange={update('da')} />
+                <Form.Label htmlFor="pay-dearness-allowance">Dearness Allowance (%)</Form.Label>
+                <Form.Control id="pay-dearness-allowance" type="number" min="0" value={form.da} onChange={update('da')} />
               </Col>
               <Col md={4}>
-                <Form.Label>House Rent Allowance (₹)</Form.Label>
-                <Form.Control type="number" min="0" value={form.hra} onChange={update('hra')} />
+                <Form.Label htmlFor="pay-house-rent-allowance">House Rent Allowance (₹)</Form.Label>
+                <Form.Control id="pay-house-rent-allowance" type="number" min="0" value={form.hra} onChange={update('hra')} />
               </Col>
               <Col md={4}>
-                <Form.Label>Other Allowances (₹)</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-other-allowances">Other Allowances (₹)</Form.Label>
+                <Form.Control id="pay-other-allowances"
                   type="number"
                   min="0"
                   value={form.otherAllowance}
@@ -288,13 +288,13 @@ export default function PayCalculator() {
             <div className="gold-rule-thin my-4" />
 
             <h6 className="fw-bold mb-3">
-              <i className="bi bi-dash-circle text-gold me-2" />
+              <i className="bi bi-dash-circle text-gold me-2" aria-hidden="true" />
               Deductions
             </h6>
             <Row className="g-3">
               <Col md={3}>
-                <Form.Label>NPS Share (%)</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-nps-share">NPS Share (%)</Form.Label>
+                <Form.Control id="pay-nps-share"
                   type="number"
                   min="0"
                   value={form.npsRate}
@@ -302,8 +302,8 @@ export default function PayCalculator() {
                 />
               </Col>
               <Col md={3}>
-                <Form.Label>Income Tax (₹)</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-income-tax">Income Tax (₹)</Form.Label>
+                <Form.Control id="pay-income-tax"
                   type="number"
                   min="0"
                   value={form.incomeTax}
@@ -311,8 +311,8 @@ export default function PayCalculator() {
                 />
               </Col>
               <Col md={3}>
-                <Form.Label>Insurance / GIS (₹)</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-insurance-gis">Insurance / GIS (₹)</Form.Label>
+                <Form.Control id="pay-insurance-gis"
                   type="number"
                   min="0"
                   value={form.insurance}
@@ -320,8 +320,8 @@ export default function PayCalculator() {
                 />
               </Col>
               <Col md={3}>
-                <Form.Label>Other Deductions (₹)</Form.Label>
-                <Form.Control
+                <Form.Label htmlFor="pay-other-deductions">Other Deductions (₹)</Form.Label>
+                <Form.Control id="pay-other-deductions"
                   type="number"
                   min="0"
                   value={form.otherDeduction}
@@ -370,11 +370,11 @@ export default function PayCalculator() {
         </div>
         <div className="d-flex flex-wrap gap-2">
           <Button className="btn-gold" onClick={() => window.print()}>
-            <i className="bi bi-printer-fill" />
+            <i className="bi bi-printer-fill" aria-hidden="true" />
             Pay Slip
           </Button>
           <Button className="btn-outline-navy" onClick={reset}>
-            <i className="bi bi-arrow-counterclockwise" />
+            <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
             Reset
           </Button>
         </div>
@@ -384,7 +384,7 @@ export default function PayCalculator() {
         <Col lg={6}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-plus-circle" />
+              <i className="bi bi-plus-circle" aria-hidden="true" />
               Earnings Break-up
             </div>
             <div className="panel-body p-0">
@@ -392,9 +392,9 @@ export default function PayCalculator() {
                 <table className="premium-table calc-table">
                   <thead>
                     <tr>
-                      <th>Head</th>
-                      <th>Basis</th>
-                      <th>Amount</th>
+                      <th scope="col">Head</th>
+                      <th scope="col">Basis</th>
+                      <th scope="col">Amount</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -419,7 +419,7 @@ export default function PayCalculator() {
         <Col lg={6}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-dash-circle" />
+              <i className="bi bi-dash-circle" aria-hidden="true" />
               Deductions Break-up
             </div>
             <div className="panel-body p-0">
@@ -427,9 +427,9 @@ export default function PayCalculator() {
                 <table className="premium-table calc-table">
                   <thead>
                     <tr>
-                      <th>Head</th>
-                      <th>Basis</th>
-                      <th>Amount</th>
+                      <th scope="col">Head</th>
+                      <th scope="col">Basis</th>
+                      <th scope="col">Amount</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -466,13 +466,13 @@ export default function PayCalculator() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="bi bi-box-arrow-up-right" />
+              <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
               Drawn Statement
             </a>
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               The DA and NPS rates above are only defaults — they are revised by government order
               from time to time. Enter the rates currently applicable to you before relying on the

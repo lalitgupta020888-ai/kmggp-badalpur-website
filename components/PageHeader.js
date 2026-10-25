@@ -16,7 +16,7 @@ export default function PageHeader({ icon = 'bi-mortarboard-fill', eyebrow, titl
       <Container>
         {eyebrow && (
           <span className="eyebrow eyebrow-light">
-            <i className={`bi ${icon}`} />
+            <i className={`bi ${icon}`} aria-hidden="true" />
             {eyebrow}
           </span>
         )}
@@ -25,16 +25,16 @@ export default function PageHeader({ icon = 'bi-mortarboard-fill', eyebrow, titl
 
         <nav className="page-crumb" aria-label="Breadcrumb">
           <Link href="/">
-            <i className="bi bi-house-door-fill me-1" />
+            <i className="bi bi-house-door-fill me-1" aria-hidden="true" />
             Home
           </Link>
           {crumbs.map((crumb, i) => (
             <React.Fragment key={`${crumb.label}-${i}`}>
-              <i className="bi bi-chevron-right sep" />
+              <i className="bi bi-chevron-right sep" aria-hidden="true" />
               {crumb.href && i !== crumbs.length - 1 ? (
                 <Link href={crumb.href}>{crumb.label}</Link>
               ) : (
-                <span className="current">{crumb.label}</span>
+                <span className="current" aria-current="page">{crumb.label}</span>
               )}
             </React.Fragment>
           ))}

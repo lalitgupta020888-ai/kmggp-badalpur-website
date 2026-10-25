@@ -43,17 +43,17 @@ export default function AlbumView({ album, others }) {
         <Container>
           <div className="album-bar">
             <Link href="/gallery" className="album-back">
-              <i className="bi bi-arrow-left" />
+              <i className="bi bi-arrow-left" aria-hidden="true" />
               All Albums
             </Link>
             <span className="d-flex flex-wrap gap-2">
               {film && (
                 <span className="status-pill is-meta">
-                  <i className="bi bi-camera-reels-fill me-2" />1 Film
+                  <i className="bi bi-camera-reels-fill me-2" aria-hidden="true" />1 Film
                 </span>
               )}
               <span className="status-pill is-meta">
-                <i className="bi bi-images me-2" />
+                <i className="bi bi-images me-2" aria-hidden="true" />
                 {photos.length} {photos.length === 1 ? 'Photograph' : 'Photographs'}
               </span>
             </span>
@@ -88,16 +88,16 @@ export default function AlbumView({ album, others }) {
                   />
                   <span className="film-sheen" aria-hidden="true" />
                   <span className="film-badge" aria-hidden="true">
-                    <i className="bi bi-play-fill" />
+                    <i className="bi bi-play-fill" aria-hidden="true" />
                   </span>
                   <span className="film-ribbon" aria-hidden="true">
-                    <i className="bi bi-camera-reels-fill" />
+                    <i className="bi bi-camera-reels-fill" aria-hidden="true" />
                     Film
                   </span>
                   <figcaption className="gallery-veil">
                     <div className="gold-rule-thin" />
                     <span>
-                      <i className="bi bi-camera-reels-fill me-2" />
+                      <i className="bi bi-camera-reels-fill me-2" aria-hidden="true" />
                       {film.caption}
                     </span>
                     <span className="small mt-1" style={{ color: 'var(--gold-300)' }}>
@@ -133,7 +133,7 @@ export default function AlbumView({ album, others }) {
                   <figcaption className="gallery-veil">
                     <div className="gold-rule-thin" />
                     <span>
-                      <i className="bi bi-camera-fill me-2" />
+                      <i className="bi bi-camera-fill me-2" aria-hidden="true" />
                       {photo.caption}
                     </span>
                     <span className="small mt-1" style={{ color: 'var(--gold-300)' }}>
@@ -141,7 +141,7 @@ export default function AlbumView({ album, others }) {
                     </span>
                   </figcaption>
                   <span className="gallery-zoom" aria-hidden="true">
-                    <i className="bi bi-arrows-fullscreen" />
+                    <i className="bi bi-arrows-fullscreen" aria-hidden="true" />
                   </span>
                 </figure>
               </Col>
@@ -152,13 +152,13 @@ export default function AlbumView({ album, others }) {
             <>
               <div className="gold-rule-thin my-5" />
               <h5 className="fw-bold mb-3">
-                <i className="bi bi-collection text-gold me-2" />
+                <i className="bi bi-collection text-gold me-2" aria-hidden="true" />
                 Other Albums
               </h5>
               <div className="d-flex flex-wrap gap-2">
                 {others.map((other) => (
                   <Link key={other.slug} href={`/gallery/${other.slug}`} className="album-chip">
-                    <i className={`bi ${other.icon}`} />
+                    <i className={`bi ${other.icon}`} aria-hidden="true" />
                     {other.title}
                     <span className="album-chip-count">{other.photos.length}</span>
                   </Link>

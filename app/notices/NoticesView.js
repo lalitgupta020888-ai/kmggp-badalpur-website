@@ -46,7 +46,7 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
             <Col lg={8}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-megaphone-fill" />
+                  <i className="bi bi-megaphone-fill" aria-hidden="true" />
                   Notice Board
                   <span className="panel-count">{visible.length}</span>
                 </div>
@@ -74,12 +74,12 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
                       {visible.map((notice) => (
                         <li className="notice-entry" key={notice.id}>
                           <span className="notice-entry-marker">
-                            <i className={`bi ${notice.icon}`} />
+                            <i className={`bi ${notice.icon}`} aria-hidden="true" />
                           </span>
                           <div className="notice-entry-body">
                             <div className="notice-entry-meta">
                               <span className="notice-entry-date">
-                                <i className="bi bi-calendar3" />
+                                <i className="bi bi-calendar3" aria-hidden="true" />
                                 {notice.date}
                               </span>
                               <span className="notice-chip">{notice.category}</span>
@@ -88,7 +88,7 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
                             <h5 className="notice-entry-title">{notice.title}</h5>
                             <Link href={notice.link} className="notice-entry-link">
                               Read the notice
-                              <i className="bi bi-arrow-right" />
+                              <i className="bi bi-arrow-right" aria-hidden="true" />
                             </Link>
                           </div>
                         </li>
@@ -96,7 +96,7 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
                     </ol>
                   ) : (
                     <div className="empty-state">
-                      <i className="bi bi-inbox" />
+                      <i className="bi bi-inbox" aria-hidden="true" />
                       <p className="mb-0">
                         No notices under {active} at the moment. New announcements are posted here
                         as soon as they are issued.
@@ -110,7 +110,7 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
             <Col lg={4}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-link-45deg" />
+                  <i className="bi bi-link-45deg" aria-hidden="true" />
                   Quick Links
                 </div>
                 <div className="panel-body">
@@ -123,21 +123,21 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <i className={`bi ${item.icon}`} />
+                        <i className={`bi ${item.icon}`} aria-hidden="true" />
                         <span className="flex-grow-1">{item.title}</span>
-                        <i className="bi bi-box-arrow-up-right doc-link-external" />
+                        <i className="bi bi-box-arrow-up-right doc-link-external" aria-hidden="true" />
                       </a>
                     ) : (
                       <Link href={item.link} className="doc-link" key={item.id}>
-                        <i className={`bi ${item.icon}`} />
+                        <i className={`bi ${item.icon}`} aria-hidden="true" />
                         <span className="flex-grow-1">{item.title}</span>
-                        <i className="bi bi-arrow-right-short" />
+                        <i className="bi bi-arrow-right-short" aria-hidden="true" />
                       </Link>
                     )
                   )}
 
                   <div className="callout mt-4 mb-0">
-                    <i className="bi bi-info-circle-fill" />
+                    <i className="bi bi-info-circle-fill" aria-hidden="true" />
                     <p>
                       Notices are published here as they are issued. For anything not listed,
                       contact the institute office during working hours.
@@ -147,12 +147,12 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-envelope-paper-fill side-cta-icon" />
+                <i className="bi bi-envelope-paper-fill side-cta-icon" aria-hidden="true" />
                 <h6>Need Something Else?</h6>
                 <p>The office can confirm any notice and issue a certified copy on request.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
@@ -175,14 +175,14 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
                   rel="noopener noreferrer"
                 >
                   <span className="icon-tile icon-tile-sm">
-                    <i className={`bi ${order.icon}`} />
+                    <i className={`bi ${order.icon}`} aria-hidden="true" />
                   </span>
                   <span className="order-card-body">
                     <span className="order-card-title">{order.title}</span>
                     <span className="order-card-note">{order.note}</span>
                   </span>
                   <span className="order-card-action">
-                    <i className="bi bi-download" />
+                    <i className="bi bi-download" aria-hidden="true" />
                     PDF
                   </span>
                 </a>

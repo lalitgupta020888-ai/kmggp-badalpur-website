@@ -24,7 +24,7 @@ export default function Flash({ result }) {
 
   return (
     <div className={`admin-flash ${result.ok ? 'ok' : 'error'}`} role="status">
-      <i className={`bi ${result.ok ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'}`} />
+      <i className={`bi ${result.ok ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'}`} aria-hidden="true" />
       <span>{result.message}</span>
     </div>
   );

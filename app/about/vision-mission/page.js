@@ -30,12 +30,12 @@ export default async function VisionMissionPage() {
             <Col lg={6}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-eye-fill" />
+                  <i className="bi bi-eye-fill" aria-hidden="true" />
                   Our Vision
                 </div>
                 <div className="panel-body">
                   <span className="icon-tile mb-4">
-                    <i className="bi bi-eye-fill" />
+                    <i className="bi bi-eye-fill" aria-hidden="true" />
                   </span>
                   <p className="lead">{page.vision}</p>
                   <div className="gold-rule-thin my-4" />
@@ -51,12 +51,12 @@ export default async function VisionMissionPage() {
             <Col lg={6}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-bullseye" />
+                  <i className="bi bi-bullseye" aria-hidden="true" />
                   Our Mission
                 </div>
                 <div className="panel-body">
                   <span className="icon-tile mb-4">
-                    <i className="bi bi-flag-fill" />
+                    <i className="bi bi-flag-fill" aria-hidden="true" />
                   </span>
                   <ul className="gold-list mb-0">
                     {MISSION.map((item) => (
@@ -82,7 +82,7 @@ export default async function VisionMissionPage() {
               <Col lg={3} md={6} key={objective.title}>
                 <div className="premium-card h-100 p-4 text-center">
                   <span className="icon-tile mx-auto mb-4">
-                    <i className={`bi ${objective.icon}`} />
+                    <i className={`bi ${objective.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{objective.title}</h5>
                   <p className="small mb-0">{objective.text}</p>
@@ -104,7 +104,7 @@ export default async function VisionMissionPage() {
                 title="Our Commitment to Quality"
               />
               <div className="callout">
-                <i className="bi bi-quote" />
+                <i className="bi bi-quote" aria-hidden="true" />
                 <p>
                   Km. Mayawati Government Girls Polytechnic, Badalpur is committed to imparting
                   quality technical education through a qualified faculty, well-equipped
@@ -121,11 +121,11 @@ export default async function VisionMissionPage() {
 
               <div className="d-flex flex-wrap gap-3 mt-4">
                 <Link href="/about/principal-message" className="btn-gold">
-                  <i className="bi bi-person-video2" />
+                  <i className="bi bi-person-video2" aria-hidden="true" />
                   Principal&apos;s Message
                 </Link>
                 <Link href="/about/approvals" className="btn-outline-navy">
-                  <i className="bi bi-patch-check-fill" />
+                  <i className="bi bi-patch-check-fill" aria-hidden="true" />
                   Statutory Approvals
                 </Link>
               </div>
@@ -134,7 +134,7 @@ export default async function VisionMissionPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-gem" />
+                  <i className="bi bi-gem" aria-hidden="true" />
                   Core Values
                 </div>
                 <div className="panel-body">
@@ -143,7 +143,7 @@ export default async function VisionMissionPage() {
                       <Col sm={6} key={value.label}>
                         <div className="feature-row align-items-center h-100">
                           <span className="icon-tile icon-tile-sm">
-                            <i className={`bi ${value.icon}`} />
+                            <i className={`bi ${value.icon}`} aria-hidden="true" />
                           </span>
                           <h5 className="mb-0">{value.label}</h5>
                         </div>

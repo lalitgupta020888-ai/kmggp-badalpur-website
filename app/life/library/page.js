@@ -83,7 +83,7 @@ export default async function LibraryPage() {
             {STATS.map((stat) => (
               <Col md={3} sm={6} key={stat.label}>
                 <div className="stat-item">
-                  <i className={`bi ${stat.icon}`} />
+                  <i className={`bi ${stat.icon}`} aria-hidden="true" />
                   <div className="stat-value">{stat.value}</div>
                   <div className="stat-label">{stat.label}</div>
                 </div>
@@ -117,7 +117,7 @@ export default async function LibraryPage() {
                 <figcaption>
                   <span className="welcome-figure-rule" />
                   <span>
-                    <i className="bi bi-book-half me-2" />
+                    <i className="bi bi-book-half me-2" aria-hidden="true" />
                     The Reading Hall, Institute Library
                   </span>
                 </figcaption>
@@ -142,13 +142,13 @@ export default async function LibraryPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-clock-fill" />
+                  <i className="bi bi-clock-fill" aria-hidden="true" />
                   Library Timings
                 </div>
                 <div className="panel-body">
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-calendar-week-fill" />
+                      <i className="bi bi-calendar-week-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">{OFFICE_DAYS}</div>
@@ -157,7 +157,7 @@ export default async function LibraryPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-journal-check" />
+                      <i className="bi bi-journal-check" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Book Issue &amp; Return</div>
@@ -166,7 +166,7 @@ export default async function LibraryPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-person-badge-fill" />
+                      <i className="bi bi-person-badge-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Librarian</div>
@@ -178,14 +178,14 @@ export default async function LibraryPage() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-stars" />
+                  <i className="bi bi-stars" aria-hidden="true" />
                   Library Services
                 </div>
                 <div className="panel-body">
                   {SERVICES.map((service) => (
                     <div className="feature-row align-items-center mb-3" key={service.label}>
                       <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${service.icon}`} />
+                        <i className={`bi ${service.icon}`} aria-hidden="true" />
                       </span>
                       <h5 className="mb-0">{service.label}</h5>
                     </div>
@@ -209,7 +209,7 @@ export default async function LibraryPage() {
               <Col lg={4} md={6} key={section.title}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${section.icon}`} />
+                    <i className={`bi ${section.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{section.title}</h5>
                   <p className="small mb-0">{section.text}</p>
@@ -226,7 +226,7 @@ export default async function LibraryPage() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-clipboard-check-fill" />
+                  <i className="bi bi-clipboard-check-fill" aria-hidden="true" />
                   Library Rules
                 </div>
                 <div className="panel-body">
@@ -242,35 +242,35 @@ export default async function LibraryPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-download" />
+                  <i className="bi bi-download" aria-hidden="true" />
                   Useful Downloads
                 </div>
                 <div className="panel-body">
                   <a href="#" className="doc-link">
-                    <i className="bi bi-file-earmark-pdf-fill" />
+                    <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                     Library Book Catalogue (PDF)
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </a>
                   <a href="#" className="doc-link">
-                    <i className="bi bi-file-earmark-text-fill" />
+                    <i className="bi bi-file-earmark-text-fill" aria-hidden="true" />
                     Previous Year Question Papers
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </a>
                   <Link href="/academic/syllabus" className="doc-link mb-0">
-                    <i className="bi bi-journal-bookmark" />
+                    <i className="bi bi-journal-bookmark" aria-hidden="true" />
                     Branch-wise Syllabus
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                 </div>
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-headset side-cta-icon" />
+                <i className="bi bi-headset side-cta-icon" aria-hidden="true" />
                 <h6>Need a Book We Don&apos;t Have?</h6>
                 <p>Suggest a title to the librarian — acquisition requests are reviewed each session.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Librarian
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>

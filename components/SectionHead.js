@@ -11,13 +11,13 @@ export default function SectionHead({ eyebrow, icon = 'bi-gem', title, subtitle,
     <div className={`section-head ${align === 'start' ? 'section-head-start' : ''}`}>
       {eyebrow && (
         <span className="eyebrow">
-          <i className={`bi ${icon}`} />
+          <i className={`bi ${icon}`} aria-hidden="true" />
           {eyebrow}
         </span>
       )}
       <h2>{title}</h2>
       <div className={`gold-flourish ${align === 'start' ? 'gold-flourish-start' : ''}`}>
-        <i className="bi bi-diamond-fill" />
+        <i className="bi bi-diamond-fill" aria-hidden="true" />
       </div>
       {subtitle && <p>{subtitle}</p>}
     </div>

@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import VideoModal from '@/components/VideoModal';
 import { alreadySeen, markSeen } from '@/lib/popup-frequency';
+import { useFocusTrap } from '@/lib/focus-trap';
 
 /**
  * The window that greets a visitor when the site opens.
@@ -23,8 +24,26 @@ export default function WelcomePopup({ popup, galleryAlbum }) {
   // Opened from an effect rather than initial state, so the server-rendered
   // markup and the first client render agree before anything appears.
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef(null);
 
   const enabled = Boolean(popup?.enabled);
+  const isFilm = popup?.kind === 'Film' || popup?.kind === 'Gallery film';
+
+  // The film form is a VideoModal, which traps focus itself.
+  useFocusTrap(dialogRef, open && enabled && !isFilm);
+
+  // Escape closes the notice and poster forms, as it does every other dialog.
+  useEffect(() => {
+    if (!open || isFilm) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        markSeen(popup, window.localStorage);
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [open, isFilm, popup]);
 
   useEffect(() => {
     if (!enabled) return;
@@ -75,16 +94,18 @@ export default function WelcomePopup({ popup, galleryAlbum }) {
 
   return (
     <div
+      ref={dialogRef}
       className="welcome-pop"
       role="dialog"
       aria-modal="true"
-      aria-label={popup.title || 'Announcement'}
+      aria-labelledby={popup.title ? 'welcome-pop-title' : undefined}
+      aria-label={popup.title ? undefined : 'Announcement'}
       onClick={close}
     >
       {/* Clicks inside the card must not reach the backdrop's close handler */}
       <div className="welcome-pop-card" onClick={(event) => event.stopPropagation()}>
         <button type="button" className="welcome-pop-close" onClick={close} autoFocus>
-          <i className="bi bi-x-lg" />
+          <i className="bi bi-x-lg" aria-hidden="true" />
           <span className="visually-hidden">Close</span>
         </button>
 
@@ -99,8 +120,8 @@ export default function WelcomePopup({ popup, galleryAlbum }) {
 
         <div className="welcome-pop-body">
           {popup.title && (
-            <h2 className="welcome-pop-title">
-              <i className={`bi ${popup.icon || 'bi-megaphone-fill'}`} />
+            <h2 className="welcome-pop-title" id="welcome-pop-title">
+              <i className={`bi ${popup.icon || 'bi-megaphone-fill'}`} aria-hidden="true" />
               {popup.title}
             </h2>
           )}
@@ -122,7 +143,7 @@ export default function WelcomePopup({ popup, galleryAlbum }) {
           <div className="welcome-pop-actions">
             {popup.buttonLabel && popup.buttonHref && (
               <Link href={popup.buttonHref} className="btn-gold" onClick={close}>
-                <i className={`bi ${popup.buttonIcon || 'bi-arrow-right'}`} />
+                <i className={`bi ${popup.buttonIcon || 'bi-arrow-right'}`} aria-hidden="true" />
                 {popup.buttonLabel}
               </Link>
             )}

@@ -36,7 +36,7 @@ export default function DocumentListForAdmission() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-folder-check" />
+          <i className="bi bi-folder-check" aria-hidden="true" />
           Document List for Admission
         </div>
         <div className="panel-body">
@@ -55,16 +55,16 @@ export default function DocumentListForAdmission() {
             <table className="premium-table">
               <thead>
                 <tr>
-                  <th>Document</th>
-                  <th>Form Required</th>
-                  <th>Remarks</th>
+                  <th scope="col">Document</th>
+                  <th scope="col">Form Required</th>
+                  <th scope="col">Remarks</th>
                 </tr>
               </thead>
               <tbody>
                 {SUBMIT.map((row) => (
                   <tr key={row.doc}>
                     <td>
-                      <i className="bi bi-file-earmark-text text-gold me-2" />
+                      <i className="bi bi-file-earmark-text text-gold me-2" aria-hidden="true" />
                       {row.doc}
                     </td>
                     <td>{row.form}</td>
@@ -81,7 +81,7 @@ export default function DocumentListForAdmission() {
         <Col lg={7}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-list-ol" />
+              <i className="bi bi-list-ol" aria-hidden="true" />
               Reporting at the Institute
             </div>
             <div className="panel-body">
@@ -97,12 +97,12 @@ export default function DocumentListForAdmission() {
         <Col lg={5}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-exclamation-circle-fill" />
+              <i className="bi bi-exclamation-circle-fill" aria-hidden="true" />
               Important
             </div>
             <div className="panel-body">
               <div className="callout">
-                <i className="bi bi-clock-fill" />
+                <i className="bi bi-clock-fill" aria-hidden="true" />
                 <p>
                   A candidate who does not report within the notified window forfeits the allotted
                   seat, and it is released to the next round.
@@ -110,7 +110,7 @@ export default function DocumentListForAdmission() {
               </div>
 
               <div className="callout mt-3">
-                <i className="bi bi-cash-coin" />
+                <i className="bi bi-cash-coin" aria-hidden="true" />
                 <p>
                   The fee heads payable at admission are listed on the{' '}
                   <Link href="/admission/fee">Fee Structure</Link> page.
@@ -118,7 +118,7 @@ export default function DocumentListForAdmission() {
               </div>
 
               <div className="callout mt-3">
-                <i className="bi bi-person-hearts" />
+                <i className="bi bi-person-hearts" aria-hidden="true" />
                 <p>
                   A parent or guardian should accompany the candidate — the anti-ragging undertaking
                   requires a guardian&rsquo;s signature.

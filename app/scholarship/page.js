@@ -101,7 +101,7 @@ export default function ScholarshipPage() {
               <Col lg={6} key={scheme.title}>
                 <div className="premium-card h-100 p-4 d-flex gap-4">
                   <span className="icon-tile flex-shrink-0">
-                    <i className={`bi ${scheme.icon}`} />
+                    <i className={`bi ${scheme.icon}`} aria-hidden="true" />
                   </span>
                   <div>
                     <span className="eyebrow">{scheme.tag}</span>
@@ -135,7 +135,7 @@ export default function ScholarshipPage() {
               </ul>
 
               <div className="callout mt-4">
-                <i className="bi bi-exclamation-triangle-fill" />
+                <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
                 <p>
                   Applications submitted after the portal deadline cannot be processed. Students are
                   advised to apply well in advance and keep a copy of every submitted document.
@@ -146,7 +146,7 @@ export default function ScholarshipPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-file-earmark-text-fill" />
+                  <i className="bi bi-file-earmark-text-fill" aria-hidden="true" />
                   Documents Required
                 </div>
                 <div className="panel-body">
@@ -159,12 +159,12 @@ export default function ScholarshipPage() {
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-headset side-cta-icon" />
+                <i className="bi bi-headset side-cta-icon" aria-hidden="true" />
                 <h6>Need Help With Your Application?</h6>
                 <p>Our scholarship cell is available during office hours to guide you through the process.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Cell
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>

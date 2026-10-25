@@ -103,7 +103,7 @@ export default async function AdmissionProcess() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-list-ol" />
+                  <i className="bi bi-list-ol" aria-hidden="true" />
                   Step-by-Step Admission Journey
                 </div>
                 <div className="panel-body">
@@ -126,7 +126,7 @@ export default async function AdmissionProcess() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-patch-check-fill" />
+                  <i className="bi bi-patch-check-fill" aria-hidden="true" />
                   Eligibility Criteria
                 </div>
                 <div className="panel-body">
@@ -140,7 +140,7 @@ export default async function AdmissionProcess() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-folder-fill" />
+                  <i className="bi bi-folder-fill" aria-hidden="true" />
                   Documents Required
                 </div>
                 <div className="panel-body">
@@ -153,12 +153,12 @@ export default async function AdmissionProcess() {
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-question-circle-fill side-cta-icon" />
+                <i className="bi bi-question-circle-fill side-cta-icon" aria-hidden="true" />
                 <h6>Still Have Questions?</h6>
                 <p>Our admission team will guide you through eligibility, counselling and fees.</p>
                 <Link href="/admission/enquiry" className="btn-gold btn-sm">
                   Submit an Enquiry
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
@@ -166,7 +166,7 @@ export default async function AdmissionProcess() {
 
           <div className="panel mt-4">
             <div className="panel-header">
-              <i className="bi bi-box-arrow-in-right" />
+              <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
               Lateral Entry (Group K) — Admission to the Second Year
             </div>
             <div className="panel-body">
@@ -179,7 +179,7 @@ export default async function AdmissionProcess() {
               <Row className="g-4 mt-1">
                 <Col lg={6}>
                   <h5 className="fw-bold mb-3">
-                    <i className="bi bi-patch-check-fill text-gold me-2" />
+                    <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                     Eligibility for Lateral Entry
                   </h5>
                   <ul className="gold-list">
@@ -191,7 +191,7 @@ export default async function AdmissionProcess() {
 
                 <Col lg={6}>
                   <h5 className="fw-bold mb-3">
-                    <i className="bi bi-folder-plus text-gold me-2" />
+                    <i className="bi bi-folder-plus text-gold me-2" aria-hidden="true" />
                     Additional Documents
                   </h5>
                   <ul className="gold-list">
@@ -206,7 +206,7 @@ export default async function AdmissionProcess() {
               </Row>
 
               <div className="callout mt-4">
-                <i className="bi bi-exclamation-triangle-fill" />
+                <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
                 <p>
                   Register under <strong>Group K</strong> to be considered for lateral entry.
                   Qualifying in Group A only makes you eligible for first-year admission. Full group
@@ -218,7 +218,7 @@ export default async function AdmissionProcess() {
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-calendar-check-fill" />
+            <i className="bi bi-calendar-check-fill" aria-hidden="true" />
             <p>
               Counselling dates are announced by JEECUP each year. Keep checking the official JEECUP
               portal and this page for the current schedule.

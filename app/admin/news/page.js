@@ -10,7 +10,7 @@ export default async function AdminNewsPage() {
     <>
       <div className="admin-card mb-4">
         <div className="admin-card-head">
-          <i className="bi bi-broadcast-pin head-icon" />
+          <i className="bi bi-broadcast-pin head-icon" aria-hidden="true" />
           <div>
             <h2>Latest News &amp; Updates</h2>
             <p>The scrolling line under the statistics strip on the home page</p>

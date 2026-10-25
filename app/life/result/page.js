@@ -81,7 +81,7 @@ export default function ResultPage() {
               <Col lg={6} key={portal.name}>
                 <div className="premium-card h-100 p-4 d-flex flex-column">
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${portal.icon}`} />
+                    <i className={`bi ${portal.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{portal.name}</h5>
                   <p className="small flex-grow-1">{portal.text}</p>
@@ -92,9 +92,9 @@ export default function ResultPage() {
                     rel="noopener noreferrer"
                     className="doc-link mb-0"
                   >
-                    <i className="bi bi-box-arrow-up-right" />
+                    <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
                     {portal.cta}
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </a>
                 </div>
               </Col>
@@ -105,7 +105,7 @@ export default function ResultPage() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-list-ol" />
+                  <i className="bi bi-list-ol" aria-hidden="true" />
                   How to Check Your Result
                 </div>
                 <div className="panel-body">
@@ -121,14 +121,14 @@ export default function ResultPage() {
             <Col lg={5}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-signpost-split-fill" />
+                  <i className="bi bi-signpost-split-fill" aria-hidden="true" />
                   After the Result
                 </div>
                 <div className="panel-body">
                   {AFTER.map((item) => (
                     <div className="d-flex gap-3 mb-4" key={item.title}>
                       <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${item.icon}`} />
+                        <i className={`bi ${item.icon}`} aria-hidden="true" />
                       </span>
                       <div>
                         <h6 className="fw-bold mb-1">{item.title}</h6>
@@ -138,7 +138,7 @@ export default function ResultPage() {
                   ))}
 
                   <div className="callout">
-                    <i className="bi bi-info-circle-fill" />
+                    <i className="bi bi-info-circle-fill" aria-hidden="true" />
                     <p>
                       The institute does not declare or revise results. For any correction, the
                       examination cell forwards your application to BTEUP.

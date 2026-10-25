@@ -10,7 +10,7 @@ export default async function AdminOrdersPage() {
     <>
       <div className="admin-card mb-4">
         <div className="admin-card-head">
-          <i className="bi bi-file-earmark-pdf-fill head-icon" />
+          <i className="bi bi-file-earmark-pdf-fill head-icon" aria-hidden="true" />
           <div>
             <h2>Orders, Circulars &amp; Documents</h2>
             <p>The downloadable files listed on /notices</p>

@@ -9,7 +9,7 @@ export default function EmployeeHome() {
   return (
     <div className="panel">
       <div className="panel-header">
-        <i className="bi bi-person-vcard-fill" />
+        <i className="bi bi-person-vcard-fill" aria-hidden="true" />
         Employee Section
       </div>
       <div className="panel-body">
@@ -25,14 +25,14 @@ export default function EmployeeHome() {
             <Col md={6} key={tool.href}>
               <Link href={tool.href} className="premium-card h-100 p-4 d-flex flex-column text-decoration-none">
                 <span className="icon-tile mb-4">
-                  <i className={`bi ${tool.icon}`} />
+                  <i className={`bi ${tool.icon}`} aria-hidden="true" />
                 </span>
                 <h5 className="fw-bold mb-3">{tool.label}</h5>
                 <p className="small flex-grow-1">{tool.blurb}</p>
                 <div className="gold-rule-thin my-3" />
                 <span className="doc-link mb-0 border-0 p-0 bg-transparent">
                   Open Calculator
-                  <i className="bi bi-arrow-right-short" />
+                  <i className="bi bi-arrow-right-short" aria-hidden="true" />
                 </span>
               </Link>
             </Col>
@@ -40,7 +40,7 @@ export default function EmployeeHome() {
         </Row>
 
         <div className="callout mt-4">
-          <i className="bi bi-info-circle-fill" />
+          <i className="bi bi-info-circle-fill" aria-hidden="true" />
           <p>
             These calculators are provided for guidance only. The figures drawn on your salary slip
             or assessed by the Income Tax Department shall prevail over any result shown here.

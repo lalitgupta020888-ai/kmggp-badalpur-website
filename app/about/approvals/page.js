@@ -109,7 +109,7 @@ export default function ApprovalsPage() {
               <Col lg={6} key={body.name}>
                 <div className="premium-card h-100 p-4 d-flex gap-4">
                   <span className="icon-tile flex-shrink-0">
-                    <i className={`bi ${body.icon}`} />
+                    <i className={`bi ${body.icon}`} aria-hidden="true" />
                   </span>
                   <div>
                     <span className="eyebrow">{body.role}</span>
@@ -129,7 +129,7 @@ export default function ApprovalsPage() {
             <Col lg={8}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-table" />
+                  <i className="bi bi-table" aria-hidden="true" />
                   Approval Summary
                 </div>
                 <div className="panel-body p-0">
@@ -137,17 +137,17 @@ export default function ApprovalsPage() {
                     <table className="premium-table">
                       <thead>
                         <tr>
-                          <th>Statutory Body</th>
-                          <th>Nature of Approval</th>
-                          <th>Scope</th>
-                          <th>Status</th>
+                          <th scope="col">Statutory Body</th>
+                          <th scope="col">Nature of Approval</th>
+                          <th scope="col">Scope</th>
+                          <th scope="col">Status</th>
                         </tr>
                       </thead>
                       <tbody>
                         {SUMMARY.map((row) => (
                           <tr key={row.body}>
                             <td>
-                              <i className="bi bi-patch-check-fill text-gold me-2" />
+                              <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                               {row.body}
                             </td>
                             <td>{row.nature}</td>
@@ -167,7 +167,7 @@ export default function ApprovalsPage() {
             <Col lg={4}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-link-45deg" />
+                  <i className="bi bi-link-45deg" aria-hidden="true" />
                   Official Portals
                 </div>
                 <div className="panel-body">
@@ -179,28 +179,28 @@ export default function ApprovalsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <i className={`bi ${item.icon}`} />
+                      <i className={`bi ${item.icon}`} aria-hidden="true" />
                       <span className="flex-grow-1">{item.label}</span>
-                      <i className="bi bi-box-arrow-up-right doc-link-external" />
+                      <i className="bi bi-box-arrow-up-right doc-link-external" aria-hidden="true" />
                     </a>
                   ))}
                 </div>
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-file-earmark-pdf-fill side-cta-icon" />
+                <i className="bi bi-file-earmark-pdf-fill side-cta-icon" aria-hidden="true" />
                 <h6>Looking for AICTE Letters?</h6>
                 <p>Year-wise Extension of Approval letters are published separately.</p>
                 <Link href="/about/aicte-approvals" className="btn-gold btn-sm">
                   View Approval Letters
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
           </Row>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Approval and affiliation status is renewed periodically as per the norms of the
               respective statutory bodies. Official letters and notifications are published on this

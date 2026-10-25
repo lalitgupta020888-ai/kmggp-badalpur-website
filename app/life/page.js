@@ -83,7 +83,7 @@ export default function LifeAtKMGGP() {
               <Col lg={4} md={6} key={facet.title}>
                 <div className="premium-card h-100 p-4 d-flex flex-column">
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${facet.icon}`} />
+                    <i className={`bi ${facet.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{facet.title}</h5>
                   <p className="small flex-grow-1">{facet.text}</p>
@@ -94,7 +94,7 @@ export default function LifeAtKMGGP() {
                         href={facet.href}
                         className="fw-bold text-decoration-none text-primary-blue small"
                       >
-                        Learn More <i className="bi bi-arrow-right" />
+                        Learn More <i className="bi bi-arrow-right" aria-hidden="true" />
                       </Link>
                     </>
                   )}
@@ -117,7 +117,7 @@ export default function LifeAtKMGGP() {
               <Col lg={3} md={4} sm={6} key={amenity.label}>
                 <div className="feature-row align-items-center h-100">
                   <span className="icon-tile icon-tile-sm">
-                    <i className={`bi ${amenity.icon}`} />
+                    <i className={`bi ${amenity.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="mb-0">{amenity.label}</h5>
                 </div>
@@ -132,7 +132,7 @@ export default function LifeAtKMGGP() {
           <Row className="align-items-center g-4">
             <Col lg={8}>
               <span className="eyebrow eyebrow-light">
-                <i className="bi bi-images" />
+                <i className="bi bi-images" aria-hidden="true" />
                 See It For Yourself
               </span>
               <h3>Take a Look Around Our Campus</h3>
@@ -141,11 +141,11 @@ export default function LifeAtKMGGP() {
             </Col>
             <Col lg={4} className="d-flex flex-column gap-3 align-items-lg-end">
               <Link href="/gallery" className="btn-gold">
-                <i className="bi bi-camera-fill" />
+                <i className="bi bi-camera-fill" aria-hidden="true" />
                 View Photo Gallery
               </Link>
               <Link href="/contact" className="hero-btn-ghost">
-                <i className="bi bi-telephone-fill" />
+                <i className="bi bi-telephone-fill" aria-hidden="true" />
                 Plan a Campus Visit
               </Link>
             </Col>

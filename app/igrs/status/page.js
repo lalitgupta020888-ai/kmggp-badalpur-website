@@ -19,7 +19,7 @@ function StatusPill({ status }) {
   const meta = STATUS_META[status] || STATUS_META.Pending;
   return (
     <span className={`status-pill ${meta.tone}`}>
-      <i className={`bi ${meta.icon}`} />
+      <i className={`bi ${meta.icon}`} aria-hidden="true" />
       {status}
     </span>
   );
@@ -41,7 +41,7 @@ function StatusTrack({ status }) {
           }`}
         >
           <span className="status-track-dot">
-            <i className={`bi ${i < activeIndex ? 'bi-check-lg' : STATUS_META[step].icon}`} />
+            <i className={`bi ${i < activeIndex ? 'bi-check-lg' : STATUS_META[step].icon}`} aria-hidden="true" />
           </span>
           <span className="status-track-label">{step}</span>
         </li>
@@ -81,7 +81,7 @@ function StatusLookup() {
       <Col xl={8}>
         <div className="panel">
           <div className="panel-header">
-            <i className="bi bi-search" />
+            <i className="bi bi-search" aria-hidden="true" />
             Track Your Grievance
           </div>
           <div className="panel-body">
@@ -91,7 +91,7 @@ function StatusLookup() {
                   Reference Number <span className="text-gold">*</span>
                 </Form.Label>
                 <div className="input-icon">
-                  <i className="bi bi-hash" />
+                  <i className="bi bi-hash" aria-hidden="true" />
                   <Form.Control
                     type="text"
                     value={refInput}
@@ -106,14 +106,14 @@ function StatusLookup() {
               </Form.Group>
 
               <Button type="submit" className="btn-gold w-100 justify-content-center">
-                <i className="bi bi-search" />
+                <i className="bi bi-search" aria-hidden="true" />
                 Check Status
               </Button>
             </Form>
 
             {lookup.state === 'missing' && (
               <Alert variant="danger" className="d-flex align-items-start gap-3 border-0 mt-4 small">
-                <i className="bi bi-exclamation-circle-fill fs-5 lh-1" />
+                <i className="bi bi-exclamation-circle-fill fs-5 lh-1" aria-hidden="true" />
                 <span>
                   No grievance found with that reference number. Please check it and try again — the
                   number is case-insensitive but must be entered in full.
@@ -133,7 +133,7 @@ function StatusLookup() {
                 <StatusTrack status={g.status} />
 
                 <div className="contact-line">
-                  <span className="icon-tile icon-tile-sm"><i className="bi bi-hash" /></span>
+                  <span className="icon-tile icon-tile-sm"><i className="bi bi-hash" aria-hidden="true" /></span>
                   <div>
                     <div className="label">Reference Number</div>
                     <p className="value">{g.refNumber}</p>
@@ -141,7 +141,7 @@ function StatusLookup() {
                 </div>
                 <div className="contact-line">
                   <span className="icon-tile icon-tile-sm">
-                    <i className={`bi ${TYPE_META[g.type]?.icon || 'bi-tag-fill'}`} />
+                    <i className={`bi ${TYPE_META[g.type]?.icon || 'bi-tag-fill'}`} aria-hidden="true" />
                   </span>
                   <div>
                     <div className="label">Grievance Type</div>
@@ -149,28 +149,28 @@ function StatusLookup() {
                   </div>
                 </div>
                 <div className="contact-line">
-                  <span className="icon-tile icon-tile-sm"><i className="bi bi-tag-fill" /></span>
+                  <span className="icon-tile icon-tile-sm"><i className="bi bi-tag-fill" aria-hidden="true" /></span>
                   <div>
                     <div className="label">Category</div>
                     <p className="value text-capitalize">{g.category || '—'}</p>
                   </div>
                 </div>
                 <div className="contact-line">
-                  <span className="icon-tile icon-tile-sm"><i className="bi bi-calendar3" /></span>
+                  <span className="icon-tile icon-tile-sm"><i className="bi bi-calendar3" aria-hidden="true" /></span>
                   <div>
                     <div className="label">Submitted On</div>
                     <p className="value">{formatDate(g.submittedOn)}</p>
                   </div>
                 </div>
                 <div className="contact-line">
-                  <span className="icon-tile icon-tile-sm"><i className="bi bi-clock-history" /></span>
+                  <span className="icon-tile icon-tile-sm"><i className="bi bi-clock-history" aria-hidden="true" /></span>
                   <div>
                     <div className="label">Last Updated</div>
                     <p className="value">{formatDate(g.lastUpdated)}</p>
                   </div>
                 </div>
                 <div className="contact-line">
-                  <span className="icon-tile icon-tile-sm"><i className="bi bi-chat-left-text-fill" /></span>
+                  <span className="icon-tile icon-tile-sm"><i className="bi bi-chat-left-text-fill" aria-hidden="true" /></span>
                   <div>
                     <div className="label">Committee Remarks</div>
                     <p className="value">{g.remarks}</p>
@@ -185,14 +185,14 @@ function StatusLookup() {
       <Col xl={4}>
         <div className="panel">
           <div className="panel-header">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             What the Statuses Mean
           </div>
           <div className="panel-body">
             {STATUSES.map((s) => (
               <div className="contact-line" key={s}>
                 <span className="icon-tile icon-tile-sm">
-                  <i className={`bi ${STATUS_META[s].icon}`} />
+                  <i className={`bi ${STATUS_META[s].icon}`} aria-hidden="true" />
                 </span>
                 <div>
                   <div className="label">{s}</div>
@@ -209,12 +209,12 @@ function StatusLookup() {
         </div>
 
         <div className="side-cta mt-4">
-          <i className="bi bi-question-circle side-cta-icon" />
+          <i className="bi bi-question-circle side-cta-icon" aria-hidden="true" />
           <h6>Lost Your Reference Number?</h6>
           <p>Contact the institute office with your name and the date of submission.</p>
           <Link href="/contact" className="btn-gold btn-sm">
             Contact Us
-            <i className="bi bi-arrow-right" />
+            <i className="bi bi-arrow-right" aria-hidden="true" />
           </Link>
         </div>
       </Col>
@@ -234,7 +234,7 @@ export default function GrievanceStatusPage() {
         fallback={
           <div className="panel">
             <div className="panel-body text-center py-5">
-              <span className="icon-tile mx-auto mb-3"><i className="bi bi-hourglass-split" /></span>
+              <span className="icon-tile mx-auto mb-3"><i className="bi bi-hourglass-split" aria-hidden="true" /></span>
               <p className="small mb-0">Loading the status tracker…</p>
             </div>
           </div>

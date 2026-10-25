@@ -155,7 +155,7 @@ export default function CounsellingSchedule() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-calendar2-week-fill" />
+          <i className="bi bi-calendar2-week-fill" aria-hidden="true" />
           Counselling Schedule for Engineering and Pharmacy Courses
         </div>
         <div className="panel-body">
@@ -167,11 +167,11 @@ export default function CounsellingSchedule() {
 
           <div className="d-flex flex-wrap align-items-center gap-2 mt-3">
             <span className="status-pill is-meta">
-              <i className="bi bi-arrow-clockwise me-2" />
+              <i className="bi bi-arrow-clockwise me-2" aria-hidden="true" />
               Updated on {UPDATED_ON}
             </span>
             <span className="status-pill is-meta">
-              <i className="bi bi-calendar-range me-2" />
+              <i className="bi bi-calendar-range me-2" aria-hidden="true" />
               25 June – 15 August 2026
             </span>
           </div>
@@ -183,7 +183,7 @@ export default function CounsellingSchedule() {
               <Col md={6} xl={3} key={item.label}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile icon-tile-sm mb-3">
-                    <i className={`bi ${item.icon}`} />
+                    <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <p className="small text-uppercase fw-bold mb-1 text-primary-blue">{item.label}</p>
                   <h6 className="fw-bold mb-1">{item.value}</h6>
@@ -198,12 +198,12 @@ export default function CounsellingSchedule() {
       {PHASES.map((phase) => (
         <div className="panel mt-4" key={phase.name}>
           <div className="panel-header">
-            <i className={`bi ${phase.icon}`} />
+            <i className={`bi ${phase.icon}`} aria-hidden="true" />
             {phase.name}
           </div>
           <div className="panel-body p-0">
             <p className="small px-4 pt-4 mb-3">
-              <i className="bi bi-people-fill text-gold me-2" />
+              <i className="bi bi-people-fill text-gold me-2" aria-hidden="true" />
               Open to: <strong>{phase.eligible}</strong>
             </p>
 
@@ -211,9 +211,9 @@ export default function CounsellingSchedule() {
               <table className="premium-table schedule-table">
                 <thead>
                   <tr>
-                    <th>Round</th>
-                    <th>Counselling Activity</th>
-                    <th>Date</th>
+                    <th scope="col">Round</th>
+                    <th scope="col">Counselling Activity</th>
+                    <th scope="col">Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -247,7 +247,7 @@ export default function CounsellingSchedule() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-info-square-fill" />
+          <i className="bi bi-info-square-fill" aria-hidden="true" />
           Reading the Schedule
         </div>
         <div className="panel-body">
@@ -256,7 +256,7 @@ export default function CounsellingSchedule() {
               <Col md={6} key={item.term}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile icon-tile-sm mb-3">
-                    <i className="bi bi-diamond-fill" />
+                    <i className="bi bi-diamond-fill" aria-hidden="true" />
                   </span>
                   <h6 className="fw-bold mb-2">{item.term}</h6>
                   <p className="small mb-0">{item.text}</p>
@@ -271,7 +271,7 @@ export default function CounsellingSchedule() {
         <Col lg={6}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-gear-wide-connected" />
+              <i className="bi bi-gear-wide-connected" aria-hidden="true" />
               Engineering &amp; Technology
             </div>
             <div className="panel-body">
@@ -287,7 +287,7 @@ export default function CounsellingSchedule() {
         <Col lg={6}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-capsule" />
+              <i className="bi bi-capsule" aria-hidden="true" />
               Pharmacy
             </div>
             <div className="panel-body">
@@ -309,13 +309,13 @@ export default function CounsellingSchedule() {
               publishes any revision on its counselling portal.
             </p>
             <a className="btn-gold" href={JEECUP_PORTAL} target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-box-arrow-up-right" />
+              <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
               View Official Schedule
             </a>
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-exclamation-triangle-fill" />
+            <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
             <p>
               Rounds are sometimes added, merged or rescheduled by the board, and seats still vacant
               after Round 05 are filled through direct admission at institute level. Treat the JEECUP

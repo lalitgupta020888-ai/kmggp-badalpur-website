@@ -92,14 +92,14 @@ export default async function AdminDashboard() {
           <Link key={stat.label} href={stat.href} className="admin-stat">
             <div className="admin-stat-label">{stat.label}</div>
             <div className="admin-stat-value">{stat.value}</div>
-            <i className={`bi ${stat.icon} admin-stat-icon`} />
+            <i className={`bi ${stat.icon} admin-stat-icon`} aria-hidden="true" />
           </Link>
         ))}
       </div>
 
       <div className="admin-card">
         <div className="admin-card-head">
-          <i className="bi bi-lightning-charge-fill head-icon" />
+          <i className="bi bi-lightning-charge-fill head-icon" aria-hidden="true" />
           <div>
             <h2>What would you like to update?</h2>
             <p>Every change goes live on the site the moment you save</p>
@@ -116,8 +116,7 @@ export default async function AdminDashboard() {
               >
                 <i
                   className={`bi ${item.icon}`}
-                  style={{ fontSize: '1.5rem', color: 'var(--gold-600)' }}
-                />
+                  style={{ fontSize: '1.5rem', color: 'var(--gold-600)' }} aria-hidden="true" />
                 <div
                   style={{
                     fontFamily: 'var(--font-display), Georgia, serif',
@@ -140,7 +139,7 @@ export default async function AdminDashboard() {
 
       <div className="admin-card">
         <div className="admin-card-head">
-          <i className="bi bi-info-circle-fill head-icon" />
+          <i className="bi bi-info-circle-fill head-icon" aria-hidden="true" />
           <div>
             <h2>How this works</h2>
             <p>Worth reading once</p>

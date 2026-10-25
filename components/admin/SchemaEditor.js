@@ -123,7 +123,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
       onClick={save}
       disabled={pending || !dirty}
     >
-      <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-check-lg'}`} />
+      <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-check-lg'}`} aria-hidden="true" />
       {pending ? 'Saving…' : dirty ? 'Save changes' : 'Saved'}
     </button>
   );
@@ -151,7 +151,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
       {section.intro && (
         <div className="admin-card mb-4">
           <div className="admin-card-head">
-            <i className={`bi ${section.icon} head-icon`} />
+            <i className={`bi ${section.icon} head-icon`} aria-hidden="true" />
             <div>
               <h2>{section.title}</h2>
               <p>{section.group}</p>
@@ -186,7 +186,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
       ) : (
         <div className="admin-card">
           <div className="admin-card-head">
-            <i className="bi bi-list-ul head-icon" />
+            <i className="bi bi-list-ul head-icon" aria-hidden="true" />
             <div>
               <h2>
                 {rows.length} entr{rows.length === 1 ? 'y' : 'ies'}
@@ -195,7 +195,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
             </div>
             <div className="head-actions">
               <button type="button" className="admin-btn" onClick={add} disabled={pending}>
-                <i className="bi bi-plus-lg" />
+                <i className="bi bi-plus-lg" aria-hidden="true" />
                 {section.addLabel || 'Add'}
               </button>
               {saveButton}
@@ -205,7 +205,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
           <div className="admin-card-body flush">
             {rows.length === 0 ? (
               <div className="admin-empty">
-                <i className="bi bi-inbox" />
+                <i className="bi bi-inbox" aria-hidden="true" />
                 <strong>Nothing here yet</strong>
                 This part of the site is hidden while the list is empty.
               </div>
@@ -218,7 +218,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
                   <div key={row.key}>
                     <div className="admin-row">
                       <span className="admin-row-handle" aria-hidden="true">
-                        <i className="bi bi-grip-vertical" />
+                        <i className="bi bi-grip-vertical" aria-hidden="true" />
                       </span>
 
                       {info.thumb ? (
@@ -229,7 +229,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
                           className="admin-row-thumb d-grid"
                           style={{ placeItems: 'center', color: 'var(--ink-faint)' }}
                         >
-                          <i className={`bi ${info.icon || 'bi-dot'}`} />
+                          <i className={`bi ${info.icon || 'bi-dot'}`} aria-hidden="true" />
                         </span>
                       )}
 
@@ -253,7 +253,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
                           disabled={index === 0}
                           aria-label="Move up"
                         >
-                          <i className="bi bi-arrow-up" />
+                          <i className="bi bi-arrow-up" aria-hidden="true" />
                         </button>
                         <button
                           type="button"
@@ -262,7 +262,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
                           disabled={index === rows.length - 1}
                           aria-label="Move down"
                         >
-                          <i className="bi bi-arrow-down" />
+                          <i className="bi bi-arrow-down" aria-hidden="true" />
                         </button>
                         <button
                           type="button"
@@ -270,7 +270,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
                           onClick={() => toggle(row.key)}
                           aria-label={expanded ? 'Collapse' : 'Edit'}
                         >
-                          <i className={`bi ${expanded ? 'bi-chevron-up' : 'bi-pencil'}`} />
+                          <i className={`bi ${expanded ? 'bi-chevron-up' : 'bi-pencil'}`} aria-hidden="true" />
                         </button>
                         <button
                           type="button"
@@ -278,7 +278,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
                           onClick={() => remove(row.key)}
                           aria-label="Delete"
                         >
-                          <i className="bi bi-trash3" />
+                          <i className="bi bi-trash3" aria-hidden="true" />
                         </button>
                       </div>
                     </div>
@@ -315,7 +315,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
       <div className="d-flex flex-wrap gap-2 align-items-center mt-3">
         {!isSingle && (
           <button type="button" className="admin-btn" onClick={add} disabled={pending}>
-            <i className="bi bi-plus-lg" />
+            <i className="bi bi-plus-lg" aria-hidden="true" />
             {section.addLabel || 'Add'}
           </button>
         )}
@@ -326,7 +326,7 @@ export default function SchemaEditor({ sectionKey, section, initial }) {
           onClick={restore}
           disabled={pending}
         >
-          <i className="bi bi-arrow-counterclockwise" />
+          <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
           Restore original content
         </button>
       </div>

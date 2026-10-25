@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Carousel, Container } from 'react-bootstrap';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,12 +13,39 @@ import Link from 'next/link';
  * a slide with no buttons simply shows none.
  */
 export default function HeroSlider({ slides = [] }) {
+  // Auto-advance is off for anyone who asked their system for less motion,
+  // and for anyone who presses the pause button; a slideshow that moves on
+  // its own is hard to read with magnification or a screen reader.
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sync = () => setPaused(query.matches);
+    sync();
+    query.addEventListener('change', sync);
+    return () => query.removeEventListener('change', sync);
+  }, []);
+
   if (slides.length === 0) return null;
 
   return (
-    <Carousel fade indicators interval={6000} pause="hover" nextLabel="" prevLabel="">
+    <section aria-roledescription="carousel" aria-label="Highlights" className="hero-carousel">
+      <Carousel
+        fade
+        indicators
+        interval={paused ? null : 6000}
+        pause="hover"
+        prevLabel="Previous slide"
+        nextLabel="Next slide"
+        controls={slides.length > 1}
+      >
       {slides.map((slide, index) => (
-        <Carousel.Item key={slide.id || `${slide.src}-${index}`} className="hero-slide">
+        <Carousel.Item
+          key={slide.id || `${slide.src}-${index}`}
+          className="hero-slide"
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`Slide ${index + 1} of ${slides.length}`}
+        >
           {slide.src ? (
             <Image
               src={slide.src}
@@ -39,7 +66,7 @@ export default function HeroSlider({ slides = [] }) {
             <Container>
               <div className="hero-caption-inner">
                 <span className="eyebrow eyebrow-light anim-up anim-up-1">
-                  <i className={`bi ${slide.icon}`} />
+                  <i className={`bi ${slide.icon}`} aria-hidden="true" />
                   {slide.eyebrow}
                 </span>
                 <h2 className="anim-up anim-up-1">{slide.title}</h2>
@@ -51,13 +78,13 @@ export default function HeroSlider({ slides = [] }) {
                       while a new banner is being put together. */}
                   {slide.primaryLabel && slide.primaryHref && (
                     <Link href={slide.primaryHref} className="hero-btn-primary">
-                      <i className={`bi ${slide.primaryIcon || 'bi-arrow-right'}`} />
+                      <i className={`bi ${slide.primaryIcon || 'bi-arrow-right'}`} aria-hidden="true" />
                       {slide.primaryLabel}
                     </Link>
                   )}
                   {slide.secondaryLabel && slide.secondaryHref && (
                     <Link href={slide.secondaryHref} className="hero-btn-ghost">
-                      <i className={`bi ${slide.secondaryIcon || 'bi-arrow-right'}`} />
+                      <i className={`bi ${slide.secondaryIcon || 'bi-arrow-right'}`} aria-hidden="true" />
                       {slide.secondaryLabel}
                     </Link>
                   )}
@@ -67,6 +94,18 @@ export default function HeroSlider({ slides = [] }) {
           </div>
         </Carousel.Item>
       ))}
-    </Carousel>
+      </Carousel>
+      {slides.length > 1 && (
+        <button
+          type="button"
+          className="hero-pause"
+          aria-pressed={paused}
+          onClick={() => setPaused((wasPaused) => !wasPaused)}
+        >
+          <i className={`bi ${paused ? 'bi-play-fill' : 'bi-pause-fill'}`} aria-hidden="true" />
+          {paused ? 'Play slideshow' : 'Pause slideshow'}
+        </button>
+      )}
+    </section>
   );
 }

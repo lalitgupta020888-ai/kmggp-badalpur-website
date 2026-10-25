@@ -272,7 +272,7 @@ export default function ItCalculator() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-percent" />
+          <i className="bi bi-percent" aria-hidden="true" />
           Income Tax Calculator — New Tax Regime
         </div>
         <div className="panel-body">
@@ -284,15 +284,15 @@ export default function ItCalculator() {
 
           <div className="d-flex flex-wrap align-items-center gap-2 mt-3">
             <span className="status-pill is-meta">
-              <i className="bi bi-calendar3 me-2" />
+              <i className="bi bi-calendar3 me-2" aria-hidden="true" />
               {FINANCIAL_YEAR} | {ASSESSMENT_YEAR}
             </span>
             <span className="status-pill is-meta">
-              <i className="bi bi-diagram-3 me-2" />
+              <i className="bi bi-diagram-3 me-2" aria-hidden="true" />
               New Tax Regime
             </span>
             <span className="status-pill is-meta">
-              <i className="bi bi-person-badge me-2" />
+              <i className="bi bi-person-badge me-2" aria-hidden="true" />
               Salaried Employees
             </span>
           </div>
@@ -300,7 +300,7 @@ export default function ItCalculator() {
           <div className="gold-rule-thin my-4" />
 
           <h6 className="fw-bold mb-3">
-            <i className="bi bi-bar-chart-steps text-gold me-2" />
+            <i className="bi bi-bar-chart-steps text-gold me-2" aria-hidden="true" />
             Income Tax Slabs — New Regime, as notified for {SLABS_AS_NOTIFIED_FOR}
           </h6>
 
@@ -320,7 +320,7 @@ export default function ItCalculator() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-person-vcard" />
+          <i className="bi bi-person-vcard" aria-hidden="true" />
           Employee Details
         </div>
         <div className="panel-body">
@@ -349,7 +349,7 @@ export default function ItCalculator() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-table" />
+          <i className="bi bi-table" aria-hidden="true" />
           Monthly Salary Details
         </div>
         <div className="panel-body p-0">
@@ -357,9 +357,9 @@ export default function ItCalculator() {
             <table className="premium-table salary-table">
               <thead>
                 <tr>
-                  <th>Month</th>
+                  <th scope="col">Month</th>
                   {COLUMNS.map((column) => (
-                    <th key={column.key}>{column.label}</th>
+                    <th scope="col" key={column.key}>{column.label}</th>
                   ))}
                 </tr>
               </thead>
@@ -410,7 +410,7 @@ export default function ItCalculator() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-cash-coin" />
+          <i className="bi bi-cash-coin" aria-hidden="true" />
           Other Income Details
         </div>
         <div className="panel-body">
@@ -434,7 +434,7 @@ export default function ItCalculator() {
 
           {result.familyPensionRelief > 0 && (
             <p className="small mb-0 mt-3">
-              <i className="bi bi-info-circle-fill text-gold me-2" />
+              <i className="bi bi-info-circle-fill text-gold me-2" aria-hidden="true" />
               Standard deduction on family pension applied: ₹ {rupees(result.familyPensionRelief)} —
               the lower of one-third of the pension or ₹ {rupees(FAMILY_PENSION_CAP)}.
             </p>
@@ -474,7 +474,7 @@ export default function ItCalculator() {
         <Col lg={7}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-file-earmark-text" />
+              <i className="bi bi-file-earmark-text" aria-hidden="true" />
               Tax Computation Summary
             </div>
             <div className="panel-body p-0">
@@ -506,7 +506,7 @@ export default function ItCalculator() {
         <Col lg={5}>
           <div className="panel">
             <div className="panel-header">
-              <i className="bi bi-bar-chart-steps" />
+              <i className="bi bi-bar-chart-steps" aria-hidden="true" />
               Tax Slab Breakdown
             </div>
             <div className="panel-body p-0">
@@ -514,9 +514,9 @@ export default function ItCalculator() {
                 <table className="premium-table calc-table">
                   <thead>
                     <tr>
-                      <th>Slab</th>
-                      <th>Rate</th>
-                      <th>Tax</th>
+                      <th scope="col">Slab</th>
+                      <th scope="col">Rate</th>
+                      <th scope="col">Tax</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -545,11 +545,11 @@ export default function ItCalculator() {
 
           <div className="d-flex flex-wrap gap-2 mt-4 no-print">
             <Button className="btn-gold" onClick={() => window.print()}>
-              <i className="bi bi-printer-fill" />
+              <i className="bi bi-printer-fill" aria-hidden="true" />
               Print Statement
             </Button>
             <Button className="btn-outline-navy" onClick={reset}>
-              <i className="bi bi-arrow-counterclockwise" />
+              <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
               Reset
             </Button>
           </div>
@@ -559,7 +559,7 @@ export default function ItCalculator() {
       <div className="panel mt-4">
         <div className="panel-body">
           <div className="callout">
-            <i className="bi bi-exclamation-triangle-fill" />
+            <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
             <p>
               The slabs, the ₹ {rupees(STANDARD_DEDUCTION)} standard deduction and the section 87A
               rebate used here are those notified for <strong>{SLABS_AS_NOTIFIED_FOR}</strong>, which
@@ -570,7 +570,7 @@ export default function ItCalculator() {
           </div>
 
           <div className="callout mt-3">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               This is a guidance tool, not a tax computation statement. Confirm the figures with the
               institute establishment section or a tax practitioner before filing.

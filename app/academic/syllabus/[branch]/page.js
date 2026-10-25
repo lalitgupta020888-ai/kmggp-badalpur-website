@@ -31,7 +31,7 @@ export default async function BranchSyllabus({ params }) {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className={`bi ${syllabus.icon}`} />
+                  <i className={`bi ${syllabus.icon}`} aria-hidden="true" />
                   About the Programme
                 </div>
                 <div className="panel-body">
@@ -44,7 +44,7 @@ export default async function BranchSyllabus({ params }) {
             <Col lg={5}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-bullseye" />
+                  <i className="bi bi-bullseye" aria-hidden="true" />
                   Core Focus Areas
                 </div>
                 <div className="panel-body">
@@ -67,7 +67,7 @@ export default async function BranchSyllabus({ params }) {
 
           <div className="panel">
             <div className="panel-header">
-              <i className="bi bi-journal-bookmark-fill" />
+              <i className="bi bi-journal-bookmark-fill" aria-hidden="true" />
               {syllabus.name}
             </div>
             <div className="panel-body">
@@ -86,12 +86,12 @@ export default async function BranchSyllabus({ params }) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <i className="bi bi-file-earmark-pdf-fill" />
+                      <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                       Download Here
                     </a>
                   ) : (
                     <span className="btn-awaited">
-                      <i className="bi bi-hourglass-split" />
+                      <i className="bi bi-hourglass-split" aria-hidden="true" />
                       Awaited
                     </span>
                   )}
@@ -101,7 +101,7 @@ export default async function BranchSyllabus({ params }) {
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Syllabus documents are updated whenever BTEUP revises the curriculum. Always verify the
               session year printed on the document before use.

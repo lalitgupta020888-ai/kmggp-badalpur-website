@@ -6388,3 +6388,495 @@ a {
     font-size: 1.12rem;
   }
 }
+
+/* ==========================================================================
+   ACCESSIBILITY
+   Skip link, a uniform visible focus ring, the options panel, and the
+   display modes it switches on (data attributes on <html>).
+   ========================================================================== */
+
+/* ---------- Skip link ------------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 3000;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--navy-900);
+  color: var(--gold-300);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-200%);
+  transition: transform 0.15s var(--ease);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid var(--gold-400);
+  outline-offset: 2px;
+  color: var(--gold-300);
+}
+
+/* The main landmark takes focus after the skip link and after navigation —
+   it must not show a ring of its own. */
+main:focus,
+h1:focus {
+  outline: none;
+}
+
+/* ---------- Focus ring ------------------------------------------------ */
+
+/* One clear ring everywhere, for keyboard focus only — pointer clicks keep
+   the existing hover styling. Gold on the navy surfaces, navy on the light. */
+:focus-visible {
+  outline: 3px solid var(--navy-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.site-header :focus-visible,
+.footer :focus-visible,
+.page-header :focus-visible,
+.cta-band :focus-visible,
+.hero-slide :focus-visible,
+.carousel :focus-visible,
+.notice-head :focus-visible,
+.panel-header :focus-visible,
+.side-nav :focus-visible,
+.news-ticker :focus-visible,
+.lightbox :focus-visible,
+.video-modal :focus-visible {
+  outline-color: var(--gold-400);
+}
+
+/* ---------- Carousel and ticker controls ------------------------------ */
+
+.carousel-control-prev,
+.carousel-control-next {
+  opacity: 0.75;
+}
+
+.carousel-control-prev:focus-visible,
+.carousel-control-next:focus-visible {
+  opacity: 1;
+  outline-offset: -6px;
+}
+
+.hero-pause,
+.gm-pause {
+  position: absolute;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(7, 28, 51, 0.72);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.hero-pause {
+  right: 18px;
+  bottom: 54px;
+}
+
+.gm-pause {
+  left: 12px;
+  bottom: 12px;
+}
+
+.hero-pause:hover,
+.gm-pause:hover {
+  background: rgba(7, 28, 51, 0.92);
+}
+
+.news-ticker-pause {
+  flex: 0 0 auto;
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.news-ticker-pause:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.news-ticker.is-paused .news-ticker-track {
+  animation-play-state: paused;
+}
+
+/* Keyboard focus on a ticker link must also stand the track still, or the
+   focused link scrolls out of sight. */
+.news-ticker-track:focus-within {
+  animation-play-state: paused;
+}
+
+/* ---------- Accessibility options panel -------------------------------- */
+
+.a11y-bar {
+  position: fixed;
+  left: 22px;
+  bottom: 26px;
+  z-index: 1045;
+}
+
+.a11y-launcher {
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--navy-800);
+  color: var(--gold-300);
+  font-size: 1.7rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.a11y-launcher:hover {
+  background: var(--navy-700);
+  transform: translateY(-2px);
+}
+
+.a11y-launcher:focus-visible {
+  outline: 3px solid var(--gold-400);
+  outline-offset: 3px;
+}
+
+.a11y-panel {
+  position: absolute;
+  left: 0;
+  bottom: 64px;
+  width: min(340px, calc(100vw - 44px));
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  font-size: 0.92rem;
+}
+
+.a11y-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--navy-wash);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.a11y-panel-head > i {
+  color: var(--gold-300);
+  font-size: 1.3rem;
+}
+
+.a11y-close {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.a11y-close:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.a11y-group {
+  padding: 12px 14px;
+  border-top: 1px solid var(--hairline);
+}
+
+.a11y-group-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.a11y-font {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.a11y-font button {
+  flex: 1;
+  height: 42px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--off-white);
+  color: var(--navy-800);
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.a11y-font button:hover:not(:disabled) {
+  background: var(--mist);
+}
+
+.a11y-font button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.a11y-font-value {
+  min-width: 54px;
+  text-align: center;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.a11y-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.a11y-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--off-white);
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.a11y-option i {
+  color: var(--gold-600);
+  font-size: 1.1rem;
+}
+
+.a11y-option:hover:not(:disabled) {
+  background: var(--mist);
+}
+
+.a11y-option:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.a11y-option.is-on {
+  background: var(--navy-800);
+  border-color: var(--navy-800);
+  color: #fff;
+}
+
+.a11y-option.is-on i {
+  color: var(--gold-300);
+}
+
+.a11y-foot {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--hairline);
+  background: var(--paper);
+}
+
+.a11y-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--navy-800);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--navy-800);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.a11y-reset:hover {
+  background: var(--navy-800);
+  color: #fff;
+}
+
+.a11y-hint {
+  margin: 10px 0 0;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.a11y-hint kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--hairline);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 575.98px) {
+  .a11y-bar {
+    left: 14px;
+    bottom: 18px;
+  }
+
+  .a11y-launcher {
+    width: 46px;
+    height: 46px;
+    font-size: 1.5rem;
+  }
+}
+
+/* ---------- Accessibility modes --------------------------------------- */
+
+/* Readable font: a plain sans-serif with wider spacing and taller lines. */
+html[data-a11y-readable] body,
+html[data-a11y-readable] h1,
+html[data-a11y-readable] h2,
+html[data-a11y-readable] h3,
+html[data-a11y-readable] h4,
+html[data-a11y-readable] h5,
+html[data-a11y-readable] h6,
+html[data-a11y-readable] .brand-text,
+html[data-a11y-readable] .page-header h1,
+html[data-a11y-readable] .section-head h2 {
+  font-family: Verdana, 'Segoe UI', Arial, sans-serif !important;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+}
+
+/* Underlined links: links are told apart by shape, not colour alone. */
+html[data-a11y-underline] a {
+  text-decoration: underline !important;
+  text-underline-offset: 0.18em;
+}
+
+/* Greyscale for colour-vision deficiency. Applied per top-level block so the
+   fixed accessibility panel is not caught inside a filter's containing block. */
+html[data-a11y-grey] body > *:not(.a11y-bar) {
+  filter: grayscale(1);
+}
+
+/* Stop animations: the same rules as the reduced-motion media query, so the
+   ticker, the sliders and every entrance animation stand still. */
+html[data-a11y-still] *,
+html[data-a11y-still] *::before,
+html[data-a11y-still] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-a11y-still] .news-ticker-track {
+  animation: none !important;
+  transform: none !important;
+}
+
+html[data-a11y-still] .anim-up {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* High contrast: black on yellow, the scheme most low-vision readers use.
+   Every surface is flattened to the two colours and every border is drawn,
+   so cards, panels and buttons still read as distinct regions. */
+html[data-a11y-contrast] body > *:not(.a11y-bar),
+html[data-a11y-contrast] body > *:not(.a11y-bar) *:not(img):not(video):not(iframe):not(svg) {
+  background-color: #000 !important;
+  background-image: none !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+html[data-a11y-contrast] body > *:not(.a11y-bar) a,
+html[data-a11y-contrast] body > *:not(.a11y-bar) a * {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+}
+
+html[data-a11y-contrast] body > *:not(.a11y-bar) button,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .btn,
+html[data-a11y-contrast] body > *:not(.a11y-bar) [class*='btn-'],
+html[data-a11y-contrast] body > *:not(.a11y-bar) .hero-btn-primary,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .hero-btn-ghost,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .side-nav-link,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .nav-link,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .dropdown-item,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .form-control,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .form-select,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .panel,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .premium-card,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .notice-card,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .principal-card,
+html[data-a11y-contrast] body > *:not(.a11y-bar) td,
+html[data-a11y-contrast] body > *:not(.a11y-bar) th {
+  border: 2px solid #ffff00 !important;
+}
+
+html[data-a11y-contrast] body > *:not(.a11y-bar) .is-active,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .active,
+html[data-a11y-contrast] body > *:not(.a11y-bar) [aria-current='page'],
+html[data-a11y-contrast] body > *:not(.a11y-bar) [aria-pressed='true'] {
+  background-color: #ffff00 !important;
+  color: #000 !important;
+}
+
+html[data-a11y-contrast] body > *:not(.a11y-bar) .is-active *,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .active *,
+html[data-a11y-contrast] body > *:not(.a11y-bar) [aria-current='page'] *,
+html[data-a11y-contrast] body > *:not(.a11y-bar) [aria-pressed='true'] * {
+  color: #000 !important;
+}
+
+html[data-a11y-contrast] body > *:not(.a11y-bar) ::placeholder {
+  color: #cccc00 !important;
+}
+
+html[data-a11y-contrast] body > *:not(.a11y-bar) .hero-overlay,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .hero-vignette,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .dept-media,
+html[data-a11y-contrast] body > *:not(.a11y-bar) .film-sheen {
+  display: none !important;
+}
+
+html[data-a11y-contrast] :focus-visible {
+  outline: 4px solid #ffffff !important;
+  outline-offset: 2px;
+}

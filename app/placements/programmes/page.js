@@ -48,7 +48,7 @@ export default function TNPProgrammes() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-easel" />
+          <i className="bi bi-easel" aria-hidden="true" />
           Training &amp; Placement Programmes
         </div>
         <div className="panel-body">
@@ -62,7 +62,7 @@ export default function TNPProgrammes() {
               <Col md={6} key={programme.title}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile mb-3">
-                    <i className={`bi ${programme.icon}`} />
+                    <i className={`bi ${programme.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-2">{programme.title}</h5>
                   <p className="small mb-0">{programme.text}</p>
@@ -75,7 +75,7 @@ export default function TNPProgrammes() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-calendar-week-fill" />
+          <i className="bi bi-calendar-week-fill" aria-hidden="true" />
           Training Roadmap Across the Diploma
         </div>
         <div className="panel-body">

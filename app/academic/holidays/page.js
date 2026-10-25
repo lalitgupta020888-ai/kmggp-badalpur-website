@@ -21,7 +21,7 @@ export default async function ListOfHolidays() {
         <Container>
           <div className="panel">
             <div className="panel-header">
-              <i className="bi bi-calendar2-heart-fill" />
+              <i className="bi bi-calendar2-heart-fill" aria-hidden="true" />
               Holiday Calendar 2026-27
             </div>
             <div className="panel-body p-0">
@@ -29,20 +29,20 @@ export default async function ListOfHolidays() {
                 <table className="premium-table">
                   <thead>
                     <tr>
-                      <th>Date</th>
-                      <th>Occasion</th>
-                      <th>Day</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Occasion</th>
+                      <th scope="col">Day</th>
                     </tr>
                   </thead>
                   <tbody>
                     {HOLIDAYS.map((holiday) => (
                       <tr key={holiday.date}>
                         <td>
-                          <i className="bi bi-calendar3 text-gold me-2" />
+                          <i className="bi bi-calendar3 text-gold me-2" aria-hidden="true" />
                           {holiday.date}
                         </td>
                         <td>
-                          <i className={`bi ${holiday.icon} text-gold me-2`} />
+                          <i className={`bi ${holiday.icon} text-gold me-2`} aria-hidden="true" />
                           {holiday.occasion}
                         </td>
                         <td>{holiday.day}</td>
@@ -65,13 +65,13 @@ export default async function ListOfHolidays() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="bi bi-file-earmark-pdf-fill" />
+              <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
               Click Here
             </a>
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Holidays follow the list notified by the Government of Uttar Pradesh and are subject to
               revision by official order. Any change will be announced on the institute notice board.

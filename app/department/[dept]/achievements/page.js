@@ -20,7 +20,7 @@ export default async function AchievementsPage({ params }) {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-trophy" />
+          <i className="bi bi-trophy" aria-hidden="true" />
           Achievements — {department.name}
         </div>
         <div className="panel-body">
@@ -31,7 +31,7 @@ export default async function AchievementsPage({ params }) {
               <Col md={6} key={item.title}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile mb-3">
-                    <i className={`bi ${item.icon}`} />
+                    <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-2">{item.title}</h5>
                   <p className="small mb-0">{item.text}</p>
@@ -44,7 +44,7 @@ export default async function AchievementsPage({ params }) {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-award-fill" />
+          <i className="bi bi-award-fill" aria-hidden="true" />
           Recent Awards &amp; Recognition
         </div>
         <div className="panel-body p-0">
@@ -52,8 +52,8 @@ export default async function AchievementsPage({ params }) {
             <table className="premium-table">
               <thead>
                 <tr>
-                  <th>Year</th>
-                  <th>Award / Recognition</th>
+                  <th scope="col">Year</th>
+                  <th scope="col">Award / Recognition</th>
                 </tr>
               </thead>
               <tbody>
@@ -61,7 +61,7 @@ export default async function AchievementsPage({ params }) {
                   <tr key={award.title}>
                     <td>{award.year}</td>
                     <td>
-                      <i className={`bi ${award.icon} text-gold me-2`} />
+                      <i className={`bi ${award.icon} text-gold me-2`} aria-hidden="true" />
                       {award.title}
                     </td>
                   </tr>

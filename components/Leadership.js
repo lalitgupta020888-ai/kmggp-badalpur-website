@@ -49,7 +49,7 @@ export default function Leadership({ leaders = [], heading = {} }) {
 
                 <h5 className="leader-tile-name">{leader.name}</h5>
                 <div className="gold-flourish leader-tile-rule">
-                  <i className="bi bi-diamond-fill" />
+                  <i className="bi bi-diamond-fill" aria-hidden="true" />
                 </div>
                 <p className="leader-tile-role">
                   <span>{leader.role}</span>

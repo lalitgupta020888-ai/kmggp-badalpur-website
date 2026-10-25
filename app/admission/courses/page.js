@@ -69,18 +69,18 @@ export default async function CoursesOffered() {
                 <div className="premium-card course-card h-100 p-4 d-flex flex-column">
                   <span className="course-level">{course.level}</span>
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${course.icon}`} />
+                    <i className={`bi ${course.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{course.short}</h5>
                   <p className="small flex-grow-1">{course.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <div className="d-flex justify-content-between small fw-semibold text-primary-blue mb-2">
                     <span>
-                      <i className="bi bi-hourglass-split text-gold me-1" />
+                      <i className="bi bi-hourglass-split text-gold me-1" aria-hidden="true" />
                       {course.years}
                     </span>
                     <span>
-                      <i className="bi bi-people-fill text-gold me-1" />
+                      <i className="bi bi-people-fill text-gold me-1" aria-hidden="true" />
                       {course.intake} Seats
                     </span>
                   </div>
@@ -89,7 +89,7 @@ export default async function CoursesOffered() {
                   <p className="course-lateral small mb-3">
                     {course.lateral ? (
                       <>
-                        <i className="bi bi-box-arrow-in-right text-gold me-1" />
+                        <i className="bi bi-box-arrow-in-right text-gold me-1" aria-hidden="true" />
                         {course.lateral} lateral entry seats
                       </>
                     ) : (
@@ -98,7 +98,7 @@ export default async function CoursesOffered() {
                   </p>
                   <Link href={course.href} className="btn-outline-navy justify-content-center">
                     Visit Department
-                    <i className="bi bi-arrow-right" />
+                    <i className="bi bi-arrow-right" aria-hidden="true" />
                   </Link>
                 </div>
               </Col>
@@ -107,7 +107,7 @@ export default async function CoursesOffered() {
 
           <div className="panel mt-5">
             <div className="panel-header">
-              <i className="bi bi-table" />
+              <i className="bi bi-table" aria-hidden="true" />
               Programme Summary
             </div>
             <div className="panel-body p-0">
@@ -115,17 +115,17 @@ export default async function CoursesOffered() {
                 <table className="premium-table">
                   <thead>
                     <tr>
-                      <th>Course Name</th>
-                      <th>Duration</th>
-                      <th>Sanctioned Intake</th>
-                      <th>Eligibility</th>
+                      <th scope="col">Course Name</th>
+                      <th scope="col">Duration</th>
+                      <th scope="col">Sanctioned Intake</th>
+                      <th scope="col">Eligibility</th>
                     </tr>
                   </thead>
                   <tbody>
                     {PROGRAMMES.map((course) => (
                       <tr key={course.name}>
                         <td>
-                          <i className={`bi ${course.icon} text-gold me-2`} />
+                          <i className={`bi ${course.icon} text-gold me-2`} aria-hidden="true" />
                           {course.name}
                         </td>
                         <td>{course.duration}</td>
@@ -136,7 +136,7 @@ export default async function CoursesOffered() {
                     {LATERAL_PROGRAMMES.map((course) => (
                       <tr key={`${course.name}-lateral`}>
                         <td>
-                          <i className={`bi ${course.icon} text-gold me-2`} />
+                          <i className={`bi ${course.icon} text-gold me-2`} aria-hidden="true" />
                           {course.name}
                           <span className="badge-group">Lateral Entry</span>
                         </td>
@@ -152,7 +152,7 @@ export default async function CoursesOffered() {
                   <tfoot>
                     <tr className="table-total">
                       <td>
-                        <i className="bi bi-people-fill text-gold me-2" />
+                        <i className="bi bi-people-fill text-gold me-2" aria-hidden="true" />
                         Total Seats
                       </td>
                       <td>—</td>
@@ -172,7 +172,7 @@ export default async function CoursesOffered() {
 
           <div className="panel mt-4">
             <div className="panel-header">
-              <i className="bi bi-box-arrow-in-right" />
+              <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
               Lateral Entry (Group K) — Direct Admission to the Second Year
             </div>
             <div className="panel-body">
@@ -188,7 +188,7 @@ export default async function CoursesOffered() {
                   <Col md={6} xl={3} key={point.label}>
                     <div className="premium-card h-100 p-4">
                       <span className="icon-tile icon-tile-sm mb-3">
-                        <i className={`bi ${point.icon}`} />
+                        <i className={`bi ${point.icon}`} aria-hidden="true" />
                       </span>
                       <p className="small text-uppercase fw-bold mb-1 text-primary-blue">
                         {point.label}
@@ -204,7 +204,7 @@ export default async function CoursesOffered() {
               <Row className="g-4">
                 <Col lg={7}>
                   <h5 className="fw-bold mb-3">
-                    <i className="bi bi-patch-check-fill text-gold me-2" />
+                    <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                     Lateral Entry Eligibility
                   </h5>
                   <ul className="gold-list">
@@ -216,13 +216,13 @@ export default async function CoursesOffered() {
                   <div className="seat-matrix">
                     {LATERAL_PROGRAMMES.map((course) => (
                       <div className="seat-matrix-item" key={course.slug}>
-                        <i className={`bi ${course.icon}`} />
+                        <i className={`bi ${course.icon}`} aria-hidden="true" />
                         <span className="seat-matrix-count">{course.lateral}</span>
                         <span className="seat-matrix-label">{course.short}</span>
                       </div>
                     ))}
                     <div className="seat-matrix-item is-total">
-                      <i className="bi bi-box-arrow-in-right" />
+                      <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
                       <span className="seat-matrix-count">{TOTAL_LATERAL}</span>
                       <span className="seat-matrix-label">Total Lateral Seats</span>
                     </div>
@@ -231,7 +231,7 @@ export default async function CoursesOffered() {
 
                 <Col lg={5}>
                   <div className="callout">
-                    <i className="bi bi-info-circle-fill" />
+                    <i className="bi bi-info-circle-fill" aria-hidden="true" />
                     <p>
                       Lateral entry seats are filled through JEECUP counselling under Group K. The
                       full eligibility table for every group is on the{' '}
@@ -240,7 +240,7 @@ export default async function CoursesOffered() {
                   </div>
 
                   <div className="callout mt-3">
-                    <i className="bi bi-mortarboard-fill" />
+                    <i className="bi bi-mortarboard-fill" aria-hidden="true" />
                     <p>
                       From the third semester onwards, the curriculum, examinations and diploma
                       awarded are identical for lateral entry and first-year students.
@@ -252,7 +252,7 @@ export default async function CoursesOffered() {
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Admission to all programmes is granted exclusively through the Joint Entrance
               Examination Council, Uttar Pradesh (JEECUP) counselling process.
@@ -261,11 +261,11 @@ export default async function CoursesOffered() {
 
           <div className="d-flex flex-wrap gap-3 mt-4">
             <Link href="/admission/process" className="btn-gold">
-              <i className="bi bi-signpost-split" />
+              <i className="bi bi-signpost-split" aria-hidden="true" />
               View Admission Process
             </Link>
             <Link href="/admission/fee" className="btn-outline-navy">
-              <i className="bi bi-cash-coin" />
+              <i className="bi bi-cash-coin" aria-hidden="true" />
               Fee Structure
             </Link>
           </div>

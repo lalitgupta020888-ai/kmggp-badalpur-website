@@ -43,7 +43,7 @@ export default async function AicteApprovalsPage() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-folder2-open" />
+                  <i className="bi bi-folder2-open" aria-hidden="true" />
                   Approval Letters
                 </div>
                 <div className="panel-body">
@@ -53,7 +53,7 @@ export default async function AicteApprovalsPage() {
                   {LETTERS.map((letter) => {
                     const body = (
                       <>
-                        <i className="bi bi-file-earmark-pdf-fill" />
+                        <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                         <span>
                           EOA {letter.session}
                           <span
@@ -64,7 +64,7 @@ export default async function AicteApprovalsPage() {
                             {!letter.file && ' — not yet published'}
                           </span>
                         </span>
-                        {letter.file && <i className="bi bi-arrow-right-short" />}
+                        {letter.file && <i className="bi bi-arrow-right-short" aria-hidden="true" />}
                       </>
                     );
 
@@ -86,7 +86,7 @@ export default async function AicteApprovalsPage() {
                   })}
 
                   <div className="callout mt-4">
-                    <i className="bi bi-info-circle-fill" />
+                    <i className="bi bi-info-circle-fill" aria-hidden="true" />
                     <p>
                       PDF copies will be uploaded here as each letter is received from AICTE. The
                       current session&apos;s letter can also be verified directly on the AICTE web
@@ -100,13 +100,13 @@ export default async function AicteApprovalsPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-info-circle-fill" />
+                  <i className="bi bi-info-circle-fill" aria-hidden="true" />
                   Institute Details
                 </div>
                 <div className="panel-body">
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-bank" />
+                      <i className="bi bi-bank" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Institute Name</div>
@@ -115,7 +115,7 @@ export default async function AicteApprovalsPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-geo-alt-fill" />
+                      <i className="bi bi-geo-alt-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Location</div>
@@ -124,7 +124,7 @@ export default async function AicteApprovalsPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-diagram-3-fill" />
+                      <i className="bi bi-diagram-3-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Institute Type</div>
@@ -133,7 +133,7 @@ export default async function AicteApprovalsPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-people-fill" />
+                      <i className="bi bi-people-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Total Sanctioned Intake</div>
@@ -146,12 +146,12 @@ export default async function AicteApprovalsPage() {
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-patch-check-fill side-cta-icon" />
+                <i className="bi bi-patch-check-fill side-cta-icon" aria-hidden="true" />
                 <h6>Other Statutory Approvals</h6>
                 <p>See the full list of bodies that approve, affiliate and regulate the institute.</p>
                 <Link href="/about/approvals" className="btn-gold btn-sm">
                   View Approvals
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
@@ -159,7 +159,7 @@ export default async function AicteApprovalsPage() {
 
           <div className="panel mt-4">
             <div className="panel-header">
-              <i className="bi bi-table" />
+              <i className="bi bi-table" aria-hidden="true" />
               Approved Programmes &amp; Sanctioned Intake
             </div>
             <div className="panel-body p-0">
@@ -167,17 +167,17 @@ export default async function AicteApprovalsPage() {
                 <table className="premium-table">
                   <thead>
                     <tr>
-                      <th>Programme</th>
-                      <th>Level</th>
-                      <th>Duration</th>
-                      <th>Approved Intake</th>
+                      <th scope="col">Programme</th>
+                      <th scope="col">Level</th>
+                      <th scope="col">Duration</th>
+                      <th scope="col">Approved Intake</th>
                     </tr>
                   </thead>
                   <tbody>
                     {PROGRAMMES.map((programme) => (
                       <tr key={programme.name}>
                         <td>
-                          <i className={`bi ${programme.icon} text-gold me-2`} />
+                          <i className={`bi ${programme.icon} text-gold me-2`} aria-hidden="true" />
                           {programme.name}
                         </td>
                         <td>{programme.level}</td>
@@ -192,7 +192,7 @@ export default async function AicteApprovalsPage() {
                   <tfoot>
                     <tr className="table-total">
                       <td>
-                        <i className="bi bi-people-fill text-gold me-2" />
+                        <i className="bi bi-people-fill text-gold me-2" aria-hidden="true" />
                         Total Approved Intake
                       </td>
                       <td>—</td>

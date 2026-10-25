@@ -46,10 +46,15 @@ export default async function Home() {
 
   return (
     <>
+      {/* The banner's headings change with each slide, so the page's one
+          fixed heading is given to screen readers here. */}
+      <h1 className="visually-hidden">
+        Km. Mayawati Government Girls Polytechnic, Badalpur — Home
+      </h1>
       <HeroSlider slides={sections['hero-slides']} />
 
       {/* Key figures */}
-      <section className="stat-strip">
+      <section className="stat-strip" aria-label="Key figures">
         <Container>
           <Row className="g-0">
             {/* Two up on a phone — stacked one per row the strip ran for most
@@ -57,7 +62,7 @@ export default async function Home() {
             {STATS.map((stat) => (
               <Col key={stat.label} md={3} xs={6}>
                 <div className="stat-item">
-                  <i className={`bi ${stat.icon}`} />
+                  <i className={`bi ${stat.icon}`} aria-hidden="true" />
                   <div className="stat-value">{stat.value}</div>
                   <div className="stat-label">{stat.label}</div>
                 </div>
@@ -95,7 +100,7 @@ export default async function Home() {
                 <figcaption>
                   <span className="welcome-figure-rule" />
                   <span>
-                    <i className="bi bi-geo-alt-fill me-2" />
+                    <i className="bi bi-geo-alt-fill me-2" aria-hidden="true" />
                     The Academic Block, Badalpur Campus
                   </span>
                 </figcaption>
@@ -116,7 +121,7 @@ export default async function Home() {
                   <Col md={6} key={pillar.title}>
                     <div className="feature-row h-100">
                       <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${pillar.icon}`} />
+                        <i className={`bi ${pillar.icon}`} aria-hidden="true" />
                       </span>
                       <div>
                         <h5>{pillar.title}</h5>
@@ -129,11 +134,11 @@ export default async function Home() {
 
               <div className="d-flex flex-wrap gap-3 mt-4">
                 <Link href="/about" className="btn-gold">
-                  <i className="bi bi-book-half" />
+                  <i className="bi bi-book-half" aria-hidden="true" />
                   Read More About Us
                 </Link>
                 <Link href="/contact" className="btn-outline-navy">
-                  <i className="bi bi-telephone-fill" />
+                  <i className="bi bi-telephone-fill" aria-hidden="true" />
                   Get in Touch
                 </Link>
               </div>
@@ -165,13 +170,13 @@ export default async function Home() {
               <Col lg={3} md={6} key={item.title}>
                 <div className="premium-card h-100 p-4 text-center d-flex flex-column">
                   <span className="icon-tile mx-auto mb-4">
-                    <i className={`bi ${item.icon}`} />
+                    <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{item.title}</h5>
                   <p className="small flex-grow-1">{item.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <Link href={item.href} className="fw-bold text-decoration-none text-primary-blue">
-                    View Details <i className="bi bi-arrow-right" />
+                    View Details <i className="bi bi-arrow-right" aria-hidden="true" />
                   </Link>
                 </div>
               </Col>
@@ -209,22 +214,22 @@ export default async function Home() {
 
                   <div className="dept-body">
                     <span className="icon-tile mb-4">
-                      <i className={`bi ${dept.icon}`} />
+                      <i className={`bi ${dept.icon}`} aria-hidden="true" />
                     </span>
                     <h5 className="fw-bold mb-3">{dept.name}</h5>
                     <p className="small">{dept.text}</p>
                     <div className="gold-rule-thin my-3" />
                     <div className="d-flex flex-wrap gap-3 small">
                       <Link href={`${dept.href}/faculty`} className="text-decoration-none text-primary-blue fw-semibold">
-                        <i className="bi bi-person-badge me-1" />
+                        <i className="bi bi-person-badge me-1" aria-hidden="true" />
                         Faculty
                       </Link>
                       <Link href={`${dept.href}/labs`} className="text-decoration-none text-primary-blue fw-semibold">
-                        <i className="bi bi-beaker me-1" />
+                        <i className="bi bi-beaker me-1" aria-hidden="true" />
                         Labs
                       </Link>
                       <Link href={dept.href} className="text-decoration-none text-primary-blue fw-semibold ms-auto">
-                        Visit <i className="bi bi-arrow-right" />
+                        Visit <i className="bi bi-arrow-right" aria-hidden="true" />
                       </Link>
                     </div>
                   </div>
@@ -269,11 +274,11 @@ export default async function Home() {
 
           <div className="recruiter-actions">
             <Link href="/placements/recruiters" className="btn-gold">
-              <i className="bi bi-buildings me-2" />
+              <i className="bi bi-buildings me-2" aria-hidden="true" />
               See All Recruiters
             </Link>
             <Link href="/placements/records" className="btn-navy">
-              <i className="bi bi-graph-up-arrow me-2" />
+              <i className="bi bi-graph-up-arrow me-2" aria-hidden="true" />
               Placement Records
             </Link>
           </div>
@@ -301,12 +306,12 @@ export default async function Home() {
                       <div className="quote-name">{item.name}</div>
                       <div className="quote-meta">{item.meta}</div>
                     </div>
-                    <span className="ms-auto text-gold">
-                      <i className="bi bi-star-fill" />
-                      <i className="bi bi-star-fill" />
-                      <i className="bi bi-star-fill" />
-                      <i className="bi bi-star-fill" />
-                      <i className="bi bi-star-fill" />
+                    <span className="ms-auto text-gold" role="img" aria-label="Rated 5 out of 5 stars">
+                      <i className="bi bi-star-fill" aria-hidden="true" />
+                      <i className="bi bi-star-fill" aria-hidden="true" />
+                      <i className="bi bi-star-fill" aria-hidden="true" />
+                      <i className="bi bi-star-fill" aria-hidden="true" />
+                      <i className="bi bi-star-fill" aria-hidden="true" />
                     </span>
                   </div>
                 </div>
@@ -332,7 +337,7 @@ export default async function Home() {
           <Row className="align-items-center g-4">
             <Col lg={8}>
               <span className="eyebrow eyebrow-light">
-                <i className="bi bi-send-fill" />
+                <i className="bi bi-send-fill" aria-hidden="true" />
                 Admissions Open 2026-27
               </span>
               <h3>Begin Your Engineering Journey With Us</h3>
@@ -344,11 +349,11 @@ export default async function Home() {
             </Col>
             <Col lg={4} className="d-flex flex-column gap-3 align-items-lg-end">
               <Link href="/admission/enquiry" className="btn-gold">
-                <i className="bi bi-pencil-square" />
+                <i className="bi bi-pencil-square" aria-hidden="true" />
                 Submit an Enquiry
               </Link>
               <Link href="/admission/booklet" className="hero-btn-ghost">
-                <i className="bi bi-file-earmark-pdf" />
+                <i className="bi bi-file-earmark-pdf" aria-hidden="true" />
                 Download Booklet
               </Link>
             </Col>

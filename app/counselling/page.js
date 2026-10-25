@@ -33,7 +33,7 @@ export default async function CounsellingHome() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-clipboard2-check-fill" />
+          <i className="bi bi-clipboard2-check-fill" aria-hidden="true" />
           Counselling &amp; Admission 2026 — Quick Access
         </div>
         <div className="panel-body">
@@ -64,7 +64,7 @@ export default async function CounsellingHome() {
               const body = (
                 <>
                   <span className="icon-tile icon-tile-sm mb-3">
-                    <i className={`bi ${link.icon}`} />
+                    <i className={`bi ${link.icon}`} aria-hidden="true" />
                   </span>
                   <h6 className="fw-bold mb-2">
                     {link.label}
@@ -104,7 +104,7 @@ export default async function CounsellingHome() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-signpost-split-fill" />
+          <i className="bi bi-signpost-split-fill" aria-hidden="true" />
           How the Counselling Works
         </div>
         <div className="panel-body">
@@ -112,7 +112,7 @@ export default async function CounsellingHome() {
             {STAGES.map((stage) => (
               <li key={stage.title}>
                 <h6 className="fw-bold mb-1">
-                  <i className={`bi ${stage.icon} text-gold me-2`} />
+                  <i className={`bi ${stage.icon} text-gold me-2`} aria-hidden="true" />
                   {stage.title}
                 </h6>
                 <p className="small mb-0">{stage.text}</p>
@@ -126,13 +126,13 @@ export default async function CounsellingHome() {
               official JEECUP counselling portal.
             </p>
             <a className="btn-gold" href={JEECUP_PORTAL} target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-box-arrow-up-right" />
+              <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
               Open JEECUP Portal
             </a>
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Counselling dates, rounds and rules are notified by JEECUP each year. Always confirm
               the current schedule on the official portal before acting on any date.

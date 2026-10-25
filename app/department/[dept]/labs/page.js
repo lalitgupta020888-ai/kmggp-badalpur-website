@@ -23,7 +23,7 @@ export default async function LabsPage({ params }) {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-beaker" />
+          <i className="bi bi-beaker" aria-hidden="true" />
           Laboratory Facilities — {department.name}
         </div>
         <div className="panel-body">
@@ -34,7 +34,7 @@ export default async function LabsPage({ params }) {
               <Col md={6} key={lab.name}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile mb-3">
-                    <i className={`bi ${lab.icon}`} />
+                    <i className={`bi ${lab.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-2">{lab.name}</h5>
                   <p className="small mb-0">{lab.text}</p>
@@ -47,7 +47,7 @@ export default async function LabsPage({ params }) {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-stars" />
+          <i className="bi bi-stars" aria-hidden="true" />
           What Makes Our Labs Different
         </div>
         <div className="panel-body">
@@ -56,7 +56,7 @@ export default async function LabsPage({ params }) {
               <Col md={6} key={feature.label}>
                 <div className="feature-row align-items-center h-100">
                   <span className="icon-tile icon-tile-sm">
-                    <i className={`bi ${feature.icon}`} />
+                    <i className={`bi ${feature.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="mb-0">{feature.label}</h5>
                 </div>

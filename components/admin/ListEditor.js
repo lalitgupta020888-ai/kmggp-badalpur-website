@@ -128,14 +128,14 @@ export default function ListEditor({
 
       <div className="admin-card">
         <div className="admin-card-head">
-          <i className="bi bi-list-ul head-icon" />
+          <i className="bi bi-list-ul head-icon" aria-hidden="true" />
           <div>
             <h2>{rows.length} entr{rows.length === 1 ? 'y' : 'ies'}</h2>
             <p>Drag order with the arrows — the site shows them top to bottom</p>
           </div>
           <div className="head-actions">
             <button type="button" className="admin-btn" onClick={add} disabled={pending}>
-              <i className="bi bi-plus-lg" />
+              <i className="bi bi-plus-lg" aria-hidden="true" />
               {addLabel}
             </button>
             <button
@@ -144,7 +144,7 @@ export default function ListEditor({
               onClick={save}
               disabled={pending || !dirty}
             >
-              <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-check-lg'}`} />
+              <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-check-lg'}`} aria-hidden="true" />
               {pending ? 'Saving…' : dirty ? 'Save changes' : 'Saved'}
             </button>
           </div>
@@ -153,7 +153,7 @@ export default function ListEditor({
         <div className="admin-card-body flush">
           {rows.length === 0 ? (
             <div className="admin-empty">
-              <i className="bi bi-inbox" />
+              <i className="bi bi-inbox" aria-hidden="true" />
               <strong>{emptyTitle}</strong>
               {emptyHint}
             </div>
@@ -166,7 +166,7 @@ export default function ListEditor({
                 <div key={row.key}>
                   <div className="admin-row">
                     <span className="admin-row-handle" aria-hidden="true">
-                      <i className="bi bi-grip-vertical" />
+                      <i className="bi bi-grip-vertical" aria-hidden="true" />
                     </span>
 
                     {info.thumb ? (
@@ -177,7 +177,7 @@ export default function ListEditor({
                         className="admin-row-thumb d-grid"
                         style={{ placeItems: 'center', color: 'var(--ink-faint)' }}
                       >
-                        <i className={`bi ${info.icon || 'bi-dot'}`} />
+                        <i className={`bi ${info.icon || 'bi-dot'}`} aria-hidden="true" />
                       </span>
                     )}
 
@@ -203,7 +203,7 @@ export default function ListEditor({
                         disabled={index === 0}
                         aria-label="Move up"
                       >
-                        <i className="bi bi-arrow-up" />
+                        <i className="bi bi-arrow-up" aria-hidden="true" />
                       </button>
                       <button
                         type="button"
@@ -212,7 +212,7 @@ export default function ListEditor({
                         disabled={index === rows.length - 1}
                         aria-label="Move down"
                       >
-                        <i className="bi bi-arrow-down" />
+                        <i className="bi bi-arrow-down" aria-hidden="true" />
                       </button>
                       <button
                         type="button"
@@ -220,7 +220,7 @@ export default function ListEditor({
                         onClick={() => toggle(row.key)}
                         aria-label={expanded ? 'Collapse' : 'Edit'}
                       >
-                        <i className={`bi ${expanded ? 'bi-chevron-up' : 'bi-pencil'}`} />
+                        <i className={`bi ${expanded ? 'bi-chevron-up' : 'bi-pencil'}`} aria-hidden="true" />
                       </button>
                       <button
                         type="button"
@@ -228,7 +228,7 @@ export default function ListEditor({
                         onClick={() => remove(row.key)}
                         aria-label="Delete"
                       >
-                        <i className="bi bi-trash3" />
+                        <i className="bi bi-trash3" aria-hidden="true" />
                       </button>
                     </div>
                   </div>
@@ -266,7 +266,7 @@ export default function ListEditor({
 
       <div className="d-flex flex-wrap gap-2 align-items-center mt-3">
         <button type="button" className="admin-btn" onClick={add} disabled={pending}>
-          <i className="bi bi-plus-lg" />
+          <i className="bi bi-plus-lg" aria-hidden="true" />
           {addLabel}
         </button>
         <button
@@ -275,7 +275,7 @@ export default function ListEditor({
           onClick={save}
           disabled={pending || !dirty}
         >
-          <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-check-lg'}`} />
+          <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-check-lg'}`} aria-hidden="true" />
           {pending ? 'Saving…' : dirty ? 'Save changes' : 'Saved'}
         </button>
         {collection && (
@@ -285,7 +285,7 @@ export default function ListEditor({
             onClick={restore}
             disabled={pending}
           >
-            <i className="bi bi-arrow-counterclockwise" />
+            <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
             Restore original content
           </button>
         )}
@@ -375,7 +375,7 @@ function Field({ field, value, onChange, onBrowse }) {
               color: 'var(--gold-300)',
             }}
           >
-            <i className={`bi ${value || 'bi-dot'}`} />
+            <i className={`bi ${value || 'bi-dot'}`} aria-hidden="true" />
           </span>
           <input
             id={id}
@@ -413,7 +413,7 @@ function Field({ field, value, onChange, onBrowse }) {
             onChange={(event) => onChange(event.target.value)}
           />
           <button type="button" className="admin-btn flex-shrink-0" onClick={onBrowse}>
-            <i className="bi bi-folder2-open" />
+            <i className="bi bi-folder2-open" aria-hidden="true" />
             Browse
           </button>
           {value && (
@@ -423,7 +423,7 @@ function Field({ field, value, onChange, onBrowse }) {
               onClick={() => onChange('')}
               aria-label="Clear"
             >
-              <i className="bi bi-x-lg" />
+              <i className="bi bi-x-lg" aria-hidden="true" />
             </button>
           )}
         </div>

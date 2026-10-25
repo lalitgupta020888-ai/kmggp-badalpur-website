@@ -13,10 +13,18 @@ const STEPS = [
 ];
 
 function Field({ label, children, required, hint }) {
+  // controlId gives the label a `for` and the control an `id`, so a screen
+  // reader names the field when it gains focus.
+  const id = React.useId();
   return (
-    <Form.Group className="mb-3">
+    <Form.Group className="mb-3" controlId={id}>
       <Form.Label>
-        {label} {required && <span className="text-gold">*</span>}
+        {label}{' '}
+        {required && (
+          <span className="text-gold" aria-hidden="true">
+            *
+          </span>
+        )}
       </Form.Label>
       {children}
       {hint && <Form.Text className="text-muted">{hint}</Form.Text>}
@@ -40,16 +48,16 @@ function Receipt({ grievance, type }) {
   return (
     <div className="panel">
       <div className="panel-header">
-        <i className="bi bi-check-circle-fill" />
+        <i className="bi bi-check-circle-fill" aria-hidden="true" />
         Grievance Submitted
       </div>
       <div className="panel-body text-center">
         <span className="icon-tile mx-auto mb-4" style={{ width: 78, height: 78, fontSize: '2rem' }}>
-          <i className="bi bi-check-lg" />
+          <i className="bi bi-check-lg" aria-hidden="true" />
         </span>
         <h4 className="fw-bold mb-2">Thank You — We Have Received It</h4>
         <div className="gold-flourish">
-          <i className="bi bi-diamond-fill" />
+          <i className="bi bi-diamond-fill" aria-hidden="true" />
         </div>
         <p className="mt-3">
           Your {type} grievance has been recorded. Please save the reference number below — it is
@@ -63,15 +71,15 @@ function Receipt({ grievance, type }) {
 
         <div className="d-flex flex-wrap gap-3 justify-content-center mt-4">
           <button type="button" className="btn-outline-navy" onClick={copyRef}>
-            <i className={`bi ${copied ? 'bi-check-lg' : 'bi-clipboard'}`} />
+            <i className={`bi ${copied ? 'bi-check-lg' : 'bi-clipboard'}`} aria-hidden="true" />
             {copied ? 'Copied' : 'Copy Number'}
           </button>
           <Link href={`/igrs/status?ref=${grievance.refNumber}`} className="btn-gold">
-            <i className="bi bi-search" />
+            <i className="bi bi-search" aria-hidden="true" />
             Track This Grievance
           </Link>
           <Link href="/" className="btn-outline-navy">
-            <i className="bi bi-house-door" />
+            <i className="bi bi-house-door" aria-hidden="true" />
             Back to Home
           </Link>
         </div>
@@ -110,7 +118,7 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
       <Col xl={8}>
         <div className="panel">
           <div className="panel-header">
-            <i className={`bi ${icon}`} />
+            <i className={`bi ${icon}`} aria-hidden="true" />
             {heading}
           </div>
           <div className="panel-body">
@@ -230,7 +238,7 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
                 <Col sm={6}>
                   <Field label="Email Address" required>
                     <div className="input-icon">
-                      <i className="bi bi-envelope-fill" />
+                      <i className="bi bi-envelope-fill" aria-hidden="true" />
                       <Form.Control name="email" type="email" placeholder="you@example.com" required />
                     </div>
                   </Field>
@@ -238,7 +246,7 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
                 <Col sm={6}>
                   <Field label="Phone Number" required>
                     <div className="input-icon">
-                      <i className="bi bi-telephone-fill" />
+                      <i className="bi bi-telephone-fill" aria-hidden="true" />
                       <Form.Control
                         name="phone"
                         type="tel"
@@ -290,7 +298,7 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
               </Form.Group>
 
               <Button type="submit" className="btn-gold w-100 justify-content-center">
-                <i className="bi bi-send-fill" />
+                <i className="bi bi-send-fill" aria-hidden="true" />
                 Submit Grievance
               </Button>
             </Form>
@@ -301,7 +309,7 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
       <Col xl={4}>
         <div className="panel">
           <div className="panel-header">
-            <i className="bi bi-signpost-split-fill" />
+            <i className="bi bi-signpost-split-fill" aria-hidden="true" />
             What Happens Next
           </div>
           <div className="panel-body">
@@ -309,7 +317,7 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
               {STEPS.map((step) => (
                 <li key={step.title}>
                   <h6>
-                    <i className={`bi ${step.icon} me-2 text-gold`} />
+                    <i className={`bi ${step.icon} me-2 text-gold`} aria-hidden="true" />
                     {step.title}
                   </h6>
                   <p>{step.text}</p>
@@ -321,7 +329,7 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
 
         <div className="panel mt-4">
           <div className="panel-header">
-            <i className="bi bi-shield-lock-fill" />
+            <i className="bi bi-shield-lock-fill" aria-hidden="true" />
             Your Privacy
           </div>
           <div className="panel-body">
@@ -335,12 +343,12 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
         </div>
 
         <div className="side-cta mt-4">
-          <i className="bi bi-search side-cta-icon" />
+          <i className="bi bi-search side-cta-icon" aria-hidden="true" />
           <h6>Already Submitted?</h6>
           <p>Track an existing grievance using its reference number.</p>
           <Link href="/igrs/status" className="btn-gold btn-sm">
             Check Status
-            <i className="bi bi-arrow-right" />
+            <i className="bi bi-arrow-right" aria-hidden="true" />
           </Link>
         </div>
       </Col>

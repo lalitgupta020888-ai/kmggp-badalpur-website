@@ -172,7 +172,7 @@ export default async function GroupwiseEligibility() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-table" />
+          <i className="bi bi-table" aria-hidden="true" />
           Groupwise Eligibility Table
         </div>
         <div className="panel-body">
@@ -187,18 +187,18 @@ export default async function GroupwiseEligibility() {
             <table className="premium-table eligibility-table">
               <thead>
                 <tr>
-                  <th>Group</th>
-                  <th>Course</th>
-                  <th>Minimum Qualification</th>
-                  <th>Marks</th>
-                  <th>Duration</th>
+                  <th scope="col">Group</th>
+                  <th scope="col">Course</th>
+                  <th scope="col">Minimum Qualification</th>
+                  <th scope="col">Marks</th>
+                  <th scope="col">Duration</th>
                 </tr>
               </thead>
               <tbody>
                 {GROUPS.map((group) => (
                   <tr key={group.code}>
                     <td>
-                      <i className="bi bi-bookmark-fill text-gold me-2" />
+                      <i className="bi bi-bookmark-fill text-gold me-2" aria-hidden="true" />
                       <strong>{group.code}</strong>
                     </td>
                     <td>
@@ -220,7 +220,7 @@ export default async function GroupwiseEligibility() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-box-arrow-in-right" />
+          <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
           Two Ways In — Group A and Group K Lateral Entry
         </div>
         <div className="panel-body">
@@ -236,17 +236,17 @@ export default async function GroupwiseEligibility() {
                 <div className="premium-card h-100 p-4">
                   <div className="d-flex align-items-center gap-3 mb-3">
                     <span className="icon-tile icon-tile-sm">
-                      <i className={`bi ${route.icon}`} />
+                      <i className={`bi ${route.icon}`} aria-hidden="true" />
                     </span>
                     <h6 className="fw-bold mb-0">{route.label}</h6>
                   </div>
                   <div className="gold-rule-thin mb-3" />
                   <p className="small mb-2">
-                    <i className="bi bi-hourglass-split text-gold me-2" />
+                    <i className="bi bi-hourglass-split text-gold me-2" aria-hidden="true" />
                     <strong>Duration:</strong> {route.duration}
                   </p>
                   <p className="small mb-2">
-                    <i className="bi bi-patch-check-fill text-gold me-2" />
+                    <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                     <strong>Entry qualification:</strong> {route.entry}
                   </p>
                   <p className="small mb-0">{route.note}</p>
@@ -261,7 +261,7 @@ export default async function GroupwiseEligibility() {
         <Col lg={7}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-mortarboard-fill" />
+              <i className="bi bi-mortarboard-fill" aria-hidden="true" />
               Branches Offered at KMGGP, Badalpur
             </div>
             <div className="panel-body">
@@ -276,13 +276,13 @@ export default async function GroupwiseEligibility() {
                   className="doc-link"
                   key={item.slug}
                 >
-                  <i className={`bi ${item.icon}`} />
+                  <i className={`bi ${item.icon}`} aria-hidden="true" />
                   <span className="flex-grow-1">
                     {item.branch}
                     <span className="badge-group">Group A</span>
                     <span className="badge-group">Group K</span>
                   </span>
-                  <i className="bi bi-arrow-right-short" />
+                  <i className="bi bi-arrow-right-short" aria-hidden="true" />
                 </Link>
               ))}
             </div>
@@ -292,7 +292,7 @@ export default async function GroupwiseEligibility() {
         <Col lg={5}>
           <div className="panel h-100">
             <div className="panel-header">
-              <i className="bi bi-check2-square" />
+              <i className="bi bi-check2-square" aria-hidden="true" />
               Common Conditions
             </div>
             <div className="panel-body">
@@ -303,7 +303,7 @@ export default async function GroupwiseEligibility() {
               </ul>
 
               <div className="callout mt-4">
-                <i className="bi bi-info-circle-fill" />
+                <i className="bi bi-info-circle-fill" aria-hidden="true" />
                 <p>
                   Group codes and eligibility conditions are revised by JEECUP from time to time.
                   Confirm them in the current-year brochure on the{' '}
@@ -320,7 +320,7 @@ export default async function GroupwiseEligibility() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-box-arrow-in-right" />
+          <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
           Group K Lateral Entry — Eligibility in Detail
         </div>
         <div className="panel-body">
@@ -334,7 +334,7 @@ export default async function GroupwiseEligibility() {
           <Row className="g-4">
             <Col lg={6}>
               <h5 className="fw-bold mb-3">
-                <i className="bi bi-patch-check-fill text-gold me-2" />
+                <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                 Who Can Apply
               </h5>
               <ul className="gold-list">
@@ -346,7 +346,7 @@ export default async function GroupwiseEligibility() {
 
             <Col lg={6}>
               <h5 className="fw-bold mb-3">
-                <i className="bi bi-info-square-fill text-gold me-2" />
+                <i className="bi bi-info-square-fill text-gold me-2" aria-hidden="true" />
                 What to Know Before Applying
               </h5>
               <ul className="gold-list">
@@ -358,7 +358,7 @@ export default async function GroupwiseEligibility() {
           </Row>
 
           <div className="callout mt-4">
-            <i className="bi bi-exclamation-triangle-fill" />
+            <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
             <p>
               A candidate must appear in the Group K paper to be considered for lateral entry.
               Qualifying in Group A does not make you eligible for second-year admission.

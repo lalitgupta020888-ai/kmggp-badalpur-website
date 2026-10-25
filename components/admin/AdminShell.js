@@ -92,7 +92,7 @@ export default function AdminShell({ username, children }) {
       <aside className="admin-sidebar">
         <Link href="/admin" className="admin-brand">
           <span className="admin-brand-mark">
-            <i className="bi bi-shield-lock-fill" />
+            <i className="bi bi-shield-lock-fill" aria-hidden="true" />
           </span>
           <span className="admin-brand-text">
             <strong>KMGGP Badalpur</strong>
@@ -110,7 +110,7 @@ export default function AdminShell({ username, children }) {
                   href={item.href}
                   className={`admin-nav-link${isActive(item) ? ' active' : ''}`}
                 >
-                  <i className={`bi ${item.icon}`} />
+                  <i className={`bi ${item.icon}`} aria-hidden="true" />
                   <span>{item.label}</span>
                 </Link>
               ))}
@@ -145,7 +145,7 @@ export default function AdminShell({ username, children }) {
             onClick={() => setNavOpen((open) => !open)}
             aria-label="Toggle navigation"
           >
-            <i className="bi bi-list" />
+            <i className="bi bi-list" aria-hidden="true" />
           </button>
 
           <div className="min-w-0">
@@ -155,12 +155,12 @@ export default function AdminShell({ username, children }) {
 
           <div className="admin-topbar-actions">
             <Link href="/" target="_blank" className="admin-btn" rel="noreferrer">
-              <i className="bi bi-box-arrow-up-right" />
+              <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
               <span className="d-none d-sm-inline">View Site</span>
             </Link>
             <form action={signOut}>
               <button type="submit" className="admin-btn admin-btn-danger">
-                <i className="bi bi-box-arrow-right" />
+                <i className="bi bi-box-arrow-right" aria-hidden="true" />
                 <span className="d-none d-sm-inline">Sign Out</span>
               </button>
             </form>

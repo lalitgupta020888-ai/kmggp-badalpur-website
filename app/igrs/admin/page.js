@@ -39,7 +39,7 @@ function StatusPill({ status }) {
   const meta = STATUS_META[status] || STATUS_META.Pending;
   return (
     <span className={`status-pill ${meta.tone}`}>
-      <i className={`bi ${meta.icon}`} />
+      <i className={`bi ${meta.icon}`} aria-hidden="true" />
       {status}
     </span>
   );
@@ -69,7 +69,7 @@ function AdminLogin({ onSuccess }) {
         <div className="auth-card">
           <div className="auth-head">
             <span className="auth-emblem">
-              <i className="bi bi-person-lock" />
+              <i className="bi bi-person-lock" aria-hidden="true" />
             </span>
             <h4>Grievance Committee Login</h4>
             <p>Integrated Grievance Redressal System — Km. Mayawati Government Girls Polytechnic</p>
@@ -77,7 +77,7 @@ function AdminLogin({ onSuccess }) {
 
           <div className="p-4 p-sm-5">
             <Alert variant="warning" className="d-flex align-items-start gap-3 border-0 small mb-4">
-              <i className="bi bi-exclamation-triangle-fill fs-5 lh-1 mt-1" />
+              <i className="bi bi-exclamation-triangle-fill fs-5 lh-1 mt-1" aria-hidden="true" />
               <span>
                 Authorised committee members only. Unauthorised access attempts are logged and may
                 invite disciplinary or legal action.
@@ -88,7 +88,7 @@ function AdminLogin({ onSuccess }) {
               <Form.Group className="mb-3">
                 <Form.Label>Username</Form.Label>
                 <div className="input-icon">
-                  <i className="bi bi-person-badge-fill" />
+                  <i className="bi bi-person-badge-fill" aria-hidden="true" />
                   <Form.Control
                     type="text"
                     value={username}
@@ -103,7 +103,7 @@ function AdminLogin({ onSuccess }) {
               <Form.Group className="mb-4">
                 <Form.Label>Password</Form.Label>
                 <div className="input-icon input-icon-action">
-                  <i className="bi bi-key-fill" />
+                  <i className="bi bi-key-fill" aria-hidden="true" />
                   <Form.Control
                     type={showPassword ? 'text' : 'password'}
                     value={password}
@@ -119,7 +119,7 @@ function AdminLogin({ onSuccess }) {
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                     title={showPassword ? 'Hide password' : 'Show password'}
                   >
-                    <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`} />
+                    <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`} aria-hidden="true" />
                   </button>
                 </div>
               </Form.Group>
@@ -136,13 +136,13 @@ function AdminLogin({ onSuccess }) {
 
               {error && (
                 <Alert variant="danger" className="border-0 small d-flex align-items-center gap-2">
-                  <i className="bi bi-exclamation-circle-fill" />
+                  <i className="bi bi-exclamation-circle-fill" aria-hidden="true" />
                   {error}
                 </Alert>
               )}
 
               <Button type="submit" className="btn-gold w-100 justify-content-center">
-                <i className="bi bi-box-arrow-in-right" />
+                <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
                 Sign In to Dashboard
               </Button>
             </Form>
@@ -152,7 +152,7 @@ function AdminLogin({ onSuccess }) {
             <div className="auth-notes">
               {NOTICES.map((notice) => (
                 <div className="auth-note" key={notice.text}>
-                  <i className={`bi ${notice.icon}`} />
+                  <i className={`bi ${notice.icon}`} aria-hidden="true" />
                   <span>{notice.text}</span>
                 </div>
               ))}
@@ -213,13 +213,13 @@ function AdminDashboard({ onLogout }) {
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
         <div>
           <span className="eyebrow">
-            <i className="bi bi-speedometer2" />
+            <i className="bi bi-speedometer2" aria-hidden="true" />
             Committee Dashboard
           </span>
           <h2 className="fw-bold mb-0">Grievance Management</h2>
         </div>
         <button type="button" className="btn-outline-navy" onClick={onLogout}>
-          <i className="bi bi-box-arrow-right" />
+          <i className="bi bi-box-arrow-right" aria-hidden="true" />
           Sign Out
         </button>
       </div>
@@ -227,7 +227,7 @@ function AdminDashboard({ onLogout }) {
       <Row className="g-3 mb-4">
         <Col md={3} sm={6}>
           <div className="premium-card is-featured p-4 text-center h-100">
-            <span className="icon-tile mx-auto mb-3"><i className="bi bi-inboxes-fill" /></span>
+            <span className="icon-tile mx-auto mb-3"><i className="bi bi-inboxes-fill" aria-hidden="true" /></span>
             <h4 className="fw-bold mb-1">{counts.total}</h4>
             <p className="small mb-0">Total Grievances</p>
           </div>
@@ -236,7 +236,7 @@ function AdminDashboard({ onLogout }) {
           <Col md={3} sm={6} key={status}>
             <div className="premium-card p-4 text-center h-100">
               <span className="icon-tile mx-auto mb-3">
-                <i className={`bi ${STATUS_META[status].icon}`} />
+                <i className={`bi ${STATUS_META[status].icon}`} aria-hidden="true" />
               </span>
               <h4 className="fw-bold mb-1">{counts[status]}</h4>
               <p className="small mb-0">{status}</p>
@@ -247,7 +247,7 @@ function AdminDashboard({ onLogout }) {
 
       <div className="panel mb-4">
         <div className="panel-header">
-          <i className="bi bi-funnel-fill" />
+          <i className="bi bi-funnel-fill" aria-hidden="true" />
           Filter &amp; Search
         </div>
         <div className="panel-body">
@@ -273,7 +273,7 @@ function AdminDashboard({ onLogout }) {
             <Col md={4}>
               <Form.Label>Search</Form.Label>
               <div className="input-icon">
-                <i className="bi bi-search" />
+                <i className="bi bi-search" aria-hidden="true" />
                 <Form.Control
                   type="search"
                   value={search}
@@ -289,7 +289,7 @@ function AdminDashboard({ onLogout }) {
       {filtered.length === 0 ? (
         <div className="panel">
           <div className="panel-body text-center py-5">
-            <span className="icon-tile mx-auto mb-3"><i className="bi bi-inbox" /></span>
+            <span className="icon-tile mx-auto mb-3"><i className="bi bi-inbox" aria-hidden="true" /></span>
             <h5 className="fw-bold mb-2">No Grievances Found</h5>
             <p className="small mb-0">
               {counts.total === 0
@@ -306,13 +306,13 @@ function AdminDashboard({ onLogout }) {
               <Col lg={6} key={g.refNumber}>
                 <div className="panel h-100">
                   <div className="panel-header">
-                    <i className={`bi ${TYPE_META[g.type]?.icon || 'bi-tag-fill'}`} />
+                    <i className={`bi ${TYPE_META[g.type]?.icon || 'bi-tag-fill'}`} aria-hidden="true" />
                     {g.subject || 'No Subject'}
                   </div>
                   <div className="panel-body">
                     <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
                       <span className="ref-inline">
-                        <i className="bi bi-hash" />
+                        <i className="bi bi-hash" aria-hidden="true" />
                         {g.refNumber}
                       </span>
                       <StatusPill status={g.status} />
@@ -387,13 +387,13 @@ function AdminDashboard({ onLogout }) {
                         className="btn-gold w-100 justify-content-center"
                         onClick={() => handleUpdate(g.refNumber)}
                       >
-                        <i className="bi bi-save-fill" />
+                        <i className="bi bi-save-fill" aria-hidden="true" />
                         Save Update
                       </button>
 
                       {savedRef === g.refNumber && (
                         <p className="small text-center mt-2 mb-0" style={{ color: 'var(--gold-700)' }}>
-                          <i className="bi bi-check-circle-fill me-1" />
+                          <i className="bi bi-check-circle-fill me-1" aria-hidden="true" />
                           Updated successfully
                         </p>
                       )}

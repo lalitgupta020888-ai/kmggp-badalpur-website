@@ -114,7 +114,7 @@ export default function EventsPage() {
             {HIGHLIGHTS.map((item) => (
               <Col md={3} sm={6} key={item.label}>
                 <div className="stat-item">
-                  <i className={`bi ${item.icon}`} />
+                  <i className={`bi ${item.icon}`} aria-hidden="true" />
                   <div className="stat-value">{item.value}</div>
                   <div className="stat-label">{item.label}</div>
                 </div>
@@ -138,7 +138,7 @@ export default function EventsPage() {
               <Col lg={4} md={6} key={category.title}>
                 <div className="premium-card h-100 p-4">
                   <span className="icon-tile mb-4">
-                    <i className={`bi ${category.icon}`} />
+                    <i className={`bi ${category.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{category.title}</h5>
                   <p className="small mb-0">{category.text}</p>
@@ -160,7 +160,7 @@ export default function EventsPage() {
 
           <div className="panel">
             <div className="panel-header">
-              <i className="bi bi-calendar-week-fill" />
+              <i className="bi bi-calendar-week-fill" aria-hidden="true" />
               Month-wise Event Schedule
             </div>
             <div className="panel-body p-0">
@@ -168,9 +168,9 @@ export default function EventsPage() {
                 <table className="premium-table">
                   <thead>
                     <tr>
-                      <th>Month</th>
-                      <th>Event</th>
-                      <th>Details</th>
+                      <th scope="col">Month</th>
+                      <th scope="col">Event</th>
+                      <th scope="col">Details</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -178,7 +178,7 @@ export default function EventsPage() {
                       <tr key={row.event}>
                         <td>{row.month}</td>
                         <td>
-                          <i className={`bi ${row.icon} text-gold me-2`} />
+                          <i className={`bi ${row.icon} text-gold me-2`} aria-hidden="true" />
                           {row.event}
                         </td>
                         <td>{row.detail}</td>
@@ -191,7 +191,7 @@ export default function EventsPage() {
           </div>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               Event dates are indicative and confirmed each session through the institute notice
               board and the academic calendar. Students are encouraged to participate and volunteer
@@ -201,11 +201,11 @@ export default function EventsPage() {
 
           <div className="d-flex flex-wrap gap-3 mt-4">
             <Link href="/gallery" className="btn-gold">
-              <i className="bi bi-images" />
+              <i className="bi bi-images" aria-hidden="true" />
               View Event Photographs
             </Link>
             <Link href="/academic/calendar" className="btn-outline-navy">
-              <i className="bi bi-calendar3" />
+              <i className="bi bi-calendar3" aria-hidden="true" />
               Academic Calendar
             </Link>
           </div>

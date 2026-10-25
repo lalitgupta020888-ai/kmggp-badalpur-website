@@ -68,7 +68,7 @@ export default function CautionMoneyRefundPage() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-file-earmark-ruled-fill" />
+                  <i className="bi bi-file-earmark-ruled-fill" aria-hidden="true" />
                   Refund Policy
                 </div>
                 <div className="panel-body">
@@ -84,7 +84,7 @@ export default function CautionMoneyRefundPage() {
                   </ul>
 
                   <div className="callout mt-4">
-                    <i className="bi bi-exclamation-triangle-fill" />
+                    <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
                     <p>
                       Refund claims submitted more than one year after leaving the institute may not
                       be entertained. Students are advised to apply immediately after completing the
@@ -98,7 +98,7 @@ export default function CautionMoneyRefundPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-folder-fill" />
+                  <i className="bi bi-folder-fill" aria-hidden="true" />
                   Documents Required
                 </div>
                 <div className="panel-body">
@@ -112,30 +112,30 @@ export default function CautionMoneyRefundPage() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-download" />
+                  <i className="bi bi-download" aria-hidden="true" />
                   Download Forms
                 </div>
                 <div className="panel-body">
                   <a href="#" className="doc-link">
-                    <i className="bi bi-file-earmark-pdf-fill" />
+                    <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                     Caution Money Refund Form (PDF)
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </a>
                   <a href="#" className="doc-link mb-0">
-                    <i className="bi bi-file-earmark-check-fill" />
+                    <i className="bi bi-file-earmark-check-fill" aria-hidden="true" />
                     No-Dues Clearance Form (PDF)
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </a>
                 </div>
               </div>
 
               <div className="side-cta mt-4">
-                <i className="bi bi-cash-coin side-cta-icon" />
+                <i className="bi bi-cash-coin side-cta-icon" aria-hidden="true" />
                 <h6>Questions About Your Refund?</h6>
                 <p>The accounts section can confirm your deposit record and dues position.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact Accounts
-                  <i className="bi bi-arrow-right" />
+                  <i className="bi bi-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </Col>
@@ -155,7 +155,7 @@ export default function CautionMoneyRefundPage() {
             <Col lg={8} className="mx-auto">
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-list-ol" />
+                  <i className="bi bi-list-ol" aria-hidden="true" />
                   Process Flow
                 </div>
                 <div className="panel-body">
@@ -172,7 +172,7 @@ export default function CautionMoneyRefundPage() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-clock-history" />
+                  <i className="bi bi-clock-history" aria-hidden="true" />
                   Processing Timeline
                 </div>
                 <div className="panel-body p-0">
@@ -180,15 +180,15 @@ export default function CautionMoneyRefundPage() {
                     <table className="premium-table">
                       <thead>
                         <tr>
-                          <th>Stage</th>
-                          <th>Responsible Section</th>
-                          <th>Indicative Time</th>
+                          <th scope="col">Stage</th>
+                          <th scope="col">Responsible Section</th>
+                          <th scope="col">Indicative Time</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td>
-                            <i className="bi bi-file-earmark-check-fill text-gold me-2" />
+                            <i className="bi bi-file-earmark-check-fill text-gold me-2" aria-hidden="true" />
                             No-dues clearance
                           </td>
                           <td>Departments, Library, Hostel</td>
@@ -196,7 +196,7 @@ export default function CautionMoneyRefundPage() {
                         </tr>
                         <tr>
                           <td>
-                            <i className="bi bi-search text-gold me-2" />
+                            <i className="bi bi-search text-gold me-2" aria-hidden="true" />
                             Verification of deposit
                           </td>
                           <td>Accounts Section</td>
@@ -204,7 +204,7 @@ export default function CautionMoneyRefundPage() {
                         </tr>
                         <tr>
                           <td>
-                            <i className="bi bi-patch-check-fill text-gold me-2" />
+                            <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                             Sanction of refund
                           </td>
                           <td>Office of the Principal</td>
@@ -212,7 +212,7 @@ export default function CautionMoneyRefundPage() {
                         </tr>
                         <tr>
                           <td>
-                            <i className="bi bi-bank text-gold me-2" />
+                            <i className="bi bi-bank text-gold me-2" aria-hidden="true" />
                             Credit to bank account
                           </td>
                           <td>Accounts Section</td>

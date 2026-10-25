@@ -50,18 +50,18 @@ export default async function GalleryPage() {
                     />
                     <span className="album-veil" />
                     <span className="album-count">
-                      <i className="bi bi-images" />
+                      <i className="bi bi-images" aria-hidden="true" />
                       {album.photos.length} {album.photos.length === 1 ? 'Photo' : 'Photos'}
                     </span>
                     <span className="album-open">
-                      <i className="bi bi-folder2-open" />
+                      <i className="bi bi-folder2-open" aria-hidden="true" />
                       Open Album
                     </span>
                   </span>
 
                   <span className="album-body">
                     <span className="album-title">
-                      <i className={`bi ${album.icon}`} />
+                      <i className={`bi ${album.icon}`} aria-hidden="true" />
                       {album.title}
                     </span>
                     <span className="album-text">{album.description}</span>
@@ -72,7 +72,7 @@ export default async function GalleryPage() {
           </Row>
 
           <div className="callout mt-5">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               {images.length} photographs across {shown.length} albums. More from annual functions,
               technical festivals and industrial visits will be added through the academic session.

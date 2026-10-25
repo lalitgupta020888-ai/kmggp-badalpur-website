@@ -10,7 +10,7 @@ export default async function AdminMediaPage() {
     <>
       <div className="admin-card mb-4">
         <div className="admin-card-head">
-          <i className="bi bi-collection-fill head-icon" />
+          <i className="bi bi-collection-fill head-icon" aria-hidden="true" />
           <div>
             <h2>Media Library</h2>
             <p>Every photograph, film and document uploaded to the site</p>

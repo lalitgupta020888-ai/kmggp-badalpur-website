@@ -54,7 +54,7 @@ export default async function AboutPage() {
 
               {page.callout && (
                 <div className="callout mt-4">
-                  <i className="bi bi-quote" />
+                  <i className="bi bi-quote" aria-hidden="true" />
                   <p>{page.callout}</p>
                 </div>
               )}
@@ -63,12 +63,12 @@ export default async function AboutPage() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-flag-fill" />
+                  <i className="bi bi-flag-fill" aria-hidden="true" />
                   Vision &amp; Mission
                 </div>
                 <div className="panel-body">
                   <h5 className="fw-bold mb-2">
-                    <i className="bi bi-eye-fill text-gold me-2" />
+                    <i className="bi bi-eye-fill text-gold me-2" aria-hidden="true" />
                     Vision
                   </h5>
                   <p className="small">
@@ -79,7 +79,7 @@ export default async function AboutPage() {
                   <div className="gold-rule-thin my-4" />
 
                   <h5 className="fw-bold mb-3">
-                    <i className="bi bi-bullseye text-gold me-2" />
+                    <i className="bi bi-bullseye text-gold me-2" aria-hidden="true" />
                     Mission
                   </h5>
                   <ul className="gold-list">
@@ -107,7 +107,7 @@ export default async function AboutPage() {
               <Col lg={3} md={6} key={value.title}>
                 <div className="premium-card h-100 p-4 text-center">
                   <span className="icon-tile mx-auto mb-4">
-                    <i className={`bi ${value.icon}`} />
+                    <i className={`bi ${value.icon}`} aria-hidden="true" />
                   </span>
                   <h5 className="fw-bold mb-3">{value.title}</h5>
                   <p className="small mb-0">{value.text}</p>
@@ -144,13 +144,13 @@ export default async function AboutPage() {
                   "More About the Institute" panel off the section. */}
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-info-circle-fill" />
+                  <i className="bi bi-info-circle-fill" aria-hidden="true" />
                   Institute Profile
                 </div>
                 <div className="panel-body">
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-bank" />
+                      <i className="bi bi-bank" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Established By</div>
@@ -159,7 +159,7 @@ export default async function AboutPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-rulers" />
+                      <i className="bi bi-rulers" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Campus Area</div>
@@ -168,7 +168,7 @@ export default async function AboutPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-award-fill" />
+                      <i className="bi bi-award-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Approval</div>
@@ -179,7 +179,7 @@ export default async function AboutPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-patch-check-fill" />
+                      <i className="bi bi-patch-check-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Affiliation</div>
@@ -188,7 +188,7 @@ export default async function AboutPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-diagram-3-fill" />
+                      <i className="bi bi-diagram-3-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Programmes</div>
@@ -200,7 +200,7 @@ export default async function AboutPage() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-geo-alt-fill" />
+                      <i className="bi bi-geo-alt-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Location</div>
@@ -210,11 +210,11 @@ export default async function AboutPage() {
 
                   <div className="d-flex flex-wrap gap-3 mt-4">
                     <Link href="/admission/courses" className="btn-gold">
-                      <i className="bi bi-collection-fill" />
+                      <i className="bi bi-collection-fill" aria-hidden="true" />
                       Courses Offered
                     </Link>
                     <Link href="/contact" className="btn-outline-navy">
-                      <i className="bi bi-envelope-fill" />
+                      <i className="bi bi-envelope-fill" aria-hidden="true" />
                       Contact Us
                     </Link>
                   </div>
@@ -223,29 +223,29 @@ export default async function AboutPage() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-folder2-open" />
+                  <i className="bi bi-folder2-open" aria-hidden="true" />
                   More About the Institute
                 </div>
                 <div className="panel-body">
                   <Link href="/about/vision-mission" className="doc-link">
-                    <i className="bi bi-bullseye" />
+                    <i className="bi bi-bullseye" aria-hidden="true" />
                     Vision &amp; Mission
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                   <Link href="/about/principal-message" className="doc-link">
-                    <i className="bi bi-person-video2" />
+                    <i className="bi bi-person-video2" aria-hidden="true" />
                     Principal&apos;s Message
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                   <Link href="/about/approvals" className="doc-link">
-                    <i className="bi bi-patch-check-fill" />
+                    <i className="bi bi-patch-check-fill" aria-hidden="true" />
                     Approvals by Statutory Bodies
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                   <Link href="/about/aicte-approvals" className="doc-link mb-0">
-                    <i className="bi bi-file-earmark-pdf-fill" />
+                    <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
                     AICTE Approval Letters
-                    <i className="bi bi-arrow-right-short" />
+                    <i className="bi bi-arrow-right-short" aria-hidden="true" />
                   </Link>
                 </div>
               </div>

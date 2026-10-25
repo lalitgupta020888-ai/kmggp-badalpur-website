@@ -99,7 +99,7 @@ export default function Field({ field, value, onChange, onBrowse }) {
       {field.type === 'icon' && (
         <div className="d-flex gap-2 align-items-center">
           <span className="d-grid" style={swatchStyle}>
-            <i className={`bi ${value || 'bi-dot'}`} />
+            <i className={`bi ${value || 'bi-dot'}`} aria-hidden="true" />
           </span>
           <input
             id={id}
@@ -142,7 +142,7 @@ export default function Field({ field, value, onChange, onBrowse }) {
             className="admin-btn flex-shrink-0"
             onClick={() => onBrowse(field.kind || 'image', onChange)}
           >
-            <i className="bi bi-folder2-open" />
+            <i className="bi bi-folder2-open" aria-hidden="true" />
             Browse
           </button>
           {value && (
@@ -152,7 +152,7 @@ export default function Field({ field, value, onChange, onBrowse }) {
               onClick={() => onChange('')}
               aria-label="Clear"
             >
-              <i className="bi bi-x-lg" />
+              <i className="bi bi-x-lg" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -254,7 +254,7 @@ function NestedList({ field, value, onChange, onBrowse }) {
                   disabled={index === 0}
                   aria-label="Move up"
                 >
-                  <i className="bi bi-arrow-up" />
+                  <i className="bi bi-arrow-up" aria-hidden="true" />
                 </button>
                 <button
                   type="button"
@@ -263,7 +263,7 @@ function NestedList({ field, value, onChange, onBrowse }) {
                   disabled={index === rows.length - 1}
                   aria-label="Move down"
                 >
-                  <i className="bi bi-arrow-down" />
+                  <i className="bi bi-arrow-down" aria-hidden="true" />
                 </button>
                 <button
                   type="button"
@@ -271,7 +271,7 @@ function NestedList({ field, value, onChange, onBrowse }) {
                   onClick={() => remove(index)}
                   aria-label="Remove"
                 >
-                  <i className="bi bi-trash3" />
+                  <i className="bi bi-trash3" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -292,7 +292,7 @@ function NestedList({ field, value, onChange, onBrowse }) {
       )}
 
       <button type="button" className="admin-btn" onClick={add}>
-        <i className="bi bi-plus-lg" />
+        <i className="bi bi-plus-lg" aria-hidden="true" />
         {field.addLabel || 'Add'}
       </button>
     </div>

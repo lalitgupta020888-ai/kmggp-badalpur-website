@@ -45,7 +45,7 @@ export default function DocumentListForVerification() {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-file-earmark-check-fill" />
+          <i className="bi bi-file-earmark-check-fill" aria-hidden="true" />
           Document List for Verification
         </div>
         <div className="panel-body">
@@ -64,7 +64,7 @@ export default function DocumentListForVerification() {
           <Row className="g-4">
             <Col lg={7}>
               <h5 className="fw-bold mb-3">
-                <i className="bi bi-file-earmark-text-fill text-gold me-2" />
+                <i className="bi bi-file-earmark-text-fill text-gold me-2" aria-hidden="true" />
                 Original Documents
               </h5>
               <ul className="gold-list is-numbered">
@@ -76,7 +76,7 @@ export default function DocumentListForVerification() {
 
             <Col lg={5}>
               <h5 className="fw-bold mb-3">
-                <i className="bi bi-files text-gold me-2" />
+                <i className="bi bi-files text-gold me-2" aria-hidden="true" />
                 Copies &amp; Photographs
               </h5>
               <ul className="gold-list">
@@ -86,7 +86,7 @@ export default function DocumentListForVerification() {
               </ul>
 
               <div className="callout mt-4">
-                <i className="bi bi-exclamation-triangle-fill" />
+                <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
                 <p>
                   Category and sub-category certificates must be in the format prescribed by the
                   Government of Uttar Pradesh. A certificate in any other format is not accepted.
@@ -99,7 +99,7 @@ export default function DocumentListForVerification() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-box-arrow-in-right" />
+          <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
           Additional Documents — Group K Lateral Entry
         </div>
         <div className="panel-body">
@@ -114,7 +114,7 @@ export default function DocumentListForVerification() {
           </ul>
 
           <div className="callout mt-4">
-            <i className="bi bi-info-circle-fill" />
+            <i className="bi bi-info-circle-fill" aria-hidden="true" />
             <p>
               An ITI candidate&rsquo;s trade must be related to the branch allotted. The verification
               officer checks this against the JEECUP trade-to-branch mapping, so carry the trade
@@ -126,7 +126,7 @@ export default function DocumentListForVerification() {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-shield-check" />
+          <i className="bi bi-shield-check" aria-hidden="true" />
           Rules at the Verification Centre
         </div>
         <div className="panel-body">
@@ -142,7 +142,7 @@ export default function DocumentListForVerification() {
               letter available in your counselling account.
             </p>
             <a className="btn-gold" href={JEECUP_PORTAL} target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-box-arrow-up-right" />
+              <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
               Download Allotment Letter
             </a>
           </div>

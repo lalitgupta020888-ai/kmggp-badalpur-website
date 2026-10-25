@@ -20,7 +20,7 @@ export default async function FacultyPage({ params }) {
     <>
       <div className="panel">
         <div className="panel-header">
-          <i className="bi bi-person-badge" />
+          <i className="bi bi-person-badge" aria-hidden="true" />
           Faculty — {department.name}
         </div>
         <div className="panel-body">
@@ -52,11 +52,11 @@ export default async function FacultyPage({ params }) {
                   <span className="eyebrow">{member.designation}</span>
                   <div className="gold-rule-thin my-3" />
                   <p className="small mb-1">
-                    <i className="bi bi-mortarboard-fill text-gold me-2" />
+                    <i className="bi bi-mortarboard-fill text-gold me-2" aria-hidden="true" />
                     {member.qualification}
                   </p>
                   <p className="small mb-0">
-                    <i className="bi bi-clock-history text-gold me-2" />
+                    <i className="bi bi-clock-history text-gold me-2" aria-hidden="true" />
                     {member.experience} of experience
                   </p>
                 </div>
@@ -68,7 +68,7 @@ export default async function FacultyPage({ params }) {
 
       <div className="panel mt-4">
         <div className="panel-header">
-          <i className="bi bi-table" />
+          <i className="bi bi-table" aria-hidden="true" />
           Faculty Directory
         </div>
         <div className="panel-body p-0">
@@ -76,11 +76,11 @@ export default async function FacultyPage({ params }) {
             <table className="premium-table">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Designation</th>
-                  <th>Qualification</th>
-                  <th>Experience</th>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Designation</th>
+                  <th scope="col">Qualification</th>
+                  <th scope="col">Experience</th>
                 </tr>
               </thead>
               <tbody>
@@ -88,7 +88,7 @@ export default async function FacultyPage({ params }) {
                   <tr key={member.id || member.name}>
                     <td>{index + 1}</td>
                     <td>
-                      <i className="bi bi-person-circle text-gold me-2" />
+                      <i className="bi bi-person-circle text-gold me-2" aria-hidden="true" />
                       {member.name}
                     </td>
                     <td>{member.designation}</td>
@@ -103,7 +103,7 @@ export default async function FacultyPage({ params }) {
       </div>
 
       <div className="callout mt-4">
-        <i className="bi bi-info-circle-fill" />
+        <i className="bi bi-info-circle-fill" aria-hidden="true" />
         <p>{text.facultyNote}</p>
       </div>
     </>

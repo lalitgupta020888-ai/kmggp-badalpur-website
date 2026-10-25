@@ -54,7 +54,7 @@ export default function PasswordForm() {
       </div>
 
       <button type="submit" className="admin-btn admin-btn-gold" disabled={pending}>
-        <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-key-fill'}`} />
+        <i className={`bi ${pending ? 'bi-hourglass-split' : 'bi-key-fill'}`} aria-hidden="true" />
         {pending ? 'Changing…' : 'Change password'}
       </button>
     </form>

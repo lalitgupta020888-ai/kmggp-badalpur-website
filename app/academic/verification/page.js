@@ -49,7 +49,7 @@ export default function EducationalVerification() {
             <Col lg={7}>
               <div className="panel h-100">
                 <div className="panel-header">
-                  <i className="bi bi-shield-check" />
+                  <i className="bi bi-shield-check" aria-hidden="true" />
                   Verification Procedure
                 </div>
                 <div className="panel-body">
@@ -69,7 +69,7 @@ export default function EducationalVerification() {
                   </ul>
 
                   <div className="callout mt-4">
-                    <i className="bi bi-exclamation-triangle-fill" />
+                    <i className="bi bi-exclamation-triangle-fill" aria-hidden="true" />
                     <p>
                       Requests that are incomplete or lack the candidate&apos;s written consent cannot
                       be processed. Please ensure every item in the checklist is enclosed.
@@ -82,13 +82,13 @@ export default function EducationalVerification() {
             <Col lg={5}>
               <div className="panel">
                 <div className="panel-header">
-                  <i className="bi bi-envelope-paper-fill" />
+                  <i className="bi bi-envelope-paper-fill" aria-hidden="true" />
                   Verification Desk
                 </div>
                 <div className="panel-body">
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-envelope-fill" />
+                      <i className="bi bi-envelope-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Email</div>
@@ -97,7 +97,7 @@ export default function EducationalVerification() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-telephone-fill" />
+                      <i className="bi bi-telephone-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Phone</div>
@@ -106,7 +106,7 @@ export default function EducationalVerification() {
                   </div>
                   <div className="contact-line">
                     <span className="icon-tile icon-tile-sm">
-                      <i className="bi bi-clock-fill" />
+                      <i className="bi bi-clock-fill" aria-hidden="true" />
                     </span>
                     <div>
                       <div className="label">Turnaround Time</div>
@@ -118,7 +118,7 @@ export default function EducationalVerification() {
 
               <div className="panel mt-4">
                 <div className="panel-header">
-                  <i className="bi bi-list-check" />
+                  <i className="bi bi-list-check" aria-hidden="true" />
                   Request Checklist
                 </div>
                 <div className="panel-body">
