@@ -104,10 +104,10 @@ export default async function BranchTimeTable({ params }) {
               {timetable.semesters.map((semester) => (
                 <div className="syllabus-year" key={semester.key}>
                   <div>
-                    <h6 className="syllabus-year-title">
+                    <h4 className="h6 syllabus-year-title">
                       {semester.title}
                       <span className="year-semesters">{semester.year}</span>
-                    </h6>
+                    </h4>
                     <p className="syllabus-year-note">{semester.note}</p>
                   </div>
                   {/* Listed either way — a semester with no document published

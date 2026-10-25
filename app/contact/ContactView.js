@@ -92,10 +92,10 @@ export default function ContactView({ officeHours, topbar = {} }) {
 
                   <div className="gold-rule-thin my-4" />
 
-                  <h6 className="fw-bold mb-3">
+                  <h4 className="h6 fw-bold mb-3">
                     <i className="bi bi-signpost-2-fill text-gold me-2" aria-hidden="true" />
                     Departmental Desks
-                  </h6>
+                  </h4>
                   {DESKS.map((desk) => (
                     <div className="contact-line" key={desk.title}>
                       <span className="icon-tile icon-tile-sm">
@@ -119,7 +119,7 @@ export default function ContactView({ officeHours, topbar = {} }) {
                 </div>
                 <div className="panel-body">
                   {submitted ? (
-                    <Alert variant="success" className="d-flex align-items-center gap-3 border-0">
+                    <Alert variant="success" role="status" className="d-flex align-items-center gap-3 border-0">
                       <i className="bi bi-check-circle-fill fs-4" aria-hidden="true" />
                       <span>Your message has been sent successfully. We will get back to you soon.</span>
                     </Alert>

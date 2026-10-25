@@ -64,7 +64,7 @@ export default function TNPProgrammes() {
                   <span className="icon-tile mb-3">
                     <i className={`bi ${programme.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-2">{programme.title}</h5>
+                  <h3 className="h5 fw-bold mb-2">{programme.title}</h3>
                   <p className="small mb-0">{programme.text}</p>
                 </div>
               </Col>
@@ -82,7 +82,7 @@ export default function TNPProgrammes() {
           <ul className="timeline">
             {CALENDAR.map((phase) => (
               <li key={phase.title}>
-                <h6>{phase.title}</h6>
+                <h4 className="h6">{phase.title}</h4>
                 <p>{phase.text}</p>
               </li>
             ))}

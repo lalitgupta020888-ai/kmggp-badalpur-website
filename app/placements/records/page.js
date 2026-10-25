@@ -38,7 +38,7 @@ export default function PlacementRecords() {
                   <span className="icon-tile mx-auto mb-3">
                     <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
-                  <h4 className="fw-bold mb-1">{item.value}</h4>
+                  <h3 className="h4 fw-bold mb-1">{item.value}</h3>
                   <p className="small mb-0">{item.label}</p>
                 </div>
               </Col>

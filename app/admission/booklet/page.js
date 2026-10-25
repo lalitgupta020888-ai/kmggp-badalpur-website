@@ -87,7 +87,7 @@ export default async function InformationBooklet() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-envelope-paper-fill side-cta-icon" aria-hidden="true" />
-                <h6>Prefer a Printed Copy?</h6>
+                <h4 className="h6">Prefer a Printed Copy?</h4>
                 <p>Printed booklets are available at the institute admission counter during office hours.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office

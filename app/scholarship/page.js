@@ -105,7 +105,7 @@ export default function ScholarshipPage() {
                   </span>
                   <div>
                     <span className="eyebrow">{scheme.tag}</span>
-                    <h5 className="fw-bold mb-2">{scheme.title}</h5>
+                    <h3 className="h5 fw-bold mb-2">{scheme.title}</h3>
                     <p className="small mb-0">{scheme.text}</p>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export default function ScholarshipPage() {
               <ul className="timeline mt-4">
                 {STEPS.map((step) => (
                   <li key={step.title}>
-                    <h6>{step.title}</h6>
+                    <h4 className="h6">{step.title}</h4>
                     <p>{step.text}</p>
                   </li>
                 ))}
@@ -160,7 +160,7 @@ export default function ScholarshipPage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-headset side-cta-icon" aria-hidden="true" />
-                <h6>Need Help With Your Application?</h6>
+                <h4 className="h6">Need Help With Your Application?</h4>
                 <p>Our scholarship cell is available during office hours to guide you through the process.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Cell

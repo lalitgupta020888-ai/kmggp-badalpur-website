@@ -147,7 +147,7 @@ export default async function AicteApprovalsPage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-patch-check-fill side-cta-icon" aria-hidden="true" />
-                <h6>Other Statutory Approvals</h6>
+                <h4 className="h6">Other Statutory Approvals</h4>
                 <p>See the full list of bodies that approve, affiliate and regulate the institute.</p>
                 <Link href="/about/approvals" className="btn-gold btn-sm">
                   View Approvals

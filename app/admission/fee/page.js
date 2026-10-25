@@ -60,9 +60,9 @@ export default async function FeeStructure() {
 
                   <div className="go-note">
                     <div className="go-note-meta">
-                      <h6>
+                      <h4 className="h6">
                         Government Order No.-1371/सोलह-प्रा0शि0-3-2010-246(बी)/91
-                      </h6>
+                      </h4>
                       <p>
                         <span>Dated:</span> 30 April 2010
                       </p>
@@ -115,7 +115,7 @@ export default async function FeeStructure() {
                       <span className="icon-tile icon-tile-sm">
                         <i className={`bi ${mode.icon}`} aria-hidden="true" />
                       </span>
-                      <h5 className="mb-0">{mode.label}</h5>
+                      <h3 className="h5 mb-0">{mode.label}</h3>
                     </div>
                   ))}
                 </div>

@@ -131,7 +131,7 @@ export default function CautionMoneyRefundPage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-cash-coin side-cta-icon" aria-hidden="true" />
-                <h6>Questions About Your Refund?</h6>
+                <h4 className="h6">Questions About Your Refund?</h4>
                 <p>The accounts section can confirm your deposit record and dues position.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact Accounts
@@ -162,7 +162,7 @@ export default function CautionMoneyRefundPage() {
                   <ul className="timeline">
                     {STEPS.map((step) => (
                       <li key={step.title}>
-                        <h6>{step.title}</h6>
+                        <h4 className="h6">{step.title}</h4>
                         <p>{step.text}</p>
                       </li>
                     ))}

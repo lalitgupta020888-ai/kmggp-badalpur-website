@@ -50,7 +50,7 @@ export default async function Syllabus() {
                   <span className="icon-tile mb-4">
                     <i className={`bi ${branch.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{branch.name}</h5>
+                  <h3 className="h5 fw-bold mb-3">{branch.name}</h3>
                   <p className="small flex-grow-1">{branch.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <Link href={`/academic/syllabus/${branch.slug}`} className="doc-link mb-0">

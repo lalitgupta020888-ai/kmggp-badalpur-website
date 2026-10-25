@@ -65,7 +65,7 @@ function StaffDirectory({ department }) {
                     <i className="bi bi-person-fill" aria-hidden="true" />
                   )}
                 </span>
-                <h5 className="fw-bold mb-1">{member.name}</h5>
+                <h3 className="h5 fw-bold mb-1">{member.name}</h3>
                 <span className="eyebrow">{member.designation}</span>
                 {member.detail && (
                   <>
@@ -117,7 +117,7 @@ export default async function DepartmentHome({ params }) {
                     <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <div>
-                    <h5 className="mb-0">{item.value}</h5>
+                    <h3 className="h5 mb-0">{item.value}</h3>
                     <p className="small mb-0">{item.label}</p>
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export default async function DepartmentHome({ params }) {
                     <span className="icon-tile icon-tile-sm">
                       <i className="bi bi-check-lg" aria-hidden="true" />
                     </span>
-                    <h5 className="mb-0">{area}</h5>
+                    <h3 className="h5 mb-0">{area}</h3>
                   </div>
                 </Col>
               ))}

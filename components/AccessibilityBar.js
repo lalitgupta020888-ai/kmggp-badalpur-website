@@ -1,29 +1,38 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 /**
  * The accessibility options panel — the "screen reader access" control that
  * Indian government sites carry, folded into one floating button.
  *
- * What it offers:
- *   - text size, in steps, applied to the root font size so every rem scales
- *   - high contrast (black on yellow), the scheme most low-vision readers ask for
- *   - greyscale, for colour-blind readers
- *   - underlined links, so links no longer depend on colour alone
- *   - a readable font with wider spacing, for dyslexic readers
- *   - stop animations, which also halts the ticker and both sliders
- *   - read aloud: the page's main content, spoken by the browser's own
- *     speech engine, for a reader without a screen reader installed
+ * Display modes (persisted in localStorage, applied as data attributes on
+ * <html>; the styling lives in globals.css under "Accessibility modes"):
+ *   text size · high contrast · greyscale · underline links · readable font ·
+ *   text spacing · reading guide · large cursor · stop animations
  *
- * Settings persist in localStorage, so they follow the visitor across pages
- * and visits. They are applied as data attributes on <html>, and the styling
- * for each lives in globals.css under "Accessibility modes".
+ * Read aloud: the main content is spoken block by block by the browser's own
+ * speech engine, with the block being read highlighted and kept in view, and
+ * play / pause / resume / stop and a speed setting. Useful for a visitor with
+ * low vision or a reading difficulty who has no screen reader installed.
+ *
+ * Every change is confirmed through a polite live region, so a screen reader
+ * hears "High contrast on" rather than nothing.
+ *
+ * Access keys (Alt + key in Chrome and Edge, Alt + Shift + key in Firefox,
+ * Control + Option + key in Safari): 0 opens this panel; the others live in
+ * SiteFrame and are listed on /accessibility.
  */
 
 const STORAGE_KEY = 'kmggp-a11y';
 const FONT_STEPS = [100, 112, 125, 150, 175];
+const RATES = [
+  { value: 0.8, label: 'Slow' },
+  { value: 1, label: 'Normal' },
+  { value: 1.25, label: 'Fast' },
+];
 
 const DEFAULTS = {
   font: 0,
@@ -31,8 +40,25 @@ const DEFAULTS = {
   grey: false,
   underline: false,
   readable: false,
+  spacing: false,
+  guide: false,
+  cursor: false,
   still: false,
+  rate: 1,
 };
+
+const MODES = [
+  { name: 'contrast', icon: 'bi-circle-half', label: 'High contrast' },
+  { name: 'grey', icon: 'bi-droplet-half', label: 'Greyscale' },
+  { name: 'underline', icon: 'bi-type-underline', label: 'Underline links' },
+  { name: 'readable', icon: 'bi-fonts', label: 'Readable font' },
+  { name: 'spacing', icon: 'bi-text-paragraph', label: 'Text spacing' },
+  { name: 'guide', icon: 'bi-rulers', label: 'Reading guide' },
+  { name: 'cursor', icon: 'bi-cursor-fill', label: 'Large cursor' },
+  { name: 'still', icon: 'bi-pause-circle', label: 'Stop animations' },
+];
+
+const ATTRS = ['contrast', 'grey', 'underline', 'readable', 'spacing', 'guide', 'cursor', 'still'];
 
 /* ------------------------------ Settings store ----------------------------- */
 
@@ -41,27 +67,29 @@ const DEFAULTS = {
    defaults, so the markup matches; the stored values are applied the moment
    the store is first subscribed in the browser. */
 
-const SERVER_STATE = { prefs: DEFAULTS, speaking: false, loaded: false };
+const SERVER_STATE = {
+  prefs: DEFAULTS,
+  loaded: false,
+  reading: 'idle', // idle | playing | paused
+  status: '',
+};
 let state = SERVER_STATE;
 const listeners = new Set();
 
-function emit() {
+function setState(patch) {
+  state = { ...state, ...patch };
   listeners.forEach((listener) => listener());
 }
 
-function setState(patch) {
-  state = { ...state, ...patch };
-  emit();
+function announce(status) {
+  // The same message twice would not be re-read; a trailing space makes it new.
+  setState({ status: state.status === status ? `${status} ` : status });
 }
 
 function applyPrefs(prefs) {
   const root = document.documentElement;
   root.style.fontSize = prefs.font ? `${FONT_STEPS[prefs.font]}%` : '';
-  root.toggleAttribute('data-a11y-contrast', prefs.contrast);
-  root.toggleAttribute('data-a11y-grey', prefs.grey);
-  root.toggleAttribute('data-a11y-underline', prefs.underline);
-  root.toggleAttribute('data-a11y-readable', prefs.readable);
-  root.toggleAttribute('data-a11y-still', prefs.still);
+  ATTRS.forEach((name) => root.toggleAttribute(`data-a11y-${name}`, Boolean(prefs[name])));
 }
 
 function loadPrefs() {
@@ -77,7 +105,7 @@ function loadPrefs() {
   setState({ prefs, loaded: true });
 }
 
-function updatePrefs(patch) {
+function updatePrefs(patch, message) {
   const prefs = { ...state.prefs, ...patch };
   applyPrefs(prefs);
   try {
@@ -86,6 +114,7 @@ function updatePrefs(patch) {
     /* private mode — the settings simply last for this page */
   }
   setState({ prefs });
+  if (message) announce(message);
 }
 
 function subscribe(listener) {
@@ -105,51 +134,109 @@ const noopSubscribe = () => () => {};
 const canSpeakNow = () => 'speechSynthesis' in window;
 const cannotSpeak = () => false;
 
-/** The visitor-facing text of the main landmark, with hidden helpers left out. */
-function mainText() {
-  const main = document.getElementById('main-content');
-  if (!main) return '';
-  const clone = main.cloneNode(true);
-  clone
-    .querySelectorAll('[aria-hidden="true"], .visually-hidden, script, style, iframe, video')
-    .forEach((el) => el.remove());
-  return clone.innerText.replace(/\s+\n/g, '\n').replace(/[ \t]+/g, ' ').trim();
+const READ_BLOCKS = 'h1, h2, h3, h4, p, li, blockquote, figcaption, dt, dd, th, td, .lead';
+const READING_CLASS = 'a11y-reading';
+
+let current = null;
+let session = 0;
+
+function clearHighlight() {
+  if (current) current.classList.remove(READING_CLASS);
+  current = null;
 }
 
-function stopReading() {
-  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-  if (state.speaking) setState({ speaking: false });
+function highlight(el) {
+  clearHighlight();
+  current = el;
+  el.classList.add(READING_CLASS);
+  el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+}
+
+/** Spoken text of one block, with icon glyphs and hidden helpers left out. */
+function blockText(el) {
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll('[aria-hidden="true"], script, style').forEach((n) => n.remove());
+  return clone.innerText.replace(/\s+/g, ' ').trim();
+}
+
+/** The readable blocks of the main landmark, outermost first, no nesting. */
+function readableBlocks() {
+  const main = document.getElementById('main-content');
+  if (!main) return [];
+  const all = Array.from(main.querySelectorAll(READ_BLOCKS));
+  return all.filter((el) => {
+    if (el.closest('[aria-hidden="true"]')) return false;
+    if (el.offsetParent === null) return false;
+    // A list item that holds its own paragraphs is read through them.
+    if (all.some((other) => other !== el && el.contains(other))) return false;
+    return blockText(el).length > 0;
+  });
+}
+
+function stopReading(message) {
+  session += 1;
+  if (canSpeakNow()) window.speechSynthesis.cancel();
+  clearHighlight();
+  if (state.reading !== 'idle') setState({ reading: 'idle' });
+  if (message) announce(message);
+}
+
+function pauseReading() {
+  if (!canSpeakNow() || state.reading !== 'playing') return;
+  window.speechSynthesis.pause();
+  setState({ reading: 'paused' });
+  announce('Reading paused');
+}
+
+function resumeReading() {
+  if (!canSpeakNow() || state.reading !== 'paused') return;
+  window.speechSynthesis.resume();
+  setState({ reading: 'playing' });
+  announce('Reading resumed');
 }
 
 function readPage() {
   if (!canSpeakNow()) return;
   stopReading();
-  const text = mainText();
-  if (!text) return;
+  const blocks = readableBlocks();
+  if (blocks.length === 0) {
+    announce('Nothing to read on this page');
+    return;
+  }
 
-  // Long passages are split at sentence ends: some engines fall silent
-  // partway through a single very long utterance.
-  const chunks = text.match(/[^.!?\n]+[.!?\n]*/g) || [text];
+  const mine = session;
   const synth = window.speechSynthesis;
-  chunks.forEach((chunk, index) => {
-    const utterance = new SpeechSynthesisUtterance(chunk.trim());
-    utterance.lang = document.documentElement.lang || 'en-IN';
-    utterance.rate = 0.95;
-    if (index === chunks.length - 1) utterance.onend = () => setState({ speaking: false });
+  const lang = document.documentElement.lang || 'en-IN';
+
+  blocks.forEach((el, index) => {
+    const utterance = new SpeechSynthesisUtterance(blockText(el));
+    utterance.lang = lang;
+    utterance.rate = state.prefs.rate;
+    utterance.onstart = () => {
+      if (mine === session) highlight(el);
+    };
+    if (index === blocks.length - 1) {
+      utterance.onend = () => {
+        if (mine === session) stopReading('Finished reading');
+      };
+    }
     synth.speak(utterance);
   });
-  setState({ speaking: true });
+
+  setState({ reading: 'playing' });
+  announce('Reading the page');
 }
 
 /* --------------------------------- Pieces ---------------------------------- */
 
-function ToggleOption({ name, icon, label, prefs }) {
+function ModeButton({ name, icon, label, prefs }) {
+  const on = Boolean(prefs[name]);
   return (
     <button
       type="button"
-      className={`a11y-option ${prefs[name] ? 'is-on' : ''}`}
-      aria-pressed={prefs[name]}
-      onClick={() => updatePrefs({ [name]: !prefs[name] })}
+      className={`a11y-option ${on ? 'is-on' : ''}`}
+      aria-pressed={on}
+      onClick={() => updatePrefs({ [name]: !on }, `${label} ${on ? 'off' : 'on'}`)}
     >
       <i className={`bi ${icon}`} aria-hidden="true" />
       <span>{label}</span>
@@ -157,9 +244,22 @@ function ToggleOption({ name, icon, label, prefs }) {
   );
 }
 
+/** The horizontal band that follows the pointer when the reading guide is on. */
+function ReadingGuide() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const onMove = (event) => {
+      if (ref.current) ref.current.style.top = `${event.clientY}px`;
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+  return <div ref={ref} className="a11y-guide" aria-hidden="true" />;
+}
+
 export default function AccessibilityBar() {
   const pathname = usePathname();
-  const { prefs, speaking } = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const { prefs, reading, status } = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const canSpeak = useSyncExternalStore(noopSubscribe, canSpeakNow, cannotSpeak);
 
   // The panel remembers the path it was opened on, so a navigation closes it
@@ -204,20 +304,28 @@ export default function AccessibilityBar() {
   }, [open]);
 
   const reset = () => {
-    updatePrefs(DEFAULTS);
+    updatePrefs(DEFAULTS, 'All accessibility settings reset');
     stopReading();
   };
 
   return (
     <div className="a11y-bar">
+      {/* Confirmations for screen readers — never shown, always announced. */}
+      <div role="status" aria-live="polite" className="visually-hidden">
+        {status}
+      </div>
+
+      {prefs.guide && <ReadingGuide />}
+
       <button
         ref={buttonRef}
         type="button"
-        className="a11y-launcher"
+        className={`a11y-launcher ${reading !== 'idle' ? 'is-reading' : ''}`}
         aria-expanded={open}
         aria-controls="a11y-panel"
         aria-label="Accessibility options"
-        title="Accessibility options"
+        title="Accessibility options (access key 0)"
+        accessKey="0"
         onClick={() => setOpenedAt(open ? null : pathname)}
       >
         <i className="bi bi-universal-access-circle" aria-hidden="true" />
@@ -244,69 +352,114 @@ export default function AccessibilityBar() {
           </button>
         </div>
 
-        <div className="a11y-group" role="group" aria-label="Text size">
-          <span className="a11y-group-label">Text size</span>
-          <div className="a11y-font">
-            <button
-              type="button"
-              aria-label="Decrease text size"
-              disabled={prefs.font === 0}
-              onClick={() => updatePrefs({ font: Math.max(0, prefs.font - 1) })}
-            >
-              A<span aria-hidden="true">−</span>
-            </button>
-            <span aria-live="polite" className="a11y-font-value">
-              {FONT_STEPS[prefs.font]}%
-            </span>
-            <button
-              type="button"
-              aria-label="Increase text size"
-              disabled={prefs.font === FONT_STEPS.length - 1}
-              onClick={() =>
-                updatePrefs({ font: Math.min(FONT_STEPS.length - 1, prefs.font + 1) })
-              }
-            >
-              A<span aria-hidden="true">+</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="a11y-group" role="group" aria-label="Display">
-          <span className="a11y-group-label">Display</span>
-          <div className="a11y-options">
-            <ToggleOption name="contrast" icon="bi-circle-half" label="High contrast" prefs={prefs} />
-            <ToggleOption name="grey" icon="bi-droplet-half" label="Greyscale" prefs={prefs} />
-            <ToggleOption name="underline" icon="bi-type-underline" label="Underline links" prefs={prefs} />
-            <ToggleOption name="readable" icon="bi-fonts" label="Readable font" prefs={prefs} />
-            <ToggleOption name="still" icon="bi-pause-circle" label="Stop animations" prefs={prefs} />
-          </div>
-        </div>
-
-        {canSpeak && (
-          <div className="a11y-group" role="group" aria-label="Read aloud">
-            <span className="a11y-group-label">Read aloud</span>
-            <div className="a11y-options">
-              <button type="button" className="a11y-option" onClick={readPage} disabled={speaking}>
-                <i className="bi bi-volume-up-fill" aria-hidden="true" />
-                <span>{speaking ? 'Reading…' : 'Read this page'}</span>
+        <div className="a11y-scroll">
+          <div className="a11y-group" role="group" aria-label="Text size">
+            <span className="a11y-group-label">Text size</span>
+            <div className="a11y-font">
+              <button
+                type="button"
+                aria-label="Decrease text size"
+                disabled={prefs.font === 0}
+                onClick={() => {
+                  const font = Math.max(0, prefs.font - 1);
+                  updatePrefs({ font }, `Text size ${FONT_STEPS[font]} percent`);
+                }}
+              >
+                A<span aria-hidden="true">−</span>
               </button>
-              <button type="button" className="a11y-option" onClick={stopReading} disabled={!speaking}>
-                <i className="bi bi-stop-circle" aria-hidden="true" />
-                <span>Stop</span>
+              <span className="a11y-font-value">{FONT_STEPS[prefs.font]}%</span>
+              <button
+                type="button"
+                aria-label="Increase text size"
+                disabled={prefs.font === FONT_STEPS.length - 1}
+                onClick={() => {
+                  const font = Math.min(FONT_STEPS.length - 1, prefs.font + 1);
+                  updatePrefs({ font }, `Text size ${FONT_STEPS[font]} percent`);
+                }}
+              >
+                A<span aria-hidden="true">+</span>
               </button>
             </div>
           </div>
-        )}
+
+          <div className="a11y-group" role="group" aria-label="Display">
+            <span className="a11y-group-label">Display</span>
+            <div className="a11y-options">
+              {MODES.map((mode) => (
+                <ModeButton key={mode.name} {...mode} prefs={prefs} />
+              ))}
+            </div>
+          </div>
+
+          {canSpeak && (
+            <div className="a11y-group" role="group" aria-label="Read aloud">
+              <span className="a11y-group-label">Read aloud</span>
+              <div className="a11y-read">
+                {reading === 'idle' && (
+                  <button type="button" className="a11y-option is-primary" onClick={readPage}>
+                    <i className="bi bi-volume-up-fill" aria-hidden="true" />
+                    <span>Read this page</span>
+                  </button>
+                )}
+                {reading === 'playing' && (
+                  <button type="button" className="a11y-option is-primary" onClick={pauseReading}>
+                    <i className="bi bi-pause-fill" aria-hidden="true" />
+                    <span>Pause</span>
+                  </button>
+                )}
+                {reading === 'paused' && (
+                  <button type="button" className="a11y-option is-primary" onClick={resumeReading}>
+                    <i className="bi bi-play-fill" aria-hidden="true" />
+                    <span>Resume</span>
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="a11y-option"
+                  onClick={() => stopReading('Reading stopped')}
+                  disabled={reading === 'idle'}
+                >
+                  <i className="bi bi-stop-circle" aria-hidden="true" />
+                  <span>Stop</span>
+                </button>
+              </div>
+              <div className="a11y-rate" role="radiogroup" aria-label="Reading speed">
+                {RATES.map((rate) => (
+                  <button
+                    key={rate.value}
+                    type="button"
+                    role="radio"
+                    aria-checked={prefs.rate === rate.value}
+                    className={prefs.rate === rate.value ? 'is-on' : ''}
+                    onClick={() => updatePrefs({ rate: rate.value }, `Reading speed ${rate.label}`)}
+                  >
+                    {rate.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="a11y-group a11y-keys" role="group" aria-label="Keyboard">
+            <span className="a11y-group-label">Keyboard</span>
+            <p className="a11y-hint">
+              <kbd>Tab</kbd> moves between links and controls, <kbd>Enter</kbd> follows one,{' '}
+              <kbd>Esc</kbd> closes a window. Access keys: <kbd>1</kbd> Home, <kbd>2</kbd> Main
+              content, <kbd>3</kbd> Notices, <kbd>4</kbd> Contact, <kbd>5</kbd> Help,{' '}
+              <kbd>0</kbd> this panel.
+            </p>
+          </div>
+        </div>
 
         <div className="a11y-foot">
           <button type="button" className="a11y-reset" onClick={reset}>
             <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
-            Reset to default
+            Reset all
           </button>
-          <p className="a11y-hint">
-            Press <kbd>Tab</kbd> to move between links and controls, <kbd>Enter</kbd> to follow
-            one, and <kbd>Esc</kbd> to close a window.
-          </p>
+          <Link href="/accessibility" className="a11y-help" onClick={() => closePanel(false)}>
+            Screen Reader Access &amp; help
+            <i className="bi bi-arrow-right" aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </div>

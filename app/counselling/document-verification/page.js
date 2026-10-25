@@ -63,10 +63,10 @@ export default function DocumentListForVerification() {
 
           <Row className="g-4">
             <Col lg={7}>
-              <h5 className="fw-bold mb-3">
+              <h3 className="h5 fw-bold mb-3">
                 <i className="bi bi-file-earmark-text-fill text-gold me-2" aria-hidden="true" />
                 Original Documents
-              </h5>
+              </h3>
               <ul className="gold-list is-numbered">
                 {ORIGINALS.map((doc) => (
                   <li key={doc}>{doc}</li>
@@ -75,10 +75,10 @@ export default function DocumentListForVerification() {
             </Col>
 
             <Col lg={5}>
-              <h5 className="fw-bold mb-3">
+              <h3 className="h5 fw-bold mb-3">
                 <i className="bi bi-files text-gold me-2" aria-hidden="true" />
                 Copies &amp; Photographs
-              </h5>
+              </h3>
               <ul className="gold-list">
                 {COPIES.map((doc) => (
                   <li key={doc}>{doc}</li>

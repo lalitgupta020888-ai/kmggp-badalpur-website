@@ -186,7 +186,7 @@ export default function CounsellingSchedule() {
                     <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <p className="small text-uppercase fw-bold mb-1 text-primary-blue">{item.label}</p>
-                  <h6 className="fw-bold mb-1">{item.value}</h6>
+                  <h4 className="h6 fw-bold mb-1">{item.value}</h4>
                   <p className="small mb-0">{item.note}</p>
                 </div>
               </Col>
@@ -258,7 +258,7 @@ export default function CounsellingSchedule() {
                   <span className="icon-tile icon-tile-sm mb-3">
                     <i className="bi bi-diamond-fill" aria-hidden="true" />
                   </span>
-                  <h6 className="fw-bold mb-2">{item.term}</h6>
+                  <h4 className="h6 fw-bold mb-2">{item.term}</h4>
                   <p className="small mb-0">{item.text}</p>
                 </div>
               </Col>

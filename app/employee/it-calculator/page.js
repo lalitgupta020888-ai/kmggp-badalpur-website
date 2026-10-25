@@ -299,10 +299,10 @@ export default function ItCalculator() {
 
           <div className="gold-rule-thin my-4" />
 
-          <h6 className="fw-bold mb-3">
+          <h4 className="h6 fw-bold mb-3">
             <i className="bi bi-bar-chart-steps text-gold me-2" aria-hidden="true" />
             Income Tax Slabs — New Regime, as notified for {SLABS_AS_NOTIFIED_FOR}
-          </h6>
+          </h4>
 
           <div className="slab-strip">
             {SLABS.map((slab, index) => {

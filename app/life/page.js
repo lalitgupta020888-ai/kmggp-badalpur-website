@@ -85,7 +85,7 @@ export default function LifeAtKMGGP() {
                   <span className="icon-tile mb-4">
                     <i className={`bi ${facet.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{facet.title}</h5>
+                  <h3 className="h5 fw-bold mb-3">{facet.title}</h3>
                   <p className="small flex-grow-1">{facet.text}</p>
                   {facet.href && (
                     <>
@@ -119,7 +119,7 @@ export default function LifeAtKMGGP() {
                   <span className="icon-tile icon-tile-sm">
                     <i className={`bi ${amenity.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="mb-0">{amenity.label}</h5>
+                  <h3 className="h5 mb-0">{amenity.label}</h3>
                 </div>
               </Col>
             ))}

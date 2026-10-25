@@ -212,10 +212,10 @@ export default function PayCalculator() {
           <div className="gold-rule-thin my-4" />
 
           <Form className="premium-form">
-            <h6 className="fw-bold mb-3">
+            <h4 className="h6 fw-bold mb-3">
               <i className="bi bi-person-vcard text-gold me-2" aria-hidden="true" />
               Pay Slip Details
-            </h6>
+            </h4>
             <Row className="g-3">
               <Col md={4}>
                 <Form.Label htmlFor="pay-employee-name">Employee Name</Form.Label>
@@ -250,10 +250,10 @@ export default function PayCalculator() {
             </p>
 
             <div className="gold-rule-thin my-4" />
-            <h6 className="fw-bold mb-3">
+            <h4 className="h6 fw-bold mb-3">
               <i className="bi bi-cash-stack text-gold me-2" aria-hidden="true" />
               Earnings
-            </h6>
+            </h4>
             <Row className="g-3">
               <Col md={4}>
                 <Form.Label htmlFor="pay-basic-pay">Basic Pay (₹)</Form.Label>
@@ -287,10 +287,10 @@ export default function PayCalculator() {
 
             <div className="gold-rule-thin my-4" />
 
-            <h6 className="fw-bold mb-3">
+            <h4 className="h6 fw-bold mb-3">
               <i className="bi bi-dash-circle text-gold me-2" aria-hidden="true" />
               Deductions
-            </h6>
+            </h4>
             <Row className="g-3">
               <Col md={3}>
                 <Form.Label htmlFor="pay-nps-share">NPS Share (%)</Form.Label>
@@ -362,7 +362,7 @@ export default function PayCalculator() {
           way down to the break-up tables. */}
       <div className="calc-actions no-print">
         <div>
-          <h6 className="fw-bold mb-1">Take a printed copy</h6>
+          <h4 className="h6 fw-bold mb-1">Take a printed copy</h4>
           <p className="small mb-0">
             The slip carries the earnings and deductions break-up below, under the institute
             masthead.

@@ -106,7 +106,7 @@ export default function CertificateIssuancePage() {
                   <span className="icon-tile mb-4">
                     <i className={`bi ${certificate.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{certificate.title}</h5>
+                  <h3 className="h5 fw-bold mb-3">{certificate.title}</h3>
                   <p className="small flex-grow-1">{certificate.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <p className="small mb-0">
@@ -137,7 +137,7 @@ export default function CertificateIssuancePage() {
                   <ul className="timeline mt-4">
                     {STEPS.map((step) => (
                       <li key={step.title}>
-                        <h6>{step.title}</h6>
+                        <h4 className="h6">{step.title}</h4>
                         <p>{step.text}</p>
                       </li>
                     ))}
@@ -182,7 +182,7 @@ export default function CertificateIssuancePage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-headset side-cta-icon" aria-hidden="true" />
-                <h6>Need Help With Your Application?</h6>
+                <h4 className="h6">Need Help With Your Application?</h4>
                 <p>The institute office assists passout students during working hours.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office

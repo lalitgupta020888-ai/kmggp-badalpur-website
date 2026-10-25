@@ -151,10 +151,10 @@ export default function AlbumView({ album, others }) {
           {others.length > 0 && (
             <>
               <div className="gold-rule-thin my-5" />
-              <h5 className="fw-bold mb-3">
+              <h3 className="h5 fw-bold mb-3">
                 <i className="bi bi-collection text-gold me-2" aria-hidden="true" />
                 Other Albums
-              </h5>
+              </h3>
               <div className="d-flex flex-wrap gap-2">
                 {others.map((other) => (
                   <Link key={other.slug} href={`/gallery/${other.slug}`} className="album-chip">

@@ -71,7 +71,7 @@ export default async function CoursesOffered() {
                   <span className="icon-tile mb-4">
                     <i className={`bi ${course.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{course.short}</h5>
+                  <h3 className="h5 fw-bold mb-3">{course.short}</h3>
                   <p className="small flex-grow-1">{course.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <div className="d-flex justify-content-between small fw-semibold text-primary-blue mb-2">
@@ -203,10 +203,10 @@ export default async function CoursesOffered() {
 
               <Row className="g-4">
                 <Col lg={7}>
-                  <h5 className="fw-bold mb-3">
+                  <h3 className="h5 fw-bold mb-3">
                     <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                     Lateral Entry Eligibility
-                  </h5>
+                  </h3>
                   <ul className="gold-list">
                     {LATERAL_ELIGIBILITY.map((item) => (
                       <li key={item}>{item}</li>

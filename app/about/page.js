@@ -67,10 +67,10 @@ export default async function AboutPage() {
                   Vision &amp; Mission
                 </div>
                 <div className="panel-body">
-                  <h5 className="fw-bold mb-2">
+                  <h3 className="h5 fw-bold mb-2">
                     <i className="bi bi-eye-fill text-gold me-2" aria-hidden="true" />
                     Vision
-                  </h5>
+                  </h3>
                   <p className="small">
                     To be recognised as a centre of excellence in technical education for women,
                     producing skilled professionals who lead with competence and integrity.
@@ -78,10 +78,10 @@ export default async function AboutPage() {
 
                   <div className="gold-rule-thin my-4" />
 
-                  <h5 className="fw-bold mb-3">
+                  <h3 className="h5 fw-bold mb-3">
                     <i className="bi bi-bullseye text-gold me-2" aria-hidden="true" />
                     Mission
-                  </h5>
+                  </h3>
                   <ul className="gold-list">
                     <li>Deliver a rigorous academic programme that fosters innovation and lifelong learning.</li>
                     <li>Build industry collaborations for practical exposure and better placements.</li>
@@ -109,7 +109,7 @@ export default async function AboutPage() {
                   <span className="icon-tile mx-auto mb-4">
                     <i className={`bi ${value.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{value.title}</h5>
+                  <h3 className="h5 fw-bold mb-3">{value.title}</h3>
                   <p className="small mb-0">{value.text}</p>
                 </div>
               </Col>
@@ -131,7 +131,7 @@ export default async function AboutPage() {
               <ul className="timeline mt-4">
                 {MILESTONES.map((item) => (
                   <li key={item.title}>
-                    <h6>{item.title}</h6>
+                    <h4 className="h6">{item.title}</h4>
                     <p>{item.text}</p>
                   </li>
                 ))}

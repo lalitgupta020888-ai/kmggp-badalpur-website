@@ -62,7 +62,7 @@ export default function EducationalVerification() {
                   <ul className="timeline mt-4">
                     {STEPS.map((step) => (
                       <li key={step.title}>
-                        <h6>{step.title}</h6>
+                        <h4 className="h6">{step.title}</h4>
                         <p>{step.text}</p>
                       </li>
                     ))}

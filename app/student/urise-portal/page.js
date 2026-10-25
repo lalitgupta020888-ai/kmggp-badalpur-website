@@ -159,7 +159,7 @@ export default function UrisePortalPage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-headset side-cta-icon" aria-hidden="true" />
-                <h6>Trouble Registering?</h6>
+                <h4 className="h6">Trouble Registering?</h4>
                 <p>The institute office can help verify your enrolment details for the portal.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office
@@ -185,7 +185,7 @@ export default function UrisePortalPage() {
                   <span className="icon-tile mb-4">
                     <i className={`bi ${feature.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{feature.title}</h5>
+                  <h3 className="h5 fw-bold mb-3">{feature.title}</h3>
                   <p className="small mb-0">{feature.text}</p>
                 </div>
               </Col>
@@ -207,7 +207,7 @@ export default function UrisePortalPage() {
                   <ul className="timeline">
                     {STEPS.map((step) => (
                       <li key={step.title}>
-                        <h6>{step.title}</h6>
+                        <h4 className="h6">{step.title}</h4>
                         <p>{step.text}</p>
                       </li>
                     ))}
@@ -228,7 +228,7 @@ export default function UrisePortalPage() {
                       <span className="icon-tile icon-tile-sm">
                         <i className={`bi ${tip.icon}`} aria-hidden="true" />
                       </span>
-                      <h5 className="mb-0">{tip.label}</h5>
+                      <h3 className="h5 mb-0">{tip.label}</h3>
                     </div>
                   ))}
                 </div>

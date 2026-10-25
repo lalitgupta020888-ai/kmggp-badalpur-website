@@ -33,7 +33,7 @@ export default function SideNav({ eyebrow, title, items, cta }) {
               {eyebrow}
             </span>
           )}
-          <h5>{title}</h5>
+          <h3 className="h5">{title}</h3>
 
           <button
             type="button"
@@ -82,7 +82,7 @@ export default function SideNav({ eyebrow, title, items, cta }) {
       {cta && (
         <aside className="side-cta">
           <i className={`bi ${cta.icon || 'bi-headset'} side-cta-icon`} aria-hidden="true" />
-          <h6>{cta.title}</h6>
+          <h4 className="h6">{cta.title}</h4>
           <p>{cta.text}</p>
           <Link href={cta.href} className="btn-gold btn-sm">
             {cta.label}

@@ -66,12 +66,12 @@ export default async function CounsellingHome() {
                   <span className="icon-tile icon-tile-sm mb-3">
                     <i className={`bi ${link.icon}`} aria-hidden="true" />
                   </span>
-                  <h6 className="fw-bold mb-2">
+                  <h4 className="h6 fw-bold mb-2">
                     {link.label}
                     {link.external && (
                       <i className="bi bi-box-arrow-up-right ms-2 small text-gold" aria-hidden="true" />
                     )}
-                  </h6>
+                  </h4>
                   <p className="small mb-0">{BLURBS[link.label]}</p>
                 </>
               );
@@ -111,10 +111,10 @@ export default async function CounsellingHome() {
           <ul className="timeline">
             {STAGES.map((stage) => (
               <li key={stage.title}>
-                <h6 className="fw-bold mb-1">
+                <h4 className="h6 fw-bold mb-1">
                   <i className={`bi ${stage.icon} text-gold me-2`} aria-hidden="true" />
                   {stage.title}
-                </h6>
+                </h4>
                 <p className="small mb-0">{stage.text}</p>
               </li>
             ))}

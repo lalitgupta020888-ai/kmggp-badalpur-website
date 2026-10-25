@@ -35,7 +35,7 @@ export default async function PrincipalMessagePage() {
                   >
                     <i className="bi bi-person-fill" aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-1">Principal</h5>
+                  <h3 className="h5 fw-bold mb-1">Principal</h3>
                   <span className="eyebrow">Km. Mayawati Government Girls Polytechnic, Badalpur</span>
                   <div className="gold-rule-thin my-3" />
                   <div className="contact-line">
@@ -61,7 +61,7 @@ export default async function PrincipalMessagePage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-chat-dots-fill side-cta-icon" aria-hidden="true" />
-                <h6>Want to Meet the Principal?</h6>
+                <h4 className="h6">Want to Meet the Principal?</h4>
                 <p>Appointments can be arranged through the institute office during working hours.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office
@@ -116,7 +116,7 @@ export default async function PrincipalMessagePage() {
                             <i className={`bi ${item.icon}`} aria-hidden="true" />
                           </span>
                           <div>
-                            <h5>{item.title}</h5>
+                            <h3 className="h5">{item.title}</h3>
                             <p>{item.text}</p>
                           </div>
                         </div>

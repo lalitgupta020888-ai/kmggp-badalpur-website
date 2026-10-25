@@ -112,7 +112,7 @@ function StatusLookup() {
             </Form>
 
             {lookup.state === 'missing' && (
-              <Alert variant="danger" className="d-flex align-items-start gap-3 border-0 mt-4 small">
+              <Alert variant="danger" role="alert" className="d-flex align-items-start gap-3 border-0 mt-4 small">
                 <i className="bi bi-exclamation-circle-fill fs-5 lh-1" aria-hidden="true" />
                 <span>
                   No grievance found with that reference number. Please check it and try again — the
@@ -126,7 +126,7 @@ function StatusLookup() {
                 <div className="gold-rule-thin mb-4" />
 
                 <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
-                  <h5 className="fw-bold mb-0">{g.subject}</h5>
+                  <h3 className="h5 fw-bold mb-0">{g.subject}</h3>
                   <StatusPill status={g.status} />
                 </div>
 
@@ -210,7 +210,7 @@ function StatusLookup() {
 
         <div className="side-cta mt-4">
           <i className="bi bi-question-circle side-cta-icon" aria-hidden="true" />
-          <h6>Lost Your Reference Number?</h6>
+          <h4 className="h6">Lost Your Reference Number?</h4>
           <p>Contact the institute office with your name and the date of submission.</p>
           <Link href="/contact" className="btn-gold btn-sm">
             Contact Us

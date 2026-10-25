@@ -227,6 +227,14 @@ export default function Navigation({
             )}
           </div>
           <div className="d-flex align-items-center gap-3">
+            <Link
+              href="/accessibility"
+              className={`topbar-item topbar-link ${isActive('/accessibility') ? 'is-active' : ''}`}
+              aria-current={isActive('/accessibility') ? 'page' : undefined}
+            >
+              <i className="bi bi-universal-access-circle" aria-hidden="true" />
+              Screen Reader Access
+            </Link>
             {/* The longest line in the bar — it only appears once there is
                 genuinely room, otherwise the contact details wrap. */}
             {topbar.accreditation && (

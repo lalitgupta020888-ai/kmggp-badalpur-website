@@ -113,7 +113,7 @@ export default function ApprovalsPage() {
                   </span>
                   <div>
                     <span className="eyebrow">{body.role}</span>
-                    <h5 className="fw-bold mb-2">{body.name}</h5>
+                    <h3 className="h5 fw-bold mb-2">{body.name}</h3>
                     <p className="small mb-0">{body.detail}</p>
                   </div>
                 </div>
@@ -189,7 +189,7 @@ export default function ApprovalsPage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-file-earmark-pdf-fill side-cta-icon" aria-hidden="true" />
-                <h6>Looking for AICTE Letters?</h6>
+                <h4 className="h6">Looking for AICTE Letters?</h4>
                 <p>Year-wise Extension of Approval letters are published separately.</p>
                 <Link href="/about/aicte-approvals" className="btn-gold btn-sm">
                   View Approval Letters

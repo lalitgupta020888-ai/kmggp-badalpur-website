@@ -146,7 +146,7 @@ export default function HostelsPage() {
                       <span className="icon-tile icon-tile-sm">
                         <i className={`bi ${item.icon}`} aria-hidden="true" />
                       </span>
-                      <h5 className="mb-0">{item.label}</h5>
+                      <h3 className="h5 mb-0">{item.label}</h3>
                     </div>
                   ))}
                 </div>
@@ -170,7 +170,7 @@ export default function HostelsPage() {
                   <span className="icon-tile mb-3">
                     <i className={`bi ${amenity.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-2">{amenity.title}</h5>
+                  <h3 className="h5 fw-bold mb-2">{amenity.title}</h3>
                   <p className="small mb-0">{amenity.text}</p>
                 </div>
               </Col>
@@ -192,7 +192,7 @@ export default function HostelsPage() {
                   <ul className="timeline">
                     {STEPS.map((step) => (
                       <li key={step.title}>
-                        <h6>{step.title}</h6>
+                        <h4 className="h6">{step.title}</h4>
                         <p>{step.text}</p>
                       </li>
                     ))}
@@ -218,7 +218,7 @@ export default function HostelsPage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-person-badge-fill side-cta-icon" aria-hidden="true" />
-                <h6>Hostel Enquiries</h6>
+                <h4 className="h6">Hostel Enquiries</h4>
                 <p>Contact the institute office or the hostel warden for allotment and fee details.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office

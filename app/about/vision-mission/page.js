@@ -84,7 +84,7 @@ export default async function VisionMissionPage() {
                   <span className="icon-tile mx-auto mb-4">
                     <i className={`bi ${objective.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{objective.title}</h5>
+                  <h3 className="h5 fw-bold mb-3">{objective.title}</h3>
                   <p className="small mb-0">{objective.text}</p>
                 </div>
               </Col>
@@ -145,7 +145,7 @@ export default async function VisionMissionPage() {
                           <span className="icon-tile icon-tile-sm">
                             <i className={`bi ${value.icon}`} aria-hidden="true" />
                           </span>
-                          <h5 className="mb-0">{value.label}</h5>
+                          <h3 className="h5 mb-0">{value.label}</h3>
                         </div>
                       </Col>
                     ))}

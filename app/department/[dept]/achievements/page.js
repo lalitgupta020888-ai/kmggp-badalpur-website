@@ -33,7 +33,7 @@ export default async function AchievementsPage({ params }) {
                   <span className="icon-tile mb-3">
                     <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-2">{item.title}</h5>
+                  <h3 className="h5 fw-bold mb-2">{item.title}</h3>
                   <p className="small mb-0">{item.text}</p>
                 </div>
               </Col>

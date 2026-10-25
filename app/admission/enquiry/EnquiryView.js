@@ -100,7 +100,7 @@ export default function EnquiryView({ officeHours }) {
                     <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
                   <div>
-                    <h5>{item.title}</h5>
+                    <h3 className="h5">{item.title}</h3>
                     <p>{item.text}</p>
                   </div>
                 </div>
@@ -129,7 +129,7 @@ export default function EnquiryView({ officeHours }) {
                       >
                         <i className="bi bi-check-lg" aria-hidden="true" />
                       </span>
-                      <h4 className="fw-bold mb-2">Enquiry Submitted</h4>
+                      <h3 className="h4 fw-bold mb-2">Enquiry Submitted</h3>
                       <div className="gold-flourish">
                         <i className="bi bi-diamond-fill" aria-hidden="true" />
                       </div>
@@ -335,7 +335,7 @@ export default function EnquiryView({ officeHours }) {
                   <ul className="timeline mb-0">
                     {NEXT_STEPS.map((step) => (
                       <li key={step.title}>
-                        <h6>{step.title}</h6>
+                        <h4 className="h6">{step.title}</h4>
                         <p>{step.text}</p>
                       </li>
                     ))}
@@ -365,7 +365,7 @@ export default function EnquiryView({ officeHours }) {
                   <span className="icon-tile mb-3">
                     <i className={`bi ${link.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-2">{link.label}</h5>
+                  <h3 className="h5 fw-bold mb-2">{link.label}</h3>
                   <p className="small mb-0">{link.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <span className="fw-bold text-primary-blue small">

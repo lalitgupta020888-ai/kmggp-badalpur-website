@@ -124,7 +124,7 @@ export default async function Home() {
                         <i className={`bi ${pillar.icon}`} aria-hidden="true" />
                       </span>
                       <div>
-                        <h5>{pillar.title}</h5>
+                        <h3 className="h5">{pillar.title}</h3>
                         <p>{pillar.text}</p>
                       </div>
                     </div>
@@ -172,7 +172,7 @@ export default async function Home() {
                   <span className="icon-tile mx-auto mb-4">
                     <i className={`bi ${item.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{item.title}</h5>
+                  <h3 className="h5 fw-bold mb-3">{item.title}</h3>
                   <p className="small flex-grow-1">{item.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <Link href={item.href} className="fw-bold text-decoration-none text-primary-blue">
@@ -216,7 +216,7 @@ export default async function Home() {
                     <span className="icon-tile mb-4">
                       <i className={`bi ${dept.icon}`} aria-hidden="true" />
                     </span>
-                    <h5 className="fw-bold mb-3">{dept.name}</h5>
+                    <h3 className="h5 fw-bold mb-3">{dept.name}</h3>
                     <p className="small">{dept.text}</p>
                     <div className="gold-rule-thin my-3" />
                     <div className="d-flex flex-wrap gap-3 small">

@@ -52,7 +52,7 @@ export default async function Recruiters() {
                     <i className={`bi ${sector.icon}`} aria-hidden="true" />
                   </span>
                   <div>
-                    <h5>{sector.title}</h5>
+                    <h3 className="h5">{sector.title}</h3>
                     <p>{sector.text}</p>
                   </div>
                 </div>

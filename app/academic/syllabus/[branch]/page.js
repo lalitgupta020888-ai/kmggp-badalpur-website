@@ -74,7 +74,7 @@ export default async function BranchSyllabus({ params }) {
               {syllabus.years.map((year) => (
                 <div className="syllabus-year" key={year.key}>
                   <div>
-                    <h6 className="syllabus-year-title">{year.title}</h6>
+                    <h4 className="h6 syllabus-year-title">{year.title}</h4>
                     <p className="syllabus-year-note">{year.note}</p>
                   </div>
                   {/* Listed either way — a paper with no document yet still

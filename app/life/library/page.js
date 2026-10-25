@@ -187,7 +187,7 @@ export default async function LibraryPage() {
                       <span className="icon-tile icon-tile-sm">
                         <i className={`bi ${service.icon}`} aria-hidden="true" />
                       </span>
-                      <h5 className="mb-0">{service.label}</h5>
+                      <h3 className="h5 mb-0">{service.label}</h3>
                     </div>
                   ))}
                 </div>
@@ -211,7 +211,7 @@ export default async function LibraryPage() {
                   <span className="icon-tile mb-4">
                     <i className={`bi ${section.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{section.title}</h5>
+                  <h3 className="h5 fw-bold mb-3">{section.title}</h3>
                   <p className="small mb-0">{section.text}</p>
                 </div>
               </Col>
@@ -266,7 +266,7 @@ export default async function LibraryPage() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-headset side-cta-icon" aria-hidden="true" />
-                <h6>Need a Book We Don&apos;t Have?</h6>
+                <h4 className="h6">Need a Book We Don&apos;t Have?</h4>
                 <p>Suggest a title to the librarian — acquisition requests are reviewed each session.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Librarian

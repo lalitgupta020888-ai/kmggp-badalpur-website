@@ -27,7 +27,7 @@ export default function EmployeeHome() {
                 <span className="icon-tile mb-4">
                   <i className={`bi ${tool.icon}`} aria-hidden="true" />
                 </span>
-                <h5 className="fw-bold mb-3">{tool.label}</h5>
+                <h3 className="h5 fw-bold mb-3">{tool.label}</h3>
                 <p className="small flex-grow-1">{tool.blurb}</p>
                 <div className="gold-rule-thin my-3" />
                 <span className="doc-link mb-0 border-0 p-0 bg-transparent">

@@ -114,7 +114,7 @@ export default async function AdmissionProcess() {
                   <ul className="timeline mt-4">
                     {STEPS.map((step) => (
                       <li key={step.title}>
-                        <h6>{step.title}</h6>
+                        <h4 className="h6">{step.title}</h4>
                         <p>{step.text}</p>
                       </li>
                     ))}
@@ -154,7 +154,7 @@ export default async function AdmissionProcess() {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-question-circle-fill side-cta-icon" aria-hidden="true" />
-                <h6>Still Have Questions?</h6>
+                <h4 className="h6">Still Have Questions?</h4>
                 <p>Our admission team will guide you through eligibility, counselling and fees.</p>
                 <Link href="/admission/enquiry" className="btn-gold btn-sm">
                   Submit an Enquiry
@@ -178,10 +178,10 @@ export default async function AdmissionProcess() {
 
               <Row className="g-4 mt-1">
                 <Col lg={6}>
-                  <h5 className="fw-bold mb-3">
+                  <h3 className="h5 fw-bold mb-3">
                     <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                     Eligibility for Lateral Entry
-                  </h5>
+                  </h3>
                   <ul className="gold-list">
                     {LATERAL_ELIGIBILITY.map((item) => (
                       <li key={item}>{item}</li>
@@ -190,10 +190,10 @@ export default async function AdmissionProcess() {
                 </Col>
 
                 <Col lg={6}>
-                  <h5 className="fw-bold mb-3">
+                  <h3 className="h5 fw-bold mb-3">
                     <i className="bi bi-folder-plus text-gold me-2" aria-hidden="true" />
                     Additional Documents
-                  </h5>
+                  </h3>
                   <ul className="gold-list">
                     {LATERAL_DOCUMENTS.map((item) => (
                       <li key={item}>{item}</li>

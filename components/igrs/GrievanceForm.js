@@ -55,7 +55,7 @@ function Receipt({ grievance, type }) {
         <span className="icon-tile mx-auto mb-4" style={{ width: 78, height: 78, fontSize: '2rem' }}>
           <i className="bi bi-check-lg" aria-hidden="true" />
         </span>
-        <h4 className="fw-bold mb-2">Thank You — We Have Received It</h4>
+        <h3 className="h4 fw-bold mb-2">Thank You — We Have Received It</h3>
         <div className="gold-flourish">
           <i className="bi bi-diamond-fill" aria-hidden="true" />
         </div>
@@ -316,10 +316,10 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
             <ul className="timeline mb-0">
               {STEPS.map((step) => (
                 <li key={step.title}>
-                  <h6>
+                  <h4 className="h6">
                     <i className={`bi ${step.icon} me-2 text-gold`} aria-hidden="true" />
                     {step.title}
-                  </h6>
+                  </h4>
                   <p>{step.text}</p>
                 </li>
               ))}
@@ -344,7 +344,7 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
 
         <div className="side-cta mt-4">
           <i className="bi bi-search side-cta-icon" aria-hidden="true" />
-          <h6>Already Submitted?</h6>
+          <h4 className="h6">Already Submitted?</h4>
           <p>Track an existing grievance using its reference number.</p>
           <Link href="/igrs/status" className="btn-gold btn-sm">
             Check Status

@@ -83,7 +83,7 @@ export default function ResultPage() {
                   <span className="icon-tile mb-4">
                     <i className={`bi ${portal.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{portal.name}</h5>
+                  <h3 className="h5 fw-bold mb-3">{portal.name}</h3>
                   <p className="small flex-grow-1">{portal.text}</p>
                   <div className="gold-rule-thin my-3" />
                   <a
@@ -131,7 +131,7 @@ export default function ResultPage() {
                         <i className={`bi ${item.icon}`} aria-hidden="true" />
                       </span>
                       <div>
-                        <h6 className="fw-bold mb-1">{item.title}</h6>
+                        <h4 className="h6 fw-bold mb-1">{item.title}</h4>
                         <p className="small mb-0">{item.text}</p>
                       </div>
                     </div>

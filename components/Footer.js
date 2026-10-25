@@ -13,6 +13,7 @@ const QUICK_LINKS = [
   { href: '/contact', label: 'Contact Us' },
   // The topbar link is desktop-only, so this is the route in on a phone.
   { href: '/employee', label: 'Employee Section' },
+  { href: '/accessibility', label: 'Screen Reader Access' },
 ];
 
 /* Official portals students and staff need most — all external. */
@@ -70,7 +71,7 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
           </Col>
 
           <Col lg={2} md={6}>
-            <h5 id="footer-quick">Quick Links</h5>
+            <h3 className="h5" id="footer-quick">Quick Links</h3>
             <ul className="list-unstyled footer-links" aria-labelledby="footer-quick">
               {QUICK_LINKS.map((link) => (
                 <li key={link.href}>
@@ -84,7 +85,7 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
           </Col>
 
           <Col lg={3} md={6}>
-            <h5 id="footer-important">Important Links</h5>
+            <h3 className="h5" id="footer-important">Important Links</h3>
             <ul className="list-unstyled footer-links" aria-labelledby="footer-important">
               {IMPORTANT_LINKS.map((link) => (
                 <li key={link.href}>
@@ -99,7 +100,7 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
           </Col>
 
           <Col lg={3} md={6}>
-            <h5>Reach Us</h5>
+            <h3 className="h5">Reach Us</h3>
             <div className="footer-contact-item">
               <i className="bi bi-geo-alt-fill" aria-hidden="true" />
               <address className="mb-0">

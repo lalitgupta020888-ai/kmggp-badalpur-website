@@ -36,7 +36,7 @@ export default async function LabsPage({ params }) {
                   <span className="icon-tile mb-3">
                     <i className={`bi ${lab.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-2">{lab.name}</h5>
+                  <h3 className="h5 fw-bold mb-2">{lab.name}</h3>
                   <p className="small mb-0">{lab.text}</p>
                 </div>
               </Col>
@@ -58,7 +58,7 @@ export default async function LabsPage({ params }) {
                   <span className="icon-tile icon-tile-sm">
                     <i className={`bi ${feature.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="mb-0">{feature.label}</h5>
+                  <h3 className="h5 mb-0">{feature.label}</h3>
                 </div>
               </Col>
             ))}

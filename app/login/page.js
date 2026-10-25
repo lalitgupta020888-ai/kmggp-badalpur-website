@@ -33,12 +33,12 @@ export default function AdminLoginPage() {
             <span className="auth-emblem">
               <i className="bi bi-shield-lock-fill" aria-hidden="true" />
             </span>
-            <h4>Admin Login</h4>
+            <h3 className="h4">Admin Login</h3>
             <p>Restricted access — Km. Mayawati Government Girls Polytechnic, Badalpur</p>
           </div>
 
           <div className="p-4 p-sm-5">
-            <Alert variant="warning" className="d-flex align-items-start gap-3 border-0 small mb-4">
+            <Alert variant="warning" role="status" className="d-flex align-items-start gap-3 border-0 small mb-4">
               <i className="bi bi-exclamation-triangle-fill fs-5 lh-1 mt-1" aria-hidden="true" />
               <span>
                 Authorised personnel only. Unauthorised access attempts are logged and may invite
@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
             </Alert>
 
             {state?.error && (
-              <Alert variant="danger" className="d-flex align-items-start gap-3 border-0 small mb-4">
+              <Alert variant="danger" role="alert" className="d-flex align-items-start gap-3 border-0 small mb-4">
                 <i className="bi bi-x-octagon-fill fs-5 lh-1 mt-1" aria-hidden="true" />
                 <span>{state.error}</span>
               </Alert>

@@ -52,10 +52,10 @@ export default async function TNPDepartment() {
 
           <div className="gold-rule-thin my-4" />
 
-          <h5 className="fw-bold mb-3">
+          <h3 className="h5 fw-bold mb-3">
             <i className="bi bi-bullseye text-gold me-2" aria-hidden="true" />
             Our Objectives
-          </h5>
+          </h3>
           <ul className="gold-list">
             {OBJECTIVES.map((objective) => (
               <li key={objective}>{objective}</li>
@@ -71,7 +71,7 @@ export default async function TNPDepartment() {
               <span className="icon-tile mb-3">
                 <i className={`bi ${service.icon}`} aria-hidden="true" />
               </span>
-              <h5 className="fw-bold mb-2">{service.title}</h5>
+              <h3 className="h5 fw-bold mb-2">{service.title}</h3>
               <p className="small mb-0">{service.text}</p>
             </div>
           </Col>

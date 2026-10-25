@@ -88,10 +88,10 @@ export default function InstructionForCandidates() {
           <ul className="timeline">
             {STEPS.map((step) => (
               <li key={step.title}>
-                <h6 className="fw-bold mb-1">
+                <h4 className="h6 fw-bold mb-1">
                   <i className={`bi ${step.icon} text-gold me-2`} aria-hidden="true" />
                   {step.title}
-                </h6>
+                </h4>
                 <p className="small mb-0">{step.text}</p>
               </li>
             ))}
@@ -151,7 +151,7 @@ export default function InstructionForCandidates() {
                   <span className="icon-tile icon-tile-sm mb-3">
                     <i className="bi bi-diamond-fill" aria-hidden="true" />
                   </span>
-                  <h6 className="fw-bold mb-2">{option.term}</h6>
+                  <h4 className="h6 fw-bold mb-2">{option.term}</h4>
                   <p className="small mb-0">{option.text}</p>
                 </div>
               </Col>

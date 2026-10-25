@@ -98,7 +98,7 @@ export default async function AcademicCalendar() {
                 <span className="icon-tile mb-3">
                   <i className="bi bi-calendar-event" aria-hidden="true" />
                 </span>
-                <h5 className="fw-bold mb-2">List of Holidays</h5>
+                <h3 className="h5 fw-bold mb-2">List of Holidays</h3>
                 <p className="small mb-0">The official holiday calendar for the current session.</p>
               </Link>
             </Col>
@@ -107,7 +107,7 @@ export default async function AcademicCalendar() {
                 <span className="icon-tile mb-3">
                   <i className="bi bi-journal-bookmark" aria-hidden="true" />
                 </span>
-                <h5 className="fw-bold mb-2">Syllabus</h5>
+                <h3 className="h5 fw-bold mb-2">Syllabus</h3>
                 <p className="small mb-0">Branch-wise syllabus as prescribed by BTEUP.</p>
               </Link>
             </Col>
@@ -116,7 +116,7 @@ export default async function AcademicCalendar() {
                 <span className="icon-tile mb-3">
                   <i className="bi bi-collection" aria-hidden="true" />
                 </span>
-                <h5 className="fw-bold mb-2">Courses Offered</h5>
+                <h3 className="h5 fw-bold mb-2">Courses Offered</h3>
                 <p className="small mb-0">Programmes, duration and sanctioned intake.</p>
               </Link>
             </Col>

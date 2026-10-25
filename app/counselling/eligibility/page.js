@@ -238,7 +238,7 @@ export default async function GroupwiseEligibility() {
                     <span className="icon-tile icon-tile-sm">
                       <i className={`bi ${route.icon}`} aria-hidden="true" />
                     </span>
-                    <h6 className="fw-bold mb-0">{route.label}</h6>
+                    <h4 className="h6 fw-bold mb-0">{route.label}</h4>
                   </div>
                   <div className="gold-rule-thin mb-3" />
                   <p className="small mb-2">
@@ -333,10 +333,10 @@ export default async function GroupwiseEligibility() {
 
           <Row className="g-4">
             <Col lg={6}>
-              <h5 className="fw-bold mb-3">
+              <h3 className="h5 fw-bold mb-3">
                 <i className="bi bi-patch-check-fill text-gold me-2" aria-hidden="true" />
                 Who Can Apply
-              </h5>
+              </h3>
               <ul className="gold-list">
                 {LATERAL_ELIGIBILITY.map((item) => (
                   <li key={item}>{item}</li>
@@ -345,10 +345,10 @@ export default async function GroupwiseEligibility() {
             </Col>
 
             <Col lg={6}>
-              <h5 className="fw-bold mb-3">
+              <h3 className="h5 fw-bold mb-3">
                 <i className="bi bi-info-square-fill text-gold me-2" aria-hidden="true" />
                 What to Know Before Applying
-              </h5>
+              </h3>
               <ul className="gold-list">
                 {LATERAL_NOTES.map((item) => (
                   <li key={item}>{item}</li>

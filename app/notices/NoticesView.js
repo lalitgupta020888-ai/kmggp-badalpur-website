@@ -85,7 +85,7 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
                               <span className="notice-chip">{notice.category}</span>
                               {notice.isNew && <span className="badge-new">NEW</span>}
                             </div>
-                            <h5 className="notice-entry-title">{notice.title}</h5>
+                            <h3 className="h5 notice-entry-title">{notice.title}</h3>
                             <Link href={notice.link} className="notice-entry-link">
                               Read the notice
                               <i className="bi bi-arrow-right" aria-hidden="true" />
@@ -148,7 +148,7 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
 
               <div className="side-cta mt-4">
                 <i className="bi bi-envelope-paper-fill side-cta-icon" aria-hidden="true" />
-                <h6>Need Something Else?</h6>
+                <h4 className="h6">Need Something Else?</h4>
                 <p>The office can confirm any notice and issue a certified copy on request.</p>
                 <Link href="/contact" className="btn-gold btn-sm">
                   Contact the Office

@@ -140,7 +140,7 @@ export default function EventsPage() {
                   <span className="icon-tile mb-4">
                     <i className={`bi ${category.icon}`} aria-hidden="true" />
                   </span>
-                  <h5 className="fw-bold mb-3">{category.title}</h5>
+                  <h3 className="h5 fw-bold mb-3">{category.title}</h3>
                   <p className="small mb-0">{category.text}</p>
                 </div>
               </Col>

@@ -48,7 +48,7 @@ export default async function FacultyPage({ params }) {
                   >
                     {member.photo ? '' : monogram(member.name)}
                   </span>
-                  <h5 className="fw-bold mb-1">{member.name}</h5>
+                  <h3 className="h5 fw-bold mb-1">{member.name}</h3>
                   <span className="eyebrow">{member.designation}</span>
                   <div className="gold-rule-thin my-3" />
                   <p className="small mb-1">
