@@ -55,10 +55,12 @@ export default async function FacultyPage({ params }) {
                     <i className="bi bi-mortarboard-fill text-gold me-2" aria-hidden="true" />
                     {member.qualification}
                   </p>
-                  <p className="small mb-0">
-                    <i className="bi bi-clock-history text-gold me-2" aria-hidden="true" />
-                    {member.experience} of experience
-                  </p>
+                  {member.experience && (
+                    <p className="small mb-0">
+                      <i className="bi bi-clock-history text-gold me-2" aria-hidden="true" />
+                      {member.experience} of experience
+                    </p>
+                  )}
                 </div>
               </Col>
             ))}
@@ -93,7 +95,7 @@ export default async function FacultyPage({ params }) {
                     </td>
                     <td>{member.designation}</td>
                     <td>{member.qualification}</td>
-                    <td>{member.experience}</td>
+                    <td>{member.experience || '—'}</td>
                   </tr>
                 ))}
               </tbody>
