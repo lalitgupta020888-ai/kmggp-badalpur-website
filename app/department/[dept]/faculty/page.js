@@ -34,17 +34,10 @@ export default async function FacultyPage({ params }) {
                       of the name — the same fallback the leadership grid uses,
                       so a department reads properly before photographs arrive. */}
                   <span
-                    className="quote-avatar mx-auto mb-3"
-                    style={{
-                      width: 64,
-                      height: 64,
-                      flex: '0 0 64px',
-                      fontSize: '1.5rem',
-                      overflow: 'hidden',
-                      backgroundImage: member.photo ? `url(${member.photo})` : undefined,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'top center',
-                    }}
+                    className="faculty-photo"
+                    role={member.photo ? 'img' : undefined}
+                    aria-label={member.photo ? `Photograph of ${member.name}` : undefined}
+                    style={{ backgroundImage: member.photo ? `url(${member.photo})` : undefined }}
                   >
                     {member.photo ? '' : monogram(member.name)}
                   </span>
