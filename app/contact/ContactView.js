@@ -17,13 +17,6 @@ const MAP_EMBED = `https://www.google.com/maps?q=${MAP_POINT}&z=17&hl=en&output=
 const MAP_VIEW = `https://www.google.com/maps/search/?api=1&query=${MAP_POINT}`;
 const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${MAP_POINT}`;
 
-
-const DESKS = [
-  { icon: 'bi-mortarboard-fill', title: 'Admission Cell', value: 'admission@kmggp.ac.in' },
-  { icon: 'bi-briefcase-fill', title: 'Training & Placement', value: 'tnp@kmggp.ac.in' },
-  { icon: 'bi-patch-check-fill', title: 'Verification Desk', value: 'verification@kmggp.ac.in' },
-];
-
 /**
  * The contact page.
  *
@@ -86,24 +79,6 @@ export default function ContactView({ officeHours, topbar = {} }) {
                       <div>
                         <div className="label">{line.label}</div>
                         <p className="value">{line.value}</p>
-                      </div>
-                    </div>
-                  ))}
-
-                  <div className="gold-rule-thin my-4" />
-
-                  <h4 className="h6 fw-bold mb-3">
-                    <i className="bi bi-signpost-2-fill text-gold me-2" aria-hidden="true" />
-                    Departmental Desks
-                  </h4>
-                  {DESKS.map((desk) => (
-                    <div className="contact-line" key={desk.title}>
-                      <span className="icon-tile icon-tile-sm">
-                        <i className={`bi ${desk.icon}`} aria-hidden="true" />
-                      </span>
-                      <div>
-                        <div className="label">{desk.title}</div>
-                        <p className="value">{desk.value}</p>
                       </div>
                     </div>
                   ))}
