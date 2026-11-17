@@ -104,9 +104,9 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
             <div className="footer-contact-item">
               <i className="bi bi-geo-alt-fill" aria-hidden="true" />
               <address className="mb-0">
-                Km. Mayawati Government Girls Polytechnic, Badalpur,
+                Km. Mayawati Government Girls Polytechnic
                 <br />
-                Gautam Buddha Nagar,
+                Badalpur, Gautam Buddha Nagar
                 <br />
                 Uttar Pradesh, India
               </address>
