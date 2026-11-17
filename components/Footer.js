@@ -84,7 +84,7 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
             </ul>
           </Col>
 
-          <Col lg={3} md={6}>
+          <Col lg={2} md={6}>
             <h3 className="h5" id="footer-important">Important Links</h3>
             <ul className="list-unstyled footer-links" aria-labelledby="footer-important">
               {IMPORTANT_LINKS.map((link) => (
@@ -99,12 +99,12 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
             </ul>
           </Col>
 
-          <Col lg={3} md={6}>
+          <Col lg={4} md={6}>
             <h3 className="h5">Reach Us</h3>
             <div className="footer-contact-item">
               <i className="bi bi-geo-alt-fill" aria-hidden="true" />
               <address className="mb-0">
-                Km. Mayawati Government Girls Polytechnic
+                <span className="text-nowrap">Km. Mayawati Government Girls Polytechnic</span>
                 <br />
                 Badalpur, Gautam Buddha Nagar
                 <br />
