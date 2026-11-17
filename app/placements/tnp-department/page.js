@@ -92,7 +92,7 @@ export default async function TNPDepartment() {
                 </span>
                 <div>
                   <div className="label">Email</div>
-                  <p className="value">tnp@kmggp.ac.in</p>
+                  <p className="value">ggpbad@gmail.com</p>
                 </div>
               </div>
             </Col>

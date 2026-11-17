@@ -92,7 +92,7 @@ export default function EducationalVerification() {
                     </span>
                     <div>
                       <div className="label">Email</div>
-                      <p className="value">verification@kmggp.ac.in</p>
+                      <p className="value">ggpbad@gmail.com</p>
                     </div>
                   </div>
                   <div className="contact-line">

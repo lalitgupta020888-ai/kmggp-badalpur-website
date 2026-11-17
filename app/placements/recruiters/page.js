@@ -66,7 +66,7 @@ export default async function Recruiters() {
         <i className="bi bi-building-check" aria-hidden="true" />
         <p>
           Organisations wishing to conduct a campus recruitment drive may write to the Training &amp;
-          Placement cell at <strong>tnp@kmggp.ac.in</strong> to schedule a visit.
+          Placement cell at <strong>ggpbad@gmail.com</strong> to schedule a visit.
         </p>
       </div>
     </>

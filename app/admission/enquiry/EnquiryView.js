@@ -302,7 +302,7 @@ export default function EnquiryView({ officeHours }) {
                     </span>
                     <div>
                       <div className="label">Email</div>
-                      <p className="value">admission@kmggp.ac.in</p>
+                      <p className="value">ggpbad@gmail.com</p>
                     </div>
                   </div>
                   <div className="contact-line">

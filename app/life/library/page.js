@@ -170,7 +170,7 @@ export default async function LibraryPage() {
                     </span>
                     <div>
                       <div className="label">Librarian</div>
-                      <p className="value">library@kmggp.ac.in</p>
+                      <p className="value">ggpbad@gmail.com</p>
                     </div>
                   </div>
                 </div>
