@@ -45,8 +45,8 @@ export default function Footer({ officeHours = '', social = [], topbar = {} }) {
                 />
               </span>
               <span className="brand-text">
-                <span className="brand-line-1">Km. Mayawati Government Girls</span>
-                <span className="brand-line-2">Polytechnic, Badalpur</span>
+                <span className="brand-line-1">Km. Mayawati Government Girls Polytechnic</span>
+                <span className="brand-line-2">Badalpur, Gautam Buddha Nagar</span>
               </span>
             </div>
             <p>
