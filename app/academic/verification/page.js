@@ -101,7 +101,7 @@ export default function EducationalVerification() {
                     </span>
                     <div>
                       <div className="label">Phone</div>
-                      <p className="value">+91 XXXXX XXXXX</p>
+                      <p className="value">+91 120 6909689</p>
                     </div>
                   </div>
                   <div className="contact-line">
