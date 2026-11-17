@@ -67,12 +67,22 @@ function StaffDirectory({ department }) {
                 </span>
                 <h3 className="h5 fw-bold mb-1">{member.name}</h3>
                 <span className="eyebrow">{member.designation}</span>
-                {member.detail && (
-                  <>
-                    <div className="gold-rule-thin my-3" />
-                    <p className="small mb-0">{member.detail}</p>
-                  </>
+                {(member.qualification || member.experience || member.detail) && (
+                  <div className="gold-rule-thin my-3" />
                 )}
+                {member.qualification && (
+                  <p className="small mb-1">
+                    <i className="bi bi-mortarboard-fill text-gold me-2" aria-hidden="true" />
+                    {member.qualification}
+                  </p>
+                )}
+                {member.experience && (
+                  <p className="small mb-0">
+                    <i className="bi bi-clock-history text-gold me-2" aria-hidden="true" />
+                    {member.experience} of experience
+                  </p>
+                )}
+                {member.detail && <p className="small mb-0 mt-1">{member.detail}</p>}
               </div>
             </Col>
           ))}
