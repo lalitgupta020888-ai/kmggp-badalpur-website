@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import { sendAdmissionEnquiry } from './actions';
 import SectionHead from '@/components/SectionHead';
 
 const ASSURANCES = [
@@ -72,9 +73,19 @@ const QUICK_LINKS = [
 
 export default function EnquiryView({ officeHours }) {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSending(true);
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const result = await sendAdmissionEnquiry(data).catch(() => ({
+      error: 'Could not reach the server. Please try again.',
+    }));
+    setSending(false);
+    if (result.error) return setError(result.error);
     setSubmitted(true);
   };
 
@@ -154,6 +165,15 @@ export default function EnquiryView({ officeHours }) {
                     </div>
                   ) : (
                     <Form onSubmit={handleSubmit} className="premium-form">
+                      {/* Hidden from people; bots fill it in and are quietly dropped. */}
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                      />
                       <p className="text-muted small mb-4">
                         Fields marked <span className="text-gold fw-bold">*</span> are required. We
                         never share your details with third parties.
@@ -167,7 +187,7 @@ export default function EnquiryView({ officeHours }) {
                             </Form.Label>
                             <div className="input-icon">
                               <i className="bi bi-person-fill" aria-hidden="true" />
-                              <Form.Control type="text" placeholder="Enter your full name" required />
+                              <Form.Control name="name" type="text" placeholder="Enter your full name" maxLength={120} required />
                             </div>
                           </Form.Group>
                         </Col>
@@ -179,6 +199,7 @@ export default function EnquiryView({ officeHours }) {
                             <div className="input-icon">
                               <i className="bi bi-telephone-fill" aria-hidden="true" />
                               <Form.Control
+                                name="mobile"
                                 type="tel"
                                 inputMode="numeric"
                                 pattern="[0-9]{10}"
@@ -200,7 +221,7 @@ export default function EnquiryView({ officeHours }) {
                         </Form.Label>
                         <div className="input-icon">
                           <i className="bi bi-envelope-fill" aria-hidden="true" />
-                          <Form.Control type="email" placeholder="you@example.com" required />
+                          <Form.Control name="email" type="email" placeholder="you@example.com" required />
                         </div>
                       </Form.Group>
 
@@ -212,7 +233,7 @@ export default function EnquiryView({ officeHours }) {
                             </Form.Label>
                             <div className="input-icon">
                               <i className="bi bi-collection-fill" aria-hidden="true" />
-                              <Form.Select required defaultValue="">
+                              <Form.Select name="course" required defaultValue="">
                                 <option value="" disabled>
                                   Select a course
                                 </option>
@@ -231,7 +252,7 @@ export default function EnquiryView({ officeHours }) {
                             </Form.Label>
                             <div className="input-icon">
                               <i className="bi bi-mortarboard-fill" aria-hidden="true" />
-                              <Form.Select required defaultValue="">
+                              <Form.Select name="class10" required defaultValue="">
                                 <option value="" disabled>
                                   Select your status
                                 </option>
@@ -247,15 +268,17 @@ export default function EnquiryView({ officeHours }) {
                         <Form.Label>City / District</Form.Label>
                         <div className="input-icon">
                           <i className="bi bi-geo-alt-fill" aria-hidden="true" />
-                          <Form.Control type="text" placeholder="e.g. Gautam Buddha Nagar" />
+                          <Form.Control name="city" type="text" placeholder="e.g. Gautam Buddha Nagar" maxLength={120} />
                         </div>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="enquiry-your-query">
                         <Form.Label>Your Query</Form.Label>
                         <Form.Control
+                          name="query"
                           as="textarea"
                           rows={4}
+                          maxLength={3000}
                           placeholder="Ask us about eligibility, fees, hostel facilities or anything else..."
                         />
                       </Form.Group>
@@ -269,9 +292,15 @@ export default function EnquiryView({ officeHours }) {
                         />
                       </Form.Group>
 
-                      <Button type="submit" className="btn-gold w-100 justify-content-center">
+                      {error && (
+                        <Alert variant="danger" role="alert" className="border-0 small">
+                          {error}
+                        </Alert>
+                      )}
+
+                      <Button type="submit" className="btn-gold w-100 justify-content-center" disabled={sending}>
                         <i className="bi bi-send-fill" aria-hidden="true" />
-                        Submit Enquiry
+                        {sending ? 'Submitting…' : 'Submit Enquiry'}
                       </Button>
                     </Form>
                   )}

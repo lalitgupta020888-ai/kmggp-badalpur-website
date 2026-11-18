@@ -5,6 +5,7 @@ import { headers } from 'next/headers';
 import { checkCredentials, endSession, getSession, startSession } from '@/lib/server/auth';
 import { checkAttempts, clearAttempts, recordFailure } from '@/lib/server/throttle';
 import { listAllGrievances, updateGrievanceStatus } from '@/lib/server/igrs';
+import { notifyGrievanceUpdate } from '@/lib/server/igrs-mail';
 
 /**
  * Grievance-committee login. Checks the same server-side accounts as /admin and
@@ -51,7 +52,9 @@ export async function fetchGrievances() {
 export async function saveGrievanceUpdate(type, refNumber, status, remarks) {
   if (!(await getSession())) return { signedOut: true };
   try {
-    return { grievance: await updateGrievanceStatus(type, refNumber, status, remarks) };
+    const grievance = await updateGrievanceStatus(type, refNumber, status, remarks);
+    await notifyGrievanceUpdate(grievance).catch((error) => console.error('[igrs] mail failed:', error));
+    return { grievance };
   } catch (error) {
     console.error('[igrs] update failed:', error);
     const message = String(error?.message || '');

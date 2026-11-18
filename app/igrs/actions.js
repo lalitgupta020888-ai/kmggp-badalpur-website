@@ -1,6 +1,8 @@
 'use server';
 
+import { guardForm } from '@/lib/server/form-guard';
 import { createGrievance, findGrievancePublic } from '@/lib/server/igrs';
+import { notifyNewGrievance } from '@/lib/server/igrs-mail';
 
 /** Hide raw database errors from visitors; keep validation messages. */
 function friendly(error, fallback) {
@@ -9,8 +11,14 @@ function friendly(error, fallback) {
 
 /** Public: submit a grievance. Returns `{ grievance }` or `{ error }`. */
 export async function submitGrievance(type, data) {
+  const guard = await guardForm('igrs', data);
+  if (!guard.ok) return { error: guard.error || 'Could not save your grievance. Please try again.' };
+
   try {
-    return { grievance: await createGrievance(type, data) };
+    const grievance = await createGrievance(type, data);
+    // Saved first; emails are best-effort and never fail the submission.
+    await notifyNewGrievance(grievance).catch((error) => console.error('[igrs] mail failed:', error));
+    return { grievance };
   } catch (error) {
     console.error('[igrs] submit failed:', error);
     return { error: friendly(error, 'Could not save your grievance. Please try again.') };

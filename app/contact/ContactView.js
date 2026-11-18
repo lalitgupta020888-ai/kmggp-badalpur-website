@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
+import { sendContactMessage } from './actions';
 
 const LOCATION = {
   name: 'Km. Mayawati Govt. Girls Polytechnic',
@@ -45,9 +46,19 @@ export default function ContactView({ officeHours, topbar = {} }) {
   ];
 
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSending(true);
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const result = await sendContactMessage(data).catch(() => ({
+      error: 'Could not reach the server. Please try again.',
+    }));
+    setSending(false);
+    if (result.error) return setError(result.error);
     setSubmitted(true);
   };
 
@@ -100,13 +111,22 @@ export default function ContactView({ officeHours, topbar = {} }) {
                     </Alert>
                   ) : (
                     <Form onSubmit={handleSubmit} className="premium-form">
+                      {/* Hidden from people; bots fill it in and are quietly dropped. */}
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                      />
                       <Row>
                         <Col sm={6}>
                           <Form.Group className="mb-3" controlId="contact-your-name">
                             <Form.Label>Your Name</Form.Label>
                             <div className="input-icon">
                               <i className="bi bi-person-fill" aria-hidden="true" />
-                              <Form.Control type="text" placeholder="Enter your full name" required />
+                              <Form.Control name="name" type="text" placeholder="Enter your full name" maxLength={120} required />
                             </div>
                           </Form.Group>
                         </Col>
@@ -115,7 +135,7 @@ export default function ContactView({ officeHours, topbar = {} }) {
                             <Form.Label>Email Address</Form.Label>
                             <div className="input-icon">
                               <i className="bi bi-envelope-fill" aria-hidden="true" />
-                              <Form.Control type="email" placeholder="you@example.com" required />
+                              <Form.Control name="email" type="email" placeholder="you@example.com" required />
                             </div>
                           </Form.Group>
                         </Col>
@@ -125,18 +145,24 @@ export default function ContactView({ officeHours, topbar = {} }) {
                         <Form.Label>Subject</Form.Label>
                         <div className="input-icon">
                           <i className="bi bi-tag-fill" aria-hidden="true" />
-                          <Form.Control type="text" placeholder="What is this regarding?" required />
+                          <Form.Control name="subject" type="text" placeholder="What is this regarding?" maxLength={200} required />
                         </div>
                       </Form.Group>
 
                       <Form.Group className="mb-4" controlId="contact-your-message">
                         <Form.Label>Your Message</Form.Label>
-                        <Form.Control as="textarea" rows={5} placeholder="Write your message here..." required />
+                        <Form.Control name="message" as="textarea" rows={5} placeholder="Write your message here..." maxLength={5000} required />
                       </Form.Group>
 
-                      <Button type="submit" className="btn-gold w-100 justify-content-center">
+                      {error && (
+                        <Alert variant="danger" role="alert" className="border-0 small">
+                          {error}
+                        </Alert>
+                      )}
+
+                      <Button type="submit" className="btn-gold w-100 justify-content-center" disabled={sending}>
                         <i className="bi bi-send-fill" aria-hidden="true" />
-                        Send Message
+                        {sending ? 'Sending…' : 'Send Message'}
                       </Button>
                     </Form>
                   )}
