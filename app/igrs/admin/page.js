@@ -7,7 +7,6 @@ import {
   STATUSES,
   STATUS_META,
   TYPE_META,
-  checkAdminCredentials,
   clearAdminSession,
   formatDate,
   getAdminSessionServerSnapshot,
@@ -19,6 +18,7 @@ import {
   subscribeGrievances,
   updateGrievance,
 } from '@/lib/igrs';
+import { verifyIgrsLogin } from './actions';
 
 const NOTICES = [
   {
@@ -52,11 +52,21 @@ function AdminLogin({ onSuccess }) {
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (event) => {
+  const [checking, setChecking] = useState(false);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
-    if (!checkAdminCredentials(username.trim(), password)) {
-      setError('Invalid username or password. Please try again.');
+    setChecking(true);
+    let result;
+    try {
+      result = await verifyIgrsLogin(username.trim(), password);
+    } catch {
+      result = { ok: false, error: 'Could not reach the server. Please try again.' };
+    }
+    setChecking(false);
+    if (!result.ok) {
+      setError(result.error);
       return;
     }
     setPassword('');
@@ -141,7 +151,7 @@ function AdminLogin({ onSuccess }) {
                 </Alert>
               )}
 
-              <Button type="submit" className="btn-gold w-100 justify-content-center">
+              <Button type="submit" className="btn-gold w-100 justify-content-center" disabled={checking}>
                 <i className="bi bi-box-arrow-in-right" aria-hidden="true" />
                 Sign In to Dashboard
               </Button>
