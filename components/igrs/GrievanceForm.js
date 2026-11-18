@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import Link from 'next/link';
-import { CATEGORIES, saveGrievance } from '@/lib/igrs';
+import { CATEGORIES } from '@/lib/igrs';
+import { submitGrievance } from '@/app/igrs/actions';
 
 const STEPS = [
   { icon: 'bi-pencil-square', title: 'Fill the form', text: 'Share your details and describe the issue.' },
@@ -95,11 +96,23 @@ function Receipt({ grievance, type }) {
  */
 export default function GrievanceForm({ type, heading, icon, options = {} }) {
   const [receipt, setReceipt] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError('');
+    setSubmitting(true);
     const data = Object.fromEntries(new FormData(event.currentTarget).entries());
-    setReceipt(saveGrievance(data, type));
+    const result = await submitGrievance(type, data).catch(() => ({
+      error: 'Could not reach the server. Please try again.',
+    }));
+    setSubmitting(false);
+    if (result.error) {
+      setError(result.error);
+      return;
+    }
+    setReceipt(result.grievance);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -297,9 +310,15 @@ export default function GrievanceForm({ type, heading, icon, options = {} }) {
                 />
               </Form.Group>
 
-              <Button type="submit" className="btn-gold w-100 justify-content-center">
+              {error && (
+                <Alert variant="danger" className="border-0 small" role="alert">
+                  {error}
+                </Alert>
+              )}
+
+              <Button type="submit" className="btn-gold w-100 justify-content-center" disabled={submitting}>
                 <i className="bi bi-send-fill" aria-hidden="true" />
-                Submit Grievance
+                {submitting ? 'Submitting…' : 'Submit Grievance'}
               </Button>
             </Form>
           </div>

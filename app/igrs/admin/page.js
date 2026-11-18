@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState, useSyncExternalStore } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import IgrsShell from '@/components/igrs/IgrsShell';
 import {
@@ -11,14 +11,10 @@ import {
   formatDate,
   getAdminSessionServerSnapshot,
   getAdminSessionSnapshot,
-  getGrievancesServerSnapshot,
-  getGrievancesSnapshot,
   setAdminSession,
   subscribeAdminSession,
-  subscribeGrievances,
-  updateGrievance,
 } from '@/lib/igrs';
-import { verifyIgrsLogin } from './actions';
+import { fetchGrievances, igrsSignOut, saveGrievanceUpdate, verifyIgrsLogin } from './actions';
 
 const NOTICES = [
   {
@@ -175,22 +171,58 @@ function AdminLogin({ onSuccess }) {
 }
 
 function AdminDashboard({ onLogout }) {
-  const { list: grievances } = useSyncExternalStore(
-    subscribeGrievances,
-    getGrievancesSnapshot,
-    getGrievancesServerSnapshot
-  );
+  const [grievances, setGrievances] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
   const [search, setSearch] = useState('');
   const [drafts, setDrafts] = useState({});
   const [savedRef, setSavedRef] = useState('');
 
-  const handleUpdate = (refNumber) => {
+  // Grievances live in Supabase; the server returns them only to a signed-in
+  // session. A lapsed session sends the committee member back to the login.
+  const load = useCallback(async () => {
+    setLoading(true);
+    const result = await fetchGrievances().catch(() => ({ error: 'Could not load grievances.', list: [] }));
+    if (result.signedOut) {
+      onLogout();
+      return;
+    }
+    setGrievances(result.list || []);
+    setLoadError(result.error || '');
+    setLoading(false);
+  }, [onLogout]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetching on mount
+    load();
+  }, [load]);
+
+  const handleUpdate = async (refNumber) => {
     const draft = drafts[refNumber] || {};
     const current = grievances.find((g) => g.refNumber === refNumber);
     if (!current) return;
-    updateGrievance(refNumber, draft.status ?? current.status, draft.remarks ?? current.remarks);
+    const result = await saveGrievanceUpdate(
+      current.type,
+      refNumber,
+      draft.status ?? current.status,
+      draft.remarks ?? current.remarks,
+    ).catch(() => ({ error: 'Could not save the update.' }));
+    if (result.signedOut) {
+      onLogout();
+      return;
+    }
+    if (result.error) {
+      window.alert(result.error);
+      return;
+    }
+    setGrievances((list) => list.map((g) => (g.refNumber === refNumber ? result.grievance : g)));
+    setDrafts((d) => {
+      const next = { ...d };
+      delete next[refNumber];
+      return next;
+    });
     setSavedRef(refNumber);
     window.setTimeout(() => setSavedRef(''), 2500);
   };
@@ -296,7 +328,13 @@ function AdminDashboard({ onLogout }) {
         </div>
       </div>
 
-      {filtered.length === 0 ? (
+      {loadError && (
+        <Alert variant="danger" className="border-0 small">{loadError}</Alert>
+      )}
+
+      {loading ? (
+        <p className="text-center text-muted py-5">Loading grievances…</p>
+      ) : filtered.length === 0 ? (
         <div className="panel">
           <div className="panel-body text-center py-5">
             <span className="icon-tile mx-auto mb-3"><i className="bi bi-inbox" aria-hidden="true" /></span>
@@ -428,6 +466,11 @@ export default function IgrsAdminPage() {
     getAdminSessionServerSnapshot
   );
 
+  const signOut = useCallback(() => {
+    igrsSignOut().catch(() => {});
+    clearAdminSession();
+  }, []);
+
   return (
     <IgrsShell
       icon="bi-person-lock"
@@ -441,7 +484,7 @@ export default function IgrsAdminPage() {
       wide={isAdmin}
     >
       {isAdmin ? (
-        <AdminDashboard onLogout={clearAdminSession} />
+        <AdminDashboard onLogout={signOut} />
       ) : (
         <AdminLogin onSuccess={setAdminSession} />
       )}

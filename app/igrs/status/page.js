@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState, useSyncExternalStore } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -10,10 +10,8 @@ import {
   STATUS_META,
   TYPE_META,
   formatDate,
-  getGrievancesServerSnapshot,
-  getGrievancesSnapshot,
-  subscribeGrievances,
 } from '@/lib/igrs';
+import { lookupGrievance } from '@/app/igrs/actions';
 
 function StatusPill({ status }) {
   const meta = STATUS_META[status] || STATUS_META.Pending;
@@ -56,25 +54,30 @@ function StatusLookup() {
   const searchParams = useSearchParams();
   const preset = searchParams.get('ref') || '';
 
-  const { ready, list } = useSyncExternalStore(
-    subscribeGrievances,
-    getGrievancesSnapshot,
-    getGrievancesServerSnapshot
-  );
-
   const [refInput, setRefInput] = useState(preset);
-  const [query, setQuery] = useState(preset);
+  const [lookup, setLookup] = useState({ state: 'idle' });
+
+  // Lookups go to the server, which returns only the case's status fields.
+  const runLookup = async (ref) => {
+    const target = String(ref || '').trim().toUpperCase();
+    if (!target) return setLookup({ state: 'idle' });
+    setLookup({ state: 'loading' });
+    const result = await lookupGrievance(target).catch(() => ({ error: true }));
+    if (result.error) return setLookup({ state: 'error' });
+    setLookup(result.grievance ? { state: 'found', g: result.grievance } : { state: 'missing' });
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- a receipt link carries ?ref=
+    if (preset) runLookup(preset);
+  }, [preset]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setQuery(refInput);
+    runLookup(refInput);
   };
 
-  const target = query.trim().toUpperCase();
-  const g = target ? list.find((item) => item.refNumber === target) || null : null;
-  // `ready` is false until the browser store is read, so an unresolved lookup
-  // during hydration is never reported as "not found".
-  const lookup = { state: !target ? 'idle' : !ready ? 'loading' : g ? 'found' : 'missing' };
+  const g = lookup.g || null;
 
   return (
     <Row className="g-4">
@@ -110,6 +113,12 @@ function StatusLookup() {
                 Check Status
               </Button>
             </Form>
+
+            {lookup.state === 'error' && (
+              <Alert variant="danger" role="alert" className="border-0 mt-4 small">
+                Could not check the status right now. Please try again in a moment.
+              </Alert>
+            )}
 
             {lookup.state === 'missing' && (
               <Alert variant="danger" role="alert" className="d-flex align-items-start gap-3 border-0 mt-4 small">
