@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import { UPLOADS_DIR } from '@/lib/server/paths';
+import { supabaseEnabled, sbPublicUrl } from '@/lib/server/supabase';
 
 /**
  * Serves an uploaded file.
@@ -35,6 +36,13 @@ export async function GET(request, { params }) {
   const extension = path.extname(file).toLowerCase();
   const contentType = CONTENT_TYPES[extension];
   if (!contentType) return new Response('Not found', { status: 404 });
+
+  // With Supabase, uploads live in a public storage bucket. Redirecting keeps
+  // every existing /media/... URL working while the bytes come from Supabase's
+  // CDN rather than through this function.
+  if (supabaseEnabled()) {
+    return Response.redirect(sbPublicUrl(file), 308);
+  }
 
   try {
     const data = await fs.readFile(path.join(UPLOADS_DIR, file));
