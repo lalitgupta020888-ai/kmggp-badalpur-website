@@ -278,3 +278,18 @@ export async function restoreDefaults(collection) {
     return ok('Restored the original content that shipped with the site.');
   });
 }
+
+/* ---------------------------- Portal updates ---------------------------- */
+
+/** Read every government portal now, instead of waiting for the schedule. */
+export async function syncPortalsNow() {
+  return guarded(async () => {
+    const { syncPortals } = await import('@/lib/server/portals');
+    const status = await syncPortals({ force: true });
+    publish();
+    const failed = Object.entries(status.sources || {}).filter(([, s]) => !s.ok).map(([k]) => k.toUpperCase());
+    return failed.length
+      ? fail(`Synced, but these portals did not respond: ${failed.join(', ')}. Their last copy is still shown.`)
+      : ok('All portals synced.');
+  });
+}

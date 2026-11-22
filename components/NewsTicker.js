@@ -21,6 +21,11 @@ export default function NewsTicker({ notices: source = [] }) {
   if (source.length === 0) return null;
 
   const items = [...source, ...source];
+  // A steady reading speed however much is announced: the track's duration
+  // grows with its length instead of the text racing past when portal
+  // updates are added to it.
+  const length = source.reduce((sum, n) => sum + String(n.title).length + (n.sourceLabel ? 10 : 0) + 8, 0);
+  const duration = `${Math.max(42, Math.round(length * 0.22))}s`;
 
   return (
     <section
@@ -33,7 +38,7 @@ export default function NewsTicker({ notices: source = [] }) {
       </div>
 
       <div className="news-ticker-viewport">
-        <div className="news-ticker-track">
+        <div className="news-ticker-track" style={{ animationDuration: duration }}>
           {items.map((notice, index) => {
             const isClone = index >= source.length;
             // An entry saved without a link still belongs in the ticker; it
@@ -54,7 +59,11 @@ export default function NewsTicker({ notices: source = [] }) {
                 tabIndex={isClone ? -1 : undefined}
               >
                 <i className={`bi ${notice.icon}`} aria-hidden="true" />
-                <span>{notice.title}</span>
+                {notice.sourceLabel && <span className={`source-chip ${notice.tone || ''}`}>{notice.sourceLabel}</span>}
+                <span>{notice.tickerTitle || notice.title}</span>
+                {notice.deadline && notice.deadline.days >= 0 && (
+                  <span className="news-ticker-deadline">Last date {notice.deadline.label}</span>
+                )}
                 {notice.isNew && <span className="news-ticker-new">NEW</span>}
                 <span className="news-ticker-dot" aria-hidden="true" />
               </Item>

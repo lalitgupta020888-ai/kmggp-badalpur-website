@@ -1,9 +1,11 @@
 import React from 'react';
+import { unstable_rethrow } from 'next/navigation';
 import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getHomeContent } from '@/lib/server/content';
 import { getSections } from '@/lib/server/sections';
+import { getPortalFeed } from '@/lib/server/portals';
 import HeroSlider from '@/components/HeroSlider';
 import NoticeBoard from '@/components/NoticeBoard';
 import NewsTicker from '@/components/NewsTicker';
@@ -20,7 +22,7 @@ import GalleryMapBand from '@/components/GalleryMapBand';
 export default async function Home() {
   // Every block on this page is admin-owned content, so the page reads it all
   // on the server and hands it down to the presentational components.
-  const [{ ticker, notices, images }, sections] = await Promise.all([
+  const [{ ticker, notices, images }, sections, portal] = await Promise.all([
     getHomeContent(),
     getSections([
       'hero-slides',
@@ -35,6 +37,13 @@ export default async function Home() {
       'recruiters',
       'institute',
     ]),
+    // Never let a portal problem take the home page down.
+    getPortalFeed().catch((error) => {
+      // Let Next's own render signals (e.g. "this page is dynamic") through.
+      unstable_rethrow(error);
+      console.error('[portals] feed failed:', error);
+      return { notices: [], deadlines: [], ticker: [] };
+    }),
   ]);
 
   const STATS = sections['home-stats'];
@@ -73,7 +82,7 @@ export default async function Home() {
       </section>
 
       {/* Running announcements, straight under the figures */}
-      <NewsTicker notices={ticker} />
+      <NewsTicker notices={[...ticker, ...portal.ticker]} />
 
       {/* Welcome + notice board */}
       <section className="section" style={{ background: 'var(--white)' }}>
@@ -147,7 +156,7 @@ export default async function Home() {
             {/* The notice board absorbs whatever height the left column runs
                 to, so both columns finish on the same line */}
             <Col lg={5} className="home-aside">
-              <NoticeBoard notices={notices} />
+              <NoticeBoard notices={notices} portal={portal.notices} deadlines={portal.deadlines} />
               <PrincipalCard principal={sections['principal-card']} />
             </Col>
           </Row>

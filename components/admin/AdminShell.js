@@ -23,6 +23,7 @@ const NAV = [
       { href: '/admin/notices', label: 'Notice Board', icon: 'bi-megaphone-fill' },
       { href: '/admin/gallery', label: 'Photos & Gallery', icon: 'bi-images' },
       { href: '/admin/orders', label: 'Orders & Circulars', icon: 'bi-file-earmark-pdf-fill' },
+      { href: '/admin/portal-updates', label: 'Portal Updates', icon: 'bi-broadcast' },
     ],
   },
   ...sectionGroups().map((group) => ({
@@ -50,6 +51,7 @@ const TITLES = {
   '/admin/notices': ['Notice Board', 'Announcements shown on the home page and /notices'],
   '/admin/gallery': ['Photos & Gallery', 'Albums, photographs and the welcome film'],
   '/admin/orders': ['Orders & Circulars', 'Published PDF documents'],
+  '/admin/portal-updates': ['Portal Updates', 'Automatic updates from BTEUP, JEECUP, scholarship portals and AICTE'],
   '/admin/media': ['Media Library', 'Every file you have uploaded'],
   '/admin/settings': ['Settings', 'Your sign-in details and stored content'],
 };

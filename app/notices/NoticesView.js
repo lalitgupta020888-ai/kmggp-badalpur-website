@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHead from '@/components/SectionHead';
+import PortalUpdates from '@/components/PortalUpdates';
 
 const ALL = 'All';
 
@@ -14,7 +15,7 @@ const ALL = 'All';
  * Content arrives as props from the route, which reads whatever the admin
  * panel currently holds; only the category filter needs browser state.
  */
-export default function NoticesView({ notices, orders, categories, ticker }) {
+export default function NoticesView({ notices, orders, categories, ticker, portal = {}, renderedAt }) {
   const [active, setActive] = useState(ALL);
 
   /* Counts come off the same list the timeline renders, so a category can
@@ -36,7 +37,7 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
         icon="bi-megaphone-fill"
         eyebrow="Announcements"
         title="Notices & Orders"
-        subtitle="Every notice, announcement and official order published by the institute, newest first."
+        subtitle="Every notice, announcement and official order published by the institute — plus live updates from BTEUP, JEECUP, the scholarship portals and AICTE."
         crumbs={[{ label: 'Notices & Orders' }]}
       />
 
@@ -170,6 +171,20 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
               </div>
             </Col>
           </Row>
+
+          <SectionHead
+            eyebrow="Updated Automatically"
+            icon="bi-broadcast-pin"
+            title="Live Updates from Official Portals"
+            subtitle="BTEUP, JEECUP, UP Scholarship, National Scholarship Portal and AICTE — exam schedules, last dates, results and government orders, as soon as they are published."
+          />
+
+          <PortalUpdates
+            notices={portal.notices || []}
+            deadlines={portal.deadlines || []}
+            status={portal.status || null}
+            renderedAt={renderedAt}
+          />
 
           <SectionHead
             eyebrow="Download Centre"
