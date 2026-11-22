@@ -19,9 +19,24 @@ import { useFocusTrap } from '@/lib/focus-trap';
  * video:  { src, poster, caption }
  * action: optional { href, label, icon } shown as a gold button in the bar
  */
+/** The <source> type from the file's extension — uploads may be MP4 or WebM. */
+function videoType(src) {
+  return /\.webm(?:$|[?#])/i.test(String(src || '')) ? 'video/webm' : 'video/mp4';
+}
+
 export default function VideoModal({ video, open, onClose, icon, action, autoPlay = false }) {
   const [muted, setMuted] = useState(autoPlay);
   const [playing, setPlaying] = useState(false);
+  // Each opening starts fresh: the <video> remounts muted only when autoPlay
+  // is set, so the sound button must not carry over the last viewing's state.
+  const [wasOpen, setWasOpen] = useState(open);
+  if (open !== wasOpen) {
+    setWasOpen(open);
+    if (open) {
+      setMuted(autoPlay);
+      setPlaying(false);
+    }
+  }
   const videoRef = useRef(null);
   const closeRef = useRef(null);
   const dialogRef = useRef(null);
@@ -94,7 +109,7 @@ export default function VideoModal({ video, open, onClose, icon, action, autoPla
           onPause={() => setPlaying(false)}
           onEnded={onClose}
         >
-          <source src={video.src} type="video/mp4" />
+          <source src={video.src} type={videoType(video.src)} />
           Your browser cannot play this video.
         </video>
 

@@ -16,6 +16,10 @@ export default function ScrollToTop() {
     <button
       type="button"
       aria-label="Scroll back to top"
+      // Hidden by opacity only, so keep it out of the tab order and the
+      // accessibility tree until it is actually on screen.
+      tabIndex={visible ? 0 : -1}
+      aria-hidden={visible ? undefined : true}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       style={{
         position: 'fixed',

@@ -37,7 +37,12 @@ export default function MediaLibrary({ initial }) {
     files.forEach((file) => formData.append('files', file));
 
     startTransition(async () => {
-      const response = await uploadFiles(formData);
+      // A body over the server's size limit is rejected before the action
+      // runs, so it arrives here as a thrown error rather than { ok: false }.
+      const response = await uploadFiles(formData).catch(() => ({
+        ok: false,
+        message: 'Upload failed. The file may be too large for the server — try a smaller file, or upload fewer files at once.',
+      }));
       setResult(response);
       if (response.ok && response.items) {
         setItems((current) => [...response.items, ...current]);

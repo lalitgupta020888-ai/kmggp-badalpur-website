@@ -1,14 +1,15 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
-import { getDepartment } from '@/lib/server/departments';
+import { findDepartment } from '@/lib/server/departments';
 import { getSection } from '@/lib/server/sections';
 
 
 
 export default async function AchievementsPage({ params }) {
   const { dept } = await params;
-  const department = await getDepartment(dept);
+  const department = await findDepartment(dept);
+  if (!department) notFound();
   const text = await getSection('department-pages');
   const ACHIEVEMENTS = department.achievements || [];
   const AWARDS = department.awards || [];

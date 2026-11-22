@@ -1,6 +1,7 @@
 import PasswordForm from '@/components/admin/sections/PasswordForm';
 import { getSession } from '@/lib/server/auth';
 import { DATA_DIR } from '@/lib/server/paths';
+import { supabaseEnabled } from '@/lib/server/supabase';
 
 export const metadata = { title: 'Settings' };
 
@@ -9,7 +10,9 @@ export default async function AdminSettingsPage() {
 
   // A relative path means the content is sitting on ordinary container disk,
   // which a redeploy wipes. Worth saying plainly rather than discovering later.
-  const persistent = DATA_DIR.startsWith('/') && !DATA_DIR.includes('.data');
+  // Supabase holds everything off the server, so a redeploy loses nothing.
+  const cloud = supabaseEnabled();
+  const persistent = cloud || (DATA_DIR.startsWith('/') && !DATA_DIR.includes('.data'));
 
   return (
     <>
@@ -31,7 +34,11 @@ export default async function AdminSettingsPage() {
           <i className="bi bi-hdd-stack-fill head-icon" aria-hidden="true" />
           <div>
             <h2>Where your content is stored</h2>
-            <p>Everything you save and upload lives in one folder on the server</p>
+            <p>
+              {cloud
+                ? 'Everything you save and upload is kept in Supabase (database and storage)'
+                : 'Everything you save and upload lives in one folder on the server'}
+            </p>
           </div>
           <div className="head-actions">
             <span className={`admin-badge ${persistent ? 'live' : ''}`}>
@@ -40,6 +47,7 @@ export default async function AdminSettingsPage() {
           </div>
         </div>
         <div className="admin-card-body">
+          {!cloud && (
           <div className="admin-field">
             <label>Storage folder</label>
             <code
@@ -56,6 +64,7 @@ export default async function AdminSettingsPage() {
               {DATA_DIR}
             </code>
           </div>
+          )}
 
           {!persistent && (
             <div className="admin-flash error mb-0">

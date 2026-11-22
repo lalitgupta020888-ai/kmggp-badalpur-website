@@ -40,8 +40,31 @@ export async function GET(request, { params }) {
   // With Supabase, uploads live in a public storage bucket. Redirecting keeps
   // every existing /media/... URL working while the bytes come from Supabase's
   // CDN rather than through this function.
+  //
+  // Images are the exception: next/image's optimiser fetches local sources
+  // without following redirects, so an uploaded photo rendered through
+  // <Image> would break. Those (capped at a few MB) are passed through instead;
+  // the immutable cache header lets the CDN keep them after the first hit.
   if (supabaseEnabled()) {
-    return Response.redirect(sbPublicUrl(file), 308);
+    if (!contentType.startsWith('image/')) {
+      return Response.redirect(sbPublicUrl(file), 308);
+    }
+    try {
+      const upstream = await fetch(sbPublicUrl(file));
+      if (upstream.status === 404 || upstream.status === 400) {
+        return new Response('Not found', { status: 404 });
+      }
+      if (!upstream.ok) throw new Error(`storage responded ${upstream.status}`);
+      return new Response(upstream.body, {
+        headers: {
+          'Content-Type': contentType,
+          'Cache-Control': 'public, max-age=31536000, immutable',
+        },
+      });
+    } catch (error) {
+      console.error('[media] Failed to fetch from storage:', error);
+      return new Response('Internal error', { status: 502 });
+    }
   }
 
   try {

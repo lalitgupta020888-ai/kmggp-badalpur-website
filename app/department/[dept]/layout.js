@@ -2,12 +2,15 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PageHeader from '@/components/PageHeader';
 import SideNav from '@/components/SideNav';
-import { getDepartment, deptNav } from '@/lib/server/departments';
+import { notFound } from 'next/navigation';
+import { findDepartment, deptNav } from '@/lib/server/departments';
 
 export default async function DepartmentLayout({ children, params }) {
   // In Next.js 16 `params` is a Promise, unwrapped with React's `use` hook.
   const { dept } = await params;
-  const department = await getDepartment(dept);
+  const department = await findDepartment(dept);
+  // A mistyped or retired slug is a real 404, not an empty "Department" page.
+  if (!department) notFound();
 
   const navItems = deptNav(department).map((item) => ({
     href: `/department/${dept}${item.path}`,

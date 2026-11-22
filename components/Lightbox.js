@@ -29,13 +29,21 @@ export default function Lightbox({ images, index, onClose, onIndexChange }) {
     [open, index, images.length, onIndexChange]
   );
 
+  // The latest handlers, read by the key listener. Keeping them out of the
+  // effect below means stepping to another photo does not re-run it — which
+  // would otherwise yank keyboard focus back to Close on every Next/Previous.
+  const handlers = useRef({ onClose, step });
+  useEffect(() => {
+    handlers.current = { onClose, step };
+  });
+
   useEffect(() => {
     if (!open) return undefined;
 
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') onClose();
-      if (event.key === 'ArrowRight') step(1);
-      if (event.key === 'ArrowLeft') step(-1);
+      if (event.key === 'Escape') handlers.current.onClose();
+      if (event.key === 'ArrowRight') handlers.current.step(1);
+      if (event.key === 'ArrowLeft') handlers.current.step(-1);
     };
 
     document.addEventListener('keydown', onKeyDown);
@@ -49,7 +57,7 @@ export default function Lightbox({ images, index, onClose, onIndexChange }) {
       document.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = previousOverflow;
     };
-  }, [open, onClose, step]);
+  }, [open]);
 
   if (!open) return null;
 

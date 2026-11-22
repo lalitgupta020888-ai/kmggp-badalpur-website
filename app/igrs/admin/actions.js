@@ -22,9 +22,18 @@ export async function verifyIgrsLogin(username, password) {
     return { ok: false, error: `Too many failed attempts. Try again in about ${gate.retryAfterMinutes} minutes.` };
   }
 
+  // Counted before the slow check so parallel requests can't outrun the limit.
+  recordFailure(key);
+
   const user = String(username || '').trim();
-  if (!(await checkCredentials(user, String(password || '')))) {
-    recordFailure(key);
+  let valid;
+  try {
+    valid = await checkCredentials(user, String(password || ''));
+  } catch (error) {
+    console.error('[igrs] credential check failed:', error);
+    return { ok: false, error: 'Sign-in is unavailable right now. Please try again in a minute.' };
+  }
+  if (!valid) {
     return { ok: false, error: 'Invalid username or password. Please try again.' };
   }
 

@@ -21,13 +21,6 @@ export async function signIn(_previousState, formData) {
     return { error: 'Enter both your admin ID and password.' };
   }
 
-  if (!(await isAdminConfigured())) {
-    return {
-      error:
-        'No admin password has been set up yet. Generate one with `node scripts/admin-password.mjs` and add ADMIN_PASSWORD_HASH to the hosting environment.',
-    };
-  }
-
   const key = await clientKey();
   const gate = checkAttempts(key);
   if (!gate.allowed) {
@@ -37,9 +30,26 @@ export async function signIn(_previousState, formData) {
       }.`,
     };
   }
+  // Count the attempt before the slow password check, so a burst of parallel
+  // requests cannot all slip past the limit while scrypt runs. A successful
+  // sign-in clears it again below.
+  recordFailure(key);
 
-  if (!(await checkCredentials(username, password))) {
-    recordFailure(key);
+  let valid;
+  try {
+    if (!(await isAdminConfigured())) {
+      return {
+        error:
+          'No admin password has been set up yet. Generate one with `node scripts/admin-password.mjs` and add ADMIN_PASSWORD_HASH to the hosting environment.',
+      };
+    }
+    valid = await checkCredentials(username, password);
+  } catch (error) {
+    console.error('[login] credential check failed:', error);
+    return { error: 'Sign-in is unavailable right now. Please try again in a minute.' };
+  }
+
+  if (!valid) {
     // The same message for a wrong ID and a wrong password, so the form cannot
     // be used to find out which admin IDs exist.
     return { error: 'Incorrect admin ID or password.' };

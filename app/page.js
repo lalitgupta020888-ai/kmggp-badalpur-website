@@ -301,7 +301,7 @@ export default async function Home() {
                   <span className="quote-mark">&rdquo;</span>
                   <p>{item.quote}</p>
                   <div className="quote-author">
-                    <span className="quote-avatar">{item.initial}</span>
+                    <span className="quote-avatar">{item.initial || String(item.name || '').trim().charAt(0)}</span>
                     <div>
                       <div className="quote-name">{item.name}</div>
                       <div className="quote-meta">{item.meta}</div>

@@ -53,7 +53,8 @@ const underThousand = (n) =>
 /** Amount in words, Indian grouping — a pay slip is expected to carry it. */
 function inWords(value) {
   const amount = Math.round(value);
-  if (amount <= 0) return 'Zero';
+  if (amount < 0) return `Minus ${inWords(-amount)}`;
+  if (amount === 0) return 'Zero';
 
   const parts = [];
   const groups = [

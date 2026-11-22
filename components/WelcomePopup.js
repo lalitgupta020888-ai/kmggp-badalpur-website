@@ -20,6 +20,20 @@ import { useFocusTrap } from '@/lib/focus-trap';
  * new visit does, subject to `frequency`.
  */
 
+
+/**
+ * The visitor's localStorage, or null. Merely reading `window.localStorage`
+ * throws a SecurityError when the browser blocks site data, and an uncaught
+ * throw in an effect would take the whole page down with it.
+ */
+function browserStorage() {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
 export default function WelcomePopup({ popup, galleryAlbum }) {
   // Opened from an effect rather than initial state, so the server-rendered
   // markup and the first client render agree before anything appears.
@@ -38,7 +52,7 @@ export default function WelcomePopup({ popup, galleryAlbum }) {
     const onKeyDown = (event) => {
       if (event.key === 'Escape') {
         setOpen(false);
-        markSeen(popup, window.localStorage);
+        markSeen(popup, browserStorage());
       }
     };
     document.addEventListener('keydown', onKeyDown);
@@ -47,13 +61,13 @@ export default function WelcomePopup({ popup, galleryAlbum }) {
 
   useEffect(() => {
     if (!enabled) return;
-    if (alreadySeen(popup, window.localStorage)) return;
+    if (alreadySeen(popup, browserStorage())) return;
     setOpen(true);
   }, [enabled, popup]);
 
   const close = () => {
     setOpen(false);
-    markSeen(popup, window.localStorage);
+    markSeen(popup, browserStorage());
   };
 
   if (!enabled) return null;

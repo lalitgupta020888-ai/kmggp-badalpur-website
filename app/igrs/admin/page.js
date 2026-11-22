@@ -179,6 +179,7 @@ function AdminDashboard({ onLogout }) {
   const [search, setSearch] = useState('');
   const [drafts, setDrafts] = useState({});
   const [savedRef, setSavedRef] = useState('');
+  const [savingRef, setSavingRef] = useState('');
 
   // Grievances live in Supabase; the server returns them only to a signed-in
   // session. A lapsed session sends the committee member back to the login.
@@ -202,13 +203,24 @@ function AdminDashboard({ onLogout }) {
   const handleUpdate = async (refNumber) => {
     const draft = drafts[refNumber] || {};
     const current = grievances.find((g) => g.refNumber === refNumber);
-    if (!current) return;
-    const result = await saveGrievanceUpdate(
-      current.type,
-      refNumber,
-      draft.status ?? current.status,
-      draft.remarks ?? current.remarks,
-    ).catch(() => ({ error: 'Could not save the update.' }));
+    if (!current || savingRef) return;
+
+    const status = draft.status ?? current.status;
+    const remarks = draft.remarks ?? current.remarks;
+    // Nothing changed: don't touch the record or email the complainant again.
+    if (status === current.status && String(remarks || '').trim() === String(current.remarks || '').trim()) {
+      setDrafts((d) => {
+        const next = { ...d };
+        delete next[refNumber];
+        return next;
+      });
+      return;
+    }
+
+    setSavingRef(refNumber);
+    const result = await saveGrievanceUpdate(current.type, refNumber, status, remarks)
+      .catch(() => ({ error: 'Could not save the update.' }))
+      .finally(() => setSavingRef(''));
     if (result.signedOut) {
       onLogout();
       return;
@@ -236,7 +248,7 @@ function AdminDashboard({ onLogout }) {
         !term
           ? true
           : g.refNumber.toLowerCase().includes(term) ||
-            String(g.name || g.parentName || '').toLowerCase().includes(term) ||
+            `${g.name || ''} ${g.parentName || ''}`.toLowerCase().includes(term) ||
             String(g.subject || '').toLowerCase().includes(term)
       )
       .sort((a, b) => new Date(b.submittedOn) - new Date(a.submittedOn));
@@ -434,9 +446,10 @@ function AdminDashboard({ onLogout }) {
                         type="button"
                         className="btn-gold w-100 justify-content-center"
                         onClick={() => handleUpdate(g.refNumber)}
+                        disabled={savingRef === g.refNumber}
                       >
                         <i className="bi bi-save-fill" aria-hidden="true" />
-                        Save Update
+                        {savingRef === g.refNumber ? 'Saving…' : 'Save Update'}
                       </button>
 
                       {savedRef === g.refNumber && (

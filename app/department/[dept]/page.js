@@ -1,7 +1,8 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Image from 'next/image';
-import { getDepartment } from '@/lib/server/departments';
+import { notFound } from 'next/navigation';
+import { findDepartment } from '@/lib/server/departments';
 import { getSection } from '@/lib/server/sections';
 
 /**
@@ -94,7 +95,8 @@ function StaffDirectory({ department }) {
 
 export default async function DepartmentHome({ params }) {
   const { dept } = await params;
-  const department = await getDepartment(dept);
+  const department = await findDepartment(dept);
+  if (!department) notFound();
   const text = await getSection('department-pages');
 
   if (department.staff) return <StaffDirectory department={department} />;

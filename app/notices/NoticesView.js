@@ -86,10 +86,23 @@ export default function NoticesView({ notices, orders, categories, ticker }) {
                               {notice.isNew && <span className="badge-new">NEW</span>}
                             </div>
                             <h3 className="h5 notice-entry-title">{notice.title}</h3>
-                            <Link href={notice.link} className="notice-entry-link">
-                              Read the notice
-                              <i className="bi bi-arrow-right" aria-hidden="true" />
-                            </Link>
+                            {notice.link &&
+                              (notice.external ? (
+                                <a
+                                  href={notice.link}
+                                  className="notice-entry-link"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  Read the notice
+                                  <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
+                                </a>
+                              ) : (
+                                <Link href={notice.link} className="notice-entry-link">
+                                  Read the notice
+                                  <i className="bi bi-arrow-right" aria-hidden="true" />
+                                </Link>
+                              ))}
                           </div>
                         </li>
                       ))}

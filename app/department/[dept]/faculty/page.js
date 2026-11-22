@@ -1,14 +1,15 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { notFound } from 'next/navigation';
-import { getDepartment } from '@/lib/server/departments';
+import { findDepartment } from '@/lib/server/departments';
 import { monogram } from '@/lib/leadership';
 import { getSection } from '@/lib/server/sections';
 
 
 export default async function FacultyPage({ params }) {
   const { dept } = await params;
-  const department = await getDepartment(dept);
+  const department = await findDepartment(dept);
+  if (!department) notFound();
   const FACULTY = department.faculty || [];
   const text = await getSection('department-pages');
 

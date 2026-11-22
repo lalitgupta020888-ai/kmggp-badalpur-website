@@ -34,7 +34,12 @@ export default function PageHeader({ icon = 'bi-mortarboard-fill', eyebrow, titl
               {crumb.href && i !== crumbs.length - 1 ? (
                 <Link href={crumb.href}>{crumb.label}</Link>
               ) : (
-                <span className="current" aria-current="page">{crumb.label}</span>
+                <span
+                  className="current"
+                  aria-current={i === crumbs.length - 1 ? 'page' : undefined}
+                >
+                  {crumb.label}
+                </span>
               )}
             </React.Fragment>
           ))}
