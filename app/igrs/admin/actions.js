@@ -148,18 +148,30 @@ export async function fetchGrievances() {
   }
 }
 
-/** Committee only: update one grievance's status and remarks. */
-export async function saveGrievanceUpdate(type, refNumber, status, remarks, notify = true) {
+/**
+ * Committee only: record an update — status, freshly typed remarks and an
+ * optional PDF letter (required when marking Resolved). Sent as FormData so
+ * the letter can travel with it.
+ */
+export async function saveGrievanceUpdate(formData) {
   if (!(await getIgrsSession())) return { signedOut: true };
+  const field = (name) => String(formData?.get?.(name) ?? '');
+  const letter = formData?.get?.('letter');
   try {
-    const { grievance, changed } = await updateGrievanceStatus(type, refNumber, status, remarks);
-    if (changed && notify) {
-      await notifyGrievanceUpdate(grievance).catch((error) => console.error('[igrs] mail failed:', error));
+    const { grievance, changed, letter: stored } = await updateGrievanceStatus(
+      field('type'),
+      field('refNumber'),
+      field('status'),
+      field('remarks'),
+      { letter: letter && typeof letter === 'object' && letter.size > 0 ? letter : null },
+    );
+    if (changed && field('notify') !== 'false') {
+      await notifyGrievanceUpdate(grievance, stored).catch((error) => console.error('[igrs] mail failed:', error));
     }
     return { grievance, changed };
   } catch (error) {
     console.error('[igrs] update failed:', error);
     const message = String(error?.message || '');
-    return { error: message.startsWith('[supabase]') ? 'Could not save the update.' : message };
+    return { error: message.startsWith('[supabase]') || !message ? 'Could not save the update.' : message };
   }
 }

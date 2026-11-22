@@ -7951,3 +7951,82 @@ html[data-a11y-cursor] button {
 .portal-source-state { color: #17683a !important; font-weight: 600; margin-top: 2px; }
 .portal-source-state.is-stale { color: #a52222 !important; }
 .portal-source > i:last-child { color: var(--ink-faint); font-size: 0.8rem; }
+
+/* IGRS — committee letters */
+.igrs-last-remark {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--gold-500);
+  border-radius: 8px;
+  background: var(--paper);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.igrs-last-remark span {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+.letter-drop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1.5px dashed var(--hairline);
+  border-radius: 12px;
+  background: var(--white);
+  transition: border-color 0.2s, background 0.2s;
+}
+.letter-drop:hover,
+.letter-drop:focus-within { border-color: var(--gold-500); background: #fffbef; }
+.letter-drop input[type='file'] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.letter-drop > i { font-size: 1.6rem; color: var(--gold-600); }
+.letter-drop.has-file { border-style: solid; border-color: #23955a; background: #f1faf4; }
+.letter-drop.has-file > i { color: #c43c3c; }
+.letter-drop.is-required { border-color: rgba(196, 60, 60, 0.55); }
+.letter-drop-text { display: flex; flex-direction: column; min-width: 0; }
+.letter-drop-text strong { font-size: 0.88rem; color: var(--navy-800); overflow-wrap: anywhere; }
+.letter-drop-text small { font-size: 0.74rem; color: var(--ink-faint); }
+.letter-clear {
+  position: relative;
+  z-index: 1;
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--mist);
+  color: var(--ink-soft);
+}
+.letter-clear:hover { background: #fbe3e3; color: #a52222; }
+
+.letter-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #fbe3e3;
+  color: #a52222;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.letter-link:hover { background: #f6cfcf; color: #7f1717; }

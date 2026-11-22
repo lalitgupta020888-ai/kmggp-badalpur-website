@@ -211,6 +211,17 @@ function StatusLookup() {
                                 <span className="when">{formatDate(h.at)}</span>
                               </div>
                               {h.remarks && <p>{h.remarks}</p>}
+                              {h.letter?.file && (
+                                <a
+                                  className="letter-link"
+                                  href={`/igrs/letter/${h.letter.file}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
+                                  Download letter ({h.letter.name})
+                                </a>
+                              )}
                             </div>
                           </li>
                         ))}

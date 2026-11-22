@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Row, Col, Form, Button, Alert, Modal } from 'react-bootstrap';
 import {
   STATUSES,
@@ -19,6 +19,8 @@ import {
 import { PasswordInput, StrengthMeter } from './AuthPanels';
 
 const PAGE_SIZE = 12;
+// Matches the server limit (lib/server/igrs-letters.js); Vercel caps bodies at ~4.5 MB.
+const LETTER_MAX_BYTES = 4 * 1024 * 1024;
 
 export function StatusPill({ status }) {
   const meta = STATUS_META[status] || STATUS_META.Pending;
@@ -166,19 +168,47 @@ function ChangePasswordModal({ show, onHide, onSignedOut }) {
 
 function GrievanceCard({ g, options, onSave, saving, saved }) {
   const [status, setStatus] = useState(g.status);
-  const [remarks, setRemarks] = useState(g.remarks || '');
+  // Remarks are typed fresh for every update — the box starts empty.
+  const [remarks, setRemarks] = useState('');
+  const [letter, setLetter] = useState(null);
+  const [letterError, setLetterError] = useState('');
   const [notify, setNotify] = useState(true);
   const [expanded, setExpanded] = useState(false);
+  const fileRef = useRef(null);
 
   // Fresh data from the server (after a save or a refresh) resets the draft.
   const [seen, setSeen] = useState(g.lastUpdated);
   if (seen !== g.lastUpdated) {
     setSeen(g.lastUpdated);
     setStatus(g.status);
-    setRemarks(g.remarks || '');
+    setRemarks('');
+    setLetter(null);
+    setLetterError('');
   }
 
-  const dirty = status !== g.status || remarks.trim() !== String(g.remarks || '').trim();
+  const hasLetterOnFile = (g.history || []).some((h) => h.letter?.file);
+  const needsLetter = status === 'Resolved' && !hasLetterOnFile && !letter;
+  const ready = remarks.trim().length > 0 && !needsLetter;
+
+  const pickLetter = (file) => {
+    setLetterError('');
+    if (!file) return setLetter(null);
+    if (file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)) {
+      setLetterError('Only a PDF file can be attached.');
+      return setLetter(null);
+    }
+    if (file.size > LETTER_MAX_BYTES) {
+      setLetterError('The PDF must be under 4 MB. Scan at a lower resolution or compress it.');
+      return setLetter(null);
+    }
+    return setLetter(file);
+  };
+
+  const clearLetter = () => {
+    setLetter(null);
+    setLetterError('');
+    if (fileRef.current) fileRef.current.value = '';
+  };
   const open = g.status === 'Pending' || g.status === 'In Progress';
   const age = ageInDays(g.submittedOn);
   const long = String(g.description || '').length > 280;
@@ -256,6 +286,12 @@ function GrievanceCard({ g, options, onSave, saving, saved }) {
                   <StatusPill status={h.status} />
                   <span className="when">{formatDate(h.at)}</span>
                   {h.remarks && <p>{h.remarks}</p>}
+                  {h.letter?.file && (
+                    <a className="letter-link" href={`/igrs/letter/${h.letter.file}`} target="_blank" rel="noopener noreferrer">
+                      <i className="bi bi-file-earmark-pdf-fill" aria-hidden="true" />
+                      {h.letter.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ol>
@@ -282,17 +318,75 @@ function GrievanceCard({ g, options, onSave, saving, saved }) {
             ))}
           </div>
 
-          <Form.Label htmlFor={`remarks-${g.refNumber}`}>Committee Remarks</Form.Label>
+          {g.remarks && (
+            <div className="igrs-last-remark">
+              <span>Last remark</span>
+              {g.remarks}
+            </div>
+          )}
+
+          <Form.Label htmlFor={`remarks-${g.refNumber}`}>
+            Committee Remarks <span className="text-gold">*</span>
+          </Form.Label>
           <Form.Control
             id={`remarks-${g.refNumber}`}
             as="textarea"
             rows={3}
             maxLength={2000}
-            className="mb-2"
+            className="mb-3"
             value={remarks}
-            placeholder="Action taken, or the reason for the decision — the complainant sees this."
+            placeholder={
+              status === 'Resolved'
+                ? 'Describe how the grievance was resolved. The complainant sees this.'
+                : 'Type the committee remarks for this update. The complainant sees this.'
+            }
             onChange={(e) => setRemarks(e.target.value)}
           />
+
+          <Form.Label htmlFor={`letter-${g.refNumber}`}>
+            {status === 'Resolved' ? 'Resolution Letter (PDF)' : 'Letter (PDF, optional)'}
+            {needsLetter && <span className="text-gold"> *</span>}
+          </Form.Label>
+          <div className={`letter-drop ${letter ? 'has-file' : ''} ${needsLetter ? 'is-required' : ''}`}>
+            <input
+              ref={fileRef}
+              id={`letter-${g.refNumber}`}
+              type="file"
+              accept="application/pdf,.pdf"
+              onChange={(e) => pickLetter(e.target.files?.[0] || null)}
+            />
+            <i className={`bi ${letter ? 'bi-file-earmark-pdf-fill' : 'bi-cloud-arrow-up'}`} aria-hidden="true" />
+            <span className="letter-drop-text">
+              {letter ? (
+                <>
+                  <strong>{letter.name}</strong>
+                  <small>{(letter.size / 1024 / 1024).toFixed(2)} MB · click to change</small>
+                </>
+              ) : (
+                <>
+                  <strong>Choose PDF letter</strong>
+                  <small>
+                    {status === 'Resolved' && hasLetterOnFile
+                      ? 'A letter is already on file; attach another only if needed'
+                      : 'Signed letter scanned as PDF · up to 4 MB'}
+                  </small>
+                </>
+              )}
+            </span>
+            {letter && (
+              <button type="button" className="letter-clear" aria-label="Remove the chosen letter" onClick={clearLetter}>
+                <i className="bi bi-x-lg" aria-hidden="true" />
+              </button>
+            )}
+          </div>
+          {letterError && <p className="small text-danger mt-1 mb-0">{letterError}</p>}
+          {needsLetter && !letterError && (
+            <p className="small mt-1 mb-0" style={{ color: '#a52222' }}>
+              <i className="bi bi-info-circle me-1" aria-hidden="true" />
+              Attach the resolution letter to mark this grievance Resolved.
+            </p>
+          )}
+          <div className="mb-3" />
           <Form.Check
             type="checkbox"
             id={`notify-${g.refNumber}`}
@@ -306,11 +400,12 @@ function GrievanceCard({ g, options, onSave, saving, saved }) {
             <button
               type="button"
               className="btn-gold flex-grow-1 justify-content-center"
-              onClick={() => onSave(g, status, remarks, notify)}
-              disabled={saving || !dirty}
+              onClick={() => onSave(g, { status, remarks, notify, letter })}
+              disabled={saving || !ready}
+              title={!remarks.trim() ? 'Type the committee remarks first' : needsLetter ? 'Attach the resolution letter first' : undefined}
             >
               {saving ? <span className="spinner-border spinner-border-sm" aria-hidden="true" /> : <i className="bi bi-save-fill" aria-hidden="true" />}
-              {saving ? 'Saving…' : dirty ? 'Save Update' : 'No Changes'}
+              {saving ? (letter ? 'Uploading…' : 'Saving…') : status === 'Resolved' ? 'Resolve Grievance' : 'Save Update'}
             </button>
             <button
               type="button"
@@ -379,11 +474,18 @@ export default function Dashboard({ onLogout, options }) {
     load();
   }, [load]);
 
-  const handleSave = async (g, status, remarks, notify) => {
+  const handleSave = async (g, { status, remarks, notify, letter }) => {
     if (savingRef) return;
     setSavingRef(g.refNumber);
-    const result = await saveGrievanceUpdate(g.type, g.refNumber, status, remarks, notify)
-      .catch(() => ({ error: 'Could not save the update.' }))
+    const form = new FormData();
+    form.set('type', g.type);
+    form.set('refNumber', g.refNumber);
+    form.set('status', status);
+    form.set('remarks', remarks);
+    form.set('notify', notify ? 'true' : 'false');
+    if (letter) form.set('letter', letter);
+    const result = await saveGrievanceUpdate(form)
+      .catch(() => ({ error: 'Could not save the update. If a letter was attached, check that it is a PDF under 4 MB.' }))
       .finally(() => setSavingRef(''));
     if (result.signedOut) {
       onLogout('Your session has ended. Please sign in again.');
