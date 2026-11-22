@@ -12,6 +12,10 @@ function friendly(error, fallback) {
 /** Public: submit a grievance. Returns `{ grievance }` or `{ error }`. */
 export async function submitGrievance(type, data) {
   const guard = await guardForm('igrs', data);
+  // A bot that filled the hidden field gets a believable receipt and nothing is stored.
+  if (guard.silent) {
+    return { grievance: { type, refNumber: 'GR' + Date.now().toString(36).toUpperCase(), status: 'Pending' } };
+  }
   if (!guard.ok) return { error: guard.error || 'Could not save your grievance. Please try again.' };
 
   try {
@@ -20,7 +24,8 @@ export async function submitGrievance(type, data) {
     await notifyNewGrievance(grievance).catch((error) => console.error('[igrs] mail failed:', error));
     return { grievance };
   } catch (error) {
-    console.error('[igrs] submit failed:', error);
+    // Validation messages are the visitor's to fix; only real failures are logged.
+    if (friendly(error, '') === '') console.error('[igrs] submit failed:', error);
     return { error: friendly(error, 'Could not save your grievance. Please try again.') };
   }
 }

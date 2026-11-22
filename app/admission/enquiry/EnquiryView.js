@@ -72,7 +72,7 @@ const QUICK_LINKS = [
 ];
 
 export default function EnquiryView({ officeHours }) {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState('');
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
 
@@ -86,7 +86,7 @@ export default function EnquiryView({ officeHours }) {
     }));
     setSending(false);
     if (result.error) return setError(result.error);
-    setSubmitted(true);
+    setSubmitted(result.ref || 'sent');
   };
 
   return (
@@ -146,8 +146,14 @@ export default function EnquiryView({ officeHours }) {
                       </div>
                       <p className="mt-3 mb-4">
                         Thank you for reaching out. Our admission team will contact you within one
-                        working day on the details you provided.
+                        working day on the details you provided. A confirmation has been emailed to you.
                       </p>
+                      {submitted !== 'sent' && (
+                        <div className="ref-badge mb-4">
+                          <span className="ref-label">Enquiry Reference</span>
+                          <span className="ref-value">{submitted}</span>
+                        </div>
+                      )}
                       <div className="d-flex flex-wrap gap-3 justify-content-center">
                         <Link href="/admission/process" className="btn-gold">
                           <i className="bi bi-signpost-split" aria-hidden="true" />
@@ -156,7 +162,7 @@ export default function EnquiryView({ officeHours }) {
                         <Button
                           type="button"
                           className="btn-outline-navy"
-                          onClick={() => setSubmitted(false)}
+                          onClick={() => setSubmitted('')}
                         >
                           <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
                           Submit Another Enquiry

@@ -7,8 +7,8 @@ import SideNav from '@/components/SideNav';
 
 export const IGRS_NAV_ITEMS = [
   { href: '/igrs/student', label: 'Student Grievance', icon: 'bi-mortarboard-fill' },
-  { href: '/igrs/parent', label: 'Parent Grievance', icon: 'bi-people-fill' },
-  { href: '/igrs/employee', label: 'Employee Grievance', icon: 'bi-person-badge-fill' },
+  { href: '/igrs/parent', label: 'Parent / Guardian Grievance', icon: 'bi-people-fill' },
+  { href: '/igrs/employee', label: 'Faculty / Staff Grievance', icon: 'bi-person-badge-fill' },
   { href: '/igrs/status', label: 'Check Status', icon: 'bi-search' },
   { href: '/igrs/admin', label: 'Admin Login', icon: 'bi-person-lock' },
 ];

@@ -9,6 +9,7 @@ import {
   STATUSES,
   STATUS_META,
   TYPE_META,
+  categoryLabel,
   formatDate,
 } from '@/lib/igrs';
 import { lookupGrievance } from '@/app/igrs/actions';
@@ -59,7 +60,7 @@ function StatusLookup() {
 
   // Lookups go to the server, which returns only the case's status fields.
   const runLookup = async (ref) => {
-    const target = String(ref || '').trim().toUpperCase();
+    const target = String(ref || '').replace(/\s+/g, '').toUpperCase();
     if (!target) return setLookup({ state: 'idle' });
     setLookup({ state: 'loading' });
     const result = await lookupGrievance(target).catch(() => ({ error: true }));
@@ -99,7 +100,10 @@ function StatusLookup() {
                     type="text"
                     value={refInput}
                     onChange={(e) => setRefInput(e.target.value)}
-                    placeholder="e.g. GR1234567890123"
+                    placeholder="e.g. GRS261122K7Q4M"
+                    autoCapitalize="characters"
+                    spellCheck={false}
+                    className="text-uppercase ref-input"
                     required
                   />
                 </div>
@@ -161,7 +165,7 @@ function StatusLookup() {
                   <span className="icon-tile icon-tile-sm"><i className="bi bi-tag-fill" aria-hidden="true" /></span>
                   <div>
                     <div className="label">Category</div>
-                    <p className="value text-capitalize">{g.category || '—'}</p>
+                    <p className="value">{categoryLabel(g.type, g.category) || '—'}</p>
                   </div>
                 </div>
                 <div className="contact-line">
@@ -184,6 +188,41 @@ function StatusLookup() {
                     <div className="label">Committee Remarks</div>
                     <p className="value">{g.remarks}</p>
                   </div>
+                </div>
+
+                {g.history?.length > 0 && (
+                  <div className="igrs-public-history">
+                    <h4 className="h6 fw-bold">
+                      <i className="bi bi-clock-history me-2 text-gold" aria-hidden="true" />
+                      Case Timeline
+                    </h4>
+                    <ol>
+                      {g.history
+                        .slice()
+                        .reverse()
+                        .map((h, i) => (
+                          <li key={`${h.at}-${i}`} className={STATUS_META[h.status]?.tone}>
+                            <span className="dot">
+                              <i className={`bi ${STATUS_META[h.status]?.icon || 'bi-circle'}`} aria-hidden="true" />
+                            </span>
+                            <div>
+                              <div className="d-flex flex-wrap gap-2 align-items-baseline">
+                                <strong>{h.status}</strong>
+                                <span className="when">{formatDate(h.at)}</span>
+                              </div>
+                              {h.remarks && <p>{h.remarks}</p>}
+                            </div>
+                          </li>
+                        ))}
+                    </ol>
+                  </div>
+                )}
+
+                <div className="d-flex flex-wrap gap-2 mt-4 no-print">
+                  <button type="button" className="btn-outline-navy btn-sm" onClick={() => window.print()}>
+                    <i className="bi bi-printer" aria-hidden="true" />
+                    Print Status
+                  </button>
                 </div>
               </div>
             )}

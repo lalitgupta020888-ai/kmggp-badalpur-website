@@ -45,7 +45,7 @@ export default function ContactView({ officeHours, topbar = {} }) {
     { icon: 'bi-clock-fill', label: 'Office Hours', value: officeHours },
   ];
 
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState('');
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
 
@@ -59,7 +59,7 @@ export default function ContactView({ officeHours, topbar = {} }) {
     }));
     setSending(false);
     if (result.error) return setError(result.error);
-    setSubmitted(true);
+    setSubmitted(result.ref || 'sent');
   };
 
   return (
@@ -105,10 +105,31 @@ export default function ContactView({ officeHours, topbar = {} }) {
                 </div>
                 <div className="panel-body">
                   {submitted ? (
-                    <Alert variant="success" role="status" className="d-flex align-items-center gap-3 border-0">
-                      <i className="bi bi-check-circle-fill fs-4" aria-hidden="true" />
-                      <span>Your message has been sent successfully. We will get back to you soon.</span>
-                    </Alert>
+                    <div className="text-center py-4" role="status">
+                      <span className="igrs-receipt-seal" aria-hidden="true">
+                        <i className="bi bi-envelope-check-fill" />
+                      </span>
+                      <h3 className="h4 fw-bold mb-2">Message Sent</h3>
+                      <div className="gold-flourish">
+                        <i className="bi bi-diamond-fill" aria-hidden="true" />
+                      </div>
+                      <p className="mt-3">
+                        Thank you for writing to us. Your message has reached the institute office
+                        and we will reply to your email soon.
+                      </p>
+                      {submitted !== 'sent' && (
+                        <div className="ref-badge">
+                          <span className="ref-label">Message Reference</span>
+                          <span className="ref-value">{submitted}</span>
+                        </div>
+                      )}
+                      <div className="mt-4">
+                        <Button type="button" className="btn-outline-navy" onClick={() => setSubmitted('')}>
+                          <i className="bi bi-arrow-counterclockwise" aria-hidden="true" />
+                          Send Another Message
+                        </Button>
+                      </div>
+                    </div>
                   ) : (
                     <Form onSubmit={handleSubmit} className="premium-form">
                       {/* Hidden from people; bots fill it in and are quietly dropped. */}
@@ -135,11 +156,29 @@ export default function ContactView({ officeHours, topbar = {} }) {
                             <Form.Label>Email Address</Form.Label>
                             <div className="input-icon">
                               <i className="bi bi-envelope-fill" aria-hidden="true" />
-                              <Form.Control name="email" type="email" placeholder="you@example.com" required />
+                              <Form.Control name="email" type="email" placeholder="you@example.com" maxLength={200} required />
                             </div>
                           </Form.Group>
                         </Col>
                       </Row>
+
+                      <Form.Group className="mb-3" controlId="contact-mobile">
+                        <Form.Label>
+                          Mobile Number <span className="text-muted small">(optional)</span>
+                        </Form.Label>
+                        <div className="input-icon">
+                          <i className="bi bi-telephone-fill" aria-hidden="true" />
+                          <Form.Control
+                            name="mobile"
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[6-9][0-9]{9}"
+                            maxLength={10}
+                            title="A 10-digit Indian mobile number"
+                            placeholder="So we can call you back"
+                          />
+                        </div>
+                      </Form.Group>
 
                       <Form.Group className="mb-3" controlId="contact-subject">
                         <Form.Label>Subject</Form.Label>

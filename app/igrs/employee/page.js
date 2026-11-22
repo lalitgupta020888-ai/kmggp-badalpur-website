@@ -9,11 +9,11 @@ export default async function EmployeeGrievancePage() {
   return (
     <IgrsShell
       icon="bi-person-badge-fill"
-      title="Employee Grievance"
-      crumb="Employee Grievance"
+      title="Faculty / Staff Grievance"
+      crumb="Faculty / Staff Grievance"
       subtitle="Faculty and staff may raise service, salary, leave, workplace or facility matters with the grievance committee."
     >
-      <GrievanceForm options={options} type="employee" heading="Employee Grievance Form" icon="bi-person-badge-fill" />
+      <GrievanceForm options={options} type="employee" heading="Faculty / Staff Grievance Form" icon="bi-person-badge-fill" />
     </IgrsShell>
   );
 }
